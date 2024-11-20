@@ -17,8 +17,11 @@ linters:
     - canonicalheader
     # TODO: Restore this
     - unused
+    - depguard
 
 linters-settings:
+  lll:
+    line-length: 160
   staticcheck:
     checks: ["all"]
   funlen:
