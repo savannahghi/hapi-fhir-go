@@ -7,10 +7,6 @@ import (
 	"github.com/savannahghi/hapi-fhir-go/models"
 )
 
-const (
-	patientResourceType = "Patient"
-)
-
 // CreateFHIRPatient creates a new FHIR Patient resource.
 func (c *Client) CreateFHIRPatient(ctx context.Context, input *models.FHIRPatient) (*models.PatientPayload, error) {
 	payload, err := structToMap(input)
@@ -46,7 +42,7 @@ func (c *Client) GetFHIRPatient(ctx context.Context, id string) (*models.Patient
 
 // GetFHIRPatientEverything is used to retrieve all patient related information.
 func (c *Client) GetFHIRPatientAllData(ctx context.Context, id string, params map[string]interface{}) (*models.Bundle, error) {
-	response, err := c.getPatientEverything(ctx, id)
+	response, err := c.getPatientEverything(ctx, id, params)
 	if err != nil {
 		return nil, err
 	}

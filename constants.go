@@ -1,0 +1,26 @@
+package hapifhirgo
+
+const (
+	organizationResource              = "Organization"
+	patientResourceType               = "Patient"
+	episodeOfCareResourceType         = "EpisodeOfCare"
+	observationResourceType           = "Observation"
+	allergyIntoleranceResourceType    = "AllergyIntolerance"
+	serviceRequestResourceType        = "ServiceRequest"
+	medicationRequestResourceType     = "MedicationRequest"
+	conditionResourceType             = "Condition"
+	encounterResourceType             = "Encounter"
+	compositionResourceType           = "Composition"
+	medicationStatementResourceType   = "MedicationStatement"
+	medicationResourceType            = "Medication"
+	mediaResourceType                 = "Media"
+	questionnaireResourceType         = "Questionnaire"
+	consentResourceType               = "Consent"
+	questionnaireResponseResourceType = "QuestionnaireResponse"
+	riskAssessmentResourceType        = "RiskAssessment"
+	diagnosticReportResourceType      = "DiagnosticReport"
+	subscriptionResourceType          = "Subscription"
+	documentReferenceResourceType     = "DocumentReference"
+	appointmentResourceType           = "Appointment"
+	taskResourceType                  = "Task"
+)

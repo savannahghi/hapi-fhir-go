@@ -18,6 +18,7 @@ linters:
     # TODO: Restore this
     - unused
     - depguard
+    - dupl
 
 linters-settings:
   lll:

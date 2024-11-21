@@ -112,11 +112,24 @@ func (c *Client) validateResource(ctx context.Context, resourceType string, payl
 //
 // This operation returns a patient's entire medical record
 // in a single request.
-func (c *Client) getPatientEverything(ctx context.Context, patientFhirID string) (*models.Bundle, error) {
+func (c *Client) getPatientEverything(ctx context.Context, patientFhirID string, searchParams map[string]interface{}) (*models.Bundle, error) {
 	path := fmt.Sprintf("Patient/%v/$everything", patientFhirID)
 	bundle := models.Bundle{}
 
-	err := c.makeRequest(ctx, http.MethodGet, path, nil, nil, bundle)
+	err := c.makeRequest(ctx, http.MethodGet, path, nil, searchParams, bundle)
+	if err != nil {
+		return nil, fmt.Errorf("unable to search: %w", err)
+	}
+
+	return &bundle, nil
+}
+
+// getEncounterEverything retrieves all the resources associated to an encounter.
+func (c *Client) getEncounterEverything(ctx context.Context, encounterID string, searchParams map[string]interface{}) (*models.Bundle, error) {
+	path := fmt.Sprintf("Encounter/%v/$everything", encounterID)
+	bundle := models.Bundle{}
+
+	err := c.makeRequest(ctx, http.MethodGet, path, nil, searchParams, bundle)
 	if err != nil {
 		return nil, fmt.Errorf("unable to search: %w", err)
 	}
