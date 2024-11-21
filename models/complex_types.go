@@ -1178,3 +1178,101 @@ type FHIRExtension struct {
 	URL       string      `json:"url,omitempty"`
 	Extension []Extension `json:"extension,omitempty"`
 }
+
+// BundleType is a FHIR enum.
+type BundleType string
+
+const (
+	BundleTypeDocument            BundleType = "document"
+	BundleTypeMessage             BundleType = "message"
+	BundleTypeTransaction         BundleType = "transaction"
+	BundleTypeTransactionResponse BundleType = "transaction-response"
+	BundleTypeBatch               BundleType = "batch"
+	BundleTypeBatchResponse       BundleType = "batch-response"
+	BundleTypeHistory             BundleType = "history"
+	BundleTypeSearchset           BundleType = "searchset"
+	BundleTypeCollection          BundleType = "collection"
+)
+
+// IsValid ...
+func (e BundleType) IsValid() bool {
+	switch e {
+	case BundleTypeDocument, BundleTypeMessage, BundleTypeTransaction,
+		BundleTypeTransactionResponse, BundleTypeBatch, BundleTypeBatchResponse,
+		BundleTypeHistory, BundleTypeSearchset, BundleTypeCollection:
+		return true
+	}
+
+	return false
+}
+
+// String ...
+func (e BundleType) String() string {
+	return string(e)
+}
+
+// UnmarshalGQL ...
+func (e BundleType) UnmarshalGQL(v interface{}) error {
+	str, ok := v.(string)
+	if !ok {
+		return errors.New("enums must be strings")
+	}
+
+	e = BundleType(str)
+	if !e.IsValid() {
+		return fmt.Errorf("%s is not a valid BundleType", str)
+	}
+
+	return nil
+}
+
+// MarshalGQL writes the bundle type to the supplied writer as a quoted
+// string.
+func (e BundleType) MarshalGQL(w io.Writer) {
+	fmt.Fprint(w, strconv.Quote(e.String()))
+}
+
+// SearchEntryMode is a FHIR enum.
+type SearchEntryMode string
+
+const (
+	SearchEntryModeMatch   SearchEntryMode = "match"
+	SearchEntryModeInclude SearchEntryMode = "include"
+	SearchEntryModeOutcome SearchEntryMode = "outcome"
+)
+
+// IsValid ...
+func (e SearchEntryMode) IsValid() bool {
+	switch e {
+	case SearchEntryModeMatch, SearchEntryModeInclude, SearchEntryModeOutcome:
+		return true
+	}
+
+	return false
+}
+
+// String ...
+func (e SearchEntryMode) String() string {
+	return string(e)
+}
+
+// UnmarshalGQL ...
+func (e SearchEntryMode) UnmarshalGQL(v interface{}) error {
+	str, ok := v.(string)
+	if !ok {
+		return errors.New("enums must be strings")
+	}
+
+	e = SearchEntryMode(str)
+	if !e.IsValid() {
+		return fmt.Errorf("%s is not a valid SearchEntryMode", str)
+	}
+
+	return nil
+}
+
+// MarshalGQL writes the search entry mode to the supplied writer as a quoted
+// string.
+func (e SearchEntryMode) MarshalGQL(w io.Writer) {
+	fmt.Fprint(w, strconv.Quote(e.String()))
+}
