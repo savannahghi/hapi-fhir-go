@@ -8,7 +8,7 @@ import (
 )
 
 // CreateFHIRPatient creates a new FHIR Patient resource.
-func (c *Client) CreateFHIRPatient(ctx context.Context, input *models.FHIRPatient) (*models.PatientPayload, error) {
+func (c *Client) CreateFHIRPatient(ctx context.Context, input *models.FHIRPatient) (*models.FHIRPatient, error) {
 	payload, err := structToMap(input)
 	if err != nil {
 		return nil, fmt.Errorf("unable to turn %s input into a map: %w", patientResourceType, err)
@@ -21,15 +21,11 @@ func (c *Client) CreateFHIRPatient(ctx context.Context, input *models.FHIRPatien
 		return nil, fmt.Errorf("unable to create %s resource: %w", patientResourceType, err)
 	}
 
-	output := &models.PatientPayload{
-		PatientRecord: resource,
-	}
-
-	return output, nil
+	return resource, nil
 }
 
 // GetFHIRPatient retrieves instances of FHIRPatient by ID.
-func (c *Client) GetFHIRPatient(ctx context.Context, id string) (*models.PatientPayload, error) {
+func (c *Client) GetFHIRPatient(ctx context.Context, id string) (*models.FHIRPatient, error) {
 	resource := &models.FHIRPatient{}
 
 	err := c.getFHIRResource(ctx, patientResourceType, id, resource)
@@ -37,7 +33,7 @@ func (c *Client) GetFHIRPatient(ctx context.Context, id string) (*models.Patient
 		return nil, fmt.Errorf("unable to get %s with ID %s, err: %w", patientResourceType, id, err)
 	}
 
-	return &models.PatientPayload{PatientRecord: resource}, nil
+	return resource, nil
 }
 
 // GetFHIRPatientEverything is used to retrieve all patient related information.
