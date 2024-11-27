@@ -15,7 +15,7 @@ func (c *Client) CreateFHIREncounter(ctx context.Context, input *models.FHIREnco
 
 	resource := &models.FHIREncounter{}
 
-	err = c.createFHIRResource(ctx, encounterResourceType, payload, resource)
+	err = c.CreateFHIRResource(ctx, encounterResourceType, payload, resource)
 	if err != nil {
 		return nil, fmt.Errorf("unable to create %s resource: %w", encounterResourceType, err)
 	}
@@ -26,7 +26,7 @@ func (c *Client) CreateFHIREncounter(ctx context.Context, input *models.FHIREnco
 func (c *Client) GetFHIREncounter(ctx context.Context, id string) (*models.FHIREncounter, error) {
 	resource := &models.FHIREncounter{}
 
-	err := c.getFHIRResource(ctx, encounterResourceType, id, resource)
+	err := c.GetFHIRResource(ctx, encounterResourceType, id, resource)
 	if err != nil {
 		return nil, fmt.Errorf("unable to get %s with ID %s, err: %w", encounterResourceType, id, err)
 	}
@@ -35,7 +35,7 @@ func (c *Client) GetFHIREncounter(ctx context.Context, id string) (*models.FHIRE
 }
 
 func (c *Client) GetFHIREncounterAllData(ctx context.Context, id string, params map[string]interface{}) (*models.Bundle, error) {
-	response, err := c.getEncounterEverything(ctx, id, params)
+	response, err := c.GetEncounterEverything(ctx, id, params)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ func (c *Client) GetFHIREncounterAllData(ctx context.Context, id string, params 
 }
 
 func (c *Client) SearchFHIREncounter(ctx context.Context, searchParams map[string]interface{}) (*models.Bundle, error) {
-	response, err := c.searchFHIRResource(ctx, encounterResourceType, searchParams)
+	response, err := c.SearchFHIRResource(ctx, encounterResourceType, searchParams)
 	if err != nil {
 		return nil, err
 	}

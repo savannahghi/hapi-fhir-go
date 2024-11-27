@@ -15,7 +15,7 @@ func (c *Client) CreateFHIRObservation(ctx context.Context, input *models.FHIROb
 
 	resource := &models.FHIRObservation{}
 
-	err = c.createFHIRResource(ctx, observationResourceType, payload, resource)
+	err = c.CreateFHIRResource(ctx, observationResourceType, payload, resource)
 	if err != nil {
 		return nil, fmt.Errorf("unable to create %s resource: %w", observationResourceType, err)
 	}
@@ -26,7 +26,7 @@ func (c *Client) CreateFHIRObservation(ctx context.Context, input *models.FHIROb
 func (c *Client) GetFHIRObservation(ctx context.Context, id string) (*models.FHIRObservation, error) {
 	resource := &models.FHIRObservation{}
 
-	err := c.getFHIRResource(ctx, observationResourceType, id, resource)
+	err := c.GetFHIRResource(ctx, observationResourceType, id, resource)
 	if err != nil {
 		return nil, fmt.Errorf("unable to get %s with ID %s, err: %w", observationResourceType, id, err)
 	}
@@ -35,7 +35,7 @@ func (c *Client) GetFHIRObservation(ctx context.Context, id string) (*models.FHI
 }
 
 func (c *Client) SearchFHIRObservation(ctx context.Context, searchParams map[string]interface{}) (*models.Bundle, error) {
-	response, err := c.searchFHIRResource(ctx, observationResourceType, searchParams)
+	response, err := c.SearchFHIRResource(ctx, observationResourceType, searchParams)
 	if err != nil {
 		return nil, err
 	}

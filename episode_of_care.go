@@ -15,7 +15,7 @@ func (c *Client) CreateFHIREpisodeOfCare(ctx context.Context, input *models.FHIR
 
 	resource := &models.FHIREpisodeOfCare{}
 
-	err = c.createFHIRResource(ctx, episodeOfCareResourceType, payload, resource)
+	err = c.CreateFHIRResource(ctx, episodeOfCareResourceType, payload, resource)
 	if err != nil {
 		return nil, fmt.Errorf("unable to create %s resource: %w", episodeOfCareResourceType, err)
 	}
@@ -26,7 +26,7 @@ func (c *Client) CreateFHIREpisodeOfCare(ctx context.Context, input *models.FHIR
 func (c *Client) GetFHIREpisodeOfCare(ctx context.Context, id string) (*models.FHIREpisodeOfCare, error) {
 	resource := &models.FHIREpisodeOfCare{}
 
-	err := c.getFHIRResource(ctx, episodeOfCareResourceType, id, resource)
+	err := c.GetFHIRResource(ctx, episodeOfCareResourceType, id, resource)
 	if err != nil {
 		return nil, fmt.Errorf("unable to get %s with ID %s, err: %w", episodeOfCareResourceType, id, err)
 	}
@@ -35,7 +35,7 @@ func (c *Client) GetFHIREpisodeOfCare(ctx context.Context, id string) (*models.F
 }
 
 func (c *Client) SearchFHIREpisodeOfCare(ctx context.Context, searchParams map[string]interface{}) (*models.Bundle, error) {
-	response, err := c.searchFHIRResource(ctx, episodeOfCareResourceType, searchParams)
+	response, err := c.SearchFHIRResource(ctx, episodeOfCareResourceType, searchParams)
 	if err != nil {
 		return nil, err
 	}

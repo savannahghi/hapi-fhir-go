@@ -15,7 +15,7 @@ func (c *Client) CreateFHIROrganization(ctx context.Context, input *models.FHIRO
 
 	resource := &models.FHIROrganization{}
 
-	err = c.createFHIRResource(ctx, organizationResource, payload, resource)
+	err = c.CreateFHIRResource(ctx, organizationResource, payload, resource)
 	if err != nil {
 		return nil, fmt.Errorf("unable to create %s resource: %w", organizationResource, err)
 	}
@@ -26,7 +26,7 @@ func (c *Client) CreateFHIROrganization(ctx context.Context, input *models.FHIRO
 func (c *Client) GetFHIROrganization(ctx context.Context, id string) (*models.FHIROrganization, error) {
 	resource := &models.FHIROrganization{}
 
-	err := c.getFHIRResource(ctx, organizationResource, id, resource)
+	err := c.GetFHIRResource(ctx, organizationResource, id, resource)
 	if err != nil {
 		return nil, fmt.Errorf("unable to get %s with ID %s, err: %w", organizationResource, id, err)
 	}
@@ -35,7 +35,7 @@ func (c *Client) GetFHIROrganization(ctx context.Context, id string) (*models.FH
 }
 
 func (c *Client) SearchFHIROrganization(ctx context.Context, searchParams map[string]interface{}) (*models.Bundle, error) {
-	response, err := c.searchFHIRResource(ctx, organizationResource, searchParams)
+	response, err := c.SearchFHIRResource(ctx, organizationResource, searchParams)
 	if err != nil {
 		return nil, err
 	}

@@ -21,7 +21,7 @@ import (
 
 // CreateFHIRResource creates a FHIR resource
 // POST [base]/[type].
-func (c *Client) createFHIRResource(ctx context.Context, resourceType string, payload map[string]interface{}, resource interface{}) error {
+func (c *Client) CreateFHIRResource(ctx context.Context, resourceType string, payload map[string]interface{}, resource interface{}) error {
 	payload["resourceType"] = resourceType
 	payload["language"] = "EN"
 
@@ -34,7 +34,7 @@ func (c *Client) createFHIRResource(ctx context.Context, resourceType string, pa
 }
 
 // deleteFHIRResource performs a logical delete on a resource instance.
-func (c *Client) deleteFHIRResource(ctx context.Context, resourceType, fhirResourceID string) error {
+func (c *Client) DeleteFHIRResource(ctx context.Context, resourceType, fhirResourceID string) error {
 	deletePath := fmt.Sprintf("%v/%v", resourceType, fhirResourceID)
 
 	err := c.makeRequest(ctx, http.MethodDelete, deletePath, nil, nil, nil)
@@ -46,7 +46,7 @@ func (c *Client) deleteFHIRResource(ctx context.Context, resourceType, fhirResou
 }
 
 // GetFHIRResource gets a FHIR resource by its ID.
-func (c *Client) getFHIRResource(ctx context.Context, resourceType, fhirResourceID string, resource interface{}) error {
+func (c *Client) GetFHIRResource(ctx context.Context, resourceType, fhirResourceID string, resource interface{}) error {
 	searchPath := fmt.Sprintf("%v/%v", resourceType, fhirResourceID)
 
 	err := c.makeRequest(ctx, http.MethodGet, searchPath, nil, nil, resource)
@@ -58,7 +58,7 @@ func (c *Client) getFHIRResource(ctx context.Context, resourceType, fhirResource
 }
 
 // SearchFHIRResource is used to search for a FHIR resource based on certain parameters.
-func (c *Client) searchFHIRResource(ctx context.Context, resourceType string, params map[string]interface{}) (*models.Bundle, error) {
+func (c *Client) SearchFHIRResource(ctx context.Context, resourceType string, params map[string]interface{}) (*models.Bundle, error) {
 	urlParams := url.Values{}
 
 	for k, v := range params {
@@ -87,7 +87,7 @@ func (c *Client) searchFHIRResource(ctx context.Context, resourceType string, pa
 
 // validateResource validates a FHIR resource against the server's validation rules.
 // POST [base]/[type]/$validate.
-func (c *Client) validateResource(ctx context.Context, resourceType string, payload map[string]interface{}) error {
+func (c *Client) ValidateResource(ctx context.Context, resourceType string, payload map[string]interface{}) error {
 	path := fmt.Sprintf("%v/$validate", resourceType)
 
 	err := c.makeRequest(ctx, http.MethodPost, path, nil, payload, nil)
@@ -112,7 +112,7 @@ func (c *Client) validateResource(ctx context.Context, resourceType string, payl
 //
 // This operation returns a patient's entire medical record
 // in a single request.
-func (c *Client) getPatientEverything(ctx context.Context, patientFhirID string, searchParams map[string]interface{}) (*models.Bundle, error) {
+func (c *Client) GetPatientEverything(ctx context.Context, patientFhirID string, searchParams map[string]interface{}) (*models.Bundle, error) {
 	path := fmt.Sprintf("Patient/%v/$everything", patientFhirID)
 	bundle := models.Bundle{}
 
@@ -125,7 +125,7 @@ func (c *Client) getPatientEverything(ctx context.Context, patientFhirID string,
 }
 
 // getEncounterEverything retrieves all the resources associated to an encounter.
-func (c *Client) getEncounterEverything(ctx context.Context, encounterID string, searchParams map[string]interface{}) (*models.Bundle, error) {
+func (c *Client) GetEncounterEverything(ctx context.Context, encounterID string, searchParams map[string]interface{}) (*models.Bundle, error) {
 	path := fmt.Sprintf("Encounter/%v/$everything", encounterID)
 	bundle := models.Bundle{}
 

@@ -15,7 +15,7 @@ func (c *Client) CreateFHIRTask(ctx context.Context, input *models.FHIRTask) (*m
 
 	resource := &models.FHIRTask{}
 
-	err = c.createFHIRResource(ctx, taskResourceType, payload, resource)
+	err = c.CreateFHIRResource(ctx, taskResourceType, payload, resource)
 	if err != nil {
 		return nil, fmt.Errorf("unable to create %s resource: %w", taskResourceType, err)
 	}
@@ -26,7 +26,7 @@ func (c *Client) CreateFHIRTask(ctx context.Context, input *models.FHIRTask) (*m
 func (c *Client) GetFHIRTask(ctx context.Context, id string) (*models.FHIRTask, error) {
 	resource := &models.FHIRTask{}
 
-	err := c.getFHIRResource(ctx, taskResourceType, id, resource)
+	err := c.GetFHIRResource(ctx, taskResourceType, id, resource)
 	if err != nil {
 		return nil, fmt.Errorf("unable to get %s with ID %s, err: %w", taskResourceType, id, err)
 	}
@@ -35,7 +35,7 @@ func (c *Client) GetFHIRTask(ctx context.Context, id string) (*models.FHIRTask, 
 }
 
 func (c *Client) SearchFHIRTask(ctx context.Context, searchParams map[string]interface{}) (*models.Bundle, error) {
-	response, err := c.searchFHIRResource(ctx, taskResourceType, searchParams)
+	response, err := c.SearchFHIRResource(ctx, taskResourceType, searchParams)
 	if err != nil {
 		return nil, err
 	}
