@@ -15,7 +15,7 @@ func (c *Client) CreateFHIRConsent(ctx context.Context, input *models.FHIRConsen
 
 	resource := &models.FHIRConsent{}
 
-	err = c.createFHIRResource(ctx, consentResourceType, payload, resource)
+	err = c.CreateFHIRResource(ctx, consentResourceType, payload, resource)
 	if err != nil {
 		return nil, fmt.Errorf("unable to create %s resource: %w", consentResourceType, err)
 	}
@@ -26,7 +26,7 @@ func (c *Client) CreateFHIRConsent(ctx context.Context, input *models.FHIRConsen
 func (c *Client) GetFHIRConsent(ctx context.Context, id string) (*models.FHIRConsent, error) {
 	resource := &models.FHIRConsent{}
 
-	err := c.getFHIRResource(ctx, consentResourceType, id, resource)
+	err := c.GetFHIRResource(ctx, consentResourceType, id, resource)
 	if err != nil {
 		return nil, fmt.Errorf("unable to get %s with ID %s, err: %w", consentResourceType, id, err)
 	}
@@ -35,7 +35,7 @@ func (c *Client) GetFHIRConsent(ctx context.Context, id string) (*models.FHIRCon
 }
 
 func (c *Client) SearchFHIRConsent(ctx context.Context, searchParams map[string]interface{}) (*models.Bundle, error) {
-	response, err := c.searchFHIRResource(ctx, consentResourceType, searchParams)
+	response, err := c.SearchFHIRResource(ctx, consentResourceType, searchParams)
 	if err != nil {
 		return nil, err
 	}
