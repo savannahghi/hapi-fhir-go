@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/savannahghi/hapi-fhir-go/compare/v1.0.0...v1.1.0) (2024-11-29)
+
+
+### Features
+
+* patching a FHIR resource instance ([#10](https://github.com/savannahghi/hapi-fhir-go/issues/10)) ([e747de7](https://github.com/savannahghi/hapi-fhir-go/commit/e747de79e5583846c5cea13ea586e90ccc17ccc9))
+
 ## 1.0.0 (2024-11-21)
 
 
