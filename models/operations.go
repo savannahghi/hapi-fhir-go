@@ -4,11 +4,13 @@ import "encoding/json"
 
 type Parameters struct {
 	ID            *string               `json:"id,omitempty"`
+	ResourceType  string                `json:"resourceType,omitempty"`
 	Meta          *FHIRMeta             `json:"meta,omitempty"`
 	ImplicitRules *string               `json:"implicitRules,omitempty"`
 	Language      *string               `json:"language,omitempty"`
 	Parameter     []ParametersParameter `json:"parameter,omitempty"`
 }
+
 type ParametersParameter struct {
 	ID                   *string               `json:"id,omitempty"`
 	Extension            []Extension           `json:"extension,omitempty"`
@@ -51,7 +53,7 @@ type ParametersParameter struct {
 	ValueSampledData     *FHIRSampledData      `json:"valueSampledData,omitempty"`
 	ValueTiming          *FHIRTiming           `json:"valueTiming,omitempty"`
 	ValueExpression      *FHIRExpression       `json:"valueExpression,omitempty"`
-	ValueMeta            *FHIRMeta             `jsoson:"valueMeta,omitempty"`
-	Resource             json.RawMessage       `jsoon:"resource,omitempty"`
+	ValueMeta            *FHIRMeta             `json:"valueMeta,omitempty"`
+	Resource             json.RawMessage       `json:"resource,omitempty"`
 	Part                 []ParametersParameter `json:"part,omitempty"`
 }

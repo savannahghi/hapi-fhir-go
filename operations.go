@@ -138,7 +138,7 @@ func (c *Client) GetEncounterEverything(ctx context.Context, encounterID string,
 }
 
 // PatchFHIRResource updates an instance of a fhir resource.
-func (c *Client) PatchFHIRResource(ctx context.Context, resourceType string, resourceID string, payload []*models.Parameters, resource interface{}) error {
+func (c *Client) PatchFHIRResource(ctx context.Context, resourceType string, resourceID string, payload *models.Parameters, resource interface{}) error {
 	updatePath := fmt.Sprintf("%v/%v", resourceType, resourceID)
 
 	err := c.makeRequest(ctx, http.MethodPatch, updatePath, nil, payload, resource)
