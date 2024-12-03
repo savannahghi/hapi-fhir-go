@@ -77,7 +77,7 @@ func (c *Client) SearchFHIRResource(ctx context.Context, resourceType string, pa
 	path := fmt.Sprintf("%v/_search", resourceType)
 	bundle := models.Bundle{}
 
-	err := c.makeRequest(ctx, http.MethodGet, path, urlParams, nil, bundle)
+	err := c.makeRequest(ctx, http.MethodGet, path, urlParams, nil, &bundle)
 	if err != nil {
 		return nil, fmt.Errorf("unable to search: %w", err)
 	}
