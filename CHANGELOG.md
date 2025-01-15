@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.3](https://github.com/savannahghi/hapi-fhir-go/compare/v1.1.2...v1.1.3) (2025-01-15)
+
+
+### Bug Fixes
+
+* bundle unmarshalling ([#13](https://github.com/savannahghi/hapi-fhir-go/issues/13)) ([cb33d14](https://github.com/savannahghi/hapi-fhir-go/commit/cb33d143273613d9e8c76e9fe2522fcd102238ff))
+* bundle unmarshalling ([#18](https://github.com/savannahghi/hapi-fhir-go/issues/18)) ([f4a3099](https://github.com/savannahghi/hapi-fhir-go/commit/f4a3099ea8c83417db7a37957c0b41b4e48ccddc))
+
 ## [1.1.2](https://github.com/savannahghi/hapi-fhir-go/compare/v1.1.1...v1.1.2) (2025-01-15)
 
 
