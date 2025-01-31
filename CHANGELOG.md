@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/savannahghi/hapi-fhir-go/compare/v1.1.3...v1.2.0) (2025-01-31)
+
+
+### Features
+
+* refactoring fhir resource validator ([#19](https://github.com/savannahghi/hapi-fhir-go/issues/19)) ([7ce1b76](https://github.com/savannahghi/hapi-fhir-go/commit/7ce1b76b53da52ee9df900dd05691b98ebdf5357))
+
 ## [1.1.3](https://github.com/savannahghi/hapi-fhir-go/compare/v1.1.2...v1.1.3) (2025-01-15)
 
 
