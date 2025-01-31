@@ -87,8 +87,9 @@ func (c *Client) SearchFHIRResource(ctx context.Context, resourceType string, pa
 
 // validateResource validates a FHIR resource against the server's validation rules.
 // POST [base]/[type]/$validate.
+
 func (c *Client) ValidateResource(ctx context.Context, resourceType string, payload map[string]interface{}) error {
-	path := fmt.Sprintf("%v/$validate", resourceType)
+	path := fmt.Sprintf("%s%s", resourceType, "/$validate")
 
 	err := c.makeRequest(ctx, http.MethodPost, path, nil, payload, nil)
 	if err != nil {

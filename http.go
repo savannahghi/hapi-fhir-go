@@ -137,6 +137,27 @@ func (c *Client) readResponse(response *http.Response, result interface{}) error
 		}
 	}
 
+	// A Specific case for validation responses.
+	// Validation of the resource is considered valid only when the severity is either "success" or "information"
+	// All validation responses, whether valid or invalid, returns a status code of 200 -> https://www.hl7.org/fhir/resource-operation-validate.html
+	if response.StatusCode == http.StatusOK {
+		var operationOutput OperationOutcome
+
+		err = json.Unmarshal(respBytes, &operationOutput)
+		if err != nil {
+			return err
+		}
+
+		for _, item := range operationOutput.Issue {
+			if !isValidSeverity(item.Severity) {
+				return APIError{
+					StatusCode:       response.StatusCode,
+					OperationOutcome: &operationOutput,
+				}
+			}
+		}
+	}
+
 	err = json.Unmarshal(respBytes, result)
 	if err != nil {
 		return fmt.Errorf("failed to unmarshall body: %w", err)
@@ -162,4 +183,8 @@ func (c *Client) makeRequest(
 	}
 
 	return c.readResponse(resp, result)
+}
+
+func isValidSeverity(severity string) bool {
+	return severity == "success" || severity == "information"
 }
