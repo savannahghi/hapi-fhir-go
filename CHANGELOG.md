@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/savannahghi/hapi-fhir-go/compare/v1.2.0...v1.3.0) (2025-02-28)
+
+
+### Features
+
+* **LS-1548:** fix a bug in makeRequest method ([#21](https://github.com/savannahghi/hapi-fhir-go/issues/21)) ([b2b88ad](https://github.com/savannahghi/hapi-fhir-go/commit/b2b88ad0d81a03fa99c13d6d9f1470bdd96b11bf))
+
 ## [1.2.0](https://github.com/savannahghi/hapi-fhir-go/compare/v1.1.3...v1.2.0) (2025-01-31)
 
 
