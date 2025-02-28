@@ -9,6 +9,7 @@ import (
 	"io"
 	"net/http"
 	"net/url"
+	"strings"
 )
 
 // APIError represents a FHIR specific error with operation outcome.
@@ -112,10 +113,11 @@ func (c *Client) composeRequestURL(path string, params url.Values) (string, erro
 	return u.String(), nil
 }
 
-func (c *Client) readResponse(response *http.Response, result interface{}) error {
+func (c *Client) readResponse(response *http.Response, path string, result interface{}) error {
 	if response.Body == nil {
 		return errors.New("response body is nil")
 	}
+
 	defer response.Body.Close()
 
 	respBytes, err := io.ReadAll(response.Body)
@@ -139,23 +141,9 @@ func (c *Client) readResponse(response *http.Response, result interface{}) error
 
 	// A Specific case for validation responses.
 	// Validation of the resource is considered valid only when the severity is either "success" or "information"
-	// All validation responses, whether valid or invalid, returns a status code of 200 -> https://www.hl7.org/fhir/resource-operation-validate.html
-	if response.StatusCode == http.StatusOK {
-		var operationOutput OperationOutcome
-
-		err = json.Unmarshal(respBytes, &operationOutput)
-		if err != nil {
-			return err
-		}
-
-		for _, item := range operationOutput.Issue {
-			if !isValidSeverity(item.Severity) {
-				return APIError{
-					StatusCode:       response.StatusCode,
-					OperationOutcome: &operationOutput,
-				}
-			}
-		}
+	// All validation responses, whether valid or invalid, returns a http status code of 200 https://www.hl7.org/fhir/resource-operation-validate.html
+	if isValidateInPath(path) && response.StatusCode == http.StatusOK {
+		return handleValidationResponse(respBytes, response.StatusCode)
 	}
 
 	err = json.Unmarshal(respBytes, result)
@@ -182,9 +170,42 @@ func (c *Client) makeRequest(
 		return err
 	}
 
-	return c.readResponse(resp, result)
+	return c.readResponse(resp, path, result)
 }
 
 func isValidSeverity(severity string) bool {
 	return severity == "success" || severity == "information"
+}
+
+/*
+isValidateInPath checks whether the request is meant for validating a resource.
+This check allows ValidateResource to share the readResponse, inside makeRequest, without confusion.
+
+Note: Validation responses from HAPI FHIR, whether failed or successful, always returns http status code of 200.
+This is counterintuitive considering that makeRequest is also used for fetching resources from HAPI FHIR server
+and can also return a http status code of 200 if successful.
+*/
+func isValidateInPath(path string) bool {
+	return strings.Contains(path, "$validate")
+}
+
+// handleValidationResponse is helper function that handles validation outcome response.
+func handleValidationResponse(resBytes []byte, statusCode int) error {
+	var outCome OperationOutcome
+
+	err := json.Unmarshal(resBytes, &outCome)
+	if err != nil {
+		return err
+	}
+
+	for _, item := range outCome.Issue {
+		if !isValidSeverity(item.Severity) {
+			return APIError{
+				StatusCode:       statusCode,
+				OperationOutcome: &outCome,
+			}
+		}
+	}
+
+	return nil
 }
