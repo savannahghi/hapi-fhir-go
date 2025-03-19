@@ -20,11 +20,7 @@ type APIError struct {
 
 func (a APIError) Error() string {
 	if a.OperationOutcome != nil && len(a.OperationOutcome.Issue) > 0 {
-		return fmt.Sprintf(
-			"FHIR error (HTTP %d): %s - %s",
-			a.StatusCode,
-			a.OperationOutcome.Issue[0].Severity,
-			a.OperationOutcome.Issue[0].Diagnostics)
+		return a.OperationOutcome.errorLogging()
 	}
 
 	return fmt.Sprintf("FHIR error (HTTP %d)", a.StatusCode)
@@ -191,6 +187,8 @@ func isValidateInPath(path string) bool {
 
 // handleValidationResponse is helper function that handles validation outcome response.
 func handleValidationResponse(resBytes []byte, statusCode int) error {
+	var results []OperationOutcomeIssue
+
 	var outCome OperationOutcome
 
 	err := json.Unmarshal(resBytes, &outCome)
@@ -200,12 +198,47 @@ func handleValidationResponse(resBytes []byte, statusCode int) error {
 
 	for _, item := range outCome.Issue {
 		if !isValidSeverity(item.Severity) {
-			return APIError{
-				StatusCode:       statusCode,
-				OperationOutcome: &outCome,
-			}
+			results = append(results, item)
+		}
+	}
+
+	if len(results) > 0 {
+		outCome.Issue = results
+
+		return APIError{
+			StatusCode:       statusCode,
+			OperationOutcome: &outCome,
 		}
 	}
 
 	return nil
+}
+
+func (o *OperationOutcome) errorLogging() string {
+	var errors, warnings []string
+
+	for _, issue := range o.Issue {
+		message := fmt.Sprintf("- FHIR error (HTTP %s): %s", issue.Code, issue.Diagnostics)
+		if issue.Severity == "error" {
+			errors = append(errors, message)
+		} else if issue.Severity == "warning" {
+			warnings = append(warnings, message)
+		}
+	}
+
+	var output strings.Builder
+
+	output.WriteString("validation errors:\n\n")
+
+	if len(errors) > 0 {
+		output.WriteString("Errors:\n")
+		output.WriteString(strings.Join(errors, "\n") + "\n\n")
+	}
+
+	if len(warnings) > 0 {
+		output.WriteString("Warnings:\n")
+		output.WriteString(strings.Join(warnings, "\n") + "\n")
+	}
+
+	return output.String()
 }
