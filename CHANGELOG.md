@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://github.com/savannahghi/hapi-fhir-go/compare/v1.3.0...v1.4.0) (2025-03-19)
+
+
+### Features
+
+* refactor error logs in readResponse ([#23](https://github.com/savannahghi/hapi-fhir-go/issues/23)) ([1c9d016](https://github.com/savannahghi/hapi-fhir-go/commit/1c9d016d29073a53e1e7336b83d1a008365849c0))
+
 ## [1.3.0](https://github.com/savannahghi/hapi-fhir-go/compare/v1.2.0...v1.3.0) (2025-02-28)
 
 
