@@ -139,7 +139,7 @@ func (c *Client) GetEncounterEverything(ctx context.Context, encounterID string,
 }
 
 // PatchFHIRResource updates an instance of a fhir resource.
-func (c *Client) PatchFHIRResource(ctx context.Context, resourceType string, resourceID string, payload *models.Parameters, resource interface{}) error {
+func (c *Client) PatchFHIRResource(ctx context.Context, resourceType, resourceID string, payload *models.Parameters, resource interface{}) error {
 	updatePath := fmt.Sprintf("%v/%v", resourceType, resourceID)
 
 	err := c.makeRequest(ctx, http.MethodPatch, updatePath, nil, payload, resource)
@@ -157,4 +157,24 @@ func (c *Client) PostFHIRBundle(ctx context.Context, payload, resource *models.B
 	}
 
 	return nil
+}
+
+// PutFHIRResource updates an instance of FHIR resource.
+func (c *Client) PutFHIRResource(
+	ctx context.Context,
+	resourceType, resourceID string,
+	payload map[string]interface{},
+	resource interface{},
+) (interface{}, error) {
+	putPath := fmt.Sprintf("%v/%v", resourceType, resourceID)
+	payload["resourceType"] = resourceType
+	payload["language"] = "EN"
+	payload["id"] = resourceID
+
+	err := c.makeRequest(ctx, http.MethodPut, putPath, nil, payload, resource)
+	if err != nil {
+		return nil, fmt.Errorf("server error occurred: %w", err)
+	}
+
+	return resource, nil
 }
