@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.0](https://github.com/savannahghi/hapi-fhir-go/compare/v1.4.0...v1.5.0) (2025-04-25)
+
+
+### Features
+
+* add post fhir bundle method ([#26](https://github.com/savannahghi/hapi-fhir-go/issues/26)) ([e81f2f3](https://github.com/savannahghi/hapi-fhir-go/commit/e81f2f382cc33bc4013446658b96d6b981b44615))
+
 ## [1.4.0](https://github.com/savannahghi/hapi-fhir-go/compare/v1.3.0...v1.4.0) (2025-03-19)
 
 
