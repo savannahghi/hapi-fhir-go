@@ -1,6 +1,10 @@
 package models
 
-import "encoding/json"
+import (
+	"encoding/json"
+
+	"github.com/savannahghi/scalarutils"
+)
 
 // Bundle is documented here http://hl7.org/fhir/StructureDefinition/Bundle
 type Bundle struct {
@@ -57,12 +61,38 @@ type BundleEntryRequest struct {
 }
 
 type BundleEntryResponse struct {
-	ID                *string         `json:"id,omitempty"`
-	Extension         []Extension     `json:"extension,omitempty"`
-	ModifierExtension []Extension     `json:"modifierExtension,omitempty"`
-	Status            string          `json:"status"`
-	Location          *string         `json:"location,omitempty"`
-	Etag              *string         `json:"etag,omitempty"`
-	LastModified      *string         `json:"lastModified,omitempty"`
-	Outcome           json.RawMessage `json:"outcome,omitempty"`
+	ID                *string          `json:"id,omitempty"`
+	Extension         []Extension      `json:"extension,omitempty"`
+	ModifierExtension []Extension      `json:"modifierExtension,omitempty"`
+	Status            string           `json:"status"`
+	Location          *string          `json:"location,omitempty"`
+	Etag              *string          `json:"etag,omitempty"`
+	LastModified      *string          `json:"lastModified,omitempty"`
+	Outcome           OperationOutcome `json:"outcome,omitempty"`
+}
+
+// SuccessfulCreate checks whether a transaction Bundle response
+// contains an OperationOutcome with the code SUCCESSFUL_CREATE.
+func (r *Bundle) SuccessfulCreate() bool {
+	successfulCreateStatus := "SUCCESSFUL_CREATE"
+
+	if r == nil || len(r.Entry) == 0 {
+		return false
+	}
+
+	for _, entry := range r.Entry {
+		for _, issue := range entry.Response.Outcome.Issue {
+			if issue.Details == nil {
+				continue
+			}
+
+			for _, code := range issue.Details.Coding {
+				if code.Code != nil && *code.Code == scalarutils.Code(successfulCreateStatus) {
+					return true
+				}
+			}
+		}
+	}
+
+	return false
 }
