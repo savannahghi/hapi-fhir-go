@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.5.2](https://github.com/savannahghi/hapi-fhir-go/compare/v1.5.1...v1.5.2) (2025-04-28)
+
+
+### Bug Fixes
+
+* change method to use receiver on BundleEntryResponse ([#32](https://github.com/savannahghi/hapi-fhir-go/issues/32)) ([dce068b](https://github.com/savannahghi/hapi-fhir-go/commit/dce068bea56033ad5e5d029181d4ac56fabffc0d))
+* update operation outcome resource ([#29](https://github.com/savannahghi/hapi-fhir-go/issues/29)) ([910f335](https://github.com/savannahghi/hapi-fhir-go/commit/910f3350e4f15f67ad1acf51a63e4c8c6c957b03))
+
 ## [1.5.1](https://github.com/savannahghi/hapi-fhir-go/compare/v1.5.0...v1.5.1) (2025-04-28)
 
 
