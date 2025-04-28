@@ -10,50 +10,22 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+
+	"github.com/savannahghi/hapi-fhir-go/models"
 )
 
 // APIError represents a FHIR specific error with operation outcome.
 type APIError struct {
-	StatusCode       int               `json:"statusCode,omitempty"`
-	OperationOutcome *OperationOutcome `json:"operationOutcome,omitempty"`
+	StatusCode       int                      `json:"statusCode,omitempty"`
+	OperationOutcome *models.OperationOutcome `json:"operationOutcome,omitempty"`
 }
 
 func (a APIError) Error() string {
 	if a.OperationOutcome != nil && len(a.OperationOutcome.Issue) > 0 {
-		return a.OperationOutcome.errorLogging()
+		return a.OperationOutcome.ErrorLogging()
 	}
 
 	return fmt.Sprintf("FHIR error (HTTP %d)", a.StatusCode)
-}
-
-// OperationOutcome is a FHIR resource that provides information about the outcome of an operation.
-// It is used extensively throughout FHIR APIs to communicate detailed error information, warnings
-// and informational messages in a standardized way.
-// An example of a validation error would be:
-//
-//	{
-//	    "resourceType": "OperationOutcome",
-//	    "issue": [{
-//	        "severity": "error",
-//	        "code": "required",
-//	        "details": {
-//	            "text": "Missing required field: status"
-//	        },
-//	        "diagnostics": "Resource Encounter requires a status element"
-//	    }]
-//	}
-type OperationOutcome struct {
-	Issue []OperationOutcomeIssue `json:"issue,omitempty"`
-}
-
-type OperationOutcomeIssue struct {
-	Severity string `json:"severity,omitempty"`
-	Code     string `json:"code,omitempty"`
-	Details  struct {
-		Text string `json:"text,omitempty"`
-	} `json:"details,omitempty"`
-	Diagnostics string   `json:"diagnostics,omitempty"`
-	Expression  []string `json:"expression,omitempty"`
 }
 
 func (c *Client) newRequest(
@@ -122,7 +94,7 @@ func (c *Client) readResponse(response *http.Response, path string, result inter
 	}
 
 	if response.StatusCode >= 400 {
-		var outcome OperationOutcome
+		var outcome models.OperationOutcome
 
 		err = json.Unmarshal(respBytes, &outcome)
 		if err != nil {
@@ -187,9 +159,9 @@ func isValidateInPath(path string) bool {
 
 // handleValidationResponse is helper function that handles validation outcome response.
 func handleValidationResponse(resBytes []byte, statusCode int) error {
-	var results []OperationOutcomeIssue
+	var results []models.OperationOutcomeIssue
 
-	var outCome OperationOutcome
+	var outCome models.OperationOutcome
 
 	err := json.Unmarshal(resBytes, &outCome)
 	if err != nil {
@@ -197,7 +169,7 @@ func handleValidationResponse(resBytes []byte, statusCode int) error {
 	}
 
 	for _, item := range outCome.Issue {
-		if !isValidSeverity(item.Severity) {
+		if !isValidSeverity(string(item.Severity)) {
 			results = append(results, item)
 		}
 	}
@@ -212,33 +184,4 @@ func handleValidationResponse(resBytes []byte, statusCode int) error {
 	}
 
 	return nil
-}
-
-func (o *OperationOutcome) errorLogging() string {
-	var errors, warnings []string
-
-	for _, issue := range o.Issue {
-		message := fmt.Sprintf("- FHIR error (HTTP %s): %s", issue.Code, issue.Diagnostics)
-		if issue.Severity == "error" {
-			errors = append(errors, message)
-		} else if issue.Severity == "warning" {
-			warnings = append(warnings, message)
-		}
-	}
-
-	var output strings.Builder
-
-	output.WriteString("validation errors:\n\n")
-
-	if len(errors) > 0 {
-		output.WriteString("Errors:\n")
-		output.WriteString(strings.Join(errors, "\n") + "\n\n")
-	}
-
-	if len(warnings) > 0 {
-		output.WriteString("Warnings:\n")
-		output.WriteString(strings.Join(warnings, "\n") + "\n")
-	}
-
-	return output.String()
 }
