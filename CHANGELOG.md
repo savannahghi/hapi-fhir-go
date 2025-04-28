@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.1](https://github.com/savannahghi/hapi-fhir-go/compare/v1.5.0...v1.5.1) (2025-04-28)
+
+
+### Bug Fixes
+
+* update operation outcome resource ([#29](https://github.com/savannahghi/hapi-fhir-go/issues/29)) ([910f335](https://github.com/savannahghi/hapi-fhir-go/commit/910f3350e4f15f67ad1acf51a63e4c8c6c957b03))
+
 ## [1.5.0](https://github.com/savannahghi/hapi-fhir-go/compare/v1.4.0...v1.5.0) (2025-04-25)
 
 
