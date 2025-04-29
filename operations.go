@@ -150,11 +150,13 @@ func (c *Client) PatchFHIRResource(ctx context.Context, resourceType string, res
 	return nil
 }
 
-func (c *Client) PostFHIRBundle(ctx context.Context, payload, resource *models.Bundle) error {
-	err := c.makeRequest(ctx, http.MethodPost, "", nil, payload, resource)
+func (c *Client) PostFHIRBundle(ctx context.Context, payload *models.Bundle) (*models.Bundle, error) {
+	var resp models.Bundle
+
+	err := c.makeRequest(ctx, http.MethodPost, "", nil, payload, &resp)
 	if err != nil {
-		return fmt.Errorf("failed to post bundle entry: %w", err)
+		return nil, fmt.Errorf("failed to post bundle entry: %w", err)
 	}
 
-	return nil
+	return &resp, nil
 }
