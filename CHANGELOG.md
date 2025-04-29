@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.3](https://github.com/savannahghi/hapi-fhir-go/compare/v1.5.2...v1.5.3) (2025-04-29)
+
+
+### Bug Fixes
+
+* return bundle response when posting fhir bundle ([#33](https://github.com/savannahghi/hapi-fhir-go/issues/33)) ([2f3b222](https://github.com/savannahghi/hapi-fhir-go/commit/2f3b2226c4facc8713d005378b9269756ae909d9))
+
 ## [1.5.2](https://github.com/savannahghi/hapi-fhir-go/compare/v1.5.1...v1.5.2) (2025-04-28)
 
 
