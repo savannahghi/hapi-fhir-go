@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.0](https://github.com/savannahghi/hapi-fhir-go/compare/v1.5.3...v1.6.0) (2025-04-30)
+
+
+### Features
+
+* FHIR path patch ([#35](https://github.com/savannahghi/hapi-fhir-go/issues/35)) ([357809a](https://github.com/savannahghi/hapi-fhir-go/commit/357809ae8eb2cedd8f4bdab68c68b1f4f2d10e32))
+
 ## [1.5.3](https://github.com/savannahghi/hapi-fhir-go/compare/v1.5.2...v1.5.3) (2025-04-29)
 
 
