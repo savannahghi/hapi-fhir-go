@@ -44,7 +44,12 @@ func (c *Client) newRequest(
 		return nil, err
 	}
 
-	c.setHeaders(request)
+	switch method {
+	case http.MethodPatch:
+		request.Header.Set("Content-Type", "application/json-patch+json")
+	default:
+		c.setHeaders(request)
+	}
 
 	switch payload := data.(type) {
 	case nil:

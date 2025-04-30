@@ -15,6 +15,7 @@ import (
 	"fmt"
 	"net/http"
 	"net/url"
+	"reflect"
 
 	"github.com/savannahghi/hapi-fhir-go/models"
 )
@@ -143,6 +144,35 @@ func (c *Client) PatchFHIRResource(ctx context.Context, resourceType string, res
 	updatePath := fmt.Sprintf("%v/%v", resourceType, resourceID)
 
 	err := c.makeRequest(ctx, http.MethodPatch, updatePath, nil, payload, resource)
+	if err != nil {
+		return fmt.Errorf("unable to patch resource: %w", err)
+	}
+
+	return nil
+}
+
+// FHIRPathPatch implements a syntax-agnostic patch mechanism where elements to be manipulated by the patch interaction are described
+// using their FHIRpath (https://www.hl7.org/fhir/fhirpath.html) names and navigation.
+// This specification is published at http://hl7.org/fhirpath icon in order to support wider re-use across multiple specifications.
+func (c *Client) FHIRPathPatch(ctx context.Context, resourceType string, resourceID string, payload map[string]interface{}, resource interface{}) error {
+	patches := []map[string]interface{}{}
+
+	for key, value := range payload {
+		if !reflect.ValueOf(value).IsZero() {
+			patches = append(
+				patches,
+				map[string]interface{}{
+					"op":    "replace",
+					"path":  fmt.Sprintf("/%s", key), //nolint:perfsprint
+					"value": value,
+				},
+			)
+		}
+	}
+
+	fhirResource := fmt.Sprintf("%s/%s", resourceType, resourceID)
+
+	err := c.makeRequest(ctx, http.MethodPatch, fhirResource, nil, patches, resource)
 	if err != nil {
 		return fmt.Errorf("unable to patch resource: %w", err)
 	}
