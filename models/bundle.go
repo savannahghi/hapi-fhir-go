@@ -9,6 +9,7 @@ import (
 // Bundle is documented here http://hl7.org/fhir/StructureDefinition/Bundle
 type Bundle struct {
 	ID            *string         `json:"id,omitempty"`
+	ResourceType  string          `json:"resourceType,omitempty"`
 	Meta          *FHIRMeta       `json:"meta,omitempty"`
 	ImplicitRules *string         `json:"implicitRules,omitempty"`
 	Language      *string         `json:"language,omitempty"`
