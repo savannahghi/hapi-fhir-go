@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.1](https://github.com/savannahghi/hapi-fhir-go/compare/v1.6.0...v1.6.1) (2025-05-05)
+
+
+### Bug Fixes
+
+* add resource type field ([#37](https://github.com/savannahghi/hapi-fhir-go/issues/37)) ([1cfd313](https://github.com/savannahghi/hapi-fhir-go/commit/1cfd313dedaa836db057b7f2c0ce909ea9cd3970))
+
 ## [1.6.0](https://github.com/savannahghi/hapi-fhir-go/compare/v1.5.3...v1.6.0) (2025-04-30)
 
 
