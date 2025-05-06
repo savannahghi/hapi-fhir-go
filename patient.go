@@ -8,13 +8,13 @@ import (
 )
 
 // CreateFHIRPatient creates a new FHIR Patient resource.
-func (c *Client) CreateFHIRPatient(ctx context.Context, input *models.FHIRPatient) (*models.FHIRPatient, error) {
+func (c *Client) CreateFHIRPatient(ctx context.Context, input *models.Patient) (*models.Patient, error) {
 	payload, err := structToMap(input)
 	if err != nil {
 		return nil, fmt.Errorf("unable to turn %s input into a map: %w", patientResourceType, err)
 	}
 
-	resource := &models.FHIRPatient{}
+	resource := &models.Patient{}
 
 	err = c.CreateFHIRResource(ctx, patientResourceType, payload, resource)
 	if err != nil {
@@ -25,8 +25,8 @@ func (c *Client) CreateFHIRPatient(ctx context.Context, input *models.FHIRPatien
 }
 
 // GetFHIRPatient retrieves instances of FHIRPatient by ID.
-func (c *Client) GetFHIRPatient(ctx context.Context, id string) (*models.FHIRPatient, error) {
-	resource := &models.FHIRPatient{}
+func (c *Client) GetFHIRPatient(ctx context.Context, id string) (*models.Patient, error) {
+	resource := &models.Patient{}
 
 	err := c.GetFHIRResource(ctx, patientResourceType, id, resource)
 	if err != nil {

@@ -7,13 +7,13 @@ import (
 	"github.com/savannahghi/hapi-fhir-go/models"
 )
 
-func (c *Client) CreateFHIRConsent(ctx context.Context, input *models.FHIRConsent) (*models.FHIRConsent, error) {
+func (c *Client) CreateFHIRConsent(ctx context.Context, input *models.Consent) (*models.Consent, error) {
 	payload, err := structToMap(input)
 	if err != nil {
 		return nil, fmt.Errorf("unable to turn %s input into a map: %w", consentResourceType, err)
 	}
 
-	resource := &models.FHIRConsent{}
+	resource := &models.Consent{}
 
 	err = c.CreateFHIRResource(ctx, consentResourceType, payload, resource)
 	if err != nil {
@@ -23,8 +23,8 @@ func (c *Client) CreateFHIRConsent(ctx context.Context, input *models.FHIRConsen
 	return resource, nil
 }
 
-func (c *Client) GetFHIRConsent(ctx context.Context, id string) (*models.FHIRConsent, error) {
-	resource := &models.FHIRConsent{}
+func (c *Client) GetFHIRConsent(ctx context.Context, id string) (*models.Consent, error) {
+	resource := &models.Consent{}
 
 	err := c.GetFHIRResource(ctx, consentResourceType, id, resource)
 	if err != nil {

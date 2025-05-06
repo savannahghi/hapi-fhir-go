@@ -6,8 +6,8 @@ import (
 )
 
 // OperationOutcome is documented here http://hl7.org/fhir/StructureDefinition/OperationOutcome
-// OperationOutcome is a FHIR resource that provides information about the outcome of an operation.
-// It is used extensively throughout FHIR APIs to communicate detailed error information, warnings
+// OperationOutcome is a  resource that provides information about the outcome of an operation.
+// It is used extensively throughout  APIs to communicate detailed error information, warnings
 // and informational messages in a standardized way.
 // An example of a validation error would be:
 //
@@ -24,25 +24,25 @@ import (
 //	}.
 type OperationOutcome struct {
 	ID                *string                 `json:"id,omitempty"`
-	Meta              *FHIRMeta               `json:"meta,omitempty"`
+	Meta              *Meta                   `json:"meta,omitempty"`
 	ImplicitRules     *string                 `json:"implicitRules,omitempty"`
 	Language          *string                 `json:"language,omitempty"`
-	Text              *FHIRNarrative          `json:"text,omitempty"`
+	Text              *Narrative              `json:"text,omitempty"`
 	Extension         []Extension             `json:"extension,omitempty"`
 	ModifierExtension []Extension             `json:"modifierExtension,omitempty"`
 	Issue             []OperationOutcomeIssue `json:"issue"`
 }
 
 type OperationOutcomeIssue struct {
-	ID                *string              `json:"id,omitempty"`
-	Extension         []Extension          `json:"extension,omitempty"`
-	ModifierExtension []Extension          `json:"modifierExtension,omitempty"`
-	Severity          IssueSeverity        `json:"severity"`
-	Details           *FHIRCodeableConcept `json:"details,omitempty"`
-	Diagnostics       *string              `json:"diagnostics,omitempty"`
-	Location          []string             `json:"location,omitempty"`
-	Expression        []string             `json:"expression,omitempty"`
-	Code              IssueType            `json:"code,omitempty"`
+	ID                *string          `json:"id,omitempty"`
+	Extension         []Extension      `json:"extension,omitempty"`
+	ModifierExtension []Extension      `json:"modifierExtension,omitempty"`
+	Severity          IssueSeverity    `json:"severity"`
+	Details           *CodeableConcept `json:"details,omitempty"`
+	Diagnostics       *string          `json:"diagnostics,omitempty"`
+	Location          []string         `json:"location,omitempty"`
+	Expression        []string         `json:"expression,omitempty"`
+	Code              IssueType        `json:"code,omitempty"`
 }
 
 // IssueSeverity is documented here http://hl7.org/fhir/ValueSet/issue-severity
@@ -144,7 +144,7 @@ func (o *OperationOutcome) ErrorLogging() string {
 	var errors, warnings []string
 
 	for _, issue := range o.Issue {
-		message := fmt.Sprintf("- FHIR error (HTTP %s): %s", issue.Code, *issue.Diagnostics)
+		message := fmt.Sprintf("-  error (HTTP %s): %s", issue.Code, *issue.Diagnostics)
 		if issue.Severity == "error" {
 			errors = append(errors, message)
 		} else if issue.Severity == "warning" {

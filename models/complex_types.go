@@ -1,6 +1,7 @@
 package models
 
 import (
+	"encoding/json"
 	"time"
 
 	"github.com/savannahghi/scalarutils"
@@ -11,7 +12,7 @@ import (
 // be used to convey addresses for use in delivering mail as well as for visiting
 // locations which might not be valid for mail delivery.  there are a variety of postal address
 // formats defined around the world.
-type FHIRAddress struct {
+type Address struct {
 	// Unique id for the element within a resource (for internal references). This
 	// may be any string value that does not contain spaces.
 	ID *string `json:"id,omitempty"`
@@ -51,12 +52,12 @@ type FHIRAddress struct {
 	Country *string `json:"country,omitempty"`
 
 	// Time period when address was/is in use.
-	Period *FHIRPeriod `json:"period,omitempty"`
+	Period *Period `json:"period,omitempty"`
 }
 
 // FHIRAge definition: a duration of time during which an organism (or a
 // process) has existed.
-type FHIRAge struct {
+type Age struct {
 	// Unique id for the element within a resource (for internal references). This
 	// may be any string value that does not contain spaces.
 	ID *string `json:"id,omitempty"`
@@ -82,13 +83,13 @@ type FHIRAge struct {
 
 // FHIRAnnotation definition: a  text note which also  contains information
 // about who made the statement and when.
-type FHIRAnnotation struct {
+type Annotation struct {
 	// Unique id for the element within a resource (for internal references). This
 	// may be any string value that does not contain spaces.
 	ID *string `json:"id,omitempty"`
 
 	// The individual responsible for making the annotation.
-	AuthorReference *FHIRReference `json:"authorReference,omitempty"`
+	AuthorReference *Reference `json:"authorReference,omitempty"`
 
 	// The individual responsible for making the annotation.
 	AuthorString *string `json:"authorString,omitempty"`
@@ -102,7 +103,7 @@ type FHIRAnnotation struct {
 
 // FHIRAttachment definition: for referring to data content defined in other
 // formats.
-type FHIRAttachment struct {
+type Attachment struct {
 	// Unique id for the element within a resource (for internal references). This
 	// may be any string value that does not contain spaces.
 	ID *string `json:"id,omitempty"`
@@ -138,13 +139,13 @@ type FHIRAttachment struct {
 
 // FHIRCodeableConcept definition: a concept that may be defined by a formal
 // reference to a terminology or ontology or may be provided by text.
-type FHIRCodeableConcept struct {
+type CodeableConcept struct {
 	// Unique id for the element within a resource (for internal references). This
 	// may be any string value that does not contain spaces.
 	ID *string `json:"id,omitempty"`
 
 	// A reference to a code defined by a terminology system.
-	Coding []*FHIRCoding `json:"coding,omitempty"`
+	Coding []*Coding `json:"coding,omitempty"`
 
 	// A human language representation of the concept as seen/selected/uttered by
 	// the user who entered the data and/or which represents the intended meaning
@@ -152,9 +153,9 @@ type FHIRCodeableConcept struct {
 	Text string `json:"text,omitempty"`
 }
 
-// FHIRCoding definition: a reference to a code defined by a terminology
+// Coding definition: a reference to a code defined by a terminology
 // system.
-type FHIRCoding struct {
+type Coding struct {
 	// Unique id for the element within a resource (for internal references). This
 	// may be any string value that does not contain spaces.
 	ID *string `json:"id,omitempty"`
@@ -185,14 +186,14 @@ type FHIRCoding struct {
 }
 
 // ToString returns the Display field of the Coding struct as a string.
-func (c *FHIRCoding) ToString() string {
+func (c *Coding) ToString() string {
 	return c.Display
 }
 
 // FHIRContactPoint definition: details for all kinds of technology mediated
 // contact points for a person or organization, including telephone, email,
 // etc.
-type FHIRContactPoint struct {
+type ContactPoint struct {
 	// Unique id for the element within a resource (for internal references). This
 	// may be any string value that does not contain spaces.
 	ID *string `json:"id,omitempty"`
@@ -214,12 +215,12 @@ type FHIRContactPoint struct {
 	Rank *int64 `json:"rank,omitempty"`
 
 	// Time period when the contact point was/is in use.
-	Period *FHIRPeriod `json:"period,omitempty"`
+	Period *Period `json:"period,omitempty"`
 }
 
 // FHIRHumanName definition: a human's name with the ability to identify parts
 // and usage.
-type FHIRHumanName struct {
+type HumanName struct {
 	// Unique id for the element within a resource (for internal references). This
 	// may be any string value that does not contain spaces.
 	ID *string `json:"id,omitempty"`
@@ -248,12 +249,12 @@ type FHIRHumanName struct {
 	Suffix []*string `json:"suffix,omitempty"`
 
 	// Indicates the period of time when this name was valid for the named person.
-	Period *FHIRPeriod `json:"period,omitempty"`
+	Period *Period `json:"period,omitempty"`
 }
 
 // FHIRIdentifier definition: an identifier - identifies some entity uniquely
 // and unambiguously. typically this is used for business identifiers.
-type FHIRIdentifier struct {
+type Identifier struct {
 	// Unique id for the element within a resource (for internal references). This
 	// may be any string value that does not contain spaces.
 	ID *string `json:"id,omitempty"`
@@ -263,7 +264,7 @@ type FHIRIdentifier struct {
 
 	// A coded type for the identifier that can be used to determine which
 	// identifier to use for a specific purpose.
-	Type FHIRCodeableConcept `json:"type,omitempty"`
+	Type CodeableConcept `json:"type,omitempty"`
 
 	// Establishes the namespace for the value - that is, a URL that describes a
 	// set values that are unique.
@@ -274,15 +275,15 @@ type FHIRIdentifier struct {
 	Value string `json:"value,omitempty"`
 
 	// Time period during which identifier is/was valid for use.
-	Period *FHIRPeriod `json:"period,omitempty"`
+	Period *Period `json:"period,omitempty"`
 
 	// Organization that issued/manages the identifier.
-	Assigner *FHIRReference `json:"assigner,omitempty"`
+	Assigner *Reference `json:"assigner,omitempty"`
 }
 
 // FHIRNarrative definition: a human-readable summary of the resource
 // conveying the essential clinical and business information for the resource.
-type FHIRNarrative struct {
+type Narrative struct {
 	// Unique id for the element within a resource (for internal references). This
 	// may be any string value that does not contain spaces.
 	ID *string `json:"id,omitempty"`
@@ -298,7 +299,7 @@ type FHIRNarrative struct {
 
 // FHIRPeriod definition: a time period defined by a start and end date and
 // optionally time.
-type FHIRPeriod struct {
+type Period struct {
 	// Unique id for the element within a resource (for internal references). This
 	// may be any string value that does not contain spaces.
 	ID *string `json:"id,omitempty"`
@@ -313,7 +314,7 @@ type FHIRPeriod struct {
 }
 
 // FHIRReference definition: a reference from one resource to another.
-type FHIRReference struct {
+type Reference struct {
 	// Unique id for the element within a resource (for internal references). This
 	// may be any string value that does not contain spaces.
 	ID *string `json:"id,omitempty"`
@@ -342,7 +343,7 @@ type FHIRReference struct {
 	// There is no requirement that a Reference.identifier point to something that is actually exposed as a FHIR instance,
 	// but it SHALL point to a business concept that would be expected to be exposed as a FHIR instance,
 	// and that instance would need to be of a FHIR resource type allowed by the reference.
-	Identifier *FHIRIdentifier `json:"identifier,omitempty"`
+	Identifier *Identifier `json:"identifier,omitempty"`
 
 	// Plain text narrative that identifies the resource in addition to the
 	// resource reference.
@@ -351,7 +352,7 @@ type FHIRReference struct {
 
 // FHIRExpression is documented here
 // http://hl7.org/fhir/StructureDefinition/Expression
-type FHIRExpression struct {
+type Expression struct {
 	ID          *string     `json:"id,omitempty"`
 	Extension   []Extension `json:"extension,omitempty"`
 	Description *string     `json:"description,omitempty"`
@@ -363,18 +364,18 @@ type FHIRExpression struct {
 
 // FHIRMeta is a set of metadata that provides technical and workflow context
 // to a resource.
-type FHIRMeta struct {
-	VersionID   string       `json:"versionId,omitempty"`
-	LastUpdated time.Time    `json:"lastUpdated,omitempty"`
-	Source      string       `json:"source,omitempty"`
-	Tag         []FHIRCoding `json:"tag,omitempty"`
-	Security    []FHIRCoding `json:"security,omitempty"`
+type Meta struct {
+	VersionID   string    `json:"versionId,omitempty"`
+	LastUpdated time.Time `json:"lastUpdated,omitempty"`
+	Source      string    `json:"source,omitempty"`
+	Tag         []Coding  `json:"tag,omitempty"`
+	Security    []Coding  `json:"security,omitempty"`
 }
 
-// FHIRQuantity definition: a measured amount (or an amount that can
+// Quantity definition: a measured amount (or an amount that can
 // potentially be measured). note that measured amounts include amounts that
 // are not precisely quantified, including amounts involving arbitrary units and floating currencies.
-type FHIRQuantity struct {
+type Quantity struct {
 	// Unique id for the element within a resource (for internal references). This
 	// may be any string value that does not contain spaces.
 	ID *string `json:"id,omitempty"`
@@ -399,29 +400,29 @@ type FHIRQuantity struct {
 }
 
 // FHIRRange definition: a set of ordered quantities defined by a low and high limit.
-type FHIRRange struct {
+type Range struct {
 	// Unique id for the element within a resource (for internal references). This
 	// may be any string value that does not contain spaces.
 	ID *string `json:"id,omitempty"`
 
 	// The low limit. The boundary is inclusive.
-	Low FHIRQuantity `json:"low,omitempty"`
+	Low Quantity `json:"low,omitempty"`
 
 	// The high limit. The boundary is inclusive.
-	High FHIRQuantity `json:"high,omitempty"`
+	High Quantity `json:"high,omitempty"`
 }
 
 // FHIRRatio definition: a relationship of two quantity values - expressed as a numerator and a denominator.
-type FHIRRatio struct {
+type Ratio struct {
 	// Unique id for the element within a resource (for internal references). This
 	// may be any string value that does not contain spaces.
 	ID *string `json:"id,omitempty"`
 
 	// The value of the numerator.
-	Numerator FHIRQuantity `json:"numerator,omitempty"`
+	Numerator Quantity `json:"numerator,omitempty"`
 
 	// The value of the denominator.
-	Denominator FHIRQuantity `json:"denominator,omitempty"`
+	Denominator Quantity `json:"denominator,omitempty"`
 }
 
 // Extension is an optional element that provides additional information not
@@ -429,40 +430,182 @@ type FHIRRatio struct {
 // Extensions allow the definition of new data elements or the modification of
 // existing data elements in the FHIR data model.
 type Extension struct {
-	URL                  string               `json:"url,omitempty"`
-	ValueBoolean         bool                 `json:"valueBoolean,omitempty"`
-	ValueInteger         *int                 `json:"valueInteger,omitempty"`
-	ValueDecimal         *float64             `json:"valueDecimal,omitempty"`
-	ValueBase64Binary    string               `json:"valueBase64Binary,omitempty"`
-	ValueInstant         string               `json:"valueInstant,omitempty"`
-	ValueString          string               `json:"valueString,omitempty"`
-	ValueURI             string               `json:"valueURI,omitempty"`
-	ValueDate            string               `json:"valueDate,omitempty"`
-	ValueDateTime        string               `json:"valueDateTime,omitempty"`
-	ValueTime            string               `json:"valueTime,omitempty"`
-	ValueCode            string               `json:"valueCode,omitempty"`
-	ValueOid             string               `json:"valueOid,omitempty"`
-	ValueUUID            string               `json:"valueUUID,omitempty"`
-	ValueID              string               `json:"valueID,omitempty"`
-	ValueUnsignedInt     int                  `json:"valueUnsignedInt,omitempty"`
-	ValuePositiveInt     int                  `json:"valuePositiveInt,omitempty"`
-	ValueMarkdown        string               `json:"valueMarkdown,omitempty"`
-	ValueAnnotation      *FHIRAnnotation      `json:"valueAnnotation,omitempty"`
-	ValueAttachment      *FHIRAttachment      `json:"valueAttachment,omitempty"`
-	ValueIdentifier      *FHIRIdentifier      `json:"valueIdentifier,omitempty"`
-	ValueCodeableConcept *FHIRCodeableConcept `json:"valueCodeableConcept,omitempty"`
-	ValueCoding          *FHIRCoding          `json:"valueCoding,omitempty"`
-	ValueQuantity        *FHIRQuantity        `json:"valueQuantity,omitempty"`
-	ValueRange           *FHIRRange           `json:"valueRange,omitempty"`
-	ValuePeriod          *FHIRPeriod          `json:"valuePeriod,omitempty"`
-	ValueRatio           *FHIRRatio           `json:"valueRatio,omitempty"`
-	ValueReference       *FHIRReference       `json:"valueReference,omitempty"`
-	ValueExpression      *FHIRExpression      `json:"valueExpression,omitempty"`
+	URL                  string           `json:"url,omitempty"`
+	ValueBoolean         bool             `json:"valueBoolean,omitempty"`
+	ValueInteger         *int             `json:"valueInteger,omitempty"`
+	ValueDecimal         *float64         `json:"valueDecimal,omitempty"`
+	ValueBase64Binary    string           `json:"valueBase64Binary,omitempty"`
+	ValueInstant         string           `json:"valueInstant,omitempty"`
+	ValueString          string           `json:"valueString,omitempty"`
+	ValueURI             string           `json:"valueURI,omitempty"`
+	ValueDate            string           `json:"valueDate,omitempty"`
+	ValueDateTime        string           `json:"valueDateTime,omitempty"`
+	ValueTime            string           `json:"valueTime,omitempty"`
+	ValueCode            string           `json:"valueCode,omitempty"`
+	ValueOid             string           `json:"valueOid,omitempty"`
+	ValueUUID            string           `json:"valueUUID,omitempty"`
+	ValueID              string           `json:"valueID,omitempty"`
+	ValueUnsignedInt     int              `json:"valueUnsignedInt,omitempty"`
+	ValuePositiveInt     int              `json:"valuePositiveInt,omitempty"`
+	ValueMarkdown        string           `json:"valueMarkdown,omitempty"`
+	ValueAnnotation      *Annotation      `json:"valueAnnotation,omitempty"`
+	ValueAttachment      *Attachment      `json:"valueAttachment,omitempty"`
+	ValueIdentifier      *Identifier      `json:"valueIdentifier,omitempty"`
+	ValueCodeableConcept *CodeableConcept `json:"valueCodeableConcept,omitempty"`
+	ValueCoding          *Coding          `json:"valueCoding,omitempty"`
+	ValueQuantity        *Quantity        `json:"valueQuantity,omitempty"`
+	ValueRange           *Range           `json:"valueRange,omitempty"`
+	ValuePeriod          *Period          `json:"valuePeriod,omitempty"`
+	ValueRatio           *Ratio           `json:"valueRatio,omitempty"`
+	ValueReference       *Reference       `json:"valueReference,omitempty"`
+	ValueExpression      *Expression      `json:"valueExpression,omitempty"`
+	Extension            []Extension      `json:"extension,omitempty"`
 }
 
-// FHIRExtension contains child elements to represent additional information
-// that is not part of the basic definition of the resource.
-type FHIRExtension struct {
-	URL       string      `json:"url,omitempty"`
-	Extension []Extension `json:"extension,omitempty"`
+// FHIRCodeableReference is documented here http://hl7.org/fhir/StructureDefinition/CodeableReference
+type CodeableReference struct {
+	ID        *string          `json:"id,omitempty"`
+	Extension []Extension      `json:"extension,omitempty"`
+	Concept   *CodeableConcept `json:"concept,omitempty"`
+	Reference *Reference       `json:"reference,omitempty"`
 }
+
+// UsageContext is documented here http://hl7.org/fhir/StructureDefinition/UsageContext
+type UsageContext struct {
+	ID                   *string         `json:"id,omitempty"`
+	Extension            []Extension     `json:"extension,omitempty"`
+	Code                 Coding          `json:"code"`
+	ValueCodeableConcept CodeableConcept `json:"valueCodeableConcept"`
+	ValueQuantity        Quantity        `json:"valueQuantity"`
+	ValueRange           Range           `json:"valueRange"`
+	ValueReference       Reference       `json:"valueReference"`
+}
+
+// RelatedArtifact is documented here http://hl7.org/fhir/StructureDefinition/RelatedArtifact
+type RelatedArtifact struct {
+	ID                *string            `json:"id,omitempty"`
+	Extension         []Extension        `json:"extension,omitempty"`
+	Classifier        []CodeableConcept  `json:"classifier,omitempty"`
+	Label             *string            `json:"label,omitempty"`
+	Display           *string            `json:"display,omitempty"`
+	Citation          *string            `json:"citation,omitempty"`
+	Document          *Attachment        `json:"document,omitempty"`
+	Resource          *string            `json:"resource,omitempty"`
+	ResourceReference *Reference         `json:"resourceReference,omitempty"`
+	PublicationStatus *PublicationStatus `json:"publicationStatus,omitempty"`
+	PublicationDate   *string            `json:"publicationDate,omitempty"`
+}
+
+// FHIRContactDetail is documented here http://hl7.org/fhir/StructureDefinition/ContactDetail
+type ContactDetail struct {
+	ID        *string        `json:"id,omitempty"`
+	Extension []Extension    `json:"extension,omitempty"`
+	Name      *string        `json:"name,omitempty"`
+	Telecom   []ContactPoint `json:"telecom,omitempty"`
+}
+
+// FHIRRatioRange is documented here http://hl7.org/fhir/StructureDefinition/RatioRange
+type RatioRange struct {
+	ID            *string     `json:"id,omitempty"`
+	Extension     []Extension `json:"extension,omitempty"`
+	LowNumerator  *Quantity   `json:"lowNumerator,omitempty"`
+	HighNumerator *Quantity   `json:"highNumerator,omitempty"`
+	Denominator   *Quantity   `json:"denominator,omitempty"`
+}
+
+type HTTPVerb string
+
+const (
+	HTTPVerbGET    HTTPVerb = "GET"
+	HTTPVerbHEAD   HTTPVerb = "HEAD"
+	HTTPVerbPOST   HTTPVerb = "POST"
+	HTTPVerbPUT    HTTPVerb = "PUT"
+	HTTPVerbDELETE HTTPVerb = "DELETE"
+	HTTPVerbPATCH  HTTPVerb = "PATCH"
+)
+
+func (code HTTPVerb) MarshalJSON() ([]byte, error) {
+	return json.Marshal(code.Code())
+}
+
+func (code HTTPVerb) String() string {
+	return code.Code()
+}
+
+func (code HTTPVerb) Code() string {
+	switch code {
+	case HTTPVerbGET:
+		return "GET"
+	case HTTPVerbHEAD:
+		return "HEAD"
+	case HTTPVerbPOST:
+		return "POST"
+	case HTTPVerbPUT:
+		return "PUT"
+	case HTTPVerbDELETE:
+		return "DELETE"
+	case HTTPVerbPATCH:
+		return "PATCH"
+	}
+
+	return "unknown HTTP verb"
+}
+
+// PublicationStatus is documented here http://hl7.org/fhir/ValueSet/publication-status
+type PublicationStatus string
+
+const (
+	PublicationStatusDraft   PublicationStatus = "draft"
+	PublicationStatusActive  PublicationStatus = "active"
+	PublicationStatusRetired PublicationStatus = "retired"
+	PublicationStatusUnknown PublicationStatus = "unknown"
+)
+
+type FilterOperator string
+
+const (
+	FilterOperatorEquals         FilterOperator = "="
+	FilterOperatorIsA            FilterOperator = "is-a"
+	FilterOperatorDescendentOf   FilterOperator = "descendent-of"
+	FilterOperatorIsNotA         FilterOperator = "is-not-a"
+	FilterOperatorRegex          FilterOperator = "regex"
+	FilterOperatorIn             FilterOperator = "in"
+	FilterOperatorNotIn          FilterOperator = "not-in"
+	FilterOperatorGeneralizes    FilterOperator = "generalizes"
+	FilterOperatorChildOf        FilterOperator = "child-of"
+	FilterOperatorDescendentLeaf FilterOperator = "descendent-leaf"
+	FilterOperatorExists         FilterOperator = "exists"
+)
+
+// CodeSystemHierarchyMeaning is documented here http://hl7.org/fhir/ValueSet/codesystem-hierarchy-meaning
+type CodeSystemHierarchyMeaning string
+
+const (
+	CodeSystemHierarchyMeaningGroupedBy      CodeSystemHierarchyMeaning = "grouped-by"
+	CodeSystemHierarchyMeaningIsA            CodeSystemHierarchyMeaning = "is-a"
+	CodeSystemHierarchyMeaningPartOf         CodeSystemHierarchyMeaning = "part-of"
+	CodeSystemHierarchyMeaningClassifiedWith CodeSystemHierarchyMeaning = "classified-with"
+)
+
+// CodeSystemContentMode is documented here http://hl7.org/fhir/ValueSet/codesystem-content-mode
+type CodeSystemContentMode string
+
+const (
+	CodeSystemContentModeNotPresent CodeSystemContentMode = "not-present"
+	CodeSystemContentModeExample    CodeSystemContentMode = "example"
+	CodeSystemContentModeFragment   CodeSystemContentMode = "fragment"
+	CodeSystemContentModeComplete   CodeSystemContentMode = "complete"
+	CodeSystemContentModeSupplement CodeSystemContentMode = "supplement"
+)
+
+type PropertyType string
+
+const (
+	PropertyTypeCode     PropertyType = "code"
+	PropertyTypeCoding   PropertyType = "coding"
+	PropertyTypeString   PropertyType = "string"
+	PropertyTypeInteger  PropertyType = "integer"
+	PropertyTypeBoolean  PropertyType = "boolean"
+	PropertyTypeDateTime PropertyType = "dateTime"
+	PropertyTypeDecimal  PropertyType = "decimal"
+)

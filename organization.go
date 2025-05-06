@@ -7,13 +7,13 @@ import (
 	"github.com/savannahghi/hapi-fhir-go/models"
 )
 
-func (c *Client) CreateFHIROrganization(ctx context.Context, input *models.FHIROrganization) (*models.FHIROrganization, error) {
+func (c *Client) CreateFHIROrganization(ctx context.Context, input *models.Organization) (*models.Organization, error) {
 	payload, err := structToMap(input)
 	if err != nil {
 		return nil, fmt.Errorf("unable to turn %s input into a map: %w", organizationResource, err)
 	}
 
-	resource := &models.FHIROrganization{}
+	resource := &models.Organization{}
 
 	err = c.CreateFHIRResource(ctx, organizationResource, payload, resource)
 	if err != nil {
@@ -23,8 +23,8 @@ func (c *Client) CreateFHIROrganization(ctx context.Context, input *models.FHIRO
 	return resource, nil
 }
 
-func (c *Client) GetFHIROrganization(ctx context.Context, id string) (*models.FHIROrganization, error) {
-	resource := &models.FHIROrganization{}
+func (c *Client) GetFHIROrganization(ctx context.Context, id string) (*models.Organization, error) {
+	resource := &models.Organization{}
 
 	err := c.GetFHIRResource(ctx, organizationResource, id, resource)
 	if err != nil {

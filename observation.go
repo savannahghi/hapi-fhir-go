@@ -7,13 +7,13 @@ import (
 	"github.com/savannahghi/hapi-fhir-go/models"
 )
 
-func (c *Client) CreateFHIRObservation(ctx context.Context, input *models.FHIRObservation) (*models.FHIRObservation, error) {
+func (c *Client) CreateFHIRObservation(ctx context.Context, input *models.Observation) (*models.Observation, error) {
 	payload, err := structToMap(input)
 	if err != nil {
 		return nil, fmt.Errorf("unable to turn %s input into a map: %w", observationResourceType, err)
 	}
 
-	resource := &models.FHIRObservation{}
+	resource := &models.Observation{}
 
 	err = c.CreateFHIRResource(ctx, observationResourceType, payload, resource)
 	if err != nil {
@@ -23,8 +23,8 @@ func (c *Client) CreateFHIRObservation(ctx context.Context, input *models.FHIROb
 	return resource, nil
 }
 
-func (c *Client) GetFHIRObservation(ctx context.Context, id string) (*models.FHIRObservation, error) {
-	resource := &models.FHIRObservation{}
+func (c *Client) GetFHIRObservation(ctx context.Context, id string) (*models.Observation, error) {
+	resource := &models.Observation{}
 
 	err := c.GetFHIRResource(ctx, observationResourceType, id, resource)
 	if err != nil {

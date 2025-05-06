@@ -50,7 +50,7 @@ func setupHAPIFHIRTestContainer(t *testing.T) (string, func()) {
 	return baseURL, cleanup
 }
 
-func fakePatient() *models.FHIRPatient {
+func fakePatient() *models.Patient {
 	id := gofakeit.UUID()
 	system := scalarutils.URI("test")
 	version := "0.0.1"
@@ -75,15 +75,15 @@ func fakePatient() *models.FHIRPatient {
 	creation := scalarutils.DateTime("2020-09-24T18:02:38.661033Z")
 	typeCode := gofakeit.UUID()
 
-	patient := models.FHIRPatient{
+	patient := models.Patient{
 		ID: &id,
-		Identifier: []*models.FHIRIdentifier{
+		Identifier: []*models.Identifier{
 			{
 				ID:  &id,
 				Use: models.IdentifierUseEnumOfficial,
-				Type: models.FHIRCodeableConcept{
+				Type: models.CodeableConcept{
 					Text: "MR",
-					Coding: []*models.FHIRCoding{
+					Coding: []*models.Coding{
 						{
 							System:       &system,
 							Version:      &version,
@@ -95,11 +95,11 @@ func fakePatient() *models.FHIRPatient {
 				},
 				System:   &system,
 				Value:    id,
-				Assigner: &models.FHIRReference{},
+				Assigner: &models.Reference{},
 			},
 		},
 		Active: &active,
-		Name: []*models.FHIRHumanName{
+		Name: []*models.HumanName{
 			{
 				Given:  []*string{&name},
 				Family: &name,
@@ -107,7 +107,7 @@ func fakePatient() *models.FHIRPatient {
 				Text:   name,
 			},
 		},
-		Telecom: []*models.FHIRContactPoint{
+		Telecom: []*models.ContactPoint{
 			{
 				System: &phoneSystem,
 				Use:    &use,
@@ -117,7 +117,7 @@ func fakePatient() *models.FHIRPatient {
 		},
 		Gender:    &male,
 		BirthDate: date,
-		Address: []*models.FHIRAddress{
+		Address: []*models.Address{
 			{
 				Use:  &addrUse,
 				Type: &postalAddrType,
@@ -125,23 +125,23 @@ func fakePatient() *models.FHIRPatient {
 				Text: address.Address,
 			},
 		},
-		Photo: []*models.FHIRAttachment{
+		Photo: []*models.Attachment{
 			{
 				ID:       &id,
 				Creation: &creation,
 			},
 		},
-		Contact: []*models.FHIRPatientContact{
+		Contact: []*models.PatientContact{
 			{
 				ID:           new(string),
-				Relationship: []*models.FHIRCodeableConcept{},
-				Name: &models.FHIRHumanName{
+				Relationship: []*models.CodeableConcept{},
+				Name: &models.HumanName{
 					Given:  []*string{&name},
 					Family: &name,
 					Use:    nameUse,
 					Text:   name,
 				},
-				Telecom: []*models.FHIRContactPoint{
+				Telecom: []*models.ContactPoint{
 					{
 						System: &phoneSystem,
 						Use:    &use,
@@ -149,7 +149,7 @@ func fakePatient() *models.FHIRPatient {
 						Value:  &phone,
 					},
 				},
-				Address: &models.FHIRAddress{
+				Address: &models.Address{
 
 					Use:  &addrUse,
 					Type: &postalAddrType,
@@ -172,7 +172,7 @@ func TestClient_CreateFHIRPatient(t *testing.T) {
 
 	type args struct {
 		ctx   context.Context
-		input *models.FHIRPatient
+		input *models.Patient
 	}
 	tests := []struct {
 		name    string
@@ -192,7 +192,7 @@ func TestClient_CreateFHIRPatient(t *testing.T) {
 			name: "Sad Case - Create an invalid patient",
 			args: args{
 				ctx: context.Background(),
-				input: &models.FHIRPatient{
+				input: &models.Patient{
 					Gender: &gender,
 				},
 			},

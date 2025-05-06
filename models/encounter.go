@@ -4,92 +4,92 @@ import (
 	"github.com/savannahghi/scalarutils"
 )
 
-// FHIREncounter definition: an interaction between a patient and healthcare provider(s) for the purpose of providing healthcare service(s)
+// Encounter definition: an interaction between a patient and healthcare provider(s) for the purpose of providing healthcare service(s)
 // or assessing the health status of a patient.
-type FHIREncounter struct {
-	ID              *string                       `json:"id,omitempty"`
-	Text            *FHIRNarrative                `json:"text,omitempty"`
-	Identifier      []*FHIRIdentifier             `json:"identifier,omitempty"`
-	Status          EncounterStatus               `json:"status,omitempty"`
-	StatusHistory   []*FHIREncounterStatushistory `json:"statusHistory,omitempty"`
-	Class           FHIRCoding                    `json:"class,omitempty"`
-	ClassHistory    []*FHIREncounterClasshistory  `json:"classHistory,omitempty"`
-	Type            []*FHIRCodeableConcept        `json:"type,omitempty"`
-	ServiceType     *FHIRCodeableConcept          `json:"serviceType,omitempty"`
-	Priority        *FHIRCodeableConcept          `json:"priority,omitempty"`
-	Subject         *FHIRReference                `json:"subject,omitempty"`
-	EpisodeOfCare   []*FHIRReference              `json:"episodeOfCare,omitempty"`
-	BasedOn         []*FHIRReference              `json:"basedOn,omitempty"`
-	Participant     []*FHIREncounterParticipant   `json:"participant,omitempty"`
-	Appointment     []*FHIRReference              `json:"appointment,omitempty"`
-	Period          *FHIRPeriod                   `json:"period,omitempty"`
-	Length          *FHIRDuration                 `json:"length,omitempty"`
-	ReasonCode      *scalarutils.Code             `json:"reasonCode,omitempty"`
-	ReasonReference []*FHIRReference              `json:"reasonReference,omitempty"`
-	Diagnosis       []*FHIREncounterDiagnosis     `json:"diagnosis,omitempty"`
-	Account         []*FHIRReference              `json:"account,omitempty"`
-	Hospitalization *FHIREncounterHospitalization `json:"hospitalization,omitempty"`
-	Location        []*FHIREncounterLocation      `json:"location,omitempty"`
-	ServiceProvider *FHIRReference                `json:"serviceProvider,omitempty"`
-	PartOf          *FHIRReference                `json:"partOf,omitempty"`
-	Meta            *FHIRMeta                     `json:"meta,omitempty"`
-	Extension       []*FHIRExtension              `json:"extension,omitempty"`
+type Encounter struct {
+	ID              *string                   `json:"id,omitempty"`
+	Text            *Narrative                `json:"text,omitempty"`
+	Identifier      []*Identifier             `json:"identifier,omitempty"`
+	Status          EncounterStatus           `json:"status,omitempty"`
+	StatusHistory   []*EncounterStatushistory `json:"statusHistory,omitempty"`
+	Class           Coding                    `json:"class,omitempty"`
+	ClassHistory    []*EncounterClasshistory  `json:"classHistory,omitempty"`
+	Type            []*CodeableConcept        `json:"type,omitempty"`
+	ServiceType     *CodeableConcept          `json:"serviceType,omitempty"`
+	Priority        *CodeableConcept          `json:"priority,omitempty"`
+	Subject         *Reference                `json:"subject,omitempty"`
+	EpisodeOfCare   []*Reference              `json:"episodeOfCare,omitempty"`
+	BasedOn         []*Reference              `json:"basedOn,omitempty"`
+	Participant     []*EncounterParticipant   `json:"participant,omitempty"`
+	Appointment     []*Reference              `json:"appointment,omitempty"`
+	Period          *Period                   `json:"period,omitempty"`
+	Length          *Duration                 `json:"length,omitempty"`
+	ReasonCode      *scalarutils.Code         `json:"reasonCode,omitempty"`
+	ReasonReference []*Reference              `json:"reasonReference,omitempty"`
+	Diagnosis       []*EncounterDiagnosis     `json:"diagnosis,omitempty"`
+	Account         []*Reference              `json:"account,omitempty"`
+	Hospitalization *EncounterHospitalization `json:"hospitalization,omitempty"`
+	Location        []*EncounterLocation      `json:"location,omitempty"`
+	ServiceProvider *Reference                `json:"serviceProvider,omitempty"`
+	PartOf          *Reference                `json:"partOf,omitempty"`
+	Meta            *Meta                     `json:"meta,omitempty"`
+	Extension       []*Extension              `json:"extension,omitempty"`
 }
 
-type FHIREncounterClasshistory struct {
-	ID     *string     `json:"id,omitempty"`
-	Class  *FHIRCoding `json:"class,omitempty"`
-	Period *FHIRPeriod `json:"period,omitempty"`
+type EncounterClasshistory struct {
+	ID     *string `json:"id,omitempty"`
+	Class  *Coding `json:"class,omitempty"`
+	Period *Period `json:"period,omitempty"`
 }
 
-type FHIREncounterDiagnosis struct {
-	ID        *string              `json:"id,omitempty"`
-	Condition *FHIRReference       `json:"condition,omitempty"`
-	Use       *FHIRCodeableConcept `json:"use,omitempty"`
-	Rank      *string              `json:"rank,omitempty"`
+type EncounterDiagnosis struct {
+	ID        *string          `json:"id,omitempty"`
+	Condition *Reference       `json:"condition,omitempty"`
+	Use       *CodeableConcept `json:"use,omitempty"`
+	Rank      *string          `json:"rank,omitempty"`
 }
 
-type FHIREncounterHospitalization struct {
-	ID                     *string                `json:"id,omitempty"`
-	PreAdmissionIdentifier *FHIRIdentifier        `json:"preAdmissionIdentifier,omitempty"`
-	Origin                 *FHIRReference         `json:"origin,omitempty"`
-	AdmitSource            *FHIRCodeableConcept   `json:"admitSource,omitempty"`
-	ReAdmission            *FHIRCodeableConcept   `json:"reAdmission,omitempty"`
-	DietPreference         []*FHIRCodeableConcept `json:"dietPreference,omitempty"`
-	SpecialCourtesy        []*FHIRCodeableConcept `json:"specialCourtesy,omitempty"`
-	SpecialArrangement     []*FHIRCodeableConcept `json:"specialArrangement,omitempty"`
-	Destination            *FHIRReference         `json:"destination,omitempty"`
-	DischargeDisposition   *FHIRCodeableConcept   `json:"dischargeDisposition,omitempty"`
+type EncounterHospitalization struct {
+	ID                     *string            `json:"id,omitempty"`
+	PreAdmissionIdentifier *Identifier        `json:"preAdmissionIdentifier,omitempty"`
+	Origin                 *Reference         `json:"origin,omitempty"`
+	AdmitSource            *CodeableConcept   `json:"admitSource,omitempty"`
+	ReAdmission            *CodeableConcept   `json:"reAdmission,omitempty"`
+	DietPreference         []*CodeableConcept `json:"dietPreference,omitempty"`
+	SpecialCourtesy        []*CodeableConcept `json:"specialCourtesy,omitempty"`
+	SpecialArrangement     []*CodeableConcept `json:"specialArrangement,omitempty"`
+	Destination            *Reference         `json:"destination,omitempty"`
+	DischargeDisposition   *CodeableConcept   `json:"dischargeDisposition,omitempty"`
 }
 
-type FHIREncounterLocation struct {
+type EncounterLocation struct {
 	ID           *string                  `json:"id,omitempty"`
-	Location     *FHIRReference           `json:"location,omitempty"`
+	Location     *Reference               `json:"location,omitempty"`
 	Status       *EncounterLocationStatus `json:"status,omitempty"`
-	PhysicalType *FHIRCodeableConcept     `json:"physicalType,omitempty"`
-	Period       *FHIRPeriod              `json:"period,omitempty"`
+	PhysicalType *CodeableConcept         `json:"physicalType,omitempty"`
+	Period       *Period                  `json:"period,omitempty"`
 }
 
-type FHIREncounterParticipant struct {
-	ID         *string                `json:"id,omitempty"`
-	Type       []*FHIRCodeableConcept `json:"type,omitempty"`
-	Period     *FHIRPeriod            `json:"period,omitempty"`
-	Individual *FHIRReference         `json:"individual,omitempty"`
+type EncounterParticipant struct {
+	ID         *string            `json:"id,omitempty"`
+	Type       []*CodeableConcept `json:"type,omitempty"`
+	Period     *Period            `json:"period,omitempty"`
+	Individual *Reference         `json:"individual,omitempty"`
 }
 
-type FHIREncounterStatushistory struct {
+type EncounterStatushistory struct {
 	ID     *string          `json:"id,omitempty"`
 	Status *EncounterStatus `json:"status,omitempty"`
-	Period *FHIRPeriod      `json:"period,omitempty"`
+	Period *Period          `json:"period,omitempty"`
 }
 
-// FHIREncounterRelayPayload is used to return single instances of Encounter.
-type FHIREncounterRelayPayload struct {
-	Resource *FHIREncounter `json:"resource,omitempty"`
+// EncounterRelayPayload is used to return single instances of Encounter.
+type EncounterRelayPayload struct {
+	Resource *Encounter `json:"resource,omitempty"`
 }
 
-// FHIRDuration definition: a length of time.
-type FHIRDuration struct {
+// Duration definition: a length of time.
+type Duration struct {
 	ID         *string                 `json:"id,omitempty"`
 	Value      *scalarutils.Decimal    `json:"value,omitempty"`
 	Comparator *DurationComparatorEnum `json:"comparator,omitempty"`

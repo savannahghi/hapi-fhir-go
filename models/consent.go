@@ -5,31 +5,31 @@ import (
 )
 
 // Consent models a fhir consent resource.
-type FHIRConsent struct {
-	ID         *string                `json:"id,omitempty"`
-	Status     *ConsentStatusEnum     `json:"status"`
-	Scope      *FHIRCodeableConcept   `json:"scope"`
-	Category   []*FHIRCodeableConcept `json:"category"`
-	PolicyRule *FHIRCodeableConcept   `json:"policyRule,omitempty"`
-	Provision  *FHIRConsentProvision  `json:"provision,omitempty"`
-	Patient    *FHIRReference         `json:"patient,omitempty"`
-	Meta       *FHIRMeta              `json:"meta,omitempty"`
-	Extension  []Extension            `json:"extension,omitempty"`
-	DateTime   *scalarutils.DateTime  `json:"dateTime,omitempty"`
+type Consent struct {
+	ID         *string               `json:"id,omitempty"`
+	Status     *ConsentStatusEnum    `json:"status"`
+	Scope      *CodeableConcept      `json:"scope"`
+	Category   []*CodeableConcept    `json:"category"`
+	PolicyRule *CodeableConcept      `json:"policyRule,omitempty"`
+	Provision  *ConsentProvision     `json:"provision,omitempty"`
+	Patient    *Reference            `json:"patient,omitempty"`
+	Meta       *Meta                 `json:"meta,omitempty"`
+	Extension  []Extension           `json:"extension,omitempty"`
+	DateTime   *scalarutils.DateTime `json:"dateTime,omitempty"`
 }
 
-// FHIRConsentProvision models a fhir consent provision.
-type FHIRConsentProvision struct {
-	ID   *string                    `json:"id,omitempty"`
-	Type *ConsentProvisionTypeEnum  `json:"type,omitempty"`
-	Data []FHIRConsentProvisionData `json:"data,omitempty"`
+// ConsentProvision models a fhir consent provision.
+type ConsentProvision struct {
+	ID   *string                   `json:"id,omitempty"`
+	Type *ConsentProvisionTypeEnum `json:"type,omitempty"`
+	Data []ConsentProvisionData    `json:"data,omitempty"`
 }
 
-// FHIRConsentProvisionData models a consent provision data.
-type FHIRConsentProvisionData struct {
+// ConsentProvisionData models a consent provision data.
+type ConsentProvisionData struct {
 	ID                *string                `json:"id,omitempty"`
 	Extension         []Extension            `json:"extension,omitempty"`
 	ModifierExtension []Extension            `json:"modifierExtension,omitempty"`
 	Meaning           ConsentDataMeaningEnum `json:"meaning,omitempty"`
-	Reference         *FHIRReference         `json:"reference,omitempty"`
+	Reference         *Reference             `json:"reference,omitempty"`
 }

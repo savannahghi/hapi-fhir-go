@@ -5,7 +5,7 @@ import "encoding/json"
 type Parameters struct {
 	ID            *string               `json:"id,omitempty"`
 	ResourceType  string                `json:"resourceType,omitempty"`
-	Meta          *FHIRMeta             `json:"meta,omitempty"`
+	Meta          *Meta                 `json:"meta,omitempty"`
 	ImplicitRules *string               `json:"implicitRules,omitempty"`
 	Language      *string               `json:"language,omitempty"`
 	Parameter     []ParametersParameter `json:"parameter,omitempty"`
@@ -35,25 +35,25 @@ type ParametersParameter struct {
 	ValueUrI             *string               `json:"valueUrI,omitempty"`
 	ValueUrL             *string               `json:"valueUrL,omitempty"`
 	ValueUUID            *string               `json:"valueUUID,omitempty"`
-	ValueAddress         *FHIRAddress          `json:"valueAddress,omitempty"`
-	ValueAge             *FHIRAge              `json:"valueAge,omitempty"`
-	ValueAnnotation      *FHIRAnnotation       `json:"valueAnnotation,omitempty"`
-	ValueAttachment      *FHIRAttachment       `json:"valueAttachment,omitempty"`
-	ValueCodeableConcept *FHIRCodeableConcept  `json:"valueCodeableConcept,omitempty"`
-	ValueCoding          *FHIRCoding           `json:"valueCoding,omitempty"`
-	ValueContactPoint    *FHIRContactPoint     `json:"valueContactPoint,omitempty"`
-	ValueDuration        *FHIRDuration         `json:"valueDuration,omitempty"`
-	ValueHumanName       *FHIRHumanName        `json:"valueHumanName,omitempty"`
-	ValueIdentifier      *FHIRIdentifier       `json:"valueIdentifier,omitempty"`
-	ValuePeriod          *FHIRPeriod           `json:"valuePeriod,omitempty"`
-	ValueQuantity        *FHIRQuantity         `json:"valueQuantity,omitempty"`
-	ValueRange           *FHIRRange            `json:"valueRange,omitempty"`
-	ValueRatio           *FHIRRatio            `json:"valueRatio,omitempty"`
-	ValueReference       *FHIRReference        `json:"valueReference,omitempty"`
-	ValueSampledData     *FHIRSampledData      `json:"valueSampledData,omitempty"`
-	ValueTiming          *FHIRTiming           `json:"valueTiming,omitempty"`
-	ValueExpression      *FHIRExpression       `json:"valueExpression,omitempty"`
-	ValueMeta            *FHIRMeta             `json:"valueMeta,omitempty"`
+	ValueAddress         *Address              `json:"valueAddress,omitempty"`
+	ValueAge             *Age                  `json:"valueAge,omitempty"`
+	ValueAnnotation      *Annotation           `json:"valueAnnotation,omitempty"`
+	ValueAttachment      *Attachment           `json:"valueAttachment,omitempty"`
+	ValueCodeableConcept *CodeableConcept      `json:"valueCodeableConcept,omitempty"`
+	ValueCoding          *Coding               `json:"valueCoding,omitempty"`
+	ValueContactPoint    *ContactPoint         `json:"valueContactPoint,omitempty"`
+	ValueDuration        *Duration             `json:"valueDuration,omitempty"`
+	ValueHumanName       *HumanName            `json:"valueHumanName,omitempty"`
+	ValueIdentifier      *Identifier           `json:"valueIdentifier,omitempty"`
+	ValuePeriod          *Period               `json:"valuePeriod,omitempty"`
+	ValueQuantity        *Quantity             `json:"valueQuantity,omitempty"`
+	ValueRange           *Range                `json:"valueRange,omitempty"`
+	ValueRatio           *Ratio                `json:"valueRatio,omitempty"`
+	ValueReference       *Reference            `json:"valueReference,omitempty"`
+	ValueSampledData     *SampledData          `json:"valueSampledData,omitempty"`
+	ValueTiming          *Timing               `json:"valueTiming,omitempty"`
+	ValueExpression      *Expression           `json:"valueExpression,omitempty"`
+	ValueMeta            *Meta                 `json:"valueMeta,omitempty"`
 	Resource             json.RawMessage       `json:"resource,omitempty"`
 	Part                 []ParametersParameter `json:"part,omitempty"`
 }

@@ -7,13 +7,13 @@ import (
 	"github.com/savannahghi/hapi-fhir-go/models"
 )
 
-func (c *Client) CreateFHIRTask(ctx context.Context, input *models.FHIRTask) (*models.FHIRTask, error) {
+func (c *Client) CreateFHIRTask(ctx context.Context, input *models.Task) (*models.Task, error) {
 	payload, err := structToMap(input)
 	if err != nil {
 		return nil, fmt.Errorf("unable to turn %s input into a map: %w", taskResourceType, err)
 	}
 
-	resource := &models.FHIRTask{}
+	resource := &models.Task{}
 
 	err = c.CreateFHIRResource(ctx, taskResourceType, payload, resource)
 	if err != nil {
@@ -23,8 +23,8 @@ func (c *Client) CreateFHIRTask(ctx context.Context, input *models.FHIRTask) (*m
 	return resource, nil
 }
 
-func (c *Client) GetFHIRTask(ctx context.Context, id string) (*models.FHIRTask, error) {
-	resource := &models.FHIRTask{}
+func (c *Client) GetFHIRTask(ctx context.Context, id string) (*models.Task, error) {
+	resource := &models.Task{}
 
 	err := c.GetFHIRResource(ctx, taskResourceType, id, resource)
 	if err != nil {

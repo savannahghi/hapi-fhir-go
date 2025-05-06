@@ -3,14 +3,13 @@ package models
 import (
 	"errors"
 	"strings"
-	"time"
 
 	"github.com/savannahghi/scalarutils"
 )
 
-// FHIRPatient definition: demographics and other administrative information
+// Patient definition: demographics and other administrative information
 // about an individual or animal receiving care or other health-related services.
-type FHIRPatient struct {
+type Patient struct {
 	// The logical id of the resource, as used in the URL for the resource. Once
 	// assigned, this value never changes.
 	ID *string `json:"id,omitempty"`
@@ -21,10 +20,10 @@ type FHIRPatient struct {
 	// contain sufficient detail to make it "clinically safe" for a human to just read the narrative.
 	// Resource definitions may define what content should be represented in the
 	// narrative to ensure clinical safety.
-	Text *FHIRNarrative `json:"text,omitempty"`
+	Text *Narrative `json:"text,omitempty"`
 
 	// An identifier for this patient.
-	Identifier []*FHIRIdentifier `json:"identifier,omitempty"`
+	Identifier []*Identifier `json:"identifier,omitempty"`
 
 	// Whether this patient record is in active use.
 	// Many systems use this property to mark as non-current patients, such as
@@ -37,11 +36,11 @@ type FHIRPatient struct {
 	Active *bool `json:"active,omitempty"`
 
 	// A name associated with the individual.
-	Name []*FHIRHumanName `json:"name,omitempty"`
+	Name []*HumanName `json:"name,omitempty"`
 
 	// A contact detail (e.g. a telephone number or an email address) by which the
 	// individual may be contacted.
-	Telecom []*FHIRContactPoint `json:"telecom,omitempty"`
+	Telecom []*ContactPoint `json:"telecom,omitempty"`
 
 	// Administrative Gender - the gender that the patient is considered to have
 	// for administration and record keeping purposes.
@@ -57,10 +56,10 @@ type FHIRPatient struct {
 	DeceasedDateTime *scalarutils.Date `json:"deceasedDateTime,omitempty"`
 
 	// An address for the individual.
-	Address []*FHIRAddress `json:"address,omitempty"`
+	Address []*Address `json:"address,omitempty"`
 
 	// This field contains a patient's most recent marital (civil) status.
-	MaritalStatus *FHIRCodeableConcept `json:"maritalStatus,omitempty"`
+	MaritalStatus *CodeableConcept `json:"maritalStatus,omitempty"`
 
 	// Indicates whether the patient is part of a multiple (boolean) or indicates
 	// the actual birth order (integer).
@@ -71,35 +70,35 @@ type FHIRPatient struct {
 	MultipleBirthInteger *string `json:"multipleBirthInteger,omitempty"`
 
 	// Image of the patient.
-	Photo []*FHIRAttachment `json:"photo,omitempty"`
+	Photo []*Attachment `json:"photo,omitempty"`
 
 	// A contact party (e.g. guardian, partner, friend) for the patient.
-	Contact []*FHIRPatientContact `json:"contact,omitempty"`
+	Contact []*PatientContact `json:"contact,omitempty"`
 
 	// A language which may be used to communicate with the patient about his or
 	// her health.
-	Communication []*FHIRPatientCommunication `json:"communication,omitempty"`
+	Communication []*PatientCommunication `json:"communication,omitempty"`
 
 	// Patient's nominated care provider.
-	GeneralPractitioner []*FHIRReference `json:"generalPractitioner,omitempty"`
+	GeneralPractitioner []*Reference `json:"generalPractitioner,omitempty"`
 
 	// Organization that is the custodian of the patient record.
-	ManagingOrganization *FHIRReference `json:"managingOrganization,omitempty"`
+	ManagingOrganization *Reference `json:"managingOrganization,omitempty"`
 
 	// Link to another patient resource that concerns the same actual patient.
-	Link []*FHIRPatientLink `json:"link,omitempty"`
+	Link []*PatientLink `json:"link,omitempty"`
 
 	// Meta stores more information about the resource
-	Meta *FHIRMeta `json:"meta,omitempty"`
+	Meta *Meta `json:"meta,omitempty"`
 
 	// Extension is an optional element that provides additional information not
 	// captured in the basic resource definition
-	Extension []*FHIRExtension `json:"extension,omitempty"`
+	Extension []*Extension `json:"extension,omitempty"`
 }
 
 // GetReceivingFacilityDetails is used to fetch the details of the receiving
 // facility.
-func (p FHIRPatient) GetPatientHealthIDIdentifier() string {
+func (p Patient) GetPatientHealthIDIdentifier() string {
 	var healthID string
 
 	for _, identifier := range p.Identifier {
@@ -116,9 +115,9 @@ func (p FHIRPatient) GetPatientHealthIDIdentifier() string {
 	return healthID
 }
 
-// FHIRPatientCommunication definition: demographics and other administrative
+// PatientCommunication definition: demographics and other administrative
 // information about an individual or animal receiving care or other health-related services.
-type FHIRPatientCommunication struct {
+type PatientCommunication struct {
 	// Unique id for the element within a resource (for internal references). This
 	// may be any string value that does not contain spaces.
 	ID *string `json:"id,omitempty"`
@@ -126,32 +125,32 @@ type FHIRPatientCommunication struct {
 	// The ISO-639-1 alpha 2 code in lower case for the language, optionally
 	// followed by a hyphen and the ISO-3166-1 alpha 2 code for the region in upper case;
 	// e.g. "en" for English, or "en-US" for American English versus "en-EN" for England English.
-	Language *FHIRCodeableConcept `json:"language,omitempty"`
+	Language *CodeableConcept `json:"language,omitempty"`
 
 	// Indicates whether or not the patient prefers this language (over other
 	// languages he masters up a certain level).
 	Preferred *bool `json:"preferred,omitempty"`
 }
 
-// FHIRPatientContact definition: demographics and other administrative
+// PatientContact definition: demographics and other administrative
 // information about an individual or animal receiving care or other health-related services.
-type FHIRPatientContact struct {
+type PatientContact struct {
 	// Unique id for the element within a resource (for internal references). This
 	// may be any string value that does not contain spaces.
 	ID *string `json:"id,omitempty"`
 
 	// The nature of the relationship between the patient and the contact person.
-	Relationship []*FHIRCodeableConcept `json:"relationship,omitempty"`
+	Relationship []*CodeableConcept `json:"relationship,omitempty"`
 
 	// A name associated with the contact person.
-	Name *FHIRHumanName `json:"name,omitempty"`
+	Name *HumanName `json:"name,omitempty"`
 
 	// A contact detail for the person, e.g. a telephone number or an email
 	// address.
-	Telecom []*FHIRContactPoint `json:"telecom,omitempty"`
+	Telecom []*ContactPoint `json:"telecom,omitempty"`
 
 	// Address for the contact person.
-	Address *FHIRAddress `json:"address,omitempty"`
+	Address *Address `json:"address,omitempty"`
 
 	// Administrative Gender - the gender that the contact person is considered to
 	// have for administration and record keeping purposes.
@@ -159,92 +158,61 @@ type FHIRPatientContact struct {
 
 	// Organization on behalf of which the contact is acting or for which the
 	// contact is working.
-	Organization *FHIRReference `json:"organization,omitempty"`
+	Organization *Reference `json:"organization,omitempty"`
 
 	// The period during which this contact person or organization is valid to be
 	// contacted relating to this patient.
-	Period *FHIRPeriod `json:"period,omitempty"`
+	Period *Period `json:"period,omitempty"`
 }
 
-// FHIRPatientLink definition: demographics and other administrative
+// PatientLink definition: demographics and other administrative
 // information about an individual or animal receiving care or other health-related services.
-type FHIRPatientLink struct {
+type PatientLink struct {
 	// Unique id for the element within a resource (for internal references). This
 	// may be any string value that does not contain spaces.
 	ID *string `json:"id,omitempty"`
 
 	// The other patient resource that the link refers to.
-	Other *FHIRReference `json:"other,omitempty"`
+	Other *Reference `json:"other,omitempty"`
 
 	// The type of link between this patient resource and another patient resource.
 	Type *PatientLinkTypeEnum `json:"type,omitempty"`
 }
 
-// FHIRPatientRelayConnection is a Relay connection for Patient.
-type FHIRPatientRelayConnection struct {
-	Edges           []*FHIRPatientRelayEdge `json:"edges,omitempty"`
-	HasOpenEpisodes bool                    `json:"hasOpenEpisodes,omitempty"`
-	PageInfo        *PageInfo               `json:"pageInfo,omitempty"`
+// PatientRelayConnection is a Relay connection for Patient.
+type PatientRelayConnection struct {
+	Edges           []*PatientRelayEdge `json:"edges,omitempty"`
+	HasOpenEpisodes bool                `json:"hasOpenEpisodes,omitempty"`
+	PageInfo        *PageInfo           `json:"pageInfo,omitempty"`
 }
 
-// FHIRPatientRelayEdge is a Relay edge for Patient.
-type FHIRPatientRelayEdge struct {
-	Cursor          *string      `json:"cursor,omitempty"`
-	HasOpenEpisodes bool         `json:"hasOpenEpisodes,omitempty"`
-	Node            *FHIRPatient `json:"node,omitempty"`
+// PatientRelayEdge is a Relay edge for Patient.
+type PatientRelayEdge struct {
+	Cursor          *string  `json:"cursor,omitempty"`
+	HasOpenEpisodes bool     `json:"hasOpenEpisodes,omitempty"`
+	Node            *Patient `json:"node,omitempty"`
 }
 
-// FHIRPatientRelayPayload is used to return single instances of Patient.
-type FHIRPatientRelayPayload struct {
-	Resource *FHIRPatient `json:"resource,omitempty"`
+// PatientRelayPayload is used to return single instances of Patient.
+type PatientRelayPayload struct {
+	Resource *Patient `json:"resource,omitempty"`
 }
 
-// PatientEdge is a Relay style edge for listings of FHIR patient records.
+// PatientEdge is a Relay style edge for listings of  patient records.
 type PatientEdge struct {
-	Cursor string       `json:"cursor"`
-	Node   *FHIRPatient `json:"node"`
+	Cursor string   `json:"cursor"`
+	Node   *Patient `json:"node"`
 }
 
-// PatientConnection is a Relay style connection for use in listings of FHIR
+// PatientConnection is a Relay style connection for use in listings of
 // patient records.
 type PatientConnection struct {
 	Edges    []*PatientEdge `json:"edges"`
 	PageInfo *PageInfo      `json:"pageInfo"`
 }
 
-// PatientLink stores a map of patient IDs to short lived opaque IDs.
-//
-// These opaque IDs are used in publicly visible links.
-// The intention is to obscure confidential (long lived) patient IDs.
-type PatientLink struct {
-	ID        string    `firestore:"ID"        json:"ID"`
-	PatientID string    `firestore:"patientID" json:"patientID"`
-	OpaqueID  string    `firestore:"opaqueID"  json:"opaqueID"`
-	Expires   time.Time `firestore:"expires"   json:"expires"`
-	Deleted   bool      `firestore:"deleted"   json:"deleted"`
-}
-
-// PatientLinkEdge is used to serialize GraphQL relay edges for patient links.
-type PatientLinkEdge struct {
-	Cursor *string      `json:"cursor"`
-	Node   *PatientLink `json:"node"`
-}
-
-// IsNode marks this struct as a relay Node.
-func (pl *PatientLink) IsNode() {}
-
-// GetID returns the patient links primary key.
-func (pl *PatientLink) GetID() string {
-	return pl.ID
-}
-
-// SetID sets the patient links' id.
-func (pl *PatientLink) SetID(id string) {
-	pl.ID = id
-}
-
 // Names renders the patient's names as a string.
-func (p FHIRPatient) Names() string {
+func (p Patient) Names() string {
 	name := ""
 	if p.Name == nil {
 		return name
@@ -270,10 +238,10 @@ func (p FHIRPatient) Names() string {
 }
 
 // IsEntity ...
-func (p FHIRPatient) IsEntity() {}
+func (p Patient) IsEntity() {}
 
 // GetPhoneNumbers extract the patients phonenumbers.
-func (p FHIRPatient) GetPhoneNumbers() ([]string, error) {
+func (p Patient) GetPhoneNumbers() ([]string, error) {
 	if p.Telecom == nil {
 		return nil, errors.New("telecom information is nil")
 	}
@@ -300,7 +268,7 @@ type Identifiers struct {
 }
 
 // GetIDs safely extracts the Health ID and National ID from the patient.
-func (p FHIRPatient) GetIDs() (*Identifiers, error) {
+func (p Patient) GetIDs() (*Identifiers, error) {
 	if p.Identifier == nil {
 		return nil, errors.New("identifier information is nil")
 	}
@@ -339,5 +307,5 @@ type PageInfo struct {
 // PatientPayload is used to return patient records and ancillary data after
 // mutations.
 type PatientPayload struct {
-	PatientRecord *FHIRPatient `json:"patientRecord,omitempty"`
+	PatientRecord *Patient `json:"patientRecord,omitempty"`
 }

@@ -7,13 +7,13 @@ import (
 	"github.com/savannahghi/hapi-fhir-go/models"
 )
 
-func (c *Client) CreateFHIREpisodeOfCare(ctx context.Context, input *models.FHIREpisodeOfCare) (*models.FHIREpisodeOfCare, error) {
+func (c *Client) CreateFHIREpisodeOfCare(ctx context.Context, input *models.EpisodeOfCare) (*models.EpisodeOfCare, error) {
 	payload, err := structToMap(input)
 	if err != nil {
 		return nil, fmt.Errorf("unable to turn %s input into a map: %w", episodeOfCareResourceType, err)
 	}
 
-	resource := &models.FHIREpisodeOfCare{}
+	resource := &models.EpisodeOfCare{}
 
 	err = c.CreateFHIRResource(ctx, episodeOfCareResourceType, payload, resource)
 	if err != nil {
@@ -23,8 +23,8 @@ func (c *Client) CreateFHIREpisodeOfCare(ctx context.Context, input *models.FHIR
 	return resource, nil
 }
 
-func (c *Client) GetFHIREpisodeOfCare(ctx context.Context, id string) (*models.FHIREpisodeOfCare, error) {
-	resource := &models.FHIREpisodeOfCare{}
+func (c *Client) GetFHIREpisodeOfCare(ctx context.Context, id string) (*models.EpisodeOfCare, error) {
+	resource := &models.EpisodeOfCare{}
 
 	err := c.GetFHIRResource(ctx, episodeOfCareResourceType, id, resource)
 	if err != nil {
