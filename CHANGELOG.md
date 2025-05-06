@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.6.2](https://github.com/savannahghi/hapi-fhir-go/compare/v1.6.1...v1.6.2) (2025-05-06)
+
+
+### Bug Fixes
+
+* update models ([#39](https://github.com/savannahghi/hapi-fhir-go/issues/39)) ([4c1d438](https://github.com/savannahghi/hapi-fhir-go/commit/4c1d4381c5c072dbde8c490b3a11bce89a34bb6e))
+* upgrade linter & fix linting issues ([#41](https://github.com/savannahghi/hapi-fhir-go/issues/41)) ([cc22468](https://github.com/savannahghi/hapi-fhir-go/commit/cc22468a919afc0f3ecd9832e0d8771d09c06ab8))
+
 ## [1.6.1](https://github.com/savannahghi/hapi-fhir-go/compare/v1.6.0...v1.6.1) (2025-05-05)
 
 
