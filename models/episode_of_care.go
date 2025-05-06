@@ -1,54 +1,54 @@
 package models
 
-// FHIREpisodeOfCare definition: an association between a patient and an organization / healthcare provider(s) during which time encounters may occur.
+// EpisodeOfCare definition: an association between a patient and an organization / healthcare provider(s) during which time encounters may occur.
 // the managing organization assumes a level of responsibility for the patient during this time.
-type FHIREpisodeOfCare struct {
-	ID                   *string                           `json:"id,omitempty"`
-	Text                 *FHIRNarrative                    `json:"text,omitempty"`
-	Identifier           []*FHIRIdentifier                 `json:"identifier,omitempty"`
-	Status               *EpisodeOfCareStatus              `json:"status,omitempty"`
-	StatusHistory        []*FHIREpisodeofcareStatushistory `json:"statusHistory,omitempty"`
-	Type                 []*FHIRCodeableConcept            `json:"type,omitempty"`
-	Diagnosis            []*FHIREpisodeofcareDiagnosis     `json:"diagnosis,omitempty"`
-	Patient              *FHIRReference                    `json:"patient,omitempty"`
-	ManagingOrganization *FHIRReference                    `json:"managingOrganization,omitempty"`
-	Period               *FHIRPeriod                       `json:"period,omitempty"`
-	ReferralRequest      []*FHIRReference                  `json:"referralRequest,omitempty"`
-	CareManager          *FHIRReference                    `json:"careManager,omitempty"`
-	Team                 []*FHIRReference                  `json:"team,omitempty"`
-	Account              []*FHIRReference                  `json:"account,omitempty"`
-	Meta                 *FHIRMeta                         `json:"meta,omitempty"`
-	Extension            []*FHIRExtension                  `json:"extension,omitempty"`
+type EpisodeOfCare struct {
+	ID                   *string                       `json:"id,omitempty"`
+	Text                 *Narrative                    `json:"text,omitempty"`
+	Identifier           []*Identifier                 `json:"identifier,omitempty"`
+	Status               *EpisodeOfCareStatus          `json:"status,omitempty"`
+	StatusHistory        []*EpisodeofcareStatushistory `json:"statusHistory,omitempty"`
+	Type                 []*CodeableConcept            `json:"type,omitempty"`
+	Diagnosis            []*EpisodeofcareDiagnosis     `json:"diagnosis,omitempty"`
+	Patient              *Reference                    `json:"patient,omitempty"`
+	ManagingOrganization *Reference                    `json:"managingOrganization,omitempty"`
+	Period               *Period                       `json:"period,omitempty"`
+	ReferralRequest      []*Reference                  `json:"referralRequest,omitempty"`
+	CareManager          *Reference                    `json:"careManager,omitempty"`
+	Team                 []*Reference                  `json:"team,omitempty"`
+	Account              []*Reference                  `json:"account,omitempty"`
+	Meta                 *Meta                         `json:"meta,omitempty"`
+	Extension            []*Extension                  `json:"extension,omitempty"`
 }
 
-// FHIREpisodeOfCareRelayEdge is a Relay edge for EpisodeOfCare.
-type FHIREpisodeOfCareRelayEdge struct {
-	Cursor *string            `json:"cursor,omitempty"`
-	Node   *FHIREpisodeOfCare `json:"node,omitempty"`
+// EpisodeOfCareRelayEdge is a Relay edge for EpisodeOfCare.
+type EpisodeOfCareRelayEdge struct {
+	Cursor *string        `json:"cursor,omitempty"`
+	Node   *EpisodeOfCare `json:"node,omitempty"`
 }
 
-// FHIREpisodeOfCareRelayPayload is used to return single instances of EpisodeOfCare.
-type FHIREpisodeOfCareRelayPayload struct {
-	Resource *FHIREpisodeOfCare `json:"resource,omitempty"`
+// EpisodeOfCareRelayPayload is used to return single instances of EpisodeOfCare.
+type EpisodeOfCareRelayPayload struct {
+	Resource *EpisodeOfCare `json:"resource,omitempty"`
 }
 
-// FHIREpisodeofcareDiagnosis definition: an association between a patient and an organization / healthcare provider(s) during which time encounters may occur.
-type FHIREpisodeofcareDiagnosis struct {
-	ID        *string              `json:"id,omitempty"`
-	Condition *FHIRReference       `json:"condition,omitempty"`
-	Role      *FHIRCodeableConcept `json:"role,omitempty"`
-	Rank      *string              `json:"rank,omitempty"`
+// EpisodeofcareDiagnosis definition: an association between a patient and an organization / healthcare provider(s) during which time encounters may occur.
+type EpisodeofcareDiagnosis struct {
+	ID        *string          `json:"id,omitempty"`
+	Condition *Reference       `json:"condition,omitempty"`
+	Role      *CodeableConcept `json:"role,omitempty"`
+	Rank      *string          `json:"rank,omitempty"`
 }
 
-// FHIREpisodeofcareStatushistory definition: an association between a patient and an organization / healthcare provider during which time encounters may occur.
-type FHIREpisodeofcareStatushistory struct {
+// EpisodeofcareStatushistory definition: an association between a patient and an organization / healthcare provider during which time encounters may occur.
+type EpisodeofcareStatushistory struct {
 	ID     *string              `json:"id,omitempty"`
 	Status *EpisodeOfCareStatus `json:"status,omitempty"`
-	Period *FHIRPeriod          `json:"period,omitempty"`
+	Period *Period              `json:"period,omitempty"`
 }
 
 // EpisodeOfCarePayload is used to return the results after creation of
 // episodes of care.
 type EpisodeOfCarePayload struct {
-	EpisodeOfCare *FHIREpisodeOfCare `json:"episodeOfCare"`
+	EpisodeOfCare *EpisodeOfCare `json:"episodeOfCare"`
 }
