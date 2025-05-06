@@ -1,0 +1,37 @@
+# Options for analysis running.
+run:
+  timeout: 3m
+  tests: false
+
+linters:
+  enable-all: true
+  disable:
+    - tagliatelle
+    - varnamelen
+    - err113
+    - wrapcheck
+    - gomnd
+    - unparam
+    - exhaustruct
+    - mnd
+    - canonicalheader
+    # TODO: Restore this
+    - unused
+    - depguard
+    - dupl
+
+linters-settings:
+  lll:
+    line-length: 160
+  staticcheck:
+    checks: ["all"]
+  funlen:
+    lines: -1
+    statements: -1
+  revive:
+    rules:
+      - name: unused-parameter
+        severity: warning
+        disabled: true
+        arguments:
+          - allowRegex: "^_"

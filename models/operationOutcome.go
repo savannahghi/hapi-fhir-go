@@ -145,9 +145,11 @@ func (o *OperationOutcome) ErrorLogging() string {
 
 	for _, issue := range o.Issue {
 		message := fmt.Sprintf("-  error (HTTP %s): %s", issue.Code, *issue.Diagnostics)
-		if issue.Severity == "error" {
+		//nolint:exhaustive
+		switch issue.Severity {
+		case "error":
 			errors = append(errors, message)
-		} else if issue.Severity == "warning" {
+		case "warning":
 			warnings = append(warnings, message)
 		}
 	}

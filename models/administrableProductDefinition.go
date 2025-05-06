@@ -40,7 +40,6 @@ type AdministrableProductDefinitionProperty struct {
 	Status               *CodeableConcept `json:"status,omitempty"`
 }
 
-//nolint:lll
 type AdministrableProductDefinitionRouteOfAdministration struct {
 	ID                        *string                                                            `json:"id,omitempty"`
 	Extension                 []Extension                                                        `json:"extension,omitempty"`
@@ -53,7 +52,6 @@ type AdministrableProductDefinitionRouteOfAdministration struct {
 	TargetSpecies             []AdministrableProductDefinitionRouteOfAdministrationTargetSpecies `json:"targetSpecies,omitempty"`
 }
 
-//nolint:lll
 type AdministrableProductDefinitionRouteOfAdministrationTargetSpecies struct {
 	ID                *string                                                                            `json:"id,omitempty"`
 	Extension         []Extension                                                                        `json:"extension,omitempty"`

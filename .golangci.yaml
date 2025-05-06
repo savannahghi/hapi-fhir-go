@@ -1,37 +1,56 @@
-# Options for analysis running.
+version: "2"
 run:
-  timeout: 3m
   tests: false
-
 linters:
-  enable-all: true
+  default: all
   disable:
-    - tagliatelle
-    - varnamelen
-    - err113
-    - wrapcheck
-    - gomnd
-    - unparam
-    - exhaustruct
-    - mnd
     - canonicalheader
-    # TODO: Restore this
-    - unused
     - depguard
     - dupl
-
-linters-settings:
-  lll:
-    line-length: 160
-  staticcheck:
-    checks: ["all"]
-  funlen:
-    lines: -1
-    statements: -1
-  revive:
-    rules:
-      - name: unused-parameter
-        severity: warning
-        disabled: true
-        arguments:
-          - allowRegex: "^_"
+    - err113
+    - exhaustruct
+    - mnd
+    - tagliatelle
+    - unparam
+    - unused
+    - varnamelen
+    - wrapcheck
+  settings:
+    funlen:
+      lines: -1
+      statements: -1
+    lll:
+      line-length: 160
+    revive:
+      rules:
+        - name: unused-parameter
+          arguments:
+            - allowRegex: ^_
+          severity: warning
+          disabled: true
+    staticcheck:
+      checks:
+        - all
+  exclusions:
+    generated: lax
+    presets:
+      - comments
+      - common-false-positives
+      - legacy
+      - std-error-handling
+    paths:
+      - third_party$
+      - builtin$
+      - examples$
+formatters:
+  enable:
+    - gci
+    - gofmt
+    - gofumpt
+    - goimports
+  exclusions:
+    generated: lax
+    paths:
+      - third_party$
+      - builtin$
+      - examples$
