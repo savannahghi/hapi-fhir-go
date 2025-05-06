@@ -3,8 +3,6 @@ package models
 import "encoding/json"
 
 // MedicinalProductDefinition is documented here http://hl7.org/fhir/StructureDefinition/MedicinalProductDefinition
-//
-//nolint:lll
 type MedicinalProductDefinition struct {
 	ID                             *string                                    `json:"id,omitempty"`
 	Meta                           *Meta                                      `json:"meta,omitempty"`

@@ -38,7 +38,6 @@ type IngredientSubstance struct {
 	Strength          []IngredientSubstanceStrength `json:"strength,omitempty"`
 }
 
-//nolint:lll
 type IngredientSubstanceStrength struct {
 	ID                           *string                                        `json:"id,omitempty"`
 	Extension                    []Extension                                    `json:"extension,omitempty"`
