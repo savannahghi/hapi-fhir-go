@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.3](https://github.com/savannahghi/hapi-fhir-go/compare/v1.6.2...v1.6.3) (2025-05-07)
+
+
+### Bug Fixes
+
+* update models ([#42](https://github.com/savannahghi/hapi-fhir-go/issues/42)) ([6d83fbc](https://github.com/savannahghi/hapi-fhir-go/commit/6d83fbcaa940053391e729c70d37a2a02cc401be))
+
 ## [1.6.2](https://github.com/savannahghi/hapi-fhir-go/compare/v1.6.1...v1.6.2) (2025-05-06)
 
 
