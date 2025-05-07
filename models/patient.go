@@ -104,7 +104,7 @@ func (p Patient) GetPatientHealthIDIdentifier() string {
 	for _, identifier := range p.Identifier {
 		healthIDDocumentType := "HEALTH_ID"
 		for _, id := range identifier.Type.Coding {
-			if string(*id.System) == healthIDDocumentType {
+			if *id.System == healthIDDocumentType {
 				healthID = id.Display
 
 				break
@@ -280,10 +280,10 @@ func (p Patient) GetIDs() (*Identifiers, error) {
 			for _, coding := range identifier.Type.Coding {
 				if coding.System != nil && coding.Code != nil {
 					switch *coding.System {
-					case scalarutils.URI("HEALTH_ID"):
-						healthID = string(*coding.Code)
-					case scalarutils.URI("NATIONAL_ID"):
-						nationalID = string(*coding.Code)
+					case string("HEALTH_ID"):
+						healthID = *coding.Code
+					case string("NATIONAL_ID"):
+						nationalID = *coding.Code
 					}
 				}
 			}

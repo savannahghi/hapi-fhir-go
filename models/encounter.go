@@ -24,7 +24,7 @@ type Encounter struct {
 	Appointment     []*Reference              `json:"appointment,omitempty"`
 	Period          *Period                   `json:"period,omitempty"`
 	Length          *Duration                 `json:"length,omitempty"`
-	ReasonCode      *scalarutils.Code         `json:"reasonCode,omitempty"`
+	ReasonCode      *string                   `json:"reasonCode,omitempty"`
 	ReasonReference []*Reference              `json:"reasonReference,omitempty"`
 	Diagnosis       []*EncounterDiagnosis     `json:"diagnosis,omitempty"`
 	Account         []*Reference              `json:"account,omitempty"`
@@ -94,6 +94,6 @@ type Duration struct {
 	Value      *scalarutils.Decimal    `json:"value,omitempty"`
 	Comparator *DurationComparatorEnum `json:"comparator,omitempty"`
 	Unit       *string                 `json:"unit,omitempty"`
-	System     *scalarutils.URI        `json:"system,omitempty"`
-	Code       *scalarutils.Code       `json:"code,omitempty"`
+	System     *string                 `json:"system,omitempty"`
+	Code       *string                 `json:"code,omitempty"`
 }

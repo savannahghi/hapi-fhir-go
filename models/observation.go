@@ -26,7 +26,7 @@ type Observation struct {
 	Issued               *scalarutils.Instant         `json:"issued,omitempty"`
 	Performer            []*Reference                 `json:"performer,omitempty"`
 	ValueQuantity        *Quantity                    `json:"valueQuantity,omitempty"`
-	ValueCodeableConcept *scalarutils.Code            `json:"valueCodeableConcept,omitempty"`
+	ValueCodeableConcept *string                      `json:"valueCodeableConcept,omitempty"`
 	ValueString          *string                      `json:"valueString,omitempty"`
 	ValueBoolean         *bool                        `json:"valueBoolean,omitempty"`
 	ValueInteger         *string                      `json:"valueInteger,omitempty"`
@@ -55,7 +55,7 @@ type ObservationComponent struct {
 	ID                   *string                      `json:"id,omitempty"`
 	Code                 CodeableConcept              `json:"code,omitempty"`
 	ValueQuantity        *Quantity                    `json:"valueQuantity,omitempty"`
-	ValueCodeableConcept *scalarutils.Code            `json:"valueCodeableConcept,omitempty"`
+	ValueCodeableConcept *string                      `json:"valueCodeableConcept,omitempty"`
 	ValueString          *string                      `json:"valueString,omitempty"`
 	ValueBoolean         *bool                        `json:"valueBoolean,omitempty"`
 	ValueInteger         *string                      `json:"valueInteger,omitempty"`
@@ -99,7 +99,7 @@ type Timing struct {
 	ID     *string                 `json:"id,omitempty"`
 	Event  []*scalarutils.DateTime `json:"event,omitempty"`
 	Repeat *TimingRepeat           `json:"repeat,omitempty"`
-	Code   scalarutils.Code        `json:"code,omitempty"`
+	Code   string                  `json:"code,omitempty"`
 }
 
 type TimingRepeat struct {
@@ -117,7 +117,7 @@ type TimingRepeat struct {
 	Period         *json.Number          `json:"period,omitempty"`
 	PeriodMax      *scalarutils.Decimal  `json:"periodMax,omitempty"`
 	PeriodUnit     *UnitsOfTime          `json:"periodUnit,omitempty"`
-	DayOfWeek      []*scalarutils.Code   `json:"dayOfWeek,omitempty"`
+	DayOfWeek      []*string             `json:"dayOfWeek,omitempty"`
 	TimeOfDay      *time.Time            `json:"timeOfDay,omitempty"`
 	When           *TimingRepeatWhenEnum `json:"when,omitempty"`
 	Offset         *int                  `json:"offset,omitempty"`

@@ -52,7 +52,7 @@ func setupHAPIFHIRTestContainer(t *testing.T) (string, func()) {
 
 func fakePatient() *models.Patient {
 	id := gofakeit.UUID()
-	system := scalarutils.URI("test")
+	system := "test"
 	version := "0.0.1"
 	userSelected := false
 	active := true
@@ -87,7 +87,7 @@ func fakePatient() *models.Patient {
 						{
 							System:       &system,
 							Version:      &version,
-							Code:         (*scalarutils.Code)(&typeCode),
+							Code:         &typeCode,
 							Display:      id,
 							UserSelected: &userSelected,
 						},

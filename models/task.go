@@ -18,15 +18,15 @@ type Task struct {
 	ModifierExtension     []*Extension           `json:"modifierExtension,omitempty"`
 	Identifier            []*Identifier          `json:"identifier,omitempty"`
 	InstantiatesCanonical *scalarutils.Canonical `json:"instantiatesCanonical,omitempty"`
-	InstantiatesURI       *scalarutils.URI       `json:"instantiatesUri,omitempty"`
+	InstantiatesURI       *string                `json:"instantiatesUri,omitempty"`
 	BasedOn               []*Reference           `json:"basedOn,omitempty"`
 	GroupIdentifier       *Identifier            `json:"groupIdentifier,omitempty"`
 	PartOf                []*Reference           `json:"partOf,omitempty"`
-	Status                *scalarutils.Code      `json:"status"`
+	Status                *string                `json:"status"`
 	StatusReason          *CodeableConcept       `json:"statusReason,omitempty"`
 	BusinessStatus        *CodeableConcept       `json:"businessStatus,omitempty"`
 	Intent                string                 `json:"intent"`
-	Priority              *scalarutils.Code      `json:"priority,omitempty"`
+	Priority              *string                `json:"priority,omitempty"`
 	Code                  *CodeableConcept       `json:"code,omitempty"`
 	Description           string                 `json:"description,omitempty"`
 	Focus                 *Reference             `json:"focus,omitempty"`
@@ -58,7 +58,7 @@ func (t *Task) GetServiceRequestIDFromTask() (string, error) {
 	var referralID string
 
 	for _, serviceRequest := range t.BasedOn {
-		if serviceRequest.Type != nil && string(*serviceRequest.Type) == ReferralServiceRequestType.String() {
+		if serviceRequest.Type != nil && *serviceRequest.Type == ReferralServiceRequestType.String() {
 			referralID = "ServiceRequest/" + *serviceRequest.ID
 
 			break
