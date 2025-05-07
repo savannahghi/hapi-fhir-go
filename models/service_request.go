@@ -32,14 +32,14 @@ type ServiceRequest struct {
 	OccurrencePeriod        *Period                    `json:"occurrencePeriod,omitempty"`
 	OccurrenceTiming        *Timing                    `json:"occurrenceTiming,omitempty"`
 	AsNeededBoolean         *bool                      `json:"asNeededBoolean,omitempty"`
-	AsNeededCodeableConcept *scalarutils.Code          `json:"asNeededCodeableConcept,omitempty"`
+	AsNeededCodeableConcept *string                    `json:"asNeededCodeableConcept,omitempty"`
 	AuthoredOn              *scalarutils.DateTime      `json:"authoredOn,omitempty"`
 	Requester               *Reference                 `json:"requester,omitempty"`
 	PerformerType           *CodeableConcept           `json:"performerType,omitempty"`
 	Performer               []*Reference               `json:"performer,omitempty"`
-	LocationCode            *scalarutils.Code          `json:"locationCode,omitempty"`
+	LocationCode            *string                    `json:"locationCode,omitempty"`
 	LocationReference       []*Reference               `json:"locationReference,omitempty"`
-	ReasonCode              *scalarutils.Code          `json:"reasonCode,omitempty"`
+	ReasonCode              *string                    `json:"reasonCode,omitempty"`
 	ReasonReference         []*Reference               `json:"reasonReference,omitempty"`
 	Insurance               []*Reference               `json:"insurance,omitempty"`
 	SupportingInfo          []*Reference               `json:"supportingInfo,omitempty"`
@@ -109,11 +109,11 @@ func (f *ServiceRequest) GetFacilityFromMeta() *Meta {
 
 // GetFacilityName is used to get the name of the facility.
 func (f *ServiceRequest) GetFacilityName() string {
-	facilitySystem := scalarutils.URI("http://mycarehub/tenant-identification/facility")
+	facilitySystem := "http://mycarehub/tenant-identification/facility"
 
 	if f.Meta.Tag != nil {
 		for _, meta := range f.Meta.Tag {
-			if string(*meta.System) == string(facilitySystem) {
+			if *meta.System == facilitySystem {
 				return meta.Display
 			}
 		}
@@ -131,7 +131,7 @@ func (f *ServiceRequest) GetPatientReferralReason() string {
 
 	if f.Code != nil && len(f.Code.Coding) > 0 {
 		for _, coding := range f.Code.Coding {
-			if coding.Code != nil && *coding.Code == scalarutils.Code(referralReasonCIELCode) && coding.Display != "" {
+			if coding.Code != nil && *coding.Code == referralReasonCIELCode && coding.Display != "" {
 				return coding.Display
 			}
 		}
@@ -144,7 +144,7 @@ func (f *ServiceRequest) GetPatientReferralReason() string {
 func (f *ServiceRequest) GetPatientReferralTest() string {
 	if f.Code != nil && len(f.Code.Coding) > 0 {
 		for _, coding := range f.Code.Coding {
-			if coding.Code != nil && *coding.Code == scalarutils.Code("TEST") && coding.Display != "" {
+			if coding.Code != nil && *coding.Code == "TEST" && coding.Display != "" {
 				return coding.Display
 			}
 		}
@@ -159,7 +159,7 @@ func (f *ServiceRequest) GetRequestedServices(serviceCIELCode string) []string {
 	var services []string
 
 	for _, coding := range f.Code.Coding {
-		if coding.Code != nil && *coding.Code == scalarutils.Code(serviceCIELCode) {
+		if coding.Code != nil && *coding.Code == serviceCIELCode {
 			services = append(services, coding.Display)
 		}
 	}

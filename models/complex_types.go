@@ -46,7 +46,7 @@ type Address struct {
 	State *string `json:"state,omitempty"`
 
 	// A postal code designating a region defined by the postal service.
-	PostalCode *scalarutils.Code `json:"postalCode,omitempty"`
+	PostalCode *string `json:"postalCode,omitempty"`
 
 	// Country - a nation as commonly understood or generally accepted.
 	Country *string `json:"country,omitempty"`
@@ -75,10 +75,10 @@ type Age struct {
 	Unit *string `json:"unit,omitempty"`
 
 	// The identification of the system that provides the coded form of the unit.
-	System *scalarutils.URI `json:"system,omitempty"`
+	System *string `json:"system,omitempty"`
 
 	// A computer processable form of the unit in some unit representation system.
-	Code *scalarutils.Code `json:"code,omitempty"`
+	Code *string `json:"code,omitempty"`
 }
 
 // FHIRAnnotation definition: a  text note which also  contains information
@@ -111,17 +111,17 @@ type Attachment struct {
 	// Identifies the type of the data in the attachment and allows a method to be
 	// chosen to interpret or render the data. Includes mime type parameters such
 	// as charset where appropriate.
-	ContentType *scalarutils.Code `json:"contentType,omitempty"`
+	ContentType *string `json:"contentType,omitempty"`
 
 	// The human language of the content. The value can be any valid value
 	// according to BCP 47.
-	Language *scalarutils.Code `json:"language,omitempty"`
+	Language *string `json:"language,omitempty"`
 
 	// The actual data of the attachment - a sequence of bytes, base64 encoded.
 	Data *scalarutils.Base64Binary `json:"data,omitempty"`
 
 	// A location where the data can be accessed.
-	URL *scalarutils.URL `json:"url,omitempty"`
+	URL *string `json:"url,omitempty"`
 
 	// The number of bytes of data that make up this attachment (before base64
 	// encoding, if that is done).
@@ -162,7 +162,7 @@ type Coding struct {
 
 	// The identification of the code system that defines the meaning of the
 	// symbol in the code.
-	System *scalarutils.URI `json:"system,omitempty"`
+	System *string `json:"system,omitempty"`
 
 	// The version of the code system which was used when choosing this code. Note
 	// that a well-maintained code system does not need the version reported,
@@ -174,7 +174,7 @@ type Coding struct {
 	// A symbol in syntax defined by the system. The symbol may be a predefined
 	// code or an expression in a syntax defined by the coding system (e.g.
 	// post-coordination).
-	Code *scalarutils.Code `json:"code,omitempty"`
+	Code *string `json:"code,omitempty"`
 
 	// A representation of the meaning of the code in the system, following the
 	// rules of the system.
@@ -268,7 +268,7 @@ type Identifier struct {
 
 	// Establishes the namespace for the value - that is, a URL that describes a
 	// set values that are unique.
-	System *scalarutils.URI `json:"system,omitempty"`
+	System *string `json:"system,omitempty"`
 
 	// The portion of the identifier typically relevant to the user and which is
 	// unique within the context of the system.
@@ -334,7 +334,7 @@ type Reference struct {
 	// reference refers to. References are URLs that are relative to
 	// http://hl7.org/fhir/StructureDefinition/ e.g. "Patient" is a reference to http://hl7.org/fhir/StructureDefinition/Patient.
 	// Absolute URLs are only allowed for logical models (and can only be used in references in logical models, not resources).
-	Type *scalarutils.URI `json:"type,omitempty"`
+	Type *string `json:"type,omitempty"`
 
 	// An identifier for the target resource. This is used when there is no way to
 	// reference the other resource directly, either because the entity it
@@ -393,10 +393,10 @@ type Quantity struct {
 	Unit string `json:"unit"`
 
 	// The identification of the system that provides the coded form of the unit.
-	System scalarutils.URI `json:"system"`
+	System string `json:"system"`
 
 	// A computer processable form of the unit in some unit representation system.
-	Code *scalarutils.Code `json:"code"`
+	Code *string `json:"code"`
 }
 
 // FHIRRange definition: a set of ordered quantities defined by a low and high limit.

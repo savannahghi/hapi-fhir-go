@@ -3,8 +3,6 @@ package models
 import (
 	"encoding/json"
 	"strings"
-
-	"github.com/savannahghi/scalarutils"
 )
 
 // Bundle is documented here http://hl7.org/fhir/StructureDefinition/Bundle
@@ -152,7 +150,7 @@ func (r *BundleEntryResponse) SuccessfulCreate() bool {
 		}
 
 		for _, code := range issue.Details.Coding {
-			if code.Code != nil && *code.Code == scalarutils.Code(successfulCreateStatus) {
+			if code.Code != nil && *code.Code == successfulCreateStatus {
 				return true
 			}
 		}
