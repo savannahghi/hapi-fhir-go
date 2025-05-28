@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.7.0](https://github.com/savannahghi/hapi-fhir-go/compare/v1.6.3...v1.7.0) (2025-05-28)
+
+
+### Features
+
+* add packaged product definition model ([#45](https://github.com/savannahghi/hapi-fhir-go/issues/45)) ([e3ecec3](https://github.com/savannahghi/hapi-fhir-go/commit/e3ecec3a1e0ce54e507fbaa3b8e56864901ca7f5))
+* put fhir resource ([#44](https://github.com/savannahghi/hapi-fhir-go/issues/44)) ([f9275a6](https://github.com/savannahghi/hapi-fhir-go/commit/f9275a689268e89b21b0742f6b75cf7973b89cfc))
+
 ## [1.6.3](https://github.com/savannahghi/hapi-fhir-go/compare/v1.6.2...v1.6.3) (2025-05-07)
 
 
