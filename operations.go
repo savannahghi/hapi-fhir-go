@@ -190,3 +190,14 @@ func (c *Client) PostFHIRBundle(ctx context.Context, payload *models.Bundle) (*m
 
 	return &resp, nil
 }
+
+func (c *Client) PutFHIRResource(ctx context.Context, resourceType string, resourceID string, payload map[string]interface{}, resource interface{}) error {
+	updatePath := fmt.Sprintf("%v/%v", resourceType, resourceID)
+
+	err := c.makeRequest(ctx, http.MethodPut, updatePath, nil, payload, resource)
+	if err != nil {
+		return fmt.Errorf("unable to put resource: %w", err)
+	}
+
+	return nil
+}
