@@ -14,7 +14,7 @@ type Bundle struct {
 	Identifier    *Identifier     `json:"identifier,omitempty"`
 	Type          BundleType      `json:"type"`
 	Timestamp     *string         `json:"timestamp,omitempty"`
-	Total         *int            `json:"total,omitempty"`
+	Total         int             `json:"total,omitempty"`
 	Link          []BundleLink    `json:"link,omitempty"`
 	Entry         []BundleEntry   `json:"entry,omitempty"`
 	Issues        json.RawMessage `json:"issues,omitempty"`
