@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.1](https://github.com/savannahghi/hapi-fhir-go/compare/v1.7.0...v1.7.1) (2025-06-23)
+
+
+### Bug Fixes
+
+* include relation in bundle link ([#49](https://github.com/savannahghi/hapi-fhir-go/issues/49)) ([17a9e53](https://github.com/savannahghi/hapi-fhir-go/commit/17a9e53c6c98b799f4b73d2fd19123fcb1372715))
+
 ## [1.7.0](https://github.com/savannahghi/hapi-fhir-go/compare/v1.6.3...v1.7.0) (2025-05-28)
 
 
