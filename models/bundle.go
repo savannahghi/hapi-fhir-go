@@ -24,6 +24,7 @@ type BundleLink struct {
 	ID                *string     `json:"id,omitempty"`
 	Extension         []Extension `json:"extension,omitempty"`
 	ModifierExtension []Extension `json:"modifierExtension,omitempty"`
+	Relation          string      `json:"relation,omitempty"`
 	URL               string      `json:"url"`
 }
 
