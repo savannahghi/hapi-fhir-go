@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.4](https://github.com/savannahghi/hapi-fhir-go/compare/v1.7.3...v1.7.4) (2025-06-25)
+
+
+### Bug Fixes
+
+* pass bundle as a pointer ([#53](https://github.com/savannahghi/hapi-fhir-go/issues/53)) ([c49f23e](https://github.com/savannahghi/hapi-fhir-go/commit/c49f23eb59d47743f5becf1d1c22f3ec9e757398))
+
 ## [1.7.3](https://github.com/savannahghi/hapi-fhir-go/compare/v1.7.2...v1.7.3) (2025-06-23)
 
 
