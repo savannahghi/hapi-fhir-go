@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.5](https://github.com/savannahghi/hapi-fhir-go/compare/v1.7.4...v1.7.5) (2025-06-25)
+
+
+### Bug Fixes
+
+* refactor search fhir resource ([#55](https://github.com/savannahghi/hapi-fhir-go/issues/55)) ([29c922d](https://github.com/savannahghi/hapi-fhir-go/commit/29c922d3404ebcd7deba75b51ffda08eacf46880))
+
 ## [1.7.4](https://github.com/savannahghi/hapi-fhir-go/compare/v1.7.3...v1.7.4) (2025-06-25)
 
 
