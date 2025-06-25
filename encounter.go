@@ -44,7 +44,7 @@ func (c *Client) GetFHIREncounterAllData(ctx context.Context, id string, params 
 }
 
 func (c *Client) SearchFHIREncounter(ctx context.Context, searchParams map[string]interface{}) (*models.Bundle, error) {
-	response, err := c.SearchFHIRResource(ctx, encounterResourceType, searchParams)
+	response, err := c.SearchFHIRResource(ctx, "", encounterResourceType, searchParams)
 	if err != nil {
 		return nil, err
 	}

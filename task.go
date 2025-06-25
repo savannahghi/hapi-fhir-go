@@ -35,7 +35,7 @@ func (c *Client) GetFHIRTask(ctx context.Context, id string) (*models.Task, erro
 }
 
 func (c *Client) SearchFHIRTask(ctx context.Context, searchParams map[string]interface{}) (*models.Bundle, error) {
-	response, err := c.SearchFHIRResource(ctx, taskResourceType, searchParams)
+	response, err := c.SearchFHIRResource(ctx, "", taskResourceType, searchParams)
 	if err != nil {
 		return nil, err
 	}

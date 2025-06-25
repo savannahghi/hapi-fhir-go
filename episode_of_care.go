@@ -35,7 +35,7 @@ func (c *Client) GetFHIREpisodeOfCare(ctx context.Context, id string) (*models.E
 }
 
 func (c *Client) SearchFHIREpisodeOfCare(ctx context.Context, searchParams map[string]interface{}) (*models.Bundle, error) {
-	response, err := c.SearchFHIRResource(ctx, episodeOfCareResourceType, searchParams)
+	response, err := c.SearchFHIRResource(ctx, "", episodeOfCareResourceType, searchParams)
 	if err != nil {
 		return nil, err
 	}

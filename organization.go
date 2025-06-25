@@ -35,7 +35,7 @@ func (c *Client) GetFHIROrganization(ctx context.Context, id string) (*models.Or
 }
 
 func (c *Client) SearchFHIROrganization(ctx context.Context, searchParams map[string]interface{}) (*models.Bundle, error) {
-	response, err := c.SearchFHIRResource(ctx, organizationResource, searchParams)
+	response, err := c.SearchFHIRResource(ctx, "", organizationResource, searchParams)
 	if err != nil {
 		return nil, err
 	}

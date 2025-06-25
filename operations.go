@@ -17,6 +17,7 @@ import (
 	"net/url"
 	"reflect"
 
+	"github.com/mailgun/errors"
 	"github.com/savannahghi/hapi-fhir-go/models"
 )
 
@@ -59,8 +60,13 @@ func (c *Client) GetFHIRResource(ctx context.Context, resourceType, fhirResource
 }
 
 // SearchFHIRResource is used to search for a FHIR resource based on certain parameters.
-func (c *Client) SearchFHIRResource(ctx context.Context, resourceType string, params map[string]interface{}) (*models.Bundle, error) {
+// bundleID has been added here for pagination purposes to avoid repeating FHIR http request logic.
+func (c *Client) SearchFHIRResource(ctx context.Context, bundleID, resourceType string, params map[string]any) (*models.Bundle, error) { //nolint:cyclop
 	urlParams := url.Values{}
+
+	if bundleID != "" && resourceType != "" {
+		return nil, errors.Errorf("bundleID and resourceType cannot both be provided")
+	}
 
 	for k, v := range params {
 		switch value := v.(type) {
@@ -75,15 +81,21 @@ func (c *Client) SearchFHIRResource(ctx context.Context, resourceType string, pa
 		}
 	}
 
-	path := fmt.Sprintf("%v/_search", resourceType)
-	bundle := models.Bundle{}
+	var path string
+	if resourceType != "" {
+		path = resourceType + "/_search"
+	} else if bundleID != "" {
+		path = ""
+	}
+
+	bundle := &models.Bundle{}
 
 	err := c.makeRequest(ctx, http.MethodGet, path, urlParams, nil, &bundle)
 	if err != nil {
 		return nil, fmt.Errorf("unable to search: %w", err)
 	}
 
-	return &bundle, nil
+	return bundle, nil
 }
 
 // validateResource validates a FHIR resource against the server's validation rules.

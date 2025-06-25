@@ -48,7 +48,7 @@ func (c *Client) GetFHIRPatientAllData(ctx context.Context, id string, params ma
 
 // SearchFHIRPatient searches for a FHIR patient.
 func (c *Client) SearchFHIRPatient(ctx context.Context, searchParams map[string]interface{}) (*models.Bundle, error) {
-	response, err := c.SearchFHIRResource(ctx, patientResourceType, searchParams)
+	response, err := c.SearchFHIRResource(ctx, "", patientResourceType, searchParams)
 	if err != nil {
 		return nil, err
 	}
