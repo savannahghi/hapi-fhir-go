@@ -34,8 +34,8 @@ func (c *Client) GetFHIRObservation(ctx context.Context, id string) (*models.Obs
 	return resource, nil
 }
 
-func (c *Client) SearchFHIRObservation(ctx context.Context, searchParams map[string]interface{}) (*models.Bundle, error) {
-	response, err := c.SearchFHIRResource(ctx, observationResourceType, searchParams)
+func (c *Client) SearchFHIRObservation(ctx context.Context, searchParams map[string]any) (*models.Bundle, error) {
+	response, err := c.SearchFHIRResource(ctx, "", observationResourceType, searchParams)
 	if err != nil {
 		return nil, err
 	}

@@ -35,7 +35,7 @@ func (c *Client) GetFHIRConsent(ctx context.Context, id string) (*models.Consent
 }
 
 func (c *Client) SearchFHIRConsent(ctx context.Context, searchParams map[string]interface{}) (*models.Bundle, error) {
-	response, err := c.SearchFHIRResource(ctx, consentResourceType, searchParams)
+	response, err := c.SearchFHIRResource(ctx, "", consentResourceType, searchParams)
 	if err != nil {
 		return nil, err
 	}

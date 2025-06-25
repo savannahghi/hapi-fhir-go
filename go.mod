@@ -6,6 +6,7 @@ toolchain go1.24.0
 
 require (
 	github.com/brianvoe/gofakeit v3.18.0+incompatible
+	github.com/mailgun/errors v0.4.0
 	github.com/savannahghi/scalarutils v0.0.4
 	github.com/testcontainers/testcontainers-go v0.34.0
 )
