@@ -118,7 +118,7 @@ func (c *Client) GetPatientEverything(ctx context.Context, patientFhirID string,
 	path := fmt.Sprintf("Patient/%v/$everything", patientFhirID)
 	bundle := models.Bundle{}
 
-	err := c.makeRequest(ctx, http.MethodGet, path, nil, searchParams, bundle)
+	err := c.makeRequest(ctx, http.MethodGet, path, nil, searchParams, &bundle)
 	if err != nil {
 		return nil, fmt.Errorf("unable to search: %w", err)
 	}
@@ -131,7 +131,7 @@ func (c *Client) GetEncounterEverything(ctx context.Context, encounterID string,
 	path := fmt.Sprintf("Encounter/%v/$everything", encounterID)
 	bundle := models.Bundle{}
 
-	err := c.makeRequest(ctx, http.MethodGet, path, nil, searchParams, bundle)
+	err := c.makeRequest(ctx, http.MethodGet, path, nil, searchParams, &bundle)
 	if err != nil {
 		return nil, fmt.Errorf("unable to search: %w", err)
 	}
