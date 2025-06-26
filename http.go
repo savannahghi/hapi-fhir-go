@@ -76,23 +76,29 @@ func (c *Client) setHeaders(r *http.Request) {
 }
 
 func (c *Client) composeRequestURL(path string, params url.Values) (string, error) {
-	base, err := url.Parse(c.baseURL)
+	u, err := url.Parse(c.baseURL)
 	if err != nil {
 		return "", fmt.Errorf("invalid base URL: %w", err)
 	}
 
 	if path != "" {
-		relPath, err := url.Parse(fmt.Sprintf("%s/%s", base.Path, path))
+		u.Path, err = url.JoinPath(u.Path, path)
 		if err != nil {
-			return "", errors.New("url parse: " + err.Error())
+			return "", err
 		}
-
-		base = base.ResolveReference(relPath)
 	}
 
-	base.RawQuery = params.Encode()
+	q := u.Query()
 
-	return base.String(), nil
+	for k, vs := range params {
+		for _, v := range vs {
+			q.Add(k, v)
+		}
+	}
+
+	u.RawQuery = q.Encode()
+
+	return u.String(), nil
 }
 
 func (c *Client) readResponse(response *http.Response, path string, result interface{}) error {
