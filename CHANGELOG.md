@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.6](https://github.com/savannahghi/hapi-fhir-go/compare/v1.7.5...v1.7.6) (2025-06-26)
+
+
+### Bug Fixes
+
+* url params ([#57](https://github.com/savannahghi/hapi-fhir-go/issues/57)) ([be8b485](https://github.com/savannahghi/hapi-fhir-go/commit/be8b4851eec7f8e0a1073358d337b74501b862a0))
+
 ## [1.7.5](https://github.com/savannahghi/hapi-fhir-go/compare/v1.7.4...v1.7.5) (2025-06-25)
 
 
