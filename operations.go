@@ -61,25 +61,12 @@ func (c *Client) GetFHIRResource(ctx context.Context, resourceType, fhirResource
 
 // SearchFHIRResource is used to search for a FHIR resource based on certain parameters.
 // bundleID has been added here for pagination purposes to avoid repeating FHIR http request logic.
-func (c *Client) SearchFHIRResource(ctx context.Context, bundleID, resourceType string, params map[string]any) (*models.Bundle, error) { //nolint:cyclop
-	urlParams := url.Values{}
-
+func (c *Client) SearchFHIRResource(ctx context.Context, bundleID, resourceType string, params map[string]any) (*models.Bundle, error) {
 	if bundleID != "" && resourceType != "" {
 		return nil, errors.Errorf("bundleID and resourceType cannot both be provided")
 	}
 
-	for k, v := range params {
-		switch value := v.(type) {
-		case string:
-			urlParams.Add(k, value)
-		case []string:
-			for _, i := range value {
-				urlParams.Add(k, i)
-			}
-		default:
-			return nil, fmt.Errorf("the search/filter param: %s should all be sent as strings", k)
-		}
-	}
+	urlParams := convertMapToURLValues(params)
 
 	var path string
 	if resourceType != "" {
@@ -96,6 +83,23 @@ func (c *Client) SearchFHIRResource(ctx context.Context, bundleID, resourceType 
 	}
 
 	return bundle, nil
+}
+
+func convertMapToURLValues(params map[string]any) url.Values {
+	urlParams := url.Values{}
+
+	for k, v := range params {
+		switch value := v.(type) {
+		case string:
+			urlParams.Add(k, value)
+		case []string:
+			for _, i := range value {
+				urlParams.Add(k, i)
+			}
+		}
+	}
+
+	return urlParams
 }
 
 // validateResource validates a FHIR resource against the server's validation rules.
@@ -130,7 +134,9 @@ func (c *Client) GetPatientEverything(ctx context.Context, patientFhirID string,
 	path := fmt.Sprintf("Patient/%v/$everything", patientFhirID)
 	bundle := models.Bundle{}
 
-	err := c.makeRequest(ctx, http.MethodGet, path, nil, searchParams, &bundle)
+	urlParams := convertMapToURLValues(searchParams)
+
+	err := c.makeRequest(ctx, http.MethodGet, path, nil, urlParams, &bundle)
 	if err != nil {
 		return nil, fmt.Errorf("unable to search: %w", err)
 	}
@@ -143,7 +149,9 @@ func (c *Client) GetEncounterEverything(ctx context.Context, encounterID string,
 	path := fmt.Sprintf("Encounter/%v/$everything", encounterID)
 	bundle := models.Bundle{}
 
-	err := c.makeRequest(ctx, http.MethodGet, path, nil, searchParams, &bundle)
+	urlParams := convertMapToURLValues(searchParams)
+
+	err := c.makeRequest(ctx, http.MethodGet, path, nil, urlParams, &bundle)
 	if err != nil {
 		return nil, fmt.Errorf("unable to search: %w", err)
 	}
