@@ -96,6 +96,8 @@ func convertMapToURLValues(params map[string]any) url.Values {
 			for _, i := range value {
 				urlParams.Add(k, i)
 			}
+		default:
+			urlParams.Add(k, fmt.Sprint(value))
 		}
 	}
 
@@ -136,7 +138,7 @@ func (c *Client) GetPatientEverything(ctx context.Context, patientFhirID string,
 
 	urlParams := convertMapToURLValues(searchParams)
 
-	err := c.makeRequest(ctx, http.MethodGet, path, nil, urlParams, &bundle)
+	err := c.makeRequest(ctx, http.MethodGet, path, urlParams, nil, &bundle)
 	if err != nil {
 		return nil, fmt.Errorf("unable to search: %w", err)
 	}
@@ -151,7 +153,7 @@ func (c *Client) GetEncounterEverything(ctx context.Context, encounterID string,
 
 	urlParams := convertMapToURLValues(searchParams)
 
-	err := c.makeRequest(ctx, http.MethodGet, path, nil, urlParams, &bundle)
+	err := c.makeRequest(ctx, http.MethodGet, path, urlParams, nil, &bundle)
 	if err != nil {
 		return nil, fmt.Errorf("unable to search: %w", err)
 	}
