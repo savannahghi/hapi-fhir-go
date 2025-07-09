@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.9.0](https://github.com/savannahghi/hapi-fhir-go/compare/v1.8.0...v1.9.0) (2025-07-09)
+
+
+### Features
+
+* add substance model ([#63](https://github.com/savannahghi/hapi-fhir-go/issues/63)) ([0e0d5ec](https://github.com/savannahghi/hapi-fhir-go/commit/0e0d5ec8b7816ae11b62ce5205ca9b3aff03ad00))
+
 ## [1.8.0](https://github.com/savannahghi/hapi-fhir-go/compare/v1.7.7...v1.8.0) (2025-07-09)
 
 
