@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.8.0](https://github.com/savannahghi/hapi-fhir-go/compare/v1.7.7...v1.8.0) (2025-07-09)
+
+
+### Features
+
+* add medication resource model ([#61](https://github.com/savannahghi/hapi-fhir-go/issues/61)) ([745d440](https://github.com/savannahghi/hapi-fhir-go/commit/745d44019a89782347c6c8adedb62ca559c5d209))
+
 ## [1.7.7](https://github.com/savannahghi/hapi-fhir-go/compare/v1.7.6...v1.7.7) (2025-06-26)
 
 
