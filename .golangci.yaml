@@ -2,7 +2,6 @@ version: "2"
 run:
   tests: false
 linters:
-  default: all
   disable:
     - canonicalheader
     - depguard
@@ -13,26 +12,10 @@ linters:
     - tagliatelle
     - unparam
     - unused
-    - varnamelen
     - embeddedstructfieldcheck
     - noinlineerr
+    - varnamelen
     - wrapcheck
-  settings:
-    funlen:
-      lines: -1
-      statements: -1
-    lll:
-      line-length: 160
-    revive:
-      rules:
-        - name: unused-parameter
-          arguments:
-            - allowRegex: ^_
-          severity: warning
-          disabled: true
-    staticcheck:
-      checks:
-        - all
   exclusions:
     generated: lax
     presets:
@@ -45,11 +28,6 @@ linters:
       - builtin$
       - examples$
 formatters:
-  enable:
-    - gci
-    - gofmt
-    - gofumpt
-    - goimports
   exclusions:
     generated: lax
     paths:
