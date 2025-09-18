@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.0](https://github.com/savannahghi/hapi-fhir-go/compare/v1.9.0...v1.10.0) (2025-09-18)
+
+
+### Features
+
+* add FHIR R4B models ([#66](https://github.com/savannahghi/hapi-fhir-go/issues/66)) ([20d8a0a](https://github.com/savannahghi/hapi-fhir-go/commit/20d8a0a2be9fe87a233411b7b16802561de25a64))
+
 ## [1.9.0](https://github.com/savannahghi/hapi-fhir-go/compare/v1.8.0...v1.9.0) (2025-07-09)
 
 
