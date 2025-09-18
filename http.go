@@ -10,21 +10,15 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
-
-	"github.com/savannahghi/hapi-fhir-go/models"
 )
 
 // APIError represents a FHIR specific error with operation outcome.
 type APIError struct {
-	StatusCode       int                      `json:"statusCode,omitempty"`
-	OperationOutcome *models.OperationOutcome `json:"operationOutcome,omitempty"`
+	StatusCode       int         `json:"statusCode,omitempty"`
+	OperationOutcome interface{} `json:"operationOutcome,omitempty"`
 }
 
 func (a APIError) Error() string {
-	if a.OperationOutcome != nil && len(a.OperationOutcome.Issue) > 0 {
-		return a.OperationOutcome.ErrorLogging()
-	}
-
 	return fmt.Sprintf("FHIR error (HTTP %d)", a.StatusCode)
 }
 
@@ -114,7 +108,7 @@ func (c *Client) readResponse(response *http.Response, path string, result inter
 	}
 
 	if response.StatusCode >= 400 {
-		var outcome models.OperationOutcome
+		var outcome map[string]interface{}
 
 		err = json.Unmarshal(respBytes, &outcome)
 		if err != nil {
@@ -123,7 +117,7 @@ func (c *Client) readResponse(response *http.Response, path string, result inter
 
 		return APIError{
 			StatusCode:       response.StatusCode,
-			OperationOutcome: &outcome,
+			OperationOutcome: outcome,
 		}
 	}
 
@@ -179,27 +173,32 @@ func isValidateInPath(path string) bool {
 
 // handleValidationResponse is helper function that handles validation outcome response.
 func handleValidationResponse(resBytes []byte, statusCode int) error {
-	var results []models.OperationOutcomeIssue
-
-	var outCome models.OperationOutcome
+	var outCome map[string]interface{}
 
 	err := json.Unmarshal(resBytes, &outCome)
 	if err != nil {
 		return err
 	}
 
-	for _, item := range outCome.Issue {
-		if !isValidSeverity(string(item.Severity)) {
-			results = append(results, item)
+	// Check if there are any issues with severity other than success/information
+	if issues, ok := outCome["issue"].([]interface{}); ok {
+		var results []interface{}
+		for _, issue := range issues {
+			if issueMap, ok := issue.(map[string]interface{}); ok {
+				if severity, ok := issueMap["severity"].(string); ok {
+					if !isValidSeverity(severity) {
+						results = append(results, issue)
+					}
+				}
+			}
 		}
-	}
 
-	if len(results) > 0 {
-		outCome.Issue = results
-
-		return APIError{
-			StatusCode:       statusCode,
-			OperationOutcome: &outCome,
+		if len(results) > 0 {
+			outCome["issue"] = results
+			return APIError{
+				StatusCode:       statusCode,
+				OperationOutcome: outCome,
+			}
 		}
 	}
 

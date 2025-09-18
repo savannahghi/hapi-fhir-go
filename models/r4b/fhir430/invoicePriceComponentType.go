@@ -1,0 +1,101 @@
+
+package fhir430
+
+import (
+	"encoding/json"
+	"fmt"
+	"strings"
+)
+// InvoicePriceComponentType is documented here http://hl7.org/fhir/ValueSet/invoice-priceComponentType
+type InvoicePriceComponentType int
+
+const (
+	InvoicePriceComponentTypeBase InvoicePriceComponentType = iota
+	InvoicePriceComponentTypeSurcharge
+	InvoicePriceComponentTypeDeduction
+	InvoicePriceComponentTypeDiscount
+	InvoicePriceComponentTypeTax
+	InvoicePriceComponentTypeInformational
+)
+
+func (code InvoicePriceComponentType) MarshalJSON() ([]byte, error) {
+	return json.Marshal(code.Code())
+}
+func (code *InvoicePriceComponentType) UnmarshalJSON(input []byte) error {
+	var s string
+	if err := json.Unmarshal(input, &s); err != nil {
+		return fmt.Errorf("failed to Unmarshal InvoicePriceComponentType code `%s`", s)
+	}
+	s = strings.ToLower(s)
+	switch s {
+	case "base":
+		*code = InvoicePriceComponentTypeBase
+	case "surcharge":
+		*code = InvoicePriceComponentTypeSurcharge
+	case "deduction":
+		*code = InvoicePriceComponentTypeDeduction
+	case "discount":
+		*code = InvoicePriceComponentTypeDiscount
+	case "tax":
+		*code = InvoicePriceComponentTypeTax
+	case "informational":
+		*code = InvoicePriceComponentTypeInformational
+	default:
+		return fmt.Errorf("unknown InvoicePriceComponentType code `%s`", s)
+	}
+	return nil
+}
+func (code InvoicePriceComponentType) String() string {
+	return code.Code()
+}
+func (code InvoicePriceComponentType) Code() string {
+	switch code {
+	case InvoicePriceComponentTypeBase:
+		return "base"
+	case InvoicePriceComponentTypeSurcharge:
+		return "surcharge"
+	case InvoicePriceComponentTypeDeduction:
+		return "deduction"
+	case InvoicePriceComponentTypeDiscount:
+		return "discount"
+	case InvoicePriceComponentTypeTax:
+		return "tax"
+	case InvoicePriceComponentTypeInformational:
+		return "informational"
+	}
+	return "<unknown>"
+}
+func (code InvoicePriceComponentType) Display() string {
+	switch code {
+	case InvoicePriceComponentTypeBase:
+		return "base price"
+	case InvoicePriceComponentTypeSurcharge:
+		return "surcharge"
+	case InvoicePriceComponentTypeDeduction:
+		return "deduction"
+	case InvoicePriceComponentTypeDiscount:
+		return "discount"
+	case InvoicePriceComponentTypeTax:
+		return "tax"
+	case InvoicePriceComponentTypeInformational:
+		return "informational"
+	}
+	return "<unknown>"
+}
+func (code InvoicePriceComponentType) Definition() string {
+	switch code {
+	case InvoicePriceComponentTypeBase:
+		return "the amount is the base price used for calculating the total price before applying surcharges, discount or taxes."
+	case InvoicePriceComponentTypeSurcharge:
+		return "the amount is a surcharge applied on the base price."
+	case InvoicePriceComponentTypeDeduction:
+		return "the amount is a deduction applied on the base price."
+	case InvoicePriceComponentTypeDiscount:
+		return "the amount is a discount applied on the base price."
+	case InvoicePriceComponentTypeTax:
+		return "the amount is the tax component of the total price."
+	case InvoicePriceComponentTypeInformational:
+		return "the amount is of informational character, it has not been applied in the calculation of the total price."
+	}
+	return "<unknown>"
+}
