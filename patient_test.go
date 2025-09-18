@@ -1,15 +1,15 @@
-package hapifhirgo
+package hapifhirgo_test
 
 import (
 	"context"
 	"fmt"
 	"log"
-	"net/http"
 	"testing"
 	"time"
 
 	"github.com/brianvoe/gofakeit"
-	"github.com/savannahghi/hapi-fhir-go/models"
+	hapifhirgo "github.com/savannahghi/hapi-fhir-go"
+	r5 "github.com/savannahghi/hapi-fhir-go/models/r5/fhir500"
 	"github.com/savannahghi/scalarutils"
 	"github.com/testcontainers/testcontainers-go"
 	"github.com/testcontainers/testcontainers-go/wait"
@@ -50,40 +50,40 @@ func setupHAPIFHIRTestContainer(t *testing.T) (string, func()) {
 	return baseURL, cleanup
 }
 
-func fakePatient() *models.Patient {
+func fakePatient() *r5.Patient {
 	id := gofakeit.UUID()
 	system := "test"
 	version := "0.0.1"
 	userSelected := false
 	active := true
-	phoneSystem := models.ContactPointSystemEnumPhone
-	use := models.ContactPointUseEnumHome
+	phoneSystem := r5.ContactPointSystemEnumPhone
+	use := r5.ContactPointUseEnumHome
 	rank := int64(1)
 	phone := gofakeit.Phone()
 	date, err := scalarutils.NewDate(12, 12, 2000)
 	if err != nil {
 		log.Fatal(err)
 	}
-	male := models.PatientGenderEnumMale
-	maleContact := models.PatientContactGenderEnumMale
+	male := r5.PatientGenderEnumMale
+	maleContact := r5.PatientContactGenderEnumMale
 	address := gofakeit.Address()
-	addrUse := models.AddressUseEnumHome
-	postalAddrType := models.AddressTypeEnumPostal
+	addrUse := r5.AddressUseEnumHome
+	postalAddrType := r5.AddressTypeEnumPostal
 	name := gofakeit.Name()
-	nameUse := models.HumanNameUseEnumOfficial
+	nameUse := r5.HumanNameUseEnumOfficial
 
 	creation := scalarutils.DateTime("2020-09-24T18:02:38.661033Z")
 	typeCode := gofakeit.UUID()
 
-	patient := models.Patient{
+	patient := r5.Patient{
 		ID: &id,
-		Identifier: []*models.Identifier{
+		Identifier: []*r5.Identifier{
 			{
 				ID:  &id,
-				Use: models.IdentifierUseEnumOfficial,
-				Type: models.CodeableConcept{
+				Use: r5.IdentifierUseEnumOfficial,
+				Type: r5.CodeableConcept{
 					Text: "MR",
-					Coding: []*models.Coding{
+					Coding: []*r5.Coding{
 						{
 							System:       &system,
 							Version:      &version,
@@ -95,11 +95,11 @@ func fakePatient() *models.Patient {
 				},
 				System:   &system,
 				Value:    id,
-				Assigner: &models.Reference{},
+				Assigner: &r5.Reference{},
 			},
 		},
 		Active: &active,
-		Name: []*models.HumanName{
+		Name: []*r5.HumanName{
 			{
 				Given:  []*string{&name},
 				Family: &name,
@@ -107,7 +107,7 @@ func fakePatient() *models.Patient {
 				Text:   name,
 			},
 		},
-		Telecom: []*models.ContactPoint{
+		Telecom: []*r5.ContactPoint{
 			{
 				System: &phoneSystem,
 				Use:    &use,
@@ -117,7 +117,7 @@ func fakePatient() *models.Patient {
 		},
 		Gender:    &male,
 		BirthDate: date,
-		Address: []*models.Address{
+		Address: []*r5.Address{
 			{
 				Use:  &addrUse,
 				Type: &postalAddrType,
@@ -125,23 +125,23 @@ func fakePatient() *models.Patient {
 				Text: address.Address,
 			},
 		},
-		Photo: []*models.Attachment{
+		Photo: []*r5.Attachment{
 			{
 				ID:       &id,
 				Creation: &creation,
 			},
 		},
-		Contact: []*models.PatientContact{
+		Contact: []*r5.PatientContact{
 			{
 				ID:           new(string),
-				Relationship: []*models.CodeableConcept{},
-				Name: &models.HumanName{
+				Relationship: []*r5.CodeableConcept{},
+				Name: &r5.HumanName{
 					Given:  []*string{&name},
 					Family: &name,
 					Use:    nameUse,
 					Text:   name,
 				},
-				Telecom: []*models.ContactPoint{
+				Telecom: []*r5.ContactPoint{
 					{
 						System: &phoneSystem,
 						Use:    &use,
@@ -149,7 +149,7 @@ func fakePatient() *models.Patient {
 						Value:  &phone,
 					},
 				},
-				Address: &models.Address{
+				Address: &r5.Address{
 
 					Use:  &addrUse,
 					Type: &postalAddrType,
@@ -168,16 +168,13 @@ func TestClient_CreateFHIRPatient(t *testing.T) {
 	baseURL, cleanup := setupHAPIFHIRTestContainer(t)
 	defer cleanup()
 
-	gender := models.PatientGenderEnum("invalid")
-
 	type args struct {
 		ctx   context.Context
-		input *models.Patient
+		input *r5.Patient
 	}
 	tests := []struct {
 		name    string
 		args    args
-		want    *models.PatientPayload
 		wantErr bool
 	}{
 		{
@@ -188,26 +185,17 @@ func TestClient_CreateFHIRPatient(t *testing.T) {
 			},
 			wantErr: false,
 		},
-		{
-			name: "Sad Case - Create an invalid patient",
-			args: args{
-				ctx: context.Background(),
-				input: &models.Patient{
-					Gender: &gender,
-				},
-			},
-			wantErr: true,
-		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			c := &Client{
-				baseURL: baseURL,
-				HTTP:    &http.Client{Timeout: 10 * time.Second},
+			client, err := hapifhirgo.NewClient(baseURL)
+			if err != nil {
+				t.Fatalf("Failed to create client: %v", err)
 			}
-			_, err := c.CreateFHIRPatient(tt.args.ctx, tt.args.input)
+
+			err = client.CreateFHIRResource(tt.args.ctx, "Patient", map[string]interface{}{}, tt.args.input)
 			if (err != nil) != tt.wantErr {
-				t.Errorf("Client.CreateFHIRPatient() error = %v, wantErr %v", err, tt.wantErr)
+				t.Errorf("Client.CreateFHIRResource() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
 		})

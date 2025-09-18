@@ -18,7 +18,6 @@ import (
 	"reflect"
 
 	"github.com/mailgun/errors"
-	"github.com/savannahghi/hapi-fhir-go/models"
 )
 
 // CreateFHIRResource creates a FHIR resource
@@ -61,9 +60,9 @@ func (c *Client) GetFHIRResource(ctx context.Context, resourceType, fhirResource
 
 // SearchFHIRResource is used to search for a FHIR resource based on certain parameters.
 // bundleID has been added here for pagination purposes to avoid repeating FHIR http request logic.
-func (c *Client) SearchFHIRResource(ctx context.Context, bundleID, resourceType string, params map[string]any) (*models.Bundle, error) {
+func (c *Client) SearchFHIRResource(ctx context.Context, bundleID, resourceType string, params map[string]any, bundle interface{}) error {
 	if bundleID != "" && resourceType != "" {
-		return nil, errors.Errorf("bundleID and resourceType cannot both be provided")
+		return errors.Errorf("bundleID and resourceType cannot both be provided")
 	}
 
 	urlParams := convertMapToURLValues(params)
@@ -75,14 +74,12 @@ func (c *Client) SearchFHIRResource(ctx context.Context, bundleID, resourceType 
 		path = ""
 	}
 
-	bundle := &models.Bundle{}
-
-	err := c.makeRequest(ctx, http.MethodGet, path, urlParams, nil, &bundle)
+	err := c.makeRequest(ctx, http.MethodGet, path, urlParams, nil, bundle)
 	if err != nil {
-		return nil, fmt.Errorf("unable to search: %w", err)
+		return fmt.Errorf("unable to search: %w", err)
 	}
 
-	return bundle, nil
+	return nil
 }
 
 func convertMapToURLValues(params map[string]any) url.Values {
@@ -132,40 +129,38 @@ func (c *Client) ValidateResource(ctx context.Context, resourceType string, payl
 //
 // This operation returns a patient's entire medical record
 // in a single request.
-func (c *Client) GetPatientEverything(ctx context.Context, patientFhirID string, searchParams map[string]interface{}) (*models.Bundle, error) {
+func (c *Client) GetPatientEverything(ctx context.Context, patientFhirID string, searchParams map[string]interface{}, bundle interface{}) error {
 	path := fmt.Sprintf("Patient/%v/$everything", patientFhirID)
-	bundle := models.Bundle{}
 
 	urlParams := convertMapToURLValues(searchParams)
 
 	err := c.makeRequest(ctx, http.MethodGet, path, urlParams, nil, &bundle)
 	if err != nil {
-		return nil, fmt.Errorf("unable to search: %w", err)
+		return fmt.Errorf("unable to search: %w", err)
 	}
 
-	return &bundle, nil
+	return nil
 }
 
 // getEncounterEverything retrieves all the resources associated to an encounter.
-func (c *Client) GetEncounterEverything(ctx context.Context, encounterID string, searchParams map[string]interface{}) (*models.Bundle, error) {
+func (c *Client) GetEncounterEverything(ctx context.Context, encounterID string, searchParams map[string]interface{}, bundle interface{}) error {
 	path := fmt.Sprintf("Encounter/%v/$everything", encounterID)
-	bundle := models.Bundle{}
 
 	urlParams := convertMapToURLValues(searchParams)
 
 	err := c.makeRequest(ctx, http.MethodGet, path, urlParams, nil, &bundle)
 	if err != nil {
-		return nil, fmt.Errorf("unable to search: %w", err)
+		return fmt.Errorf("unable to search: %w", err)
 	}
 
-	return &bundle, nil
+	return nil
 }
 
 // PatchFHIRResource updates an instance of a fhir resource.
-func (c *Client) PatchFHIRResource(ctx context.Context, resourceType string, resourceID string, payload *models.Parameters, resource interface{}) error {
+func (c *Client) PatchFHIRResource(ctx context.Context, resourceType string, resourceID string, payload interface{}, resource interface{}) error {
 	updatePath := fmt.Sprintf("%v/%v", resourceType, resourceID)
 
-	err := c.makeRequest(ctx, http.MethodPatch, updatePath, nil, payload, resource)
+	err := c.makeRequest(ctx, http.MethodPatch, updatePath, nil, payload, &resource)
 	if err != nil {
 		return fmt.Errorf("unable to patch resource: %w", err)
 	}
@@ -202,21 +197,19 @@ func (c *Client) FHIRPathPatch(ctx context.Context, resourceType string, resourc
 	return nil
 }
 
-func (c *Client) PostFHIRBundle(ctx context.Context, payload *models.Bundle) (*models.Bundle, error) {
-	var resp models.Bundle
-
-	err := c.makeRequest(ctx, http.MethodPost, "", nil, payload, &resp)
+func (c *Client) PostFHIRBundle(ctx context.Context, payload interface{}, response interface{}) error {
+	err := c.makeRequest(ctx, http.MethodPost, "", nil, payload, &response)
 	if err != nil {
-		return nil, fmt.Errorf("failed to post bundle entry: %w", err)
+		return fmt.Errorf("failed to post bundle entry: %w", err)
 	}
 
-	return &resp, nil
+	return nil
 }
 
 func (c *Client) PutFHIRResource(ctx context.Context, resourceType string, resourceID string, payload map[string]interface{}, resource interface{}) error {
 	updatePath := fmt.Sprintf("%v/%v", resourceType, resourceID)
 
-	err := c.makeRequest(ctx, http.MethodPut, updatePath, nil, payload, resource)
+	err := c.makeRequest(ctx, http.MethodPut, updatePath, nil, payload, &resource)
 	if err != nil {
 		return fmt.Errorf("unable to put resource: %w", err)
 	}
