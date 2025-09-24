@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.11.0](https://github.com/savannahghi/hapi-fhir-go/compare/v1.10.0...v1.11.0) (2025-09-24)
+
+
+### Features
+
+* add nsr auth option ([#70](https://github.com/savannahghi/hapi-fhir-go/issues/70)) ([80da7f7](https://github.com/savannahghi/hapi-fhir-go/commit/80da7f767d95f9c9c55e66a5345604adc6cddc57))
+
 ## [1.10.0](https://github.com/savannahghi/hapi-fhir-go/compare/v1.9.0...v1.10.0) (2025-09-18)
 
 
