@@ -28,14 +28,18 @@ func (c *Client) newRequest(
 	params url.Values,
 	data interface{},
 ) (*http.Request, error) {
-	url, err := c.composeRequestURL(path, params)
+	reqUrl, err := c.composeRequestURL(path, params)
 	if err != nil {
 		return nil, err
 	}
 
-	request, err := http.NewRequestWithContext(ctx, method, url, http.NoBody)
+	request, err := http.NewRequestWithContext(ctx, method, reqUrl, http.NoBody)
 	if err != nil {
 		return nil, err
+	}
+
+	if c.authCreds != nil {
+		request.SetBasicAuth(c.authCreds.username, c.authCreds.password)
 	}
 
 	switch method {
