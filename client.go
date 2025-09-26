@@ -16,7 +16,8 @@ type Client struct {
 
 	HTTP *http.Client
 
-	authCreds *authCredential
+	authCreds       *authCredential
+	matchboxBaseURL string
 }
 
 type authCredential struct {
@@ -41,6 +42,15 @@ func WithBasicAuth(username, password string) ClientOption {
 
 		c.authCreds.username = username
 		c.authCreds.password = password
+	}
+}
+
+// WithMatchBox is used to OPTIONALLY configure HAPI FHIR matchbox URL.
+//
+// Its essence is purely for Structured Data Extraction i.e given a FHIR QuestionnaireResponse, extract to a given FHIR resource e.g. Observation, Condition, etc.
+func WithMatchBox(matchBoxBaseURL string) ClientOption {
+	return func(c *Client) {
+		c.matchboxBaseURL = matchBoxBaseURL
 	}
 }
 
