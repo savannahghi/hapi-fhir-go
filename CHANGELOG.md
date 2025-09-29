@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.12.0](https://github.com/savannahghi/hapi-fhir-go/compare/v1.11.0...v1.12.0) (2025-09-29)
+
+
+### Features
+
+* extract data from questionnaire response ([#72](https://github.com/savannahghi/hapi-fhir-go/issues/72)) ([f82d170](https://github.com/savannahghi/hapi-fhir-go/commit/f82d170189c83c4956aa70a59f8b5b9d998a5244))
+
 ## [1.11.0](https://github.com/savannahghi/hapi-fhir-go/compare/v1.10.0...v1.11.0) (2025-09-24)
 
 
