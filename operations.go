@@ -216,3 +216,16 @@ func (c *Client) PutFHIRResource(ctx context.Context, resourceType string, resou
 
 	return nil
 }
+
+// ExtractFHIRResource extract data from a questionnaire response and returns a bundle resource type that is used to create various FHIR resources
+// such as Conditions, Observations, etc.
+func (c *Client) ExtractFHIRResource(ctx context.Context, resourceType string, payload map[string]interface{}, resource interface{}) error {
+	extractionPath := fmt.Sprintf("%v/%s", resourceType, "$extract")
+
+	err := c.makeRequest(ctx, http.MethodPost, extractionPath, nil, payload, &resource)
+	if err != nil {
+		return fmt.Errorf("unable to extract resource %s with err %w", resourceType, err)
+	}
+
+	return nil
+}
