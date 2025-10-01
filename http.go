@@ -24,11 +24,12 @@ func (a APIError) Error() string {
 
 func (c *Client) newRequest(
 	ctx context.Context,
-	method, path string,
+	method, baseURL, path string,
 	params url.Values,
 	data interface{},
 ) (*http.Request, error) {
-	reqUrl, err := c.composeRequestURL(path, params)
+
+	reqUrl, err := c.composeRequestURL(baseURL, path, params)
 	if err != nil {
 		return nil, err
 	}
@@ -73,8 +74,8 @@ func (c *Client) setHeaders(r *http.Request) {
 	r.Header.Set("Accept", "application/fhir+json")
 }
 
-func (c *Client) composeRequestURL(path string, params url.Values) (string, error) {
-	u, err := url.Parse(c.baseURL)
+func (c *Client) composeRequestURL(baseURL, path string, params url.Values) (string, error) {
+	u, err := url.Parse(baseURL)
 	if err != nil {
 		return "", fmt.Errorf("invalid base URL: %w", err)
 	}
@@ -145,8 +146,15 @@ func (c *Client) makeRequest(
 	method, path string,
 	params url.Values,
 	data, result interface{},
+	isExtractingResource bool,
 ) error {
-	request, err := c.newRequest(ctx, method, path, params, data)
+	baseURL := c.baseURL
+
+	if isExtractingResource {
+		baseURL = c.SDCEnabledServerURL
+	}
+
+	request, err := c.newRequest(ctx, method, baseURL, path, params, data)
 	if err != nil {
 		return err
 	}
