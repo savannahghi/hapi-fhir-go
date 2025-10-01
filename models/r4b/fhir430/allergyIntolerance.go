@@ -1,7 +1,7 @@
-
 package fhir430
 
 import "encoding/json"
+
 // AllergyIntolerance is documented here http://hl7.org/fhir/StructureDefinition/AllergyIntolerance
 // Risk of harmful or undesirable, physiological response which is unique to an individual and associated with exposure to a substance.
 type AllergyIntolerance struct {
@@ -20,7 +20,7 @@ type AllergyIntolerance struct {
 	Category           []AllergyIntoleranceCategory   `json:"category,omitempty"`
 	Criticality        *AllergyIntoleranceCriticality `json:"criticality,omitempty"`
 	Code               *CodeableConcept               `json:"code,omitempty"`
-	Patient            Reference                      `json:"patient"`
+	Patient            *Reference                     `json:"patient"`
 	Encounter          *Reference                     `json:"encounter,omitempty"`
 	OnsetDateTime      *string                        `json:"onsetDateTime,omitempty"`
 	OnsetAge           *Age                           `json:"onsetAge,omitempty"`

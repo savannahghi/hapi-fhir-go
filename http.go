@@ -27,8 +27,10 @@ func (c *Client) newRequest(
 	method, path string,
 	params url.Values,
 	data interface{},
+	useCREnabledServer bool,
 ) (*http.Request, error) {
-	reqUrl, err := c.composeRequestURL(path, params)
+
+	reqUrl, err := c.composeRequestURL(path, params, useCREnabledServer)
 	if err != nil {
 		return nil, err
 	}
@@ -73,8 +75,14 @@ func (c *Client) setHeaders(r *http.Request) {
 	r.Header.Set("Accept", "application/fhir+json")
 }
 
-func (c *Client) composeRequestURL(path string, params url.Values) (string, error) {
-	u, err := url.Parse(c.baseURL)
+func (c *Client) composeRequestURL(path string, params url.Values, useCREnabledServer bool) (string, error) {
+	baseURL := c.baseURL
+
+	if useCREnabledServer {
+		baseURL = c.CREnabledHAPIFHIRBaseURL
+	}
+
+	u, err := url.Parse(baseURL)
 	if err != nil {
 		return "", fmt.Errorf("invalid base URL: %w", err)
 	}
@@ -145,8 +153,9 @@ func (c *Client) makeRequest(
 	method, path string,
 	params url.Values,
 	data, result interface{},
+	useCREnabledServer bool,
 ) error {
-	request, err := c.newRequest(ctx, method, path, params, data)
+	request, err := c.newRequest(ctx, method, path, params, data, useCREnabledServer)
 	if err != nil {
 		return err
 	}

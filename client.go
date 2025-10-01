@@ -17,6 +17,9 @@ type Client struct {
 	HTTP *http.Client
 
 	authCreds *authCredential
+
+	// CREnabledHAPIFHIRBaseURL is the base url of a HAPI FHIR server with Clinical Reasoning Module enabled
+	CREnabledHAPIFHIRBaseURL string
 }
 
 type authCredential struct {
@@ -41,6 +44,13 @@ func WithBasicAuth(username, password string) ClientOption {
 
 		c.authCreds.username = username
 		c.authCreds.password = password
+	}
+}
+
+// WithCREnabledHAPIFHIR is an option that allows the clients to define servers with clinical reasoning module enabled
+func WithCREnabledHAPIFHIR(CREnabledHAPIFHIRBaseURL string) ClientOption {
+	return func(c *Client) {
+		c.CREnabledHAPIFHIRBaseURL = CREnabledHAPIFHIRBaseURL
 	}
 }
 
