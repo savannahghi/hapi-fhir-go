@@ -17,6 +17,8 @@ type Client struct {
 	HTTP *http.Client
 
 	authCreds *authCredential
+
+	SDCEnabledServerURL string
 }
 
 type authCredential struct {
@@ -41,6 +43,12 @@ func WithBasicAuth(username, password string) ClientOption {
 
 		c.authCreds.username = username
 		c.authCreds.password = password
+	}
+}
+
+func WithSDCEnabledServerURL(SDCEnabledServerURL string) ClientOption {
+	return func(c *Client) {
+		c.SDCEnabledServerURL = SDCEnabledServerURL
 	}
 }
 
