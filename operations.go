@@ -206,10 +206,7 @@ func (c *Client) PostFHIRBundle(ctx context.Context, payload interface{}, respon
 	return nil
 }
 
-func (c *Client) PutFHIRResource(
-	ctx context.Context, resourceType, resourceID string,
-	payload map[string]interface{}, resource interface{}, useCREnabledServer bool,
-) error {
+func (c *Client) PutFHIRResource(ctx context.Context, resourceType, resourceID string, payload map[string]interface{}, resource interface{}, useCREnabledServer bool) error {
 	updatePath := fmt.Sprintf("%v/%v", resourceType, resourceID)
 
 	err := c.makeRequest(ctx, http.MethodPut, updatePath, nil, payload, &resource, useCREnabledServer)
