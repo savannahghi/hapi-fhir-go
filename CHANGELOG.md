@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.12.1](https://github.com/savannahghi/hapi-fhir-go/compare/v1.12.0...v1.12.1) (2025-10-14)
+
+
+### Bug Fixes
+
+* assorted fix ([#76](https://github.com/savannahghi/hapi-fhir-go/issues/76)) ([3bd3f19](https://github.com/savannahghi/hapi-fhir-go/commit/3bd3f19b7a290cfea171be921c44d95340249bc2))
+
 ## [1.12.0](https://github.com/savannahghi/hapi-fhir-go/compare/v1.11.0...v1.12.0) (2025-09-29)
 
 
