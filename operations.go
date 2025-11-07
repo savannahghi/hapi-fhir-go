@@ -18,6 +18,7 @@ import (
 	"reflect"
 
 	"github.com/mailgun/errors"
+	"github.com/savannahghi/hapi-fhir-go/search"
 )
 
 // CreateFHIRResource creates a FHIR resource
@@ -58,7 +59,7 @@ func (c *Client) GetFHIRResource(ctx context.Context, resourceType, fhirResource
 	return nil
 }
 
-// SearchFHIRResource is used to search for a FHIR resource based on certain parameters.
+// SearchFHIRResource is used to search for a FHIR resource instances based on certain parameters.
 // bundleID has been added here for pagination purposes to avoid repeating FHIR http request logic.
 func (c *Client) SearchFHIRResource(ctx context.Context, bundleID, resourceType string, params map[string]any, bundle interface{}) error {
 	if bundleID != "" && resourceType != "" {
@@ -225,6 +226,45 @@ func (c *Client) ExtractFHIRResource(ctx context.Context, resourceType string, p
 	err := c.makeRequest(ctx, http.MethodPost, extractionPath, nil, payload, &resource, true)
 	if err != nil {
 		return fmt.Errorf("unable to extract resource %s with err %w", resourceType, err)
+	}
+
+	return nil
+}
+
+// InlineFHIRSearch performs an inline FHIR search using the parameters provided
+// in the InlineSearchInput and unmarshals the resulting FHIR Bundle into the
+// supplied resource.
+//
+// The method executes the following steps:
+//
+//  1. Validates the provided InlineSearchInput to ensure all required fields
+//     are present and appropriate for constructing a FHIR search query.
+//  2. Uses a SearchBuilder to construct a FHIR RESTful search path, including
+//     support for _include and _revinclude parameters.
+//  3. Issues an HTTP GET request to the constructed search URL.
+//  4. Unmarshals the FHIR response payload into the provided resource.
+//
+// The workings of FHIR inline search is docuemnted here https://shorturl.at/obdyp
+func (c *Client) InlineFHIRSearch(ctx context.Context, input *search.InlineSearchInput, resource any) error {
+	err := input.Validate()
+	if err != nil {
+		return err
+	}
+
+	pathBuilder := search.NewSearchBuilder(input.BaseResource, input.ResourceID)
+	for _, item := range input.Params {
+		switch item.Type {
+		case search.Include:
+			pathBuilder.Include(item.TargetResource, item.SearchField)
+		case search.RevInclude:
+			pathBuilder.RevInclude(item.TargetResource, item.SearchField)
+		}
+	}
+	url := pathBuilder.BuildPath()
+
+	err = c.makeRequest(ctx, http.MethodGet, url, nil, nil, resource, true)
+	if err != nil {
+		return fmt.Errorf("unable to perform inline search %w", err)
 	}
 
 	return nil
