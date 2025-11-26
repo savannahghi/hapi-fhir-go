@@ -369,6 +369,7 @@ type Meta struct {
 	LastUpdated time.Time `json:"lastUpdated,omitempty"`
 	Source      string    `json:"source,omitempty"`
 	Tag         []Coding  `json:"tag,omitempty"`
+	Profile     []string  `json:"profile,omitempty"`
 	Security    []Coding  `json:"security,omitempty"`
 }
 
