@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.12.3](https://github.com/savannahghi/hapi-fhir-go/compare/v1.12.2...v1.12.3) (2025-11-28)
+
+
+### Bug Fixes
+
+* correct json unmarshal to use address of result ([#83](https://github.com/savannahghi/hapi-fhir-go/issues/83)) ([160ded2](https://github.com/savannahghi/hapi-fhir-go/commit/160ded27ec1706fe3f1d34c4d2c0e5459d825fa1))
+
 ## [1.12.2](https://github.com/savannahghi/hapi-fhir-go/compare/v1.12.1...v1.12.2) (2025-11-27)
 
 
