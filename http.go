@@ -140,7 +140,7 @@ func (c *Client) readResponse(response *http.Response, path string, result inter
 		return handleValidationResponse(respBytes, response.StatusCode)
 	}
 
-	err = json.Unmarshal(respBytes, result)
+	err = json.Unmarshal(respBytes, &result)
 	if err != nil {
 		return fmt.Errorf("failed to unmarshall body: %w", err)
 	}
