@@ -7,7 +7,7 @@ package hapifhirgo
 //   - Version management and history tracking
 //   - Resource validation
 //   - Metadata operations
-//   - Extended operations ($everything, $validate, etc.)
+//   - Extended operations ($everything, $validate, $expand, etc.)
 //   - Batch/transaction processing
 
 import (
@@ -230,6 +230,114 @@ func (c *Client) ExtractFHIRResource(ctx context.Context, resourceType string, p
 	err := c.makeRequest(ctx, http.MethodPost, extractionPath, nil, payload, &resource, true)
 	if err != nil {
 		return fmt.Errorf("unable to extract resource %s with err %w", resourceType, err)
+	}
+
+	return nil
+}
+
+// ExpandValueSet expands a ValueSet resource to produce a simple collection of enumerated codes.
+// The operation can be called at the instance level (with valueSetID) or at the type level (with url or valueSet resource).
+//
+// Parameters:
+//   - valueSetID: Optional. If provided, expands the ValueSet at instance level: ValueSet/[id]/$expand
+//   - params: Optional map of expansion parameters. Common parameters include:
+//   - url: Canonical reference to a ValueSet (required if valueSetID is not provided and valueSet is nil)
+//   - context: Context of the value set for resolution
+//   - filter: Filter to apply to the expansion
+//   - displayLanguage: Language for display names
+//   - count: Number of codes to return (for paging)
+//   - offset: Offset for paging
+//   - activeOnly: Whether to include only active codes
+//   - excludeNested: Whether to exclude nested codes
+//   - excludeNotForUI: Whether to exclude codes not intended for UI
+//   - excludePostCoordinated: Whether to exclude post-coordinated codes
+//   - includeDesignations: Whether to include designations
+//   - includeSystem: Whether to include the system in the expansion
+//   - limitedExpansion: Whether to limit the expansion
+//   - profile: Profile to use for expansion
+//   - date: Date for the expansion
+//   - valueSet: Optional. The ValueSet resource to expand (used for POST requests when valueSetID is not provided)
+//   - expandedValueSet: The expanded ValueSet will be unmarshaled into this parameter
+//
+// The operation supports both GET and POST methods:
+//   - GET: ValueSet/$expand?url=... or ValueSet/[id]/$expand
+//   - POST: ValueSet/$expand (with valueSet in body) or ValueSet/[id]/$expand
+//
+// Usage Examples:
+//
+// Case 1: Instance-level expansion (ValueSet stored on server)
+//
+//	// Expand a ValueSet by its ID with optional parameters
+//	var expandedValueSet r4b.ValueSet
+//	err := client.ExpandValueSet(ctx, "my-valueset-id", map[string]interface{}{
+//	    "filter": "example",
+//	    "count": 100,
+//	}, nil, &expandedValueSet)
+//
+// Case 2a: Type-level expansion by URL (GET request)
+//
+//	// Expand a ValueSet by its canonical URL
+//	var expandedValueSet r4b.ValueSet
+//	err := client.ExpandValueSet(ctx, "", map[string]interface{}{
+//	    "url": "http://hl7.org/fhir/ValueSet/example",
+//	    "filter": "test",
+//	    "displayLanguage": "en",
+//	    "count": 50,
+//	    "offset": 0,
+//	}, nil, &expandedValueSet)
+//
+// Case 2b: Type-level expansion by POST (ValueSet not stored on server)
+//
+//	// Expand a ValueSet resource provided directly in the request
+//	myValueSet := r4b.ValueSet{
+//	    // ... ValueSet definition ...
+//	}
+//	var expandedValueSet r4b.ValueSet
+//	err := client.ExpandValueSet(ctx, "", nil, myValueSet, &expandedValueSet)
+//
+// Returns an error if the expansion fails.
+func (c *Client) ExpandValueSet(
+	ctx context.Context,
+	valueSetID string,
+	params map[string]interface{},
+	valueSet interface{},
+	expandedValueSet interface{},
+) error {
+	var path string
+	var method string
+	var payload interface{}
+	var urlParams url.Values
+
+	// Determine the path based on whether valueSetID is provided
+	if valueSetID != "" {
+		path = fmt.Sprintf("ValueSet/%s/$expand", valueSetID)
+	} else {
+		path = "ValueSet/$expand"
+	}
+
+	// Convert params to URL values for GET requests
+	urlParams = convertMapToURLValues(params)
+
+	// Determine method and payload
+	// If valueSet is provided and no valueSetID, use POST with valueSet in body
+	// Otherwise, use GET with parameters in URL
+	if valueSet != nil && valueSetID == "" {
+		method = http.MethodPost
+		// For POST, we need to create a Parameters resource or include valueSet in the payload
+		// HAPI FHIR accepts the valueSet directly in POST body for $expand
+		payload = valueSet
+	} else {
+		method = http.MethodGet
+		payload = nil
+
+		if len(params) > 0 && urlParams == nil {
+			urlParams = convertMapToURLValues(params)
+		}
+	}
+
+	err := c.makeRequest(ctx, method, path, urlParams, payload, expandedValueSet, false)
+	if err != nil {
+		return fmt.Errorf("unable to expand value set: %w", err)
 	}
 
 	return nil
