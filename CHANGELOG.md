@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.13.0](https://github.com/savannahghi/hapi-fhir-go/compare/v1.12.3...v1.13.0) (2025-12-02)
+
+
+### Features
+
+* add $expand operation ([#85](https://github.com/savannahghi/hapi-fhir-go/issues/85)) ([573f626](https://github.com/savannahghi/hapi-fhir-go/commit/573f62641e7fee0a38412dd40953802f0806d331))
+
 ## [1.12.3](https://github.com/savannahghi/hapi-fhir-go/compare/v1.12.2...v1.12.3) (2025-11-28)
 
 
