@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // Group is documented here http://hl7.org/fhir/StructureDefinition/Group
 // Represents a defined collection of entities that may be discussed or acted upon collectively but which are not expected to act collectively, and are not formally or legally recognized; i.e. a collection of entities that isn't an Organization.
 type Group struct {
-	ID                *string               `json:"ID,omitempty"`
+	ID                *string               `json:"id,omitempty"`
 	Meta              *Meta                 `json:"meta,omitempty"`
 	ImplicitRules     *string               `json:"implicitRules,omitempty"`
 	Language          *string               `json:"language,omitempty"`
@@ -28,7 +28,7 @@ type Group struct {
 // Identifies traits whose presence r absence is shared by members of the group.
 // All the identified characteristics must be true for an entity to a member of the group.
 type GroupCharacteristic struct {
-	ID                   *string         `json:"ID,omitempty"`
+	ID                   *string         `json:"id,omitempty"`
 	Extension            []Extension     `json:"extension,omitempty"`
 	ModifierExtension    []Extension     `json:"modifierExtension,omitempty"`
 	Code                 CodeableConcept `json:"code"`
@@ -43,7 +43,7 @@ type GroupCharacteristic struct {
 
 // Identifies the resource instances that are members of the group.
 type GroupMember struct {
-	ID                *string     `json:"ID,omitempty"`
+	ID                *string     `json:"id,omitempty"`
 	Extension         []Extension `json:"extension,omitempty"`
 	ModifierExtension []Extension `json:"modifierExtension,omitempty"`
 	Entity            Reference   `json:"entity"`

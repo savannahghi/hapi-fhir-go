@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // Observation is documented here http://hl7.org/fhir/StructureDefinition/Observation
 // Measurements and simple assertions made about a patient, device or other subject.
 type Observation struct {
-	ID                   *string                     `json:"ID,omitempty"`
+	ID                   *string                     `json:"id,omitempty"`
 	Meta                 *Meta                       `json:"meta,omitempty"`
 	ImplicitRules        *string                     `json:"implicitRules,omitempty"`
 	Language             *string                     `json:"language,omitempty"`
@@ -55,7 +55,7 @@ type Observation struct {
 // Guidance on how to interpret the value by comparison to a normal or recommended range.  Multiple reference ranges are interpreted as an "OR".   In other words, to represent two distinct target populations, two `referenceRange` elements would be used.
 // Most observations only have one generic reference range. Systems MAY choose to restrict to only supplying the relevant reference range based on knowledge about the patient (e.g., specific to the patient's age, gender, weight and other factors), but this might not be possible or appropriate. Whenever more than one reference range is supplied, the differences between them SHOULD be provided in the reference range and/or age properties.
 type ObservationReferenceRange struct {
-	ID                *string           `json:"ID,omitempty"`
+	ID                *string           `json:"id,omitempty"`
 	Extension         []Extension       `json:"extension,omitempty"`
 	ModifierExtension []Extension       `json:"modifierExtension,omitempty"`
 	Low               *Quantity         `json:"low,omitempty"`
@@ -69,7 +69,7 @@ type ObservationReferenceRange struct {
 // Some observations have multiple component observations.  These component observations are expressed as separate code value pairs that share the same attributes.  Examples include systolic and diastolic component observations for blood pressure measurement and multiple component observations for genetics observations.
 // For a discussion on the ways Observations can be assembled in groups together see [Notes](observation.html#notes) below.
 type ObservationComponent struct {
-	ID                   *string                     `json:"ID,omitempty"`
+	ID                   *string                     `json:"id,omitempty"`
 	Extension            []Extension                 `json:"extension,omitempty"`
 	ModifierExtension    []Extension                 `json:"modifierExtension,omitempty"`
 	Code                 CodeableConcept             `json:"code"`

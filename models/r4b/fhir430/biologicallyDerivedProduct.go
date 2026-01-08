@@ -1,14 +1,14 @@
-
 package fhir430
 
 import "encoding/json"
+
 // BiologicallyDerivedProduct is documented here http://hl7.org/fhir/StructureDefinition/BiologicallyDerivedProduct
 /*
 A material substance originating from a biological entity intended to be transplanted or infused
 into another (possibly the same) biological entity.
 */
 type BiologicallyDerivedProduct struct {
-	ID                *string                                 `json:"ID,omitempty"`
+	ID                *string                                 `json:"id,omitempty"`
 	Meta              *Meta                                   `json:"meta,omitempty"`
 	ImplicitRules     *string                                 `json:"implicitRules,omitempty"`
 	Language          *string                                 `json:"language,omitempty"`
@@ -31,7 +31,7 @@ type BiologicallyDerivedProduct struct {
 
 // How this product was collected.
 type BiologicallyDerivedProductCollection struct {
-	ID                *string     `json:"ID,omitempty"`
+	ID                *string     `json:"id,omitempty"`
 	Extension         []Extension `json:"extension,omitempty"`
 	ModifierExtension []Extension `json:"modifierExtension,omitempty"`
 	Collector         *Reference  `json:"collector,omitempty"`
@@ -42,7 +42,7 @@ type BiologicallyDerivedProductCollection struct {
 
 // Any processing of the product during collection that does not change the fundamental nature of the product. For example adding anti-coagulants during the collection of Peripheral Blood Stem Cells.
 type BiologicallyDerivedProductProcessing struct {
-	ID                *string          `json:"ID,omitempty"`
+	ID                *string          `json:"id,omitempty"`
 	Extension         []Extension      `json:"extension,omitempty"`
 	ModifierExtension []Extension      `json:"modifierExtension,omitempty"`
 	Description       *string          `json:"description,omitempty"`
@@ -54,7 +54,7 @@ type BiologicallyDerivedProductProcessing struct {
 
 // Any manipulation of product post-collection that is intended to alter the product.  For example a buffy-coat enrichment or CD8 reduction of Peripheral Blood Stem Cells to make it more suitable for infusion.
 type BiologicallyDerivedProductManipulation struct {
-	ID                *string     `json:"ID,omitempty"`
+	ID                *string     `json:"id,omitempty"`
 	Extension         []Extension `json:"extension,omitempty"`
 	ModifierExtension []Extension `json:"modifierExtension,omitempty"`
 	Description       *string     `json:"description,omitempty"`
@@ -64,7 +64,7 @@ type BiologicallyDerivedProductManipulation struct {
 
 // Product storage.
 type BiologicallyDerivedProductStorage struct {
-	ID                *string                                 `json:"ID,omitempty"`
+	ID                *string                                 `json:"id,omitempty"`
 	Extension         []Extension                             `json:"extension,omitempty"`
 	ModifierExtension []Extension                             `json:"modifierExtension,omitempty"`
 	Description       *string                                 `json:"description,omitempty"`

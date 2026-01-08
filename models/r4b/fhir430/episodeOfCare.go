@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // EpisodeOfCare is documented here http://hl7.org/fhir/StructureDefinition/EpisodeOfCare
 // An association between a patient and an organization / healthcare provider(s) during which time encounters may occur. The managing organization assumes a level of responsibility for the patient during this time.
 type EpisodeOfCare struct {
-	ID                   *string                      `json:"ID,omitempty"`
+	ID                   *string                      `json:"id,omitempty"`
 	Meta                 *Meta                        `json:"meta,omitempty"`
 	ImplicitRules        *string                      `json:"implicitRules,omitempty"`
 	Language             *string                      `json:"language,omitempty"`
@@ -29,7 +29,7 @@ type EpisodeOfCare struct {
 
 // The history of statuses that the EpisodeOfCare has been through (without requiring processing the history of the resource).
 type EpisodeOfCareStatusHistory struct {
-	ID                *string             `json:"ID,omitempty"`
+	ID                *string             `json:"id,omitempty"`
 	Extension         []Extension         `json:"extension,omitempty"`
 	ModifierExtension []Extension         `json:"modifierExtension,omitempty"`
 	Status            EpisodeOfCareStatus `json:"status"`
@@ -38,7 +38,7 @@ type EpisodeOfCareStatusHistory struct {
 
 // The list of diagnosis relevant to this episode of care.
 type EpisodeOfCareDiagnosis struct {
-	ID                *string          `json:"ID,omitempty"`
+	ID                *string          `json:"id,omitempty"`
 	Extension         []Extension      `json:"extension,omitempty"`
 	ModifierExtension []Extension      `json:"modifierExtension,omitempty"`
 	Condition         Reference        `json:"condition"`

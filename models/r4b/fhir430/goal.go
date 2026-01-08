@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // Goal is documented here http://hl7.org/fhir/StructureDefinition/Goal
 // Describes the intended objective(s) for a patient, group or organization care, for example, weight loss, restoring an activity of daily living, obtaining herd immunity via immunization, meeting a process improvement objective, etc.
 type Goal struct {
-	ID                   *string             `json:"ID,omitempty"`
+	ID                   *string             `json:"id,omitempty"`
 	Meta                 *Meta               `json:"meta,omitempty"`
 	ImplicitRules        *string             `json:"implicitRules,omitempty"`
 	Language             *string             `json:"language,omitempty"`
@@ -35,7 +35,7 @@ type Goal struct {
 // Indicates what should be done by when.
 // When multiple targets are present for a single goal instance, all targets must be met for the overall goal to be met.
 type GoalTarget struct {
-	ID                    *string          `json:"ID,omitempty"`
+	ID                    *string          `json:"id,omitempty"`
 	Extension             []Extension      `json:"extension,omitempty"`
 	ModifierExtension     []Extension      `json:"modifierExtension,omitempty"`
 	Measure               *CodeableConcept `json:"measure,omitempty"`

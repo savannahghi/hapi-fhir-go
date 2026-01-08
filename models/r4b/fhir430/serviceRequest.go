@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // ServiceRequest is documented here http://hl7.org/fhir/StructureDefinition/ServiceRequest
 // A record of a request for service such as diagnostic investigations, treatments, or operations to be performed.
 type ServiceRequest struct {
-	ID                      *string           `json:"ID,omitempty"`
+	ID                      *string           `json:"id,omitempty"`
 	Meta                    *Meta             `json:"meta,omitempty"`
 	ImplicitRules           *string           `json:"implicitRules,omitempty"`
 	Language                *string           `json:"language,omitempty"`

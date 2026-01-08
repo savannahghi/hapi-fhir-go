@@ -1,9 +1,9 @@
-
 package fhir430
+
 // Dosage is documented here http://hl7.org/fhir/StructureDefinition/Dosage
 // Base StructureDefinition for Dosage Type: Indicates how the medication is/was taken or should be taken by the patient.
 type Dosage struct {
-	ID                       *string             `json:"ID,omitempty"`
+	ID                       *string             `json:"id,omitempty"`
 	Extension                []Extension         `json:"extension,omitempty"`
 	ModifierExtension        []Extension         `json:"modifierExtension,omitempty"`
 	Sequence                 *int                `json:"sequence,omitempty"`
@@ -24,7 +24,7 @@ type Dosage struct {
 
 // The amount of medication administered.
 type DosageDoseAndRate struct {
-	ID           *string          `json:"ID,omitempty"`
+	ID           *string          `json:"id,omitempty"`
 	Extension    []Extension      `json:"extension,omitempty"`
 	Type         *CodeableConcept `json:"type,omitempty"`
 	DoseRange    *Range           `json:"doseRange,omitempty"`

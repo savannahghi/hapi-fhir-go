@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // ClaimResponse is documented here http://hl7.org/fhir/StructureDefinition/ClaimResponse
 // This resource provides the adjudication details from the processing of a Claim resource.
 type ClaimResponse struct {
-	ID                   *string                         `json:"ID,omitempty"`
+	ID                   *string                         `json:"id,omitempty"`
 	Meta                 *Meta                           `json:"meta,omitempty"`
 	ImplicitRules        *string                         `json:"implicitRules,omitempty"`
 	Language             *string                         `json:"language,omitempty"`
@@ -44,7 +44,7 @@ type ClaimResponse struct {
 
 // A claim line. Either a simple (a product or service) or a 'group' of details which can also be a simple items or groups of sub-details.
 type ClaimResponseItem struct {
-	ID                *string                         `json:"ID,omitempty"`
+	ID                *string                         `json:"id,omitempty"`
 	Extension         []Extension                     `json:"extension,omitempty"`
 	ModifierExtension []Extension                     `json:"modifierExtension,omitempty"`
 	ItemSequence      int                             `json:"itemSequence"`
@@ -55,7 +55,7 @@ type ClaimResponseItem struct {
 
 // If this item is a group then the values here are a summary of the adjudication of the detail items. If this item is a simple product or service then this is the result of the adjudication of this item.
 type ClaimResponseItemAdjudication struct {
-	ID                *string          `json:"ID,omitempty"`
+	ID                *string          `json:"id,omitempty"`
 	Extension         []Extension      `json:"extension,omitempty"`
 	ModifierExtension []Extension      `json:"modifierExtension,omitempty"`
 	Category          CodeableConcept  `json:"category"`
@@ -66,7 +66,7 @@ type ClaimResponseItemAdjudication struct {
 
 // A claim detail. Either a simple (a product or service) or a 'group' of sub-details which are simple items.
 type ClaimResponseItemDetail struct {
-	ID                *string                            `json:"ID,omitempty"`
+	ID                *string                            `json:"id,omitempty"`
 	Extension         []Extension                        `json:"extension,omitempty"`
 	ModifierExtension []Extension                        `json:"modifierExtension,omitempty"`
 	DetailSequence    int                                `json:"detailSequence"`
@@ -77,7 +77,7 @@ type ClaimResponseItemDetail struct {
 
 // A sub-detail adjudication of a simple product or service.
 type ClaimResponseItemDetailSubDetail struct {
-	ID                *string                         `json:"ID,omitempty"`
+	ID                *string                         `json:"id,omitempty"`
 	Extension         []Extension                     `json:"extension,omitempty"`
 	ModifierExtension []Extension                     `json:"modifierExtension,omitempty"`
 	SubDetailSequence int                             `json:"subDetailSequence"`
@@ -87,7 +87,7 @@ type ClaimResponseItemDetailSubDetail struct {
 
 // The first-tier service adjudications for payor added product or service lines.
 type ClaimResponseAddItem struct {
-	ID                      *string                         `json:"ID,omitempty"`
+	ID                      *string                         `json:"id,omitempty"`
 	Extension               []Extension                     `json:"extension,omitempty"`
 	ModifierExtension       []Extension                     `json:"modifierExtension,omitempty"`
 	ItemSequence            []int                           `json:"itemSequence,omitempty"`
@@ -115,7 +115,7 @@ type ClaimResponseAddItem struct {
 
 // The second-tier service adjudications for payor added services.
 type ClaimResponseAddItemDetail struct {
-	ID                *string                               `json:"ID,omitempty"`
+	ID                *string                               `json:"id,omitempty"`
 	Extension         []Extension                           `json:"extension,omitempty"`
 	ModifierExtension []Extension                           `json:"modifierExtension,omitempty"`
 	ProductOrService  CodeableConcept                       `json:"productOrService"`
@@ -131,7 +131,7 @@ type ClaimResponseAddItemDetail struct {
 
 // The third-tier service adjudications for payor added services.
 type ClaimResponseAddItemDetailSubDetail struct {
-	ID                *string                         `json:"ID,omitempty"`
+	ID                *string                         `json:"id,omitempty"`
 	Extension         []Extension                     `json:"extension,omitempty"`
 	ModifierExtension []Extension                     `json:"modifierExtension,omitempty"`
 	ProductOrService  CodeableConcept                 `json:"productOrService"`
@@ -147,7 +147,7 @@ type ClaimResponseAddItemDetailSubDetail struct {
 // Categorized monetary totals for the adjudication.
 // Totals for amounts submitted, co-pays, benefits payable etc.
 type ClaimResponseTotal struct {
-	ID                *string         `json:"ID,omitempty"`
+	ID                *string         `json:"id,omitempty"`
 	Extension         []Extension     `json:"extension,omitempty"`
 	ModifierExtension []Extension     `json:"modifierExtension,omitempty"`
 	Category          CodeableConcept `json:"category"`
@@ -156,7 +156,7 @@ type ClaimResponseTotal struct {
 
 // Payment details for the adjudication of the claim.
 type ClaimResponsePayment struct {
-	ID                *string          `json:"ID,omitempty"`
+	ID                *string          `json:"id,omitempty"`
 	Extension         []Extension      `json:"extension,omitempty"`
 	ModifierExtension []Extension      `json:"modifierExtension,omitempty"`
 	Type              CodeableConcept  `json:"type"`
@@ -169,7 +169,7 @@ type ClaimResponsePayment struct {
 
 // A note that describes or explains adjudication results in a human readable form.
 type ClaimResponseProcessNote struct {
-	ID                *string          `json:"ID,omitempty"`
+	ID                *string          `json:"id,omitempty"`
 	Extension         []Extension      `json:"extension,omitempty"`
 	ModifierExtension []Extension      `json:"modifierExtension,omitempty"`
 	Number            *int             `json:"number,omitempty"`
@@ -181,7 +181,7 @@ type ClaimResponseProcessNote struct {
 // Financial instruments for reimbursement for the health care products and services specified on the claim.
 // All insurance coverages for the patient which may be applicable for reimbursement, of the products and services listed in the claim, are typically provided in the claim to allow insurers to confirm the ordering of the insurance coverages relative to local 'coordination of benefit' rules. One coverage (and only one) with 'focal=true' is to be used in the adjudication of this claim. Coverages appearing before the focal Coverage in the list, and where 'subrogation=false', should provide a reference to the ClaimResponse containing the adjudication results of the prior claim.
 type ClaimResponseInsurance struct {
-	ID                  *string     `json:"ID,omitempty"`
+	ID                  *string     `json:"id,omitempty"`
 	Extension           []Extension `json:"extension,omitempty"`
 	ModifierExtension   []Extension `json:"modifierExtension,omitempty"`
 	Sequence            int         `json:"sequence"`
@@ -194,7 +194,7 @@ type ClaimResponseInsurance struct {
 // Errors encountered during the processing of the adjudication.
 // If the request contains errors then an error element should be provided and no adjudication related sections (item, addItem, or payment) should be present.
 type ClaimResponseError struct {
-	ID                *string         `json:"ID,omitempty"`
+	ID                *string         `json:"id,omitempty"`
 	Extension         []Extension     `json:"extension,omitempty"`
 	ModifierExtension []Extension     `json:"modifierExtension,omitempty"`
 	ItemSequence      *int            `json:"itemSequence,omitempty"`

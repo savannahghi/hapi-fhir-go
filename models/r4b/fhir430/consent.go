@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // Consent is documented here http://hl7.org/fhir/StructureDefinition/Consent
 // A record of a healthcare consumer’s  choices, which permits or denies identified recipient(s) or recipient role(s) to perform one or more actions within a given policy context, for specific purposes and periods of time.
 type Consent struct {
-	ID                *string               `json:"ID,omitempty"`
+	ID                *string               `json:"id,omitempty"`
 	Meta              *Meta                 `json:"meta,omitempty"`
 	ImplicitRules     *string               `json:"implicitRules,omitempty"`
 	Language          *string               `json:"language,omitempty"`
@@ -31,7 +31,7 @@ type Consent struct {
 
 // The references to the policies that are included in this consent scope. Policies may be organizational, but are often defined jurisdictionally, or in law.
 type ConsentPolicy struct {
-	ID                *string     `json:"ID,omitempty"`
+	ID                *string     `json:"id,omitempty"`
 	Extension         []Extension `json:"extension,omitempty"`
 	ModifierExtension []Extension `json:"modifierExtension,omitempty"`
 	Authority         *string     `json:"authority,omitempty"`
@@ -40,7 +40,7 @@ type ConsentPolicy struct {
 
 // Whether a treatment instruction (e.g. artificial respiration yes or no) was verified with the patient, his/her family or another authorized person.
 type ConsentVerification struct {
-	ID                *string     `json:"ID,omitempty"`
+	ID                *string     `json:"id,omitempty"`
 	Extension         []Extension `json:"extension,omitempty"`
 	ModifierExtension []Extension `json:"modifierExtension,omitempty"`
 	Verified          bool        `json:"verified"`
@@ -50,7 +50,7 @@ type ConsentVerification struct {
 
 // An exception to the base policy of this consent. An exception can be an addition or removal of access permissions.
 type ConsentProvision struct {
-	ID                *string                 `json:"ID,omitempty"`
+	ID                *string                 `json:"id,omitempty"`
 	Extension         []Extension             `json:"extension,omitempty"`
 	ModifierExtension []Extension             `json:"modifierExtension,omitempty"`
 	Type              *ConsentProvisionType   `json:"type,omitempty"`
@@ -69,7 +69,7 @@ type ConsentProvision struct {
 // Who or what is controlled by this rule. Use group to identify a set of actors by some property they share (e.g. 'admitting officers').
 // There is no specific actor associated with the exception
 type ConsentProvisionActor struct {
-	ID                *string         `json:"ID,omitempty"`
+	ID                *string         `json:"id,omitempty"`
 	Extension         []Extension     `json:"extension,omitempty"`
 	ModifierExtension []Extension     `json:"modifierExtension,omitempty"`
 	Role              CodeableConcept `json:"role"`
@@ -79,7 +79,7 @@ type ConsentProvisionActor struct {
 // The resources controlled by this rule if specific resources are referenced.
 // all data
 type ConsentProvisionData struct {
-	ID                *string            `json:"ID,omitempty"`
+	ID                *string            `json:"id,omitempty"`
 	Extension         []Extension        `json:"extension,omitempty"`
 	ModifierExtension []Extension        `json:"modifierExtension,omitempty"`
 	Meaning           ConsentDataMeaning `json:"meaning"`

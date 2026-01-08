@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // StructureDefinition is documented here http://hl7.org/fhir/StructureDefinition/StructureDefinition
 // A definition of a FHIR structure. This resource is used to describe the underlying resources, data types defined in FHIR, and also for describing extensions and constraints on resources and data types.
 type StructureDefinition struct {
-	ID                *string                          `json:"ID,omitempty"`
+	ID                *string                          `json:"id,omitempty"`
 	Meta              *Meta                            `json:"meta,omitempty"`
 	ImplicitRules     *string                          `json:"implicitRules,omitempty"`
 	Language          *string                          `json:"language,omitempty"`
@@ -43,7 +43,7 @@ type StructureDefinition struct {
 
 // An external specification that the content is mapped to.
 type StructureDefinitionMapping struct {
-	ID                *string     `json:"ID,omitempty"`
+	ID                *string     `json:"id,omitempty"`
 	Extension         []Extension `json:"extension,omitempty"`
 	ModifierExtension []Extension `json:"modifierExtension,omitempty"`
 	Identity          string      `json:"identity"`
@@ -54,7 +54,7 @@ type StructureDefinitionMapping struct {
 
 // Identifies the types of resource or data type elements to which the extension can be applied.
 type StructureDefinitionContext struct {
-	ID                *string              `json:"ID,omitempty"`
+	ID                *string              `json:"id,omitempty"`
 	Extension         []Extension          `json:"extension,omitempty"`
 	ModifierExtension []Extension          `json:"modifierExtension,omitempty"`
 	Type              ExtensionContextType `json:"type"`
@@ -63,7 +63,7 @@ type StructureDefinitionContext struct {
 
 // A snapshot view is expressed in a standalone form that can be used and interpreted without considering the base StructureDefinition.
 type StructureDefinitionSnapshot struct {
-	ID                *string             `json:"ID,omitempty"`
+	ID                *string             `json:"id,omitempty"`
 	Extension         []Extension         `json:"extension,omitempty"`
 	ModifierExtension []Extension         `json:"modifierExtension,omitempty"`
 	Element           []ElementDefinition `json:"element"`
@@ -71,7 +71,7 @@ type StructureDefinitionSnapshot struct {
 
 // A differential view is expressed relative to the base StructureDefinition - a statement of differences that it applies.
 type StructureDefinitionDifferential struct {
-	ID                *string             `json:"ID,omitempty"`
+	ID                *string             `json:"id,omitempty"`
 	Extension         []Extension         `json:"extension,omitempty"`
 	ModifierExtension []Extension         `json:"modifierExtension,omitempty"`
 	Element           []ElementDefinition `json:"element"`

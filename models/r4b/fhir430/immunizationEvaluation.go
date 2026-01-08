@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // ImmunizationEvaluation is documented here http://hl7.org/fhir/StructureDefinition/ImmunizationEvaluation
 // Describes a comparison of an immunization event against published recommendations to determine if the administration is "valid" in relation to those  recommendations.
 type ImmunizationEvaluation struct {
-	ID                     *string                           `json:"ID,omitempty"`
+	ID                     *string                           `json:"id,omitempty"`
 	Meta                   *Meta                             `json:"meta,omitempty"`
 	ImplicitRules          *string                           `json:"implicitRules,omitempty"`
 	Language               *string                           `json:"language,omitempty"`

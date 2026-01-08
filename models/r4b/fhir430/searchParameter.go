@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // SearchParameter is documented here http://hl7.org/fhir/StructureDefinition/SearchParameter
 // A search parameter that defines a named search item that can be used to search/filter on a resource.
 type SearchParameter struct {
-	ID                *string                    `json:"ID,omitempty"`
+	ID                *string                    `json:"id,omitempty"`
 	Meta              *Meta                      `json:"meta,omitempty"`
 	ImplicitRules     *string                    `json:"implicitRules,omitempty"`
 	Language          *string                    `json:"language,omitempty"`
@@ -43,7 +43,7 @@ type SearchParameter struct {
 
 // Used to define the parts of a composite search parameter.
 type SearchParameterComponent struct {
-	ID                *string     `json:"ID,omitempty"`
+	ID                *string     `json:"id,omitempty"`
 	Extension         []Extension `json:"extension,omitempty"`
 	ModifierExtension []Extension `json:"modifierExtension,omitempty"`
 	Definition        string      `json:"definition"`

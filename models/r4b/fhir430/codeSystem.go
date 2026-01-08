@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // CodeSystem is documented here http://hl7.org/fhir/StructureDefinition/CodeSystem
 // The CodeSystem resource is used to declare the existence of and describe a code system or code system supplement and its key properties, and optionally define a part or all of its content.
 type CodeSystem struct {
-	ID                *string                     `json:"ID,omitempty"`
+	ID                *string                     `json:"id,omitempty"`
 	Meta              *Meta                       `json:"meta,omitempty"`
 	ImplicitRules     *string                     `json:"implicitRules,omitempty"`
 	Language          *string                     `json:"language,omitempty"`
@@ -43,7 +43,7 @@ type CodeSystem struct {
 // A filter that can be used in a value set compose statement when selecting concepts using a filter.
 // Note that filters defined in code systems usually require custom code on the part of any terminology engine that will make them available for use in value set filters. For this reason, they are generally only seen in high value published terminologies.
 type CodeSystemFilter struct {
-	ID                *string          `json:"ID,omitempty"`
+	ID                *string          `json:"id,omitempty"`
 	Extension         []Extension      `json:"extension,omitempty"`
 	ModifierExtension []Extension      `json:"modifierExtension,omitempty"`
 	Code              string           `json:"code"`
@@ -54,7 +54,7 @@ type CodeSystemFilter struct {
 
 // A property defines an additional slot through which additional information can be provided about a concept.
 type CodeSystemProperty struct {
-	ID                *string      `json:"ID,omitempty"`
+	ID                *string      `json:"id,omitempty"`
 	Extension         []Extension  `json:"extension,omitempty"`
 	ModifierExtension []Extension  `json:"modifierExtension,omitempty"`
 	Code              string       `json:"code"`
@@ -66,7 +66,7 @@ type CodeSystemProperty struct {
 // Concepts that are in the code system. The concept definitions are inherently hierarchical, but the definitions must be consulted to determine what the meanings of the hierarchical relationships are.
 // If this is empty, it means that the code system resource does not represent the content of the code system.
 type CodeSystemConcept struct {
-	ID                *string                        `json:"ID,omitempty"`
+	ID                *string                        `json:"id,omitempty"`
 	Extension         []Extension                    `json:"extension,omitempty"`
 	ModifierExtension []Extension                    `json:"modifierExtension,omitempty"`
 	Code              string                         `json:"code"`
@@ -80,7 +80,7 @@ type CodeSystemConcept struct {
 // Additional representations for the concept - other languages, aliases, specialized purposes, used for particular purposes, etc.
 // Concepts have both a ```display``` and an array of ```designation```. The display is equivalent to a special designation with an implied ```designation.use``` of "primary code" and a language equal to the [Resource Language](resource.html#language).
 type CodeSystemConceptDesignation struct {
-	ID                *string     `json:"ID,omitempty"`
+	ID                *string     `json:"id,omitempty"`
 	Extension         []Extension `json:"extension,omitempty"`
 	ModifierExtension []Extension `json:"modifierExtension,omitempty"`
 	Language          *string     `json:"language,omitempty"`
@@ -90,7 +90,7 @@ type CodeSystemConceptDesignation struct {
 
 // A property value for this concept.
 type CodeSystemConceptProperty struct {
-	ID                *string     `json:"ID,omitempty"`
+	ID                *string     `json:"id,omitempty"`
 	Extension         []Extension `json:"extension,omitempty"`
 	ModifierExtension []Extension `json:"modifierExtension,omitempty"`
 	Code              string      `json:"code"`

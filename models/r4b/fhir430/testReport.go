@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // TestReport is documented here http://hl7.org/fhir/StructureDefinition/TestReport
 // A summary of information based on the results of executing a TestScript.
 type TestReport struct {
-	ID                *string                 `json:"ID,omitempty"`
+	ID                *string                 `json:"id,omitempty"`
 	Meta              *Meta                   `json:"meta,omitempty"`
 	ImplicitRules     *string                 `json:"implicitRules,omitempty"`
 	Language          *string                 `json:"language,omitempty"`
@@ -29,7 +29,7 @@ type TestReport struct {
 
 // A participant in the test execution, either the execution engine, a client, or a server.
 type TestReportParticipant struct {
-	ID                *string                   `json:"ID,omitempty"`
+	ID                *string                   `json:"id,omitempty"`
 	Extension         []Extension               `json:"extension,omitempty"`
 	ModifierExtension []Extension               `json:"modifierExtension,omitempty"`
 	Type              TestReportParticipantType `json:"type"`
@@ -39,7 +39,7 @@ type TestReportParticipant struct {
 
 // The results of the series of required setup operations before the tests were executed.
 type TestReportSetup struct {
-	ID                *string                 `json:"ID,omitempty"`
+	ID                *string                 `json:"id,omitempty"`
 	Extension         []Extension             `json:"extension,omitempty"`
 	ModifierExtension []Extension             `json:"modifierExtension,omitempty"`
 	Action            []TestReportSetupAction `json:"action"`
@@ -48,7 +48,7 @@ type TestReportSetup struct {
 // Action would contain either an operation or an assertion.
 // An action should contain either an operation or an assertion but not both.  It can contain any number of variables.
 type TestReportSetupAction struct {
-	ID                *string                         `json:"ID,omitempty"`
+	ID                *string                         `json:"id,omitempty"`
 	Extension         []Extension                     `json:"extension,omitempty"`
 	ModifierExtension []Extension                     `json:"modifierExtension,omitempty"`
 	Operation         *TestReportSetupActionOperation `json:"operation,omitempty"`
@@ -57,7 +57,7 @@ type TestReportSetupAction struct {
 
 // The operation performed.
 type TestReportSetupActionOperation struct {
-	ID                *string                `json:"ID,omitempty"`
+	ID                *string                `json:"id,omitempty"`
 	Extension         []Extension            `json:"extension,omitempty"`
 	ModifierExtension []Extension            `json:"modifierExtension,omitempty"`
 	Result            TestReportActionResult `json:"result"`
@@ -67,7 +67,7 @@ type TestReportSetupActionOperation struct {
 
 // The results of the assertion performed on the previous operations.
 type TestReportSetupActionAssert struct {
-	ID                *string                `json:"ID,omitempty"`
+	ID                *string                `json:"id,omitempty"`
 	Extension         []Extension            `json:"extension,omitempty"`
 	ModifierExtension []Extension            `json:"modifierExtension,omitempty"`
 	Result            TestReportActionResult `json:"result"`
@@ -77,7 +77,7 @@ type TestReportSetupActionAssert struct {
 
 // A test executed from the test script.
 type TestReportTest struct {
-	ID                *string                `json:"ID,omitempty"`
+	ID                *string                `json:"id,omitempty"`
 	Extension         []Extension            `json:"extension,omitempty"`
 	ModifierExtension []Extension            `json:"modifierExtension,omitempty"`
 	Name              *string                `json:"name,omitempty"`
@@ -88,7 +88,7 @@ type TestReportTest struct {
 // Action would contain either an operation or an assertion.
 // An action should contain either an operation or an assertion but not both.  It can contain any number of variables.
 type TestReportTestAction struct {
-	ID                *string                         `json:"ID,omitempty"`
+	ID                *string                         `json:"id,omitempty"`
 	Extension         []Extension                     `json:"extension,omitempty"`
 	ModifierExtension []Extension                     `json:"modifierExtension,omitempty"`
 	Operation         *TestReportSetupActionOperation `json:"operation,omitempty"`
@@ -97,7 +97,7 @@ type TestReportTestAction struct {
 
 // The results of the series of operations required to clean up after all the tests were executed (successfully or otherwise).
 type TestReportTeardown struct {
-	ID                *string                    `json:"ID,omitempty"`
+	ID                *string                    `json:"id,omitempty"`
 	Extension         []Extension                `json:"extension,omitempty"`
 	ModifierExtension []Extension                `json:"modifierExtension,omitempty"`
 	Action            []TestReportTeardownAction `json:"action"`
@@ -106,7 +106,7 @@ type TestReportTeardown struct {
 // The teardown action will only contain an operation.
 // An action should contain either an operation or an assertion but not both.  It can contain any number of variables.
 type TestReportTeardownAction struct {
-	ID                *string                        `json:"ID,omitempty"`
+	ID                *string                        `json:"id,omitempty"`
 	Extension         []Extension                    `json:"extension,omitempty"`
 	ModifierExtension []Extension                    `json:"modifierExtension,omitempty"`
 	Operation         TestReportSetupActionOperation `json:"operation,omitempty"`

@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // TerminologyCapabilities is documented here http://hl7.org/fhir/StructureDefinition/TerminologyCapabilities
 // A TerminologyCapabilities resource documents a set of capabilities (behaviors) of a FHIR Terminology Server that may be used as a statement of actual server functionality or a statement of required or desired server implementation.
 type TerminologyCapabilities struct {
-	ID                *string                                `json:"ID,omitempty"`
+	ID                *string                                `json:"id,omitempty"`
 	Meta              *Meta                                  `json:"meta,omitempty"`
 	ImplicitRules     *string                                `json:"implicitRules,omitempty"`
 	Language          *string                                `json:"language,omitempty"`
@@ -40,7 +40,7 @@ type TerminologyCapabilities struct {
 
 // Software that is covered by this terminology capability statement.  It is used when the statement describes the capabilities of a particular software version, independent of an installation.
 type TerminologyCapabilitiesSoftware struct {
-	ID                *string     `json:"ID,omitempty"`
+	ID                *string     `json:"id,omitempty"`
 	Extension         []Extension `json:"extension,omitempty"`
 	ModifierExtension []Extension `json:"modifierExtension,omitempty"`
 	Name              string      `json:"name"`
@@ -49,7 +49,7 @@ type TerminologyCapabilitiesSoftware struct {
 
 // Identifies a specific implementation instance that is described by the terminology capability statement - i.e. a particular installation, rather than the capabilities of a software program.
 type TerminologyCapabilitiesImplementation struct {
-	ID                *string     `json:"ID,omitempty"`
+	ID                *string     `json:"id,omitempty"`
 	Extension         []Extension `json:"extension,omitempty"`
 	ModifierExtension []Extension `json:"modifierExtension,omitempty"`
 	Description       string      `json:"description"`
@@ -59,7 +59,7 @@ type TerminologyCapabilitiesImplementation struct {
 // Identifies a code system that is supported by the server. If there is a no code system URL, then this declares the general assumptions a client can make about support for any CodeSystem resource.
 // The code system - identified by its system URL - may also be declared explicitly as a Code System Resource at /CodeSystem, but it might not be.
 type TerminologyCapabilitiesCodeSystem struct {
-	ID                *string                                    `json:"ID,omitempty"`
+	ID                *string                                    `json:"id,omitempty"`
 	Extension         []Extension                                `json:"extension,omitempty"`
 	ModifierExtension []Extension                                `json:"modifierExtension,omitempty"`
 	Uri               *string                                    `json:"uri,omitempty"`
@@ -70,7 +70,7 @@ type TerminologyCapabilitiesCodeSystem struct {
 // For the code system, a list of versions that are supported by the server.
 // Language translations might not be available for all codes.
 type TerminologyCapabilitiesCodeSystemVersion struct {
-	ID                *string                                          `json:"ID,omitempty"`
+	ID                *string                                          `json:"id,omitempty"`
 	Extension         []Extension                                      `json:"extension,omitempty"`
 	ModifierExtension []Extension                                      `json:"modifierExtension,omitempty"`
 	Code              *string                                          `json:"code,omitempty"`
@@ -83,7 +83,7 @@ type TerminologyCapabilitiesCodeSystemVersion struct {
 
 // Filter Properties supported.
 type TerminologyCapabilitiesCodeSystemVersionFilter struct {
-	ID                *string     `json:"ID,omitempty"`
+	ID                *string     `json:"id,omitempty"`
 	Extension         []Extension `json:"extension,omitempty"`
 	ModifierExtension []Extension `json:"modifierExtension,omitempty"`
 	Code              string      `json:"code"`
@@ -92,7 +92,7 @@ type TerminologyCapabilitiesCodeSystemVersionFilter struct {
 
 // Information about the [ValueSet/$expand](valueset-operation-expand.html) operation.
 type TerminologyCapabilitiesExpansion struct {
-	ID                *string                                     `json:"ID,omitempty"`
+	ID                *string                                     `json:"id,omitempty"`
 	Extension         []Extension                                 `json:"extension,omitempty"`
 	ModifierExtension []Extension                                 `json:"modifierExtension,omitempty"`
 	Hierarchical      *bool                                       `json:"hierarchical,omitempty"`
@@ -104,7 +104,7 @@ type TerminologyCapabilitiesExpansion struct {
 
 // Supported expansion parameter.
 type TerminologyCapabilitiesExpansionParameter struct {
-	ID                *string     `json:"ID,omitempty"`
+	ID                *string     `json:"id,omitempty"`
 	Extension         []Extension `json:"extension,omitempty"`
 	ModifierExtension []Extension `json:"modifierExtension,omitempty"`
 	Name              string      `json:"name"`
@@ -113,7 +113,7 @@ type TerminologyCapabilitiesExpansionParameter struct {
 
 // Information about the [ValueSet/$validate-code](valueset-operation-validate-code.html) operation.
 type TerminologyCapabilitiesValidateCode struct {
-	ID                *string     `json:"ID,omitempty"`
+	ID                *string     `json:"id,omitempty"`
 	Extension         []Extension `json:"extension,omitempty"`
 	ModifierExtension []Extension `json:"modifierExtension,omitempty"`
 	Translations      bool        `json:"translations"`
@@ -121,7 +121,7 @@ type TerminologyCapabilitiesValidateCode struct {
 
 // Information about the [ConceptMap/$translate](conceptmap-operation-translate.html) operation.
 type TerminologyCapabilitiesTranslation struct {
-	ID                *string     `json:"ID,omitempty"`
+	ID                *string     `json:"id,omitempty"`
 	Extension         []Extension `json:"extension,omitempty"`
 	ModifierExtension []Extension `json:"modifierExtension,omitempty"`
 	NeedsMap          bool        `json:"needsMap"`
@@ -129,7 +129,7 @@ type TerminologyCapabilitiesTranslation struct {
 
 // Whether the $closure operation is supported.
 type TerminologyCapabilitiesClosure struct {
-	ID                *string     `json:"ID,omitempty"`
+	ID                *string     `json:"id,omitempty"`
 	Extension         []Extension `json:"extension,omitempty"`
 	ModifierExtension []Extension `json:"modifierExtension,omitempty"`
 	Translation       *bool       `json:"translation,omitempty"`

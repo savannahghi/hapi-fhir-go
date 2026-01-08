@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // QuestionnaireResponse is documented here http://hl7.org/fhir/StructureDefinition/QuestionnaireResponse
 // A structured set of questions and their answers. The questions are ordered and grouped into coherent subsets, corresponding to the structure of the grouping of the questionnaire being responded to.
 type QuestionnaireResponse struct {
-	ID                *string                     `json:"ID,omitempty"`
+	ID                *string                     `json:"id,omitempty"`
 	Meta              *Meta                       `json:"meta,omitempty"`
 	ImplicitRules     *string                     `json:"implicitRules,omitempty"`
 	Language          *string                     `json:"language,omitempty"`
@@ -29,7 +29,7 @@ type QuestionnaireResponse struct {
 // A group or question item from the original questionnaire for which answers are provided.
 // Groups cannot have answers and therefore must nest directly within item. When dealing with questions, nesting must occur within each answer because some questions may have multiple answers (and the nesting occurs for each answer).
 type QuestionnaireResponseItem struct {
-	ID                *string                           `json:"ID,omitempty"`
+	ID                *string                           `json:"id,omitempty"`
 	Extension         []Extension                       `json:"extension,omitempty"`
 	ModifierExtension []Extension                       `json:"modifierExtension,omitempty"`
 	LinkId            string                            `json:"linkId"`
@@ -42,7 +42,7 @@ type QuestionnaireResponseItem struct {
 // The respondent's answer(s) to the question.
 // The value is nested because we cannot have a repeating structure that has variable type.
 type QuestionnaireResponseItemAnswer struct {
-	ID                *string                     `json:"ID,omitempty"`
+	ID                *string                     `json:"id,omitempty"`
 	Extension         []Extension                 `json:"extension,omitempty"`
 	ModifierExtension []Extension                 `json:"modifierExtension,omitempty"`
 	ValueBoolean      *bool                       `json:"valueBoolean,omitempty"`

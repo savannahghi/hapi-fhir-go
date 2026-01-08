@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // Slot is documented here http://hl7.org/fhir/StructureDefinition/Slot
 // A slot of time on a schedule that may be available for booking appointments.
 type Slot struct {
-	ID                *string           `json:"ID,omitempty"`
+	ID                *string           `json:"id,omitempty"`
 	Meta              *Meta             `json:"meta,omitempty"`
 	ImplicitRules     *string           `json:"implicitRules,omitempty"`
 	Language          *string           `json:"language,omitempty"`

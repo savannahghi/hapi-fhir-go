@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // Resource is documented here http://hl7.org/fhir/StructureDefinition/Resource
 // This is the base resource type for everything.
 type Resource struct {
-	ID            *string `json:"ID,omitempty"`
+	ID            *string `json:"id,omitempty"`
 	Meta          *Meta   `json:"meta,omitempty"`
 	ImplicitRules *string `json:"implicitRules,omitempty"`
 	Language      *string `json:"language,omitempty"`

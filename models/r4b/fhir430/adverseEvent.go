@@ -5,7 +5,7 @@ import "encoding/json"
 // AdverseEvent is documented here http://hl7.org/fhir/StructureDefinition/AdverseEvent
 // Actual or  potential/avoided event causing unintended physical injury resulting from or contributed to by medical care, a research study or other healthcare setting factors that requires additional monitoring, treatment, or hospitalization, or that results in death.
 type AdverseEvent struct {
-	ID                    *string                     `json:"ID,omitempty"`
+	ID                    *string                     `json:"id,omitempty"`
 	Meta                  *Meta                       `json:"meta,omitempty"`
 	ImplicitRules         *string                     `json:"implicitRules,omitempty"`
 	Language              *string                     `json:"language,omitempty"`
@@ -37,7 +37,7 @@ type AdverseEvent struct {
 
 // Describes the entity that is suspected to have caused the adverse event.
 type AdverseEventSuspectEntity struct {
-	ID                *string                              `json:"ID,omitempty"`
+	ID                *string                              `json:"id,omitempty"`
 	Extension         []Extension                          `json:"extension,omitempty"`
 	ModifierExtension []Extension                          `json:"modifierExtension,omitempty"`
 	Instance          Reference                            `json:"instance"`
@@ -46,7 +46,7 @@ type AdverseEventSuspectEntity struct {
 
 // Information on the possible cause of the event.
 type AdverseEventSuspectEntityCausality struct {
-	ID                 *string          `json:"ID,omitempty"`
+	ID                 *string          `json:"id,omitempty"`
 	Extension          []Extension      `json:"extension,omitempty"`
 	ModifierExtension  []Extension      `json:"modifierExtension,omitempty"`
 	Assessment         *CodeableConcept `json:"assessment,omitempty"`

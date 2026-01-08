@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // Location is documented here http://hl7.org/fhir/StructureDefinition/Location
 // Details and position information for a physical place where services are provided and resources and participants may be stored, found, contained, or accommodated.
 type Location struct {
-	ID                     *string                    `json:"ID,omitempty"`
+	ID                     *string                    `json:"id,omitempty"`
 	Meta                   *Meta                      `json:"meta,omitempty"`
 	ImplicitRules          *string                    `json:"implicitRules,omitempty"`
 	Language               *string                    `json:"language,omitempty"`
@@ -34,7 +34,7 @@ type Location struct {
 
 // The absolute geographic location of the Location, expressed using the WGS84 datum (This is the same co-ordinate system used in KML).
 type LocationPosition struct {
-	ID                *string      `json:"ID,omitempty"`
+	ID                *string      `json:"id,omitempty"`
 	Extension         []Extension  `json:"extension,omitempty"`
 	ModifierExtension []Extension  `json:"modifierExtension,omitempty"`
 	Longitude         json.Number  `json:"longitude"`
@@ -49,7 +49,7 @@ This type of information is commonly found published in directories and on websi
 Specific services within the location may have their own hours which could be shorter (or longer) than the locations hours.
 */
 type LocationHoursOfOperation struct {
-	ID                *string      `json:"ID,omitempty"`
+	ID                *string      `json:"id,omitempty"`
 	Extension         []Extension  `json:"extension,omitempty"`
 	ModifierExtension []Extension  `json:"modifierExtension,omitempty"`
 	DaysOfWeek        []DaysOfWeek `json:"daysOfWeek,omitempty"`

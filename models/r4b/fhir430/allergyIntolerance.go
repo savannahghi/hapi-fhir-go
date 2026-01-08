@@ -5,7 +5,7 @@ import "encoding/json"
 // AllergyIntolerance is documented here http://hl7.org/fhir/StructureDefinition/AllergyIntolerance
 // Risk of harmful or undesirable, physiological response which is unique to an individual and associated with exposure to a substance.
 type AllergyIntolerance struct {
-	ID                 *string                        `json:"ID,omitempty"`
+	ID                 *string                        `json:"id,omitempty"`
 	Meta               *Meta                          `json:"meta,omitempty"`
 	ImplicitRules      *string                        `json:"implicitRules,omitempty"`
 	Language           *string                        `json:"language,omitempty"`
@@ -37,7 +37,7 @@ type AllergyIntolerance struct {
 
 // Details about each adverse reaction event linked to exposure to the identified substance.
 type AllergyIntoleranceReaction struct {
-	ID                *string                     `json:"ID,omitempty"`
+	ID                *string                     `json:"id,omitempty"`
 	Extension         []Extension                 `json:"extension,omitempty"`
 	ModifierExtension []Extension                 `json:"modifierExtension,omitempty"`
 	Substance         *CodeableConcept            `json:"substance,omitempty"`

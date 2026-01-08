@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // DocumentReference is documented here http://hl7.org/fhir/StructureDefinition/DocumentReference
 // A reference to a document of any kind for any purpose. Provides metadata about the document so that the document can be discovered and managed. The scope of a document is any seralized object with a mime-type, so includes formal patient centric documents (CDA), cliical notes, scanned paper, and non-patient specific documents like policy text.
 type DocumentReference struct {
-	ID                *string                      `json:"ID,omitempty"`
+	ID                *string                      `json:"id,omitempty"`
 	Meta              *Meta                        `json:"meta,omitempty"`
 	ImplicitRules     *string                      `json:"implicitRules,omitempty"`
 	Language          *string                      `json:"language,omitempty"`
@@ -34,7 +34,7 @@ type DocumentReference struct {
 // Relationships that this document has with other document references that already exist.
 // This element is labeled as a modifier because documents that append to other documents are incomplete on their own.
 type DocumentReferenceRelatesTo struct {
-	ID                *string                  `json:"ID,omitempty"`
+	ID                *string                  `json:"id,omitempty"`
 	Extension         []Extension              `json:"extension,omitempty"`
 	ModifierExtension []Extension              `json:"modifierExtension,omitempty"`
 	Code              DocumentRelationshipType `json:"code"`
@@ -43,7 +43,7 @@ type DocumentReferenceRelatesTo struct {
 
 // The document and format referenced. There may be multiple content element repetitions, each with a different format.
 type DocumentReferenceContent struct {
-	ID                *string     `json:"ID,omitempty"`
+	ID                *string     `json:"id,omitempty"`
 	Extension         []Extension `json:"extension,omitempty"`
 	ModifierExtension []Extension `json:"modifierExtension,omitempty"`
 	Attachment        Attachment  `json:"attachment"`
@@ -53,7 +53,7 @@ type DocumentReferenceContent struct {
 // The clinical context in which the document was prepared.
 // These values are primarily added to help with searching for interesting/relevant documents.
 type DocumentReferenceContext struct {
-	ID                *string           `json:"ID,omitempty"`
+	ID                *string           `json:"id,omitempty"`
 	Extension         []Extension       `json:"extension,omitempty"`
 	ModifierExtension []Extension       `json:"modifierExtension,omitempty"`
 	Encounter         []Reference       `json:"encounter,omitempty"`

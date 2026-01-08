@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // MedicinalProductPharmaceutical is documented here http://hl7.org/fhir/StructureDefinition/MedicinalProductPharmaceutical
 // A pharmaceutical product described in terms of its composition and dose form.
 type MedicinalProductPharmaceutical struct {
-	ID                    *string                                               `json:"ID,omitempty"`
+	ID                    *string                                               `json:"id,omitempty"`
 	Meta                  *Meta                                                 `json:"meta,omitempty"`
 	ImplicitRules         *string                                               `json:"implicitRules,omitempty"`
 	Language              *string                                               `json:"language,omitempty"`
@@ -24,7 +24,7 @@ type MedicinalProductPharmaceutical struct {
 
 // Characteristics e.g. a products onset of action.
 type MedicinalProductPharmaceuticalCharacteristics struct {
-	ID                *string          `json:"ID,omitempty"`
+	ID                *string          `json:"id,omitempty"`
 	Extension         []Extension      `json:"extension,omitempty"`
 	ModifierExtension []Extension      `json:"modifierExtension,omitempty"`
 	Code              CodeableConcept  `json:"code"`
@@ -33,7 +33,7 @@ type MedicinalProductPharmaceuticalCharacteristics struct {
 
 // The path by which the pharmaceutical product is taken into or makes contact with the body.
 type MedicinalProductPharmaceuticalRouteOfAdministration struct {
-	ID                        *string                                                            `json:"ID,omitempty"`
+	ID                        *string                                                            `json:"id,omitempty"`
 	Extension                 []Extension                                                        `json:"extension,omitempty"`
 	ModifierExtension         []Extension                                                        `json:"modifierExtension,omitempty"`
 	Code                      CodeableConcept                                                    `json:"code"`
@@ -47,7 +47,7 @@ type MedicinalProductPharmaceuticalRouteOfAdministration struct {
 
 // A species for which this route applies.
 type MedicinalProductPharmaceuticalRouteOfAdministrationTargetSpecies struct {
-	ID                *string                                                                            `json:"ID,omitempty"`
+	ID                *string                                                                            `json:"id,omitempty"`
 	Extension         []Extension                                                                        `json:"extension,omitempty"`
 	ModifierExtension []Extension                                                                        `json:"modifierExtension,omitempty"`
 	Code              CodeableConcept                                                                    `json:"code"`
@@ -56,7 +56,7 @@ type MedicinalProductPharmaceuticalRouteOfAdministrationTargetSpecies struct {
 
 // A species specific time during which consumption of animal product is not appropriate.
 type MedicinalProductPharmaceuticalRouteOfAdministrationTargetSpeciesWithdrawalPeriod struct {
-	ID                    *string         `json:"ID,omitempty"`
+	ID                    *string         `json:"id,omitempty"`
 	Extension             []Extension     `json:"extension,omitempty"`
 	ModifierExtension     []Extension     `json:"modifierExtension,omitempty"`
 	Tissue                CodeableConcept `json:"tissue"`

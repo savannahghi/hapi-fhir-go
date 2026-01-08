@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // MolecularSequence is documented here http://hl7.org/fhir/StructureDefinition/MolecularSequence
 // Raw data describing a biological sequence.
 type MolecularSequence struct {
-	ID                *string                             `json:"ID,omitempty"`
+	ID                *string                             `json:"id,omitempty"`
 	Meta              *Meta                               `json:"meta,omitempty"`
 	ImplicitRules     *string                             `json:"implicitRules,omitempty"`
 	Language          *string                             `json:"language,omitempty"`
@@ -33,7 +33,7 @@ type MolecularSequence struct {
 
 // A sequence that is used as a reference to describe variants that are present in a sequence analyzed.
 type MolecularSequenceReferenceSeq struct {
-	ID                  *string          `json:"ID,omitempty"`
+	ID                  *string          `json:"id,omitempty"`
 	Extension           []Extension      `json:"extension,omitempty"`
 	ModifierExtension   []Extension      `json:"modifierExtension,omitempty"`
 	Chromosome          *CodeableConcept `json:"chromosome,omitempty"`
@@ -49,7 +49,7 @@ type MolecularSequenceReferenceSeq struct {
 
 // The definition of variant here originates from Sequence ontology ([variant_of](http://www.sequenceontology.org/browser/current_svn/term/variant_of)). This element can represent amino acid or nucleic sequence change(including insertion,deletion,SNP,etc.)  It can represent some complex mutation or segment variation with the assist of CIGAR string.
 type MolecularSequenceVariant struct {
-	ID                *string     `json:"ID,omitempty"`
+	ID                *string     `json:"id,omitempty"`
 	Extension         []Extension `json:"extension,omitempty"`
 	ModifierExtension []Extension `json:"modifierExtension,omitempty"`
 	Start             *int        `json:"start,omitempty"`
@@ -62,7 +62,7 @@ type MolecularSequenceVariant struct {
 
 // An experimental feature attribute that defines the quality of the feature in a quantitative way, such as a phred quality score ([SO:0001686](http://www.sequenceontology.org/browser/current_svn/term/SO:0001686)).
 type MolecularSequenceQuality struct {
-	ID                *string                      `json:"ID,omitempty"`
+	ID                *string                      `json:"id,omitempty"`
 	Extension         []Extension                  `json:"extension,omitempty"`
 	ModifierExtension []Extension                  `json:"modifierExtension,omitempty"`
 	Type              string                       `json:"type"`
@@ -84,7 +84,7 @@ type MolecularSequenceQuality struct {
 
 // Receiver Operator Characteristic (ROC) Curve  to give sensitivity/specificity tradeoff.
 type MolecularSequenceQualityRoc struct {
-	ID                *string       `json:"ID,omitempty"`
+	ID                *string       `json:"id,omitempty"`
 	Extension         []Extension   `json:"extension,omitempty"`
 	ModifierExtension []Extension   `json:"modifierExtension,omitempty"`
 	Score             []int         `json:"score,omitempty"`
@@ -98,7 +98,7 @@ type MolecularSequenceQualityRoc struct {
 
 // Configurations of the external repository. The repository shall store target's observedSeq or records related with target's observedSeq.
 type MolecularSequenceRepository struct {
-	ID                *string     `json:"ID,omitempty"`
+	ID                *string     `json:"id,omitempty"`
 	Extension         []Extension `json:"extension,omitempty"`
 	ModifierExtension []Extension `json:"modifierExtension,omitempty"`
 	Type              string      `json:"type"`
@@ -111,7 +111,7 @@ type MolecularSequenceRepository struct {
 
 // Information about chromosome structure variation.
 type MolecularSequenceStructureVariant struct {
-	ID                *string                                 `json:"ID,omitempty"`
+	ID                *string                                 `json:"id,omitempty"`
 	Extension         []Extension                             `json:"extension,omitempty"`
 	ModifierExtension []Extension                             `json:"modifierExtension,omitempty"`
 	VariantType       *CodeableConcept                        `json:"variantType,omitempty"`
@@ -123,7 +123,7 @@ type MolecularSequenceStructureVariant struct {
 
 // Structural variant outer.
 type MolecularSequenceStructureVariantOuter struct {
-	ID                *string     `json:"ID,omitempty"`
+	ID                *string     `json:"id,omitempty"`
 	Extension         []Extension `json:"extension,omitempty"`
 	ModifierExtension []Extension `json:"modifierExtension,omitempty"`
 	Start             *int        `json:"start,omitempty"`
@@ -132,7 +132,7 @@ type MolecularSequenceStructureVariantOuter struct {
 
 // Structural variant inner.
 type MolecularSequenceStructureVariantInner struct {
-	ID                *string     `json:"ID,omitempty"`
+	ID                *string     `json:"id,omitempty"`
 	Extension         []Extension `json:"extension,omitempty"`
 	ModifierExtension []Extension `json:"modifierExtension,omitempty"`
 	Start             *int        `json:"start,omitempty"`

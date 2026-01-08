@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // HealthcareService is documented here http://hl7.org/fhir/StructureDefinition/HealthcareService
 // The details of a healthcare service available at a location.
 type HealthcareService struct {
-	ID                     *string                          `json:"ID,omitempty"`
+	ID                     *string                          `json:"id,omitempty"`
 	Meta                   *Meta                            `json:"meta,omitempty"`
 	ImplicitRules          *string                          `json:"implicitRules,omitempty"`
 	Language               *string                          `json:"language,omitempty"`
@@ -41,7 +41,7 @@ type HealthcareService struct {
 
 // Does this service have specific eligibility requirements that need to be met in order to use the service?
 type HealthcareServiceEligibility struct {
-	ID                *string          `json:"ID,omitempty"`
+	ID                *string          `json:"id,omitempty"`
 	Extension         []Extension      `json:"extension,omitempty"`
 	ModifierExtension []Extension      `json:"modifierExtension,omitempty"`
 	Code              *CodeableConcept `json:"code,omitempty"`
@@ -51,7 +51,7 @@ type HealthcareServiceEligibility struct {
 // A collection of times that the Service Site is available.
 // More detailed availability information may be provided in associated Schedule/Slot resources.
 type HealthcareServiceAvailableTime struct {
-	ID                 *string      `json:"ID,omitempty"`
+	ID                 *string      `json:"id,omitempty"`
 	Extension          []Extension  `json:"extension,omitempty"`
 	ModifierExtension  []Extension  `json:"modifierExtension,omitempty"`
 	DaysOfWeek         []DaysOfWeek `json:"daysOfWeek,omitempty"`
@@ -62,7 +62,7 @@ type HealthcareServiceAvailableTime struct {
 
 // The HealthcareService is not available during this period of time due to the provided reason.
 type HealthcareServiceNotAvailable struct {
-	ID                *string     `json:"ID,omitempty"`
+	ID                *string     `json:"id,omitempty"`
 	Extension         []Extension `json:"extension,omitempty"`
 	ModifierExtension []Extension `json:"modifierExtension,omitempty"`
 	Description       string      `json:"description"`

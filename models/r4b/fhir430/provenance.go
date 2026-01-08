@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // Provenance is documented here http://hl7.org/fhir/StructureDefinition/Provenance
 // Provenance of a resource is a record that describes entities and processes involved in producing and delivering or otherwise influencing that resource. Provenance provides a critical foundation for assessing authenticity, enabling trust, and allowing reproducibility. Provenance assertions are a form of contextual metadata and can themselves become important records with their own provenance. Provenance statement indicates clinical significance in terms of confidence in authenticity, reliability, and trustworthiness, integrity, and stage in lifecycle (e.g. Document Completion - has the artifact been legally authenticated), all of which may impact security, privacy, and trust policies.
 type Provenance struct {
-	ID                *string            `json:"ID,omitempty"`
+	ID                *string            `json:"id,omitempty"`
 	Meta              *Meta              `json:"meta,omitempty"`
 	ImplicitRules     *string            `json:"implicitRules,omitempty"`
 	Language          *string            `json:"language,omitempty"`
@@ -29,7 +29,7 @@ type Provenance struct {
 // An actor taking a role in an activity  for which it can be assigned some degree of responsibility for the activity taking place.
 // Several agents may be associated (i.e. has some responsibility for an activity) with an activity and vice-versa.
 type ProvenanceAgent struct {
-	ID                *string           `json:"ID,omitempty"`
+	ID                *string           `json:"id,omitempty"`
 	Extension         []Extension       `json:"extension,omitempty"`
 	ModifierExtension []Extension       `json:"modifierExtension,omitempty"`
 	Type              *CodeableConcept  `json:"type,omitempty"`
@@ -40,7 +40,7 @@ type ProvenanceAgent struct {
 
 // An entity used in this activity.
 type ProvenanceEntity struct {
-	ID                *string              `json:"ID,omitempty"`
+	ID                *string              `json:"id,omitempty"`
 	Extension         []Extension          `json:"extension,omitempty"`
 	ModifierExtension []Extension          `json:"modifierExtension,omitempty"`
 	Role              ProvenanceEntityRole `json:"role"`

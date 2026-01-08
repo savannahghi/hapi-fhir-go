@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // NamingSystem is documented here http://hl7.org/fhir/StructureDefinition/NamingSystem
 // A curated namespace that issues unique symbols within that namespace for the identification of concepts, people, devices, etc.  Represents a "System" used within the Identifier and Coding data types.
 type NamingSystem struct {
-	ID                *string                `json:"ID,omitempty"`
+	ID                *string                `json:"id,omitempty"`
 	Meta              *Meta                  `json:"meta,omitempty"`
 	ImplicitRules     *string                `json:"implicitRules,omitempty"`
 	Language          *string                `json:"language,omitempty"`
@@ -31,7 +31,7 @@ type NamingSystem struct {
 // Indicates how the system may be identified when referenced in electronic exchange.
 // Multiple identifiers may exist, either due to duplicate registration, regional rules, needs of different communication technologies, etc.
 type NamingSystemUniqueId struct {
-	ID                *string                    `json:"ID,omitempty"`
+	ID                *string                    `json:"id,omitempty"`
 	Extension         []Extension                `json:"extension,omitempty"`
 	ModifierExtension []Extension                `json:"modifierExtension,omitempty"`
 	Type              NamingSystemIdentifierType `json:"type"`

@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // Communication is documented here http://hl7.org/fhir/StructureDefinition/Communication
 // An occurrence of information being transmitted; e.g. an alert that was sent to a responsible provider, a public health agency that was notified about a reportable condition.
 type Communication struct {
-	ID                    *string                `json:"ID,omitempty"`
+	ID                    *string                `json:"id,omitempty"`
 	Meta                  *Meta                  `json:"meta,omitempty"`
 	ImplicitRules         *string                `json:"implicitRules,omitempty"`
 	Language              *string                `json:"language,omitempty"`
@@ -40,7 +40,7 @@ type Communication struct {
 
 // Text, attachment(s), or resource(s) that was communicated to the recipient.
 type CommunicationPayload struct {
-	ID                *string     `json:"ID,omitempty"`
+	ID                *string     `json:"id,omitempty"`
 	Extension         []Extension `json:"extension,omitempty"`
 	ModifierExtension []Extension `json:"modifierExtension,omitempty"`
 	ContentString     string      `json:"contentString"`

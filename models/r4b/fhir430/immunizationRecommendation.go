@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // ImmunizationRecommendation is documented here http://hl7.org/fhir/StructureDefinition/ImmunizationRecommendation
 // A patient's point-in-time set of recommendations (i.e. forecasting) according to a published schedule with optional supporting justification.
 type ImmunizationRecommendation struct {
-	ID                *string                                    `json:"ID,omitempty"`
+	ID                *string                                    `json:"id,omitempty"`
 	Meta              *Meta                                      `json:"meta,omitempty"`
 	ImplicitRules     *string                                    `json:"implicitRules,omitempty"`
 	Language          *string                                    `json:"language,omitempty"`
@@ -22,7 +22,7 @@ type ImmunizationRecommendation struct {
 
 // Vaccine administration recommendations.
 type ImmunizationRecommendationRecommendation struct {
-	ID                           *string                                                 `json:"ID,omitempty"`
+	ID                           *string                                                 `json:"id,omitempty"`
 	Extension                    []Extension                                             `json:"extension,omitempty"`
 	ModifierExtension            []Extension                                             `json:"modifierExtension,omitempty"`
 	VaccineCode                  []CodeableConcept                                       `json:"vaccineCode,omitempty"`
@@ -43,7 +43,7 @@ type ImmunizationRecommendationRecommendation struct {
 
 // Vaccine date recommendations.  For example, earliest date to administer, latest date to administer, etc.
 type ImmunizationRecommendationRecommendationDateCriterion struct {
-	ID                *string         `json:"ID,omitempty"`
+	ID                *string         `json:"id,omitempty"`
 	Extension         []Extension     `json:"extension,omitempty"`
 	ModifierExtension []Extension     `json:"modifierExtension,omitempty"`
 	Code              CodeableConcept `json:"code"`

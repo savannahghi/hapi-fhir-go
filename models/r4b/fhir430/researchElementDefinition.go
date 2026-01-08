@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // ResearchElementDefinition is documented here http://hl7.org/fhir/StructureDefinition/ResearchElementDefinition
 // The ResearchElementDefinition resource describes a "PICO" element that knowledge (evidence, assertion, recommendation) is about.
 type ResearchElementDefinition struct {
-	ID                     *string                                   `json:"ID,omitempty"`
+	ID                     *string                                   `json:"id,omitempty"`
 	Meta                   *Meta                                     `json:"meta,omitempty"`
 	ImplicitRules          *string                                   `json:"implicitRules,omitempty"`
 	Language               *string                                   `json:"language,omitempty"`
@@ -51,7 +51,7 @@ type ResearchElementDefinition struct {
 // A characteristic that defines the members of the research element. Multiple characteristics are applied with "and" semantics.
 // Characteristics can be defined flexibly to accommodate different use cases for membership criteria, ranging from simple codes, all the way to using an expression language to express the criteria.
 type ResearchElementDefinitionCharacteristic struct {
-	ID                                *string          `json:"ID,omitempty"`
+	ID                                *string          `json:"id,omitempty"`
 	Extension                         []Extension      `json:"extension,omitempty"`
 	ModifierExtension                 []Extension      `json:"modifierExtension,omitempty"`
 	DefinitionCodeableConcept         CodeableConcept  `json:"definitionCodeableConcept"`

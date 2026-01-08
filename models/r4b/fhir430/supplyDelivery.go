@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // SupplyDelivery is documented here http://hl7.org/fhir/StructureDefinition/SupplyDelivery
 // Record of delivery of what is supplied.
 type SupplyDelivery struct {
-	ID                 *string                     `json:"ID,omitempty"`
+	ID                 *string                     `json:"id,omitempty"`
 	Meta               *Meta                       `json:"meta,omitempty"`
 	ImplicitRules      *string                     `json:"implicitRules,omitempty"`
 	Language           *string                     `json:"language,omitempty"`
@@ -30,7 +30,7 @@ type SupplyDelivery struct {
 
 // The item that is being delivered or has been supplied.
 type SupplyDeliverySuppliedItem struct {
-	ID                  *string          `json:"ID,omitempty"`
+	ID                  *string          `json:"id,omitempty"`
 	Extension           []Extension      `json:"extension,omitempty"`
 	ModifierExtension   []Extension      `json:"modifierExtension,omitempty"`
 	Quantity            *Quantity        `json:"quantity,omitempty"`

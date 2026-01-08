@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // MedicationKnowledge is documented here http://hl7.org/fhir/StructureDefinition/MedicationKnowledge
 // Information about a medication that is used to support knowledge.
 type MedicationKnowledge struct {
-	ID                         *string                                         `json:"ID,omitempty"`
+	ID                         *string                                         `json:"id,omitempty"`
 	Meta                       *Meta                                           `json:"meta,omitempty"`
 	ImplicitRules              *string                                         `json:"implicitRules,omitempty"`
 	Language                   *string                                         `json:"language,omitempty"`
@@ -39,7 +39,7 @@ type MedicationKnowledge struct {
 
 // Associated or related knowledge about a medication.
 type MedicationKnowledgeRelatedMedicationKnowledge struct {
-	ID                *string         `json:"ID,omitempty"`
+	ID                *string         `json:"id,omitempty"`
 	Extension         []Extension     `json:"extension,omitempty"`
 	ModifierExtension []Extension     `json:"modifierExtension,omitempty"`
 	Type              CodeableConcept `json:"type"`
@@ -48,7 +48,7 @@ type MedicationKnowledgeRelatedMedicationKnowledge struct {
 
 // Associated documentation about the medication.
 type MedicationKnowledgeMonograph struct {
-	ID                *string          `json:"ID,omitempty"`
+	ID                *string          `json:"id,omitempty"`
 	Extension         []Extension      `json:"extension,omitempty"`
 	ModifierExtension []Extension      `json:"modifierExtension,omitempty"`
 	Type              *CodeableConcept `json:"type,omitempty"`
@@ -57,7 +57,7 @@ type MedicationKnowledgeMonograph struct {
 
 // Identifies a particular constituent of interest in the product.
 type MedicationKnowledgeIngredient struct {
-	ID                  *string         `json:"ID,omitempty"`
+	ID                  *string         `json:"id,omitempty"`
 	Extension           []Extension     `json:"extension,omitempty"`
 	ModifierExtension   []Extension     `json:"modifierExtension,omitempty"`
 	ItemCodeableConcept CodeableConcept `json:"itemCodeableConcept"`
@@ -68,7 +68,7 @@ type MedicationKnowledgeIngredient struct {
 
 // The price of the medication.
 type MedicationKnowledgeCost struct {
-	ID                *string         `json:"ID,omitempty"`
+	ID                *string         `json:"id,omitempty"`
 	Extension         []Extension     `json:"extension,omitempty"`
 	ModifierExtension []Extension     `json:"modifierExtension,omitempty"`
 	Type              CodeableConcept `json:"type"`
@@ -78,7 +78,7 @@ type MedicationKnowledgeCost struct {
 
 // The program under which the medication is reviewed.
 type MedicationKnowledgeMonitoringProgram struct {
-	ID                *string          `json:"ID,omitempty"`
+	ID                *string          `json:"id,omitempty"`
 	Extension         []Extension      `json:"extension,omitempty"`
 	ModifierExtension []Extension      `json:"modifierExtension,omitempty"`
 	Type              *CodeableConcept `json:"type,omitempty"`
@@ -87,7 +87,7 @@ type MedicationKnowledgeMonitoringProgram struct {
 
 // Guidelines for the administration of the medication.
 type MedicationKnowledgeAdministrationGuidelines struct {
-	ID                        *string                                                             `json:"ID,omitempty"`
+	ID                        *string                                                             `json:"id,omitempty"`
 	Extension                 []Extension                                                         `json:"extension,omitempty"`
 	ModifierExtension         []Extension                                                         `json:"modifierExtension,omitempty"`
 	Dosage                    []MedicationKnowledgeAdministrationGuidelinesDosage                 `json:"dosage,omitempty"`
@@ -98,7 +98,7 @@ type MedicationKnowledgeAdministrationGuidelines struct {
 
 // Dosage for the medication for the specific guidelines.
 type MedicationKnowledgeAdministrationGuidelinesDosage struct {
-	ID                *string         `json:"ID,omitempty"`
+	ID                *string         `json:"id,omitempty"`
 	Extension         []Extension     `json:"extension,omitempty"`
 	ModifierExtension []Extension     `json:"modifierExtension,omitempty"`
 	Type              CodeableConcept `json:"type"`
@@ -107,7 +107,7 @@ type MedicationKnowledgeAdministrationGuidelinesDosage struct {
 
 // Characteristics of the patient that are relevant to the administration guidelines (for example, height, weight, gender, etc.).
 type MedicationKnowledgeAdministrationGuidelinesPatientCharacteristics struct {
-	ID                            *string         `json:"ID,omitempty"`
+	ID                            *string         `json:"id,omitempty"`
 	Extension                     []Extension     `json:"extension,omitempty"`
 	ModifierExtension             []Extension     `json:"modifierExtension,omitempty"`
 	CharacteristicCodeableConcept CodeableConcept `json:"characteristicCodeableConcept"`
@@ -117,7 +117,7 @@ type MedicationKnowledgeAdministrationGuidelinesPatientCharacteristics struct {
 
 // Categorization of the medication within a formulary or classification system.
 type MedicationKnowledgeMedicineClassification struct {
-	ID                *string           `json:"ID,omitempty"`
+	ID                *string           `json:"id,omitempty"`
 	Extension         []Extension       `json:"extension,omitempty"`
 	ModifierExtension []Extension       `json:"modifierExtension,omitempty"`
 	Type              CodeableConcept   `json:"type"`
@@ -126,7 +126,7 @@ type MedicationKnowledgeMedicineClassification struct {
 
 // Information that only applies to packages (not products).
 type MedicationKnowledgePackaging struct {
-	ID                *string          `json:"ID,omitempty"`
+	ID                *string          `json:"id,omitempty"`
 	Extension         []Extension      `json:"extension,omitempty"`
 	ModifierExtension []Extension      `json:"modifierExtension,omitempty"`
 	Type              *CodeableConcept `json:"type,omitempty"`
@@ -135,7 +135,7 @@ type MedicationKnowledgePackaging struct {
 
 // Specifies descriptive properties of the medicine, such as color, shape, imprints, etc.
 type MedicationKnowledgeDrugCharacteristic struct {
-	ID                   *string          `json:"ID,omitempty"`
+	ID                   *string          `json:"id,omitempty"`
 	Extension            []Extension      `json:"extension,omitempty"`
 	ModifierExtension    []Extension      `json:"modifierExtension,omitempty"`
 	Type                 *CodeableConcept `json:"type,omitempty"`
@@ -147,7 +147,7 @@ type MedicationKnowledgeDrugCharacteristic struct {
 
 // Regulatory information about a medication.
 type MedicationKnowledgeRegulatory struct {
-	ID                  *string                                     `json:"ID,omitempty"`
+	ID                  *string                                     `json:"id,omitempty"`
 	Extension           []Extension                                 `json:"extension,omitempty"`
 	ModifierExtension   []Extension                                 `json:"modifierExtension,omitempty"`
 	RegulatoryAuthority Reference                                   `json:"regulatoryAuthority"`
@@ -158,7 +158,7 @@ type MedicationKnowledgeRegulatory struct {
 
 // Specifies if changes are allowed when dispensing a medication from a regulatory perspective.
 type MedicationKnowledgeRegulatorySubstitution struct {
-	ID                *string         `json:"ID,omitempty"`
+	ID                *string         `json:"id,omitempty"`
 	Extension         []Extension     `json:"extension,omitempty"`
 	ModifierExtension []Extension     `json:"modifierExtension,omitempty"`
 	Type              CodeableConcept `json:"type"`
@@ -167,7 +167,7 @@ type MedicationKnowledgeRegulatorySubstitution struct {
 
 // Specifies the schedule of a medication in jurisdiction.
 type MedicationKnowledgeRegulatorySchedule struct {
-	ID                *string         `json:"ID,omitempty"`
+	ID                *string         `json:"id,omitempty"`
 	Extension         []Extension     `json:"extension,omitempty"`
 	ModifierExtension []Extension     `json:"modifierExtension,omitempty"`
 	Schedule          CodeableConcept `json:"schedule"`
@@ -175,7 +175,7 @@ type MedicationKnowledgeRegulatorySchedule struct {
 
 // The maximum number of units of the medication that can be dispensed in a period.
 type MedicationKnowledgeRegulatoryMaxDispense struct {
-	ID                *string     `json:"ID,omitempty"`
+	ID                *string     `json:"id,omitempty"`
 	Extension         []Extension `json:"extension,omitempty"`
 	ModifierExtension []Extension `json:"modifierExtension,omitempty"`
 	Quantity          Quantity    `json:"quantity"`
@@ -184,7 +184,7 @@ type MedicationKnowledgeRegulatoryMaxDispense struct {
 
 // The time course of drug absorption, distribution, metabolism and excretion of a medication from the body.
 type MedicationKnowledgeKinetics struct {
-	ID                *string     `json:"ID,omitempty"`
+	ID                *string     `json:"id,omitempty"`
 	Extension         []Extension `json:"extension,omitempty"`
 	ModifierExtension []Extension `json:"modifierExtension,omitempty"`
 	AreaUnderCurve    []Quantity  `json:"areaUnderCurve,omitempty"`

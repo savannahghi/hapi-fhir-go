@@ -5,7 +5,7 @@ import "encoding/json"
 // Patient is documented here http://hl7.org/fhir/StructureDefinition/Patient
 // Demographics and other administrative information about an individual or animal receiving care or other health-related services.
 type Patient struct {
-	ID                   *string                `json:"ID,omitempty"`
+	ID                   *string                `json:"id,omitempty"`
 	Meta                 *Meta                  `json:"meta,omitempty"`
 	ImplicitRules        *string                `json:"implicitRules,omitempty"`
 	Language             *string                `json:"language,omitempty"`
@@ -36,7 +36,7 @@ type Patient struct {
 // A contact party (e.g. guardian, partner, friend) for the patient.
 // Contact covers all kinds of contact parties: family members, business contacts, guardians, caregivers. Not applicable to register pedigree and family ties beyond use of having contact.
 type PatientContact struct {
-	ID                *string               `json:"ID,omitempty"`
+	ID                *string               `json:"id,omitempty"`
 	Extension         []Extension           `json:"extension,omitempty"`
 	ModifierExtension []Extension           `json:"modifierExtension,omitempty"`
 	Relationship      []CodeableConcept     `json:"relationship,omitempty"`
@@ -51,7 +51,7 @@ type PatientContact struct {
 // A language which may be used to communicate with the patient about his or her health.
 // If no language is specified, this *implies* that the default local language is spoken.  If you need to convey proficiency for multiple modes, then you need multiple Patient.Communication associations.   For animals, language is not a relevant field, and should be absent from the instance. If the Patient does not speak the default local language, then the Interpreter Required Standard can be used to explicitly declare that an interpreter is required.
 type PatientCommunication struct {
-	ID                *string         `json:"ID,omitempty"`
+	ID                *string         `json:"id,omitempty"`
 	Extension         []Extension     `json:"extension,omitempty"`
 	ModifierExtension []Extension     `json:"modifierExtension,omitempty"`
 	Language          CodeableConcept `json:"language"`
@@ -61,7 +61,7 @@ type PatientCommunication struct {
 // Link to another patient resource that concerns the same actual patient.
 // There is no assumption that linked patient records have mutual links.
 type PatientLink struct {
-	ID                *string     `json:"ID,omitempty"`
+	ID                *string     `json:"id,omitempty"`
 	Extension         []Extension `json:"extension,omitempty"`
 	ModifierExtension []Extension `json:"modifierExtension,omitempty"`
 	Other             Reference   `json:"other"`

@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // Linkage is documented here http://hl7.org/fhir/StructureDefinition/Linkage
 // Identifies two or more records (resource instances) that refer to the same real-world "occurrence".
 type Linkage struct {
-	ID                *string           `json:"ID,omitempty"`
+	ID                *string           `json:"id,omitempty"`
 	Meta              *Meta             `json:"meta,omitempty"`
 	ImplicitRules     *string           `json:"implicitRules,omitempty"`
 	Language          *string           `json:"language,omitempty"`
@@ -20,7 +20,7 @@ type Linkage struct {
 
 // Identifies which record considered as the reference to the same real-world occurrence as well as how the items should be evaluated within the collection of linked items.
 type LinkageItem struct {
-	ID                *string     `json:"ID,omitempty"`
+	ID                *string     `json:"id,omitempty"`
 	Extension         []Extension `json:"extension,omitempty"`
 	ModifierExtension []Extension `json:"modifierExtension,omitempty"`
 	Type              LinkageType `json:"type"`

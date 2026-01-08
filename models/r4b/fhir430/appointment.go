@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // Appointment is documented here http://hl7.org/fhir/StructureDefinition/Appointment
 // A booking of a healthcare event among patient(s), practitioner(s), related person(s) and/or device(s) for a specific date/time. This may result in one or more Encounter(s).
 type Appointment struct {
-	ID                    *string                  `json:"ID,omitempty"`
+	ID                    *string                  `json:"id,omitempty"`
 	Meta                  *Meta                    `json:"meta,omitempty"`
 	ImplicitRules         *string                  `json:"implicitRules,omitempty"`
 	Language              *string                  `json:"language,omitempty"`
@@ -39,7 +39,7 @@ type Appointment struct {
 
 // List of participants involved in the appointment.
 type AppointmentParticipant struct {
-	ID                *string              `json:"ID,omitempty"`
+	ID                *string              `json:"id,omitempty"`
 	Extension         []Extension          `json:"extension,omitempty"`
 	ModifierExtension []Extension          `json:"modifierExtension,omitempty"`
 	Type              []CodeableConcept    `json:"type,omitempty"`

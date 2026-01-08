@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // EnrollmentRequest is documented here http://hl7.org/fhir/StructureDefinition/EnrollmentRequest
 // This resource provides the insurance enrollment details to the insurer regarding a specified coverage.
 type EnrollmentRequest struct {
-	ID                *string                       `json:"ID,omitempty"`
+	ID                *string                       `json:"id,omitempty"`
 	Meta              *Meta                         `json:"meta,omitempty"`
 	ImplicitRules     *string                       `json:"implicitRules,omitempty"`
 	Language          *string                       `json:"language,omitempty"`

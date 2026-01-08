@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // EventDefinition is documented here http://hl7.org/fhir/StructureDefinition/EventDefinition
 // The EventDefinition resource provides a reusable description of when a particular event can occur.
 type EventDefinition struct {
-	ID                     *string             `json:"ID,omitempty"`
+	ID                     *string             `json:"id,omitempty"`
 	Meta                   *Meta               `json:"meta,omitempty"`
 	ImplicitRules          *string             `json:"implicitRules,omitempty"`
 	Language               *string             `json:"language,omitempty"`

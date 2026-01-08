@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // StructureMap is documented here http://hl7.org/fhir/StructureDefinition/StructureMap
 // A Map of relationships between 2 structures that can be used to transform data.
 type StructureMap struct {
-	ID                *string                 `json:"ID,omitempty"`
+	ID                *string                 `json:"id,omitempty"`
 	Meta              *Meta                   `json:"meta,omitempty"`
 	ImplicitRules     *string                 `json:"implicitRules,omitempty"`
 	Language          *string                 `json:"language,omitempty"`
@@ -35,7 +35,7 @@ type StructureMap struct {
 // A structure definition used by this map. The structure definition may describe instances that are converted, or the instances that are produced.
 // It is not necessary for a structure map to identify any dependent structures, though not listing them may restrict its usefulness.
 type StructureMapStructure struct {
-	ID                *string               `json:"ID,omitempty"`
+	ID                *string               `json:"id,omitempty"`
 	Extension         []Extension           `json:"extension,omitempty"`
 	ModifierExtension []Extension           `json:"modifierExtension,omitempty"`
 	Url               string                `json:"url"`
@@ -46,7 +46,7 @@ type StructureMapStructure struct {
 
 // Organizes the mapping into manageable chunks for human review/ease of maintenance.
 type StructureMapGroup struct {
-	ID                *string                   `json:"ID,omitempty"`
+	ID                *string                   `json:"id,omitempty"`
 	Extension         []Extension               `json:"extension,omitempty"`
 	ModifierExtension []Extension               `json:"modifierExtension,omitempty"`
 	Name              string                    `json:"name"`
@@ -60,7 +60,7 @@ type StructureMapGroup struct {
 // A name assigned to an instance of data. The instance must be provided when the mapping is invoked.
 // If no inputs are named, then the entry mappings are type based.
 type StructureMapGroupInput struct {
-	ID                *string               `json:"ID,omitempty"`
+	ID                *string               `json:"id,omitempty"`
 	Extension         []Extension           `json:"extension,omitempty"`
 	ModifierExtension []Extension           `json:"modifierExtension,omitempty"`
 	Name              string                `json:"name"`
@@ -71,7 +71,7 @@ type StructureMapGroupInput struct {
 
 // Transform Rule from source to target.
 type StructureMapGroupRule struct {
-	ID                *string                          `json:"ID,omitempty"`
+	ID                *string                          `json:"id,omitempty"`
 	Extension         []Extension                      `json:"extension,omitempty"`
 	ModifierExtension []Extension                      `json:"modifierExtension,omitempty"`
 	Name              string                           `json:"name"`
@@ -84,7 +84,7 @@ type StructureMapGroupRule struct {
 
 // Source inputs to the mapping.
 type StructureMapGroupRuleSource struct {
-	ID                              *string                     `json:"ID,omitempty"`
+	ID                              *string                     `json:"id,omitempty"`
 	Extension                       []Extension                 `json:"extension,omitempty"`
 	ModifierExtension               []Extension                 `json:"modifierExtension,omitempty"`
 	Context                         string                      `json:"context"`
@@ -151,7 +151,7 @@ type StructureMapGroupRuleSource struct {
 
 // Content to create because of this mapping rule.
 type StructureMapGroupRuleTarget struct {
-	ID                *string                                `json:"ID,omitempty"`
+	ID                *string                                `json:"id,omitempty"`
 	Extension         []Extension                            `json:"extension,omitempty"`
 	ModifierExtension []Extension                            `json:"modifierExtension,omitempty"`
 	Context           *string                                `json:"context,omitempty"`
@@ -166,7 +166,7 @@ type StructureMapGroupRuleTarget struct {
 
 // Parameters to the transform.
 type StructureMapGroupRuleTargetParameter struct {
-	ID                *string     `json:"ID,omitempty"`
+	ID                *string     `json:"id,omitempty"`
 	Extension         []Extension `json:"extension,omitempty"`
 	ModifierExtension []Extension `json:"modifierExtension,omitempty"`
 	ValueId           string      `json:"valueId"`
@@ -178,7 +178,7 @@ type StructureMapGroupRuleTargetParameter struct {
 
 // Which other rules to apply in the context of this rule.
 type StructureMapGroupRuleDependent struct {
-	ID                *string     `json:"ID,omitempty"`
+	ID                *string     `json:"id,omitempty"`
 	Extension         []Extension `json:"extension,omitempty"`
 	ModifierExtension []Extension `json:"modifierExtension,omitempty"`
 	Name              string      `json:"name"`

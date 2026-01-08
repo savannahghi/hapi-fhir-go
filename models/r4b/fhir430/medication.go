@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // Medication is documented here http://hl7.org/fhir/StructureDefinition/Medication
 // This resource is primarily used for the identification and definition of a medication for the purposes of prescribing, dispensing, and administering a medication as well as for making statements about medication use.
 type Medication struct {
-	ID                *string                `json:"ID,omitempty"`
+	ID                *string                `json:"id,omitempty"`
 	Meta              *Meta                  `json:"meta,omitempty"`
 	ImplicitRules     *string                `json:"implicitRules,omitempty"`
 	Language          *string                `json:"language,omitempty"`
@@ -26,7 +26,7 @@ type Medication struct {
 // Identifies a particular constituent of interest in the product.
 // The ingredients need not be a complete list.  If an ingredient is not specified, this does not indicate whether an ingredient is present or absent.  If an ingredient is specified it does not mean that all ingredients are specified.  It is possible to specify both inactive and active ingredients.
 type MedicationIngredient struct {
-	ID                  *string         `json:"ID,omitempty"`
+	ID                  *string         `json:"id,omitempty"`
 	Extension           []Extension     `json:"extension,omitempty"`
 	ModifierExtension   []Extension     `json:"modifierExtension,omitempty"`
 	ItemCodeableConcept CodeableConcept `json:"itemCodeableConcept"`
@@ -37,7 +37,7 @@ type MedicationIngredient struct {
 
 // Information that only applies to packages (not products).
 type MedicationBatch struct {
-	ID                *string     `json:"ID,omitempty"`
+	ID                *string     `json:"id,omitempty"`
 	Extension         []Extension `json:"extension,omitempty"`
 	ModifierExtension []Extension `json:"modifierExtension,omitempty"`
 	LotNumber         *string     `json:"lotNumber,omitempty"`

@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // Composition is documented here http://hl7.org/fhir/StructureDefinition/Composition
 // A set of healthcare-related information that is assembled together into a single logical package that provides a single coherent statement of meaning, establishes its own context and that has clinical attestation with regard to who is making the statement. A Composition defines the structure and narrative content necessary for a document. However, a Composition alone does not constitute a document. Rather, the Composition must be the first entry in a Bundle where Bundle.type=document, and any other resources referenced from Composition must be included as subsequent entries in the Bundle (for example Patient, Practitioner, Encounter, etc.).
 type Composition struct {
-	ID                *string                `json:"ID,omitempty"`
+	ID                *string                `json:"id,omitempty"`
 	Meta              *Meta                  `json:"meta,omitempty"`
 	ImplicitRules     *string                `json:"implicitRules,omitempty"`
 	Language          *string                `json:"language,omitempty"`
@@ -33,7 +33,7 @@ type Composition struct {
 // A participant who has attested to the accuracy of the composition/document.
 // Only list each attester once.
 type CompositionAttester struct {
-	ID                *string                    `json:"ID,omitempty"`
+	ID                *string                    `json:"id,omitempty"`
 	Extension         []Extension                `json:"extension,omitempty"`
 	ModifierExtension []Extension                `json:"modifierExtension,omitempty"`
 	Mode              CompositionAttestationMode `json:"mode"`
@@ -44,7 +44,7 @@ type CompositionAttester struct {
 // Relationships that this composition has with other compositions or documents that already exist.
 // A document is a version specific composition.
 type CompositionRelatesTo struct {
-	ID                *string                  `json:"ID,omitempty"`
+	ID                *string                  `json:"id,omitempty"`
 	Extension         []Extension              `json:"extension,omitempty"`
 	ModifierExtension []Extension              `json:"modifierExtension,omitempty"`
 	Code              DocumentRelationshipType `json:"code"`
@@ -55,7 +55,7 @@ type CompositionRelatesTo struct {
 // The clinical service, such as a colonoscopy or an appendectomy, being documented.
 // The event needs to be consistent with the type element, though can provide further information if desired.
 type CompositionEvent struct {
-	ID                *string           `json:"ID,omitempty"`
+	ID                *string           `json:"id,omitempty"`
 	Extension         []Extension       `json:"extension,omitempty"`
 	ModifierExtension []Extension       `json:"modifierExtension,omitempty"`
 	Code              []CodeableConcept `json:"code,omitempty"`
@@ -65,7 +65,7 @@ type CompositionEvent struct {
 
 // The root of the sections that make up the composition.
 type CompositionSection struct {
-	ID                *string              `json:"ID,omitempty"`
+	ID                *string              `json:"id,omitempty"`
 	Extension         []Extension          `json:"extension,omitempty"`
 	ModifierExtension []Extension          `json:"modifierExtension,omitempty"`
 	Title             *string              `json:"title,omitempty"`

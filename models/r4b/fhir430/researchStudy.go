@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // ResearchStudy is documented here http://hl7.org/fhir/StructureDefinition/ResearchStudy
 // A process where a researcher or organization plans and then executes a series of steps intended to increase the field of healthcare-related knowledge.  This includes studies of safety, efficacy, comparative effectiveness and other information about medications, devices, therapies and other interventional and investigative techniques.  A ResearchStudy involves the gathering of information about human or animal subjects.
 type ResearchStudy struct {
-	ID                    *string                  `json:"ID,omitempty"`
+	ID                    *string                  `json:"id,omitempty"`
 	Meta                  *Meta                    `json:"meta,omitempty"`
 	ImplicitRules         *string                  `json:"implicitRules,omitempty"`
 	Language              *string                  `json:"language,omitempty"`
@@ -41,7 +41,7 @@ type ResearchStudy struct {
 
 // Describes an expected sequence of events for one of the participants of a study.  E.g. Exposure to drug A, wash-out, exposure to drug B, wash-out, follow-up.
 type ResearchStudyArm struct {
-	ID                *string          `json:"ID,omitempty"`
+	ID                *string          `json:"id,omitempty"`
 	Extension         []Extension      `json:"extension,omitempty"`
 	ModifierExtension []Extension      `json:"modifierExtension,omitempty"`
 	Name              string           `json:"name"`
@@ -51,7 +51,7 @@ type ResearchStudyArm struct {
 
 // A goal that the study is aiming to achieve in terms of a scientific question to be answered by the analysis of data collected during the study.
 type ResearchStudyObjective struct {
-	ID                *string          `json:"ID,omitempty"`
+	ID                *string          `json:"id,omitempty"`
 	Extension         []Extension      `json:"extension,omitempty"`
 	ModifierExtension []Extension      `json:"modifierExtension,omitempty"`
 	Name              *string          `json:"name,omitempty"`

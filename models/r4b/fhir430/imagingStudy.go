@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // ImagingStudy is documented here http://hl7.org/fhir/StructureDefinition/ImagingStudy
 // Representation of the content produced in a DICOM imaging study. A study comprises a set of series, each of which includes a set of Service-Object Pair Instances (SOP Instances - images or other data) acquired or produced in a common context.  A series is of only one modality (e.g. X-ray, CT, MR, ultrasound), but a study may have multiple series of different modalities.
 type ImagingStudy struct {
-	ID                 *string              `json:"ID,omitempty"`
+	ID                 *string              `json:"id,omitempty"`
 	Meta               *Meta                `json:"meta,omitempty"`
 	ImplicitRules      *string              `json:"implicitRules,omitempty"`
 	Language           *string              `json:"language,omitempty"`
@@ -37,7 +37,7 @@ type ImagingStudy struct {
 
 // Each study has one or more series of images or other content.
 type ImagingStudySeries struct {
-	ID                *string                       `json:"ID,omitempty"`
+	ID                *string                       `json:"id,omitempty"`
 	Extension         []Extension                   `json:"extension,omitempty"`
 	ModifierExtension []Extension                   `json:"modifierExtension,omitempty"`
 	Uid               string                        `json:"uid"`
@@ -57,7 +57,7 @@ type ImagingStudySeries struct {
 // Indicates who or what performed the series and how they were involved.
 // If the person who performed the series is not known, their Organization may be recorded. A patient, or related person, may be the performer, e.g. for patient-captured images.
 type ImagingStudySeriesPerformer struct {
-	ID                *string          `json:"ID,omitempty"`
+	ID                *string          `json:"id,omitempty"`
 	Extension         []Extension      `json:"extension,omitempty"`
 	ModifierExtension []Extension      `json:"modifierExtension,omitempty"`
 	Function          *CodeableConcept `json:"function,omitempty"`
@@ -66,7 +66,7 @@ type ImagingStudySeriesPerformer struct {
 
 // A single SOP instance within the series, e.g. an image, or presentation state.
 type ImagingStudySeriesInstance struct {
-	ID                *string     `json:"ID,omitempty"`
+	ID                *string     `json:"id,omitempty"`
 	Extension         []Extension `json:"extension,omitempty"`
 	ModifierExtension []Extension `json:"modifierExtension,omitempty"`
 	Uid               string      `json:"uid"`

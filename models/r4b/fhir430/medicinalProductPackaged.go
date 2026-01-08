@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // MedicinalProductPackaged is documented here http://hl7.org/fhir/StructureDefinition/MedicinalProductPackaged
 // A medicinal product in a container or package.
 type MedicinalProductPackaged struct {
-	ID                     *string                                   `json:"ID,omitempty"`
+	ID                     *string                                   `json:"id,omitempty"`
 	Meta                   *Meta                                     `json:"meta,omitempty"`
 	ImplicitRules          *string                                   `json:"implicitRules,omitempty"`
 	Language               *string                                   `json:"language,omitempty"`
@@ -26,7 +26,7 @@ type MedicinalProductPackaged struct {
 
 // Batch numbering.
 type MedicinalProductPackagedBatchIdentifier struct {
-	ID                 *string     `json:"ID,omitempty"`
+	ID                 *string     `json:"id,omitempty"`
 	Extension          []Extension `json:"extension,omitempty"`
 	ModifierExtension  []Extension `json:"modifierExtension,omitempty"`
 	OuterPackaging     Identifier  `json:"outerPackaging"`
@@ -35,7 +35,7 @@ type MedicinalProductPackagedBatchIdentifier struct {
 
 // A packaging item, as a contained for medicine, possibly with other packaging items within.
 type MedicinalProductPackagedPackageItem struct {
-	ID                      *string                               `json:"ID,omitempty"`
+	ID                      *string                               `json:"id,omitempty"`
 	Extension               []Extension                           `json:"extension,omitempty"`
 	ModifierExtension       []Extension                           `json:"modifierExtension,omitempty"`
 	Identifier              []Identifier                          `json:"identifier,omitempty"`

@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // PaymentNotice is documented here http://hl7.org/fhir/StructureDefinition/PaymentNotice
 // This resource provides the status of the payment for goods and services rendered, and the request and response resource references.
 type PaymentNotice struct {
-	ID                *string                      `json:"ID,omitempty"`
+	ID                *string                      `json:"id,omitempty"`
 	Meta              *Meta                        `json:"meta,omitempty"`
 	ImplicitRules     *string                      `json:"implicitRules,omitempty"`
 	Language          *string                      `json:"language,omitempty"`

@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // Timing is documented here http://hl7.org/fhir/StructureDefinition/Timing
 // Base StructureDefinition for Timing Type: Specifies an event that may occur multiple times. Timing schedules are used to record when things are planned, expected or requested to occur. The most common usage is in dosage instructions for medications. They are also used when planning care of various kinds, and may be used for reporting the schedule to which past regular activities were carried out.
 type Timing struct {
-	ID                *string          `json:"ID,omitempty"`
+	ID                *string          `json:"id,omitempty"`
 	Extension         []Extension      `json:"extension,omitempty"`
 	ModifierExtension []Extension      `json:"modifierExtension,omitempty"`
 	Event             []string         `json:"event,omitempty"`
@@ -15,7 +15,7 @@ type Timing struct {
 
 // A set of rules that describe when the event is scheduled.
 type TimingRepeat struct {
-	ID             *string      `json:"ID,omitempty"`
+	ID             *string      `json:"id,omitempty"`
 	Extension      []Extension  `json:"extension,omitempty"`
 	BoundsDuration *Duration    `json:"boundsDuration,omitempty"`
 	BoundsRange    *Range       `json:"boundsRange,omitempty"`

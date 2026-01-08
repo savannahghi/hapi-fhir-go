@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // List is documented here http://hl7.org/fhir/StructureDefinition/List
 // A list is a curated collection of resources.
 type List struct {
-	ID                *string           `json:"ID,omitempty"`
+	ID                *string           `json:"id,omitempty"`
 	Meta              *Meta             `json:"meta,omitempty"`
 	ImplicitRules     *string           `json:"implicitRules,omitempty"`
 	Language          *string           `json:"language,omitempty"`
@@ -31,7 +31,7 @@ type List struct {
 // Entries in this list.
 // If there are no entries in the list, an emptyReason SHOULD be provided.
 type ListEntry struct {
-	ID                *string          `json:"ID,omitempty"`
+	ID                *string          `json:"id,omitempty"`
 	Extension         []Extension      `json:"extension,omitempty"`
 	ModifierExtension []Extension      `json:"modifierExtension,omitempty"`
 	Flag              *CodeableConcept `json:"flag,omitempty"`

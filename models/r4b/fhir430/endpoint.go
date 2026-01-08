@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // Endpoint is documented here http://hl7.org/fhir/StructureDefinition/Endpoint
 // The technical details of an endpoint that can be used for electronic services, such as for web services providing XDS.b or a REST endpoint for another FHIR server. This may include any security context information.
 type Endpoint struct {
-	ID                   *string           `json:"ID,omitempty"`
+	ID                   *string           `json:"id,omitempty"`
 	Meta                 *Meta             `json:"meta,omitempty"`
 	ImplicitRules        *string           `json:"implicitRules,omitempty"`
 	Language             *string           `json:"language,omitempty"`

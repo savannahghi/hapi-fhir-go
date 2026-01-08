@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // Specimen is documented here http://hl7.org/fhir/StructureDefinition/Specimen
 // A sample to be used for analysis.
 type Specimen struct {
-	ID                  *string              `json:"ID,omitempty"`
+	ID                  *string              `json:"id,omitempty"`
 	Meta                *Meta                `json:"meta,omitempty"`
 	ImplicitRules       *string              `json:"implicitRules,omitempty"`
 	Language            *string              `json:"language,omitempty"`
@@ -30,7 +30,7 @@ type Specimen struct {
 
 // Details concerning the specimen collection.
 type SpecimenCollection struct {
-	ID                           *string          `json:"ID,omitempty"`
+	ID                           *string          `json:"id,omitempty"`
 	Extension                    []Extension      `json:"extension,omitempty"`
 	ModifierExtension            []Extension      `json:"modifierExtension,omitempty"`
 	Collector                    *Reference       `json:"collector,omitempty"`
@@ -46,7 +46,7 @@ type SpecimenCollection struct {
 
 // Details concerning processing and processing steps for the specimen.
 type SpecimenProcessing struct {
-	ID                *string          `json:"ID,omitempty"`
+	ID                *string          `json:"id,omitempty"`
 	Extension         []Extension      `json:"extension,omitempty"`
 	ModifierExtension []Extension      `json:"modifierExtension,omitempty"`
 	Description       *string          `json:"description,omitempty"`
@@ -58,7 +58,7 @@ type SpecimenProcessing struct {
 
 // The container holding the specimen.  The recursive nature of containers; i.e. blood in tube in tray in rack is not addressed here.
 type SpecimenContainer struct {
-	ID                      *string          `json:"ID,omitempty"`
+	ID                      *string          `json:"id,omitempty"`
 	Extension               []Extension      `json:"extension,omitempty"`
 	ModifierExtension       []Extension      `json:"modifierExtension,omitempty"`
 	Identifier              []Identifier     `json:"identifier,omitempty"`

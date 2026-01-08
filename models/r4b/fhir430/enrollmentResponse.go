@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // EnrollmentResponse is documented here http://hl7.org/fhir/StructureDefinition/EnrollmentResponse
 // This resource provides enrollment and plan details from the processing of an EnrollmentRequest resource.
 type EnrollmentResponse struct {
-	ID                *string                       `json:"ID,omitempty"`
+	ID                *string                       `json:"id,omitempty"`
 	Meta              *Meta                         `json:"meta,omitempty"`
 	ImplicitRules     *string                       `json:"implicitRules,omitempty"`
 	Language          *string                       `json:"language,omitempty"`

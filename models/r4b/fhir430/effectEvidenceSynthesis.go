@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // EffectEvidenceSynthesis is documented here http://hl7.org/fhir/StructureDefinition/EffectEvidenceSynthesis
 // The EffectEvidenceSynthesis resource describes the difference in an outcome between exposures states in a population where the effect estimate is derived from a combination of research studies.
 type EffectEvidenceSynthesis struct {
-	ID                  *string                                    `json:"ID,omitempty"`
+	ID                  *string                                    `json:"id,omitempty"`
 	Meta                *Meta                                      `json:"meta,omitempty"`
 	ImplicitRules       *string                                    `json:"implicitRules,omitempty"`
 	Language            *string                                    `json:"language,omitempty"`
@@ -49,7 +49,7 @@ type EffectEvidenceSynthesis struct {
 
 // A description of the size of the sample involved in the synthesis.
 type EffectEvidenceSynthesisSampleSize struct {
-	ID                   *string     `json:"ID,omitempty"`
+	ID                   *string     `json:"id,omitempty"`
 	Extension            []Extension `json:"extension,omitempty"`
 	ModifierExtension    []Extension `json:"modifierExtension,omitempty"`
 	Description          *string     `json:"description,omitempty"`
@@ -59,7 +59,7 @@ type EffectEvidenceSynthesisSampleSize struct {
 
 // A description of the results for each exposure considered in the effect estimate.
 type EffectEvidenceSynthesisResultsByExposure struct {
-	ID                    *string          `json:"ID,omitempty"`
+	ID                    *string          `json:"id,omitempty"`
 	Extension             []Extension      `json:"extension,omitempty"`
 	ModifierExtension     []Extension      `json:"modifierExtension,omitempty"`
 	Description           *string          `json:"description,omitempty"`
@@ -70,7 +70,7 @@ type EffectEvidenceSynthesisResultsByExposure struct {
 
 // The estimated effect of the exposure variant.
 type EffectEvidenceSynthesisEffectEstimate struct {
-	ID                *string                                                  `json:"ID,omitempty"`
+	ID                *string                                                  `json:"id,omitempty"`
 	Extension         []Extension                                              `json:"extension,omitempty"`
 	ModifierExtension []Extension                                              `json:"modifierExtension,omitempty"`
 	Description       *string                                                  `json:"description,omitempty"`
@@ -83,7 +83,7 @@ type EffectEvidenceSynthesisEffectEstimate struct {
 
 // A description of the precision of the estimate for the effect.
 type EffectEvidenceSynthesisEffectEstimatePrecisionEstimate struct {
-	ID                *string          `json:"ID,omitempty"`
+	ID                *string          `json:"id,omitempty"`
 	Extension         []Extension      `json:"extension,omitempty"`
 	ModifierExtension []Extension      `json:"modifierExtension,omitempty"`
 	Type              *CodeableConcept `json:"type,omitempty"`
@@ -94,7 +94,7 @@ type EffectEvidenceSynthesisEffectEstimatePrecisionEstimate struct {
 
 // A description of the certainty of the effect estimate.
 type EffectEvidenceSynthesisCertainty struct {
-	ID                    *string                                                 `json:"ID,omitempty"`
+	ID                    *string                                                 `json:"id,omitempty"`
 	Extension             []Extension                                             `json:"extension,omitempty"`
 	ModifierExtension     []Extension                                             `json:"modifierExtension,omitempty"`
 	Rating                []CodeableConcept                                       `json:"rating,omitempty"`
@@ -104,7 +104,7 @@ type EffectEvidenceSynthesisCertainty struct {
 
 // A description of a component of the overall certainty.
 type EffectEvidenceSynthesisCertaintyCertaintySubcomponent struct {
-	ID                *string           `json:"ID,omitempty"`
+	ID                *string           `json:"id,omitempty"`
 	Extension         []Extension       `json:"extension,omitempty"`
 	ModifierExtension []Extension       `json:"modifierExtension,omitempty"`
 	Type              *CodeableConcept  `json:"type,omitempty"`

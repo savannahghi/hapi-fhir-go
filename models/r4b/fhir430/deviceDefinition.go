@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // DeviceDefinition is documented here http://hl7.org/fhir/StructureDefinition/DeviceDefinition
 // The characteristics, operational status and capabilities of a medical-related component of a medical device.
 type DeviceDefinition struct {
-	ID                      *string                               `json:"ID,omitempty"`
+	ID                      *string                               `json:"id,omitempty"`
 	Meta                    *Meta                                 `json:"meta,omitempty"`
 	ImplicitRules           *string                               `json:"implicitRules,omitempty"`
 	Language                *string                               `json:"language,omitempty"`
@@ -40,7 +40,7 @@ type DeviceDefinition struct {
 
 // Unique device identifier (UDI) assigned to device label or package.  Note that the Device may include multiple udiCarriers as it either may include just the udiCarrier for the jurisdiction it is sold, or for multiple jurisdictions it could have been sold.
 type DeviceDefinitionUdiDeviceIdentifier struct {
-	ID                *string     `json:"ID,omitempty"`
+	ID                *string     `json:"id,omitempty"`
 	Extension         []Extension `json:"extension,omitempty"`
 	ModifierExtension []Extension `json:"modifierExtension,omitempty"`
 	DeviceIdentifier  string      `json:"deviceIdentifier"`
@@ -50,7 +50,7 @@ type DeviceDefinitionUdiDeviceIdentifier struct {
 
 // A name given to the device to identify it.
 type DeviceDefinitionDeviceName struct {
-	ID                *string        `json:"ID,omitempty"`
+	ID                *string        `json:"id,omitempty"`
 	Extension         []Extension    `json:"extension,omitempty"`
 	ModifierExtension []Extension    `json:"modifierExtension,omitempty"`
 	Name              string         `json:"name"`
@@ -59,7 +59,7 @@ type DeviceDefinitionDeviceName struct {
 
 // The capabilities supported on a  device, the standards to which the device conforms for a particular purpose, and used for the communication.
 type DeviceDefinitionSpecialization struct {
-	ID                *string     `json:"ID,omitempty"`
+	ID                *string     `json:"id,omitempty"`
 	Extension         []Extension `json:"extension,omitempty"`
 	ModifierExtension []Extension `json:"modifierExtension,omitempty"`
 	SystemType        string      `json:"systemType"`
@@ -68,7 +68,7 @@ type DeviceDefinitionSpecialization struct {
 
 // Device capabilities.
 type DeviceDefinitionCapability struct {
-	ID                *string           `json:"ID,omitempty"`
+	ID                *string           `json:"id,omitempty"`
 	Extension         []Extension       `json:"extension,omitempty"`
 	ModifierExtension []Extension       `json:"modifierExtension,omitempty"`
 	Type              CodeableConcept   `json:"type"`
@@ -77,7 +77,7 @@ type DeviceDefinitionCapability struct {
 
 // The actual configuration settings of a device as it actually operates, e.g., regulation status, time properties.
 type DeviceDefinitionProperty struct {
-	ID                *string           `json:"ID,omitempty"`
+	ID                *string           `json:"id,omitempty"`
 	Extension         []Extension       `json:"extension,omitempty"`
 	ModifierExtension []Extension       `json:"modifierExtension,omitempty"`
 	Type              CodeableConcept   `json:"type"`
@@ -87,7 +87,7 @@ type DeviceDefinitionProperty struct {
 
 // A substance used to create the material(s) of which the device is made.
 type DeviceDefinitionMaterial struct {
-	ID                  *string         `json:"ID,omitempty"`
+	ID                  *string         `json:"id,omitempty"`
 	Extension           []Extension     `json:"extension,omitempty"`
 	ModifierExtension   []Extension     `json:"modifierExtension,omitempty"`
 	Substance           CodeableConcept `json:"substance"`

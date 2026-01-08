@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // Measure is documented here http://hl7.org/fhir/StructureDefinition/Measure
 // The Measure resource provides the definition of a quality measure.
 type Measure struct {
-	ID                              *string                   `json:"ID,omitempty"`
+	ID                              *string                   `json:"id,omitempty"`
 	Meta                            *Meta                     `json:"meta,omitempty"`
 	ImplicitRules                   *string                   `json:"implicitRules,omitempty"`
 	Language                        *string                   `json:"language,omitempty"`
@@ -58,7 +58,7 @@ type Measure struct {
 
 // A group of population criteria for the measure.
 type MeasureGroup struct {
-	ID                *string                  `json:"ID,omitempty"`
+	ID                *string                  `json:"id,omitempty"`
 	Extension         []Extension              `json:"extension,omitempty"`
 	ModifierExtension []Extension              `json:"modifierExtension,omitempty"`
 	Code              *CodeableConcept         `json:"code,omitempty"`
@@ -69,7 +69,7 @@ type MeasureGroup struct {
 
 // A population criteria for the measure.
 type MeasureGroupPopulation struct {
-	ID                *string          `json:"ID,omitempty"`
+	ID                *string          `json:"id,omitempty"`
 	Extension         []Extension      `json:"extension,omitempty"`
 	ModifierExtension []Extension      `json:"modifierExtension,omitempty"`
 	Code              *CodeableConcept `json:"code,omitempty"`
@@ -79,7 +79,7 @@ type MeasureGroupPopulation struct {
 
 // The stratifier criteria for the measure report, specified as either the name of a valid CQL expression defined within a referenced library or a valid FHIR Resource Path.
 type MeasureGroupStratifier struct {
-	ID                *string                           `json:"ID,omitempty"`
+	ID                *string                           `json:"id,omitempty"`
 	Extension         []Extension                       `json:"extension,omitempty"`
 	ModifierExtension []Extension                       `json:"modifierExtension,omitempty"`
 	Code              *CodeableConcept                  `json:"code,omitempty"`
@@ -91,7 +91,7 @@ type MeasureGroupStratifier struct {
 // A component of the stratifier criteria for the measure report, specified as either the name of a valid CQL expression defined within a referenced library or a valid FHIR Resource Path.
 // Stratifiers are defined either as a single criteria, or as a set of component criteria.
 type MeasureGroupStratifierComponent struct {
-	ID                *string          `json:"ID,omitempty"`
+	ID                *string          `json:"id,omitempty"`
 	Extension         []Extension      `json:"extension,omitempty"`
 	ModifierExtension []Extension      `json:"modifierExtension,omitempty"`
 	Code              *CodeableConcept `json:"code,omitempty"`
@@ -102,7 +102,7 @@ type MeasureGroupStratifierComponent struct {
 // The supplemental data criteria for the measure report, specified as either the name of a valid CQL expression within a referenced library, or a valid FHIR Resource Path.
 // Note that supplemental data are reported as observations for each patient and included in the evaluatedResources bundle. See the MeasureReport resource or the Quality Reporting topic for more information.
 type MeasureSupplementalData struct {
-	ID                *string           `json:"ID,omitempty"`
+	ID                *string           `json:"id,omitempty"`
 	Extension         []Extension       `json:"extension,omitempty"`
 	ModifierExtension []Extension       `json:"modifierExtension,omitempty"`
 	Code              *CodeableConcept  `json:"code,omitempty"`

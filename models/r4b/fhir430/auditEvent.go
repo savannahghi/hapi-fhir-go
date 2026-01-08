@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // AuditEvent is documented here http://hl7.org/fhir/StructureDefinition/AuditEvent
 // A record of an event made for purposes of maintaining a security log. Typical uses include detection of intrusion attempts and monitoring for inappropriate usage.
 type AuditEvent struct {
-	ID                *string            `json:"ID,omitempty"`
+	ID                *string            `json:"id,omitempty"`
 	Meta              *Meta              `json:"meta,omitempty"`
 	ImplicitRules     *string            `json:"implicitRules,omitempty"`
 	Language          *string            `json:"language,omitempty"`
@@ -33,7 +33,7 @@ Several agents may be associated (i.e. have some responsibility for an activity)
 For example, an activity may be initiated by one user for other users or involve more than one user. However, only one user may be the initiator/requestor for the activity.
 */
 type AuditEventAgent struct {
-	ID                *string                 `json:"ID,omitempty"`
+	ID                *string                 `json:"id,omitempty"`
 	Extension         []Extension             `json:"extension,omitempty"`
 	ModifierExtension []Extension             `json:"modifierExtension,omitempty"`
 	Type              *CodeableConcept        `json:"type,omitempty"`
@@ -51,7 +51,7 @@ type AuditEventAgent struct {
 
 // Logical network location for application activity, if the activity has a network location.
 type AuditEventAgentNetwork struct {
-	ID                *string                     `json:"ID,omitempty"`
+	ID                *string                     `json:"id,omitempty"`
 	Extension         []Extension                 `json:"extension,omitempty"`
 	ModifierExtension []Extension                 `json:"modifierExtension,omitempty"`
 	Address           *string                     `json:"address,omitempty"`
@@ -61,7 +61,7 @@ type AuditEventAgentNetwork struct {
 // The system that is reporting the event.
 // Since multi-tier, distributed, or composite applications make source identification ambiguous, this collection of fields may repeat for each application or process actively involved in the event. For example, multiple value-sets can identify participating web servers, application processes, and database server threads in an n-tier distributed application. Passive event participants (e.g. low-level network transports) need not be identified.
 type AuditEventSource struct {
-	ID                *string     `json:"ID,omitempty"`
+	ID                *string     `json:"id,omitempty"`
 	Extension         []Extension `json:"extension,omitempty"`
 	ModifierExtension []Extension `json:"modifierExtension,omitempty"`
 	Site              *string     `json:"site,omitempty"`
@@ -72,7 +72,7 @@ type AuditEventSource struct {
 // Specific instances of data or objects that have been accessed.
 // Required unless the values for event identification, agent identification, and audit source identification are sufficient to document the entire auditable event. Because events may have more than one entity, this group can be a repeating set of values.
 type AuditEventEntity struct {
-	ID                *string                  `json:"ID,omitempty"`
+	ID                *string                  `json:"id,omitempty"`
 	Extension         []Extension              `json:"extension,omitempty"`
 	ModifierExtension []Extension              `json:"modifierExtension,omitempty"`
 	What              *Reference               `json:"what,omitempty"`
@@ -88,7 +88,7 @@ type AuditEventEntity struct {
 
 // Tagged value pairs for conveying additional information about the entity.
 type AuditEventEntityDetail struct {
-	ID                *string     `json:"ID,omitempty"`
+	ID                *string     `json:"id,omitempty"`
 	Extension         []Extension `json:"extension,omitempty"`
 	ModifierExtension []Extension `json:"modifierExtension,omitempty"`
 	Type              string      `json:"type"`

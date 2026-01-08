@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // ChargeItemDefinition is documented here http://hl7.org/fhir/StructureDefinition/ChargeItemDefinition
 // The ChargeItemDefinition resource provides the properties that apply to the (billing) codes necessary to calculate costs and prices. The properties may differ largely depending on type and realm, therefore this resource gives only a rough structure and requires profiling for each type of billing code system.
 type ChargeItemDefinition struct {
-	ID                *string                             `json:"ID,omitempty"`
+	ID                *string                             `json:"id,omitempty"`
 	Meta              *Meta                               `json:"meta,omitempty"`
 	ImplicitRules     *string                             `json:"implicitRules,omitempty"`
 	Language          *string                             `json:"language,omitempty"`
@@ -40,7 +40,7 @@ type ChargeItemDefinition struct {
 // Expressions that describe applicability criteria for the billing code.
 // The applicability conditions can be used to ascertain whether a billing item is allowed in a specific context. E.g. some billing codes may only be applicable in out-patient settings, only to male/female patients or only to children.
 type ChargeItemDefinitionApplicability struct {
-	ID                *string     `json:"ID,omitempty"`
+	ID                *string     `json:"id,omitempty"`
 	Extension         []Extension `json:"extension,omitempty"`
 	ModifierExtension []Extension `json:"modifierExtension,omitempty"`
 	Description       *string     `json:"description,omitempty"`
@@ -50,7 +50,7 @@ type ChargeItemDefinitionApplicability struct {
 
 // Group of properties which are applicable under the same conditions. If no applicability rules are established for the group, then all properties always apply.
 type ChargeItemDefinitionPropertyGroup struct {
-	ID                *string                                           `json:"ID,omitempty"`
+	ID                *string                                           `json:"id,omitempty"`
 	Extension         []Extension                                       `json:"extension,omitempty"`
 	ModifierExtension []Extension                                       `json:"modifierExtension,omitempty"`
 	Applicability     []ChargeItemDefinitionApplicability               `json:"applicability,omitempty"`
@@ -59,7 +59,7 @@ type ChargeItemDefinitionPropertyGroup struct {
 
 // The price for a ChargeItem may be calculated as a base price with surcharges/deductions that apply in certain conditions. A ChargeItemDefinition resource that defines the prices, factors and conditions that apply to a billing code is currently under development. The priceComponent element can be used to offer transparency to the recipient of the Invoice of how the prices have been calculated.
 type ChargeItemDefinitionPropertyGroupPriceComponent struct {
-	ID                *string                   `json:"ID,omitempty"`
+	ID                *string                   `json:"id,omitempty"`
 	Extension         []Extension               `json:"extension,omitempty"`
 	ModifierExtension []Extension               `json:"modifierExtension,omitempty"`
 	Type              InvoicePriceComponentType `json:"type"`

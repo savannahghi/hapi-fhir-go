@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // FamilyMemberHistory is documented here http://hl7.org/fhir/StructureDefinition/FamilyMemberHistory
 // Significant health conditions for a person related to the patient relevant in the context of care for the patient.
 type FamilyMemberHistory struct {
-	ID                    *string                        `json:"ID,omitempty"`
+	ID                    *string                        `json:"id,omitempty"`
 	Meta                  *Meta                          `json:"meta,omitempty"`
 	ImplicitRules         *string                        `json:"implicitRules,omitempty"`
 	Language              *string                        `json:"language,omitempty"`
@@ -43,7 +43,7 @@ type FamilyMemberHistory struct {
 
 // The significant Conditions (or condition) that the family member had. This is a repeating section to allow a system to represent more than one condition per resource, though there is nothing stopping multiple resources - one per condition.
 type FamilyMemberHistoryCondition struct {
-	ID                 *string          `json:"ID,omitempty"`
+	ID                 *string          `json:"id,omitempty"`
 	Extension          []Extension      `json:"extension,omitempty"`
 	ModifierExtension  []Extension      `json:"modifierExtension,omitempty"`
 	Code               CodeableConcept  `json:"code"`

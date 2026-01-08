@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // DeviceUseStatement is documented here http://hl7.org/fhir/StructureDefinition/DeviceUseStatement
 // A record of a device being used by a patient where the record is the result of a report from the patient or another clinician.
 type DeviceUseStatement struct {
-	ID                *string                  `json:"ID,omitempty"`
+	ID                *string                  `json:"id,omitempty"`
 	Meta              *Meta                    `json:"meta,omitempty"`
 	ImplicitRules     *string                  `json:"implicitRules,omitempty"`
 	Language          *string                  `json:"language,omitempty"`

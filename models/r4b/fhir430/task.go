@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // Task is documented here http://hl7.org/fhir/StructureDefinition/Task
 // A task to be performed.
 type Task struct {
-	ID                    *string           `json:"ID,omitempty"`
+	ID                    *string           `json:"id,omitempty"`
 	Meta                  *Meta             `json:"meta,omitempty"`
 	ImplicitRules         *string           `json:"implicitRules,omitempty"`
 	Language              *string           `json:"language,omitempty"`
@@ -48,7 +48,7 @@ type Task struct {
 
 // If the Task.focus is a request resource and the task is seeking fulfillment (i.e. is asking for the request to be actioned), this element identifies any limitations on what parts of the referenced request should be actioned.
 type TaskRestriction struct {
-	ID                *string     `json:"ID,omitempty"`
+	ID                *string     `json:"id,omitempty"`
 	Extension         []Extension `json:"extension,omitempty"`
 	ModifierExtension []Extension `json:"modifierExtension,omitempty"`
 	Repetitions       *int        `json:"repetitions,omitempty"`
@@ -58,7 +58,7 @@ type TaskRestriction struct {
 
 // Additional information that may be needed in the execution of the task.
 type TaskInput struct {
-	ID                       *string             `json:"ID,omitempty"`
+	ID                       *string             `json:"id,omitempty"`
 	Extension                []Extension         `json:"extension,omitempty"`
 	ModifierExtension        []Extension         `json:"modifierExtension,omitempty"`
 	Type                     CodeableConcept     `json:"type"`
@@ -116,7 +116,7 @@ type TaskInput struct {
 
 // Outputs produced by the Task.
 type TaskOutput struct {
-	ID                       *string             `json:"ID,omitempty"`
+	ID                       *string             `json:"id,omitempty"`
 	Extension                []Extension         `json:"extension,omitempty"`
 	ModifierExtension        []Extension         `json:"modifierExtension,omitempty"`
 	Type                     CodeableConcept     `json:"type"`

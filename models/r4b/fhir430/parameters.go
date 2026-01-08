@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // Parameters is documented here http://hl7.org/fhir/StructureDefinition/Parameters
 // This resource is a non-persisted resource used to pass information into and back from an [operation](operations.html). It has no other use, and there is no RESTful endpoint associated with it.
 type Parameters struct {
-	ID            *string               `json:"ID,omitempty"`
+	ID            *string               `json:"id,omitempty"`
 	Meta          *Meta                 `json:"meta,omitempty"`
 	ImplicitRules *string               `json:"implicitRules,omitempty"`
 	Language      *string               `json:"language,omitempty"`
@@ -14,7 +14,7 @@ type Parameters struct {
 
 // A parameter passed to or received from the operation.
 type ParametersParameter struct {
-	ID                       *string               `json:"ID,omitempty"`
+	ID                       *string               `json:"id,omitempty"`
 	Extension                []Extension           `json:"extension,omitempty"`
 	ModifierExtension        []Extension           `json:"modifierExtension,omitempty"`
 	Name                     string                `json:"name"`

@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // ResearchSubject is documented here http://hl7.org/fhir/StructureDefinition/ResearchSubject
 // A physical entity which is the primary unit of operational and/or administrative interest in a study.
 type ResearchSubject struct {
-	ID                *string               `json:"ID,omitempty"`
+	ID                *string               `json:"id,omitempty"`
 	Meta              *Meta                 `json:"meta,omitempty"`
 	ImplicitRules     *string               `json:"implicitRules,omitempty"`
 	Language          *string               `json:"language,omitempty"`

@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // SubstancePolymer is documented here http://hl7.org/fhir/StructureDefinition/SubstancePolymer
 // Todo.
 type SubstancePolymer struct {
-	ID                    *string                      `json:"ID,omitempty"`
+	ID                    *string                      `json:"id,omitempty"`
 	Meta                  *Meta                        `json:"meta,omitempty"`
 	ImplicitRules         *string                      `json:"implicitRules,omitempty"`
 	Language              *string                      `json:"language,omitempty"`
@@ -23,7 +23,7 @@ type SubstancePolymer struct {
 
 // Todo.
 type SubstancePolymerMonomerSet struct {
-	ID                *string                                      `json:"ID,omitempty"`
+	ID                *string                                      `json:"id,omitempty"`
 	Extension         []Extension                                  `json:"extension,omitempty"`
 	ModifierExtension []Extension                                  `json:"modifierExtension,omitempty"`
 	RatioType         *CodeableConcept                             `json:"ratioType,omitempty"`
@@ -32,7 +32,7 @@ type SubstancePolymerMonomerSet struct {
 
 // Todo.
 type SubstancePolymerMonomerSetStartingMaterial struct {
-	ID                *string          `json:"ID,omitempty"`
+	ID                *string          `json:"id,omitempty"`
 	Extension         []Extension      `json:"extension,omitempty"`
 	ModifierExtension []Extension      `json:"modifierExtension,omitempty"`
 	Material          *CodeableConcept `json:"material,omitempty"`
@@ -43,7 +43,7 @@ type SubstancePolymerMonomerSetStartingMaterial struct {
 
 // Todo.
 type SubstancePolymerRepeat struct {
-	ID                      *string                            `json:"ID,omitempty"`
+	ID                      *string                            `json:"id,omitempty"`
 	Extension               []Extension                        `json:"extension,omitempty"`
 	ModifierExtension       []Extension                        `json:"modifierExtension,omitempty"`
 	NumberOfUnits           *int                               `json:"numberOfUnits,omitempty"`
@@ -54,7 +54,7 @@ type SubstancePolymerRepeat struct {
 
 // Todo.
 type SubstancePolymerRepeatRepeatUnit struct {
-	ID                          *string                                                    `json:"ID,omitempty"`
+	ID                          *string                                                    `json:"id,omitempty"`
 	Extension                   []Extension                                                `json:"extension,omitempty"`
 	ModifierExtension           []Extension                                                `json:"modifierExtension,omitempty"`
 	OrientationOfPolymerisation *CodeableConcept                                           `json:"orientationOfPolymerisation,omitempty"`
@@ -66,7 +66,7 @@ type SubstancePolymerRepeatRepeatUnit struct {
 
 // Todo.
 type SubstancePolymerRepeatRepeatUnitDegreeOfPolymerisation struct {
-	ID                *string          `json:"ID,omitempty"`
+	ID                *string          `json:"id,omitempty"`
 	Extension         []Extension      `json:"extension,omitempty"`
 	ModifierExtension []Extension      `json:"modifierExtension,omitempty"`
 	Degree            *CodeableConcept `json:"degree,omitempty"`
@@ -75,7 +75,7 @@ type SubstancePolymerRepeatRepeatUnitDegreeOfPolymerisation struct {
 
 // Todo.
 type SubstancePolymerRepeatRepeatUnitStructuralRepresentation struct {
-	ID                *string          `json:"ID,omitempty"`
+	ID                *string          `json:"id,omitempty"`
 	Extension         []Extension      `json:"extension,omitempty"`
 	ModifierExtension []Extension      `json:"modifierExtension,omitempty"`
 	Type              *CodeableConcept `json:"type,omitempty"`

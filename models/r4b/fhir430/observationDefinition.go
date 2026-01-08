@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // ObservationDefinition is documented here http://hl7.org/fhir/StructureDefinition/ObservationDefinition
 // Set of definitional characteristics for a kind of observation or measurement produced or consumed by an orderable health care service.
 type ObservationDefinition struct {
-	ID                     *string                                   `json:"ID,omitempty"`
+	ID                     *string                                   `json:"id,omitempty"`
 	Meta                   *Meta                                     `json:"meta,omitempty"`
 	ImplicitRules          *string                                   `json:"implicitRules,omitempty"`
 	Language               *string                                   `json:"language,omitempty"`
@@ -30,7 +30,7 @@ type ObservationDefinition struct {
 
 // Characteristics for quantitative results of this observation.
 type ObservationDefinitionQuantitativeDetails struct {
-	ID                *string          `json:"ID,omitempty"`
+	ID                *string          `json:"id,omitempty"`
 	Extension         []Extension      `json:"extension,omitempty"`
 	ModifierExtension []Extension      `json:"modifierExtension,omitempty"`
 	CustomaryUnit     *CodeableConcept `json:"customaryUnit,omitempty"`
@@ -41,7 +41,7 @@ type ObservationDefinitionQuantitativeDetails struct {
 
 // Multiple  ranges of results qualified by different contexts for ordinal or continuous observations conforming to this ObservationDefinition.
 type ObservationDefinitionQualifiedInterval struct {
-	ID                *string                   `json:"ID,omitempty"`
+	ID                *string                   `json:"id,omitempty"`
 	Extension         []Extension               `json:"extension,omitempty"`
 	ModifierExtension []Extension               `json:"modifierExtension,omitempty"`
 	Category          *ObservationRangeCategory `json:"category,omitempty"`

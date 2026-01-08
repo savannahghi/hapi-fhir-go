@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // OperationOutcome is documented here http://hl7.org/fhir/StructureDefinition/OperationOutcome
 // A collection of error, warning, or information messages that result from a system action.
 type OperationOutcome struct {
-	ID                *string                 `json:"ID,omitempty"`
+	ID                *string                 `json:"id,omitempty"`
 	Meta              *Meta                   `json:"meta,omitempty"`
 	ImplicitRules     *string                 `json:"implicitRules,omitempty"`
 	Language          *string                 `json:"language,omitempty"`
@@ -18,7 +18,7 @@ type OperationOutcome struct {
 
 // An error, warning, or information message that results from a system action.
 type OperationOutcomeIssue struct {
-	ID                *string          `json:"ID,omitempty"`
+	ID                *string          `json:"id,omitempty"`
 	Extension         []Extension      `json:"extension,omitempty"`
 	ModifierExtension []Extension      `json:"modifierExtension,omitempty"`
 	Severity          IssueSeverity    `json:"severity"`

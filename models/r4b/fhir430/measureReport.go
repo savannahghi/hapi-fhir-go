@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // MeasureReport is documented here http://hl7.org/fhir/StructureDefinition/MeasureReport
 // The MeasureReport resource contains the results of the calculation of a measure; and optionally a reference to the resources involved in that calculation.
 type MeasureReport struct {
-	ID                  *string              `json:"ID,omitempty"`
+	ID                  *string              `json:"id,omitempty"`
 	Meta                *Meta                `json:"meta,omitempty"`
 	ImplicitRules       *string              `json:"implicitRules,omitempty"`
 	Language            *string              `json:"language,omitempty"`
@@ -28,7 +28,7 @@ type MeasureReport struct {
 
 // The results of the calculation, one for each population group in the measure.
 type MeasureReportGroup struct {
-	ID                *string                        `json:"ID,omitempty"`
+	ID                *string                        `json:"id,omitempty"`
 	Extension         []Extension                    `json:"extension,omitempty"`
 	ModifierExtension []Extension                    `json:"modifierExtension,omitempty"`
 	Code              *CodeableConcept               `json:"code,omitempty"`
@@ -39,7 +39,7 @@ type MeasureReportGroup struct {
 
 // The populations that make up the population group, one for each type of population appropriate for the measure.
 type MeasureReportGroupPopulation struct {
-	ID                *string          `json:"ID,omitempty"`
+	ID                *string          `json:"id,omitempty"`
 	Extension         []Extension      `json:"extension,omitempty"`
 	ModifierExtension []Extension      `json:"modifierExtension,omitempty"`
 	Code              *CodeableConcept `json:"code,omitempty"`
@@ -49,7 +49,7 @@ type MeasureReportGroupPopulation struct {
 
 // When a measure includes multiple stratifiers, there will be a stratifier group for each stratifier defined by the measure.
 type MeasureReportGroupStratifier struct {
-	ID                *string                               `json:"ID,omitempty"`
+	ID                *string                               `json:"id,omitempty"`
 	Extension         []Extension                           `json:"extension,omitempty"`
 	ModifierExtension []Extension                           `json:"modifierExtension,omitempty"`
 	Code              []CodeableConcept                     `json:"code,omitempty"`
@@ -58,7 +58,7 @@ type MeasureReportGroupStratifier struct {
 
 // This element contains the results for a single stratum within the stratifier. For example, when stratifying on administrative gender, there will be four strata, one for each possible gender value.
 type MeasureReportGroupStratifierStratum struct {
-	ID                *string                                         `json:"ID,omitempty"`
+	ID                *string                                         `json:"id,omitempty"`
 	Extension         []Extension                                     `json:"extension,omitempty"`
 	ModifierExtension []Extension                                     `json:"modifierExtension,omitempty"`
 	Value             *CodeableConcept                                `json:"value,omitempty"`
@@ -69,7 +69,7 @@ type MeasureReportGroupStratifierStratum struct {
 
 // A stratifier component value.
 type MeasureReportGroupStratifierStratumComponent struct {
-	ID                *string         `json:"ID,omitempty"`
+	ID                *string         `json:"id,omitempty"`
 	Extension         []Extension     `json:"extension,omitempty"`
 	ModifierExtension []Extension     `json:"modifierExtension,omitempty"`
 	Code              CodeableConcept `json:"code"`
@@ -78,7 +78,7 @@ type MeasureReportGroupStratifierStratumComponent struct {
 
 // The populations that make up the stratum, one for each type of population appropriate to the measure.
 type MeasureReportGroupStratifierStratumPopulation struct {
-	ID                *string          `json:"ID,omitempty"`
+	ID                *string          `json:"id,omitempty"`
 	Extension         []Extension      `json:"extension,omitempty"`
 	ModifierExtension []Extension      `json:"modifierExtension,omitempty"`
 	Code              *CodeableConcept `json:"code,omitempty"`

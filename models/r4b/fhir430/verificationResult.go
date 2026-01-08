@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // VerificationResult is documented here http://hl7.org/fhir/StructureDefinition/VerificationResult
 // Describes validation requirements, source(s), status and dates for one or more elements.
 type VerificationResult struct {
-	ID                *string                           `json:"ID,omitempty"`
+	ID                *string                           `json:"id,omitempty"`
 	Meta              *Meta                             `json:"meta,omitempty"`
 	ImplicitRules     *string                           `json:"implicitRules,omitempty"`
 	Language          *string                           `json:"language,omitempty"`
@@ -31,7 +31,7 @@ type VerificationResult struct {
 
 // Information about the primary source(s) involved in validation.
 type VerificationResultPrimarySource struct {
-	ID                  *string           `json:"ID,omitempty"`
+	ID                  *string           `json:"id,omitempty"`
 	Extension           []Extension       `json:"extension,omitempty"`
 	ModifierExtension   []Extension       `json:"modifierExtension,omitempty"`
 	Who                 *Reference        `json:"who,omitempty"`
@@ -45,7 +45,7 @@ type VerificationResultPrimarySource struct {
 
 // Information about the entity attesting to information.
 type VerificationResultAttestation struct {
-	ID                        *string          `json:"ID,omitempty"`
+	ID                        *string          `json:"id,omitempty"`
 	Extension                 []Extension      `json:"extension,omitempty"`
 	ModifierExtension         []Extension      `json:"modifierExtension,omitempty"`
 	Who                       *Reference       `json:"who,omitempty"`
@@ -60,7 +60,7 @@ type VerificationResultAttestation struct {
 
 // Information about the entity validating information.
 type VerificationResultValidator struct {
-	ID                   *string     `json:"ID,omitempty"`
+	ID                   *string     `json:"id,omitempty"`
 	Extension            []Extension `json:"extension,omitempty"`
 	ModifierExtension    []Extension `json:"modifierExtension,omitempty"`
 	Organization         Reference   `json:"organization"`

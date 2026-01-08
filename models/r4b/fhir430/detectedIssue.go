@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // DetectedIssue is documented here http://hl7.org/fhir/StructureDefinition/DetectedIssue
 // Indicates an actual or potential clinical issue with or between one or more active or proposed clinical actions for a patient; e.g. Drug-drug interaction, Ineffective treatment frequency, Procedure-condition conflict, etc.
 type DetectedIssue struct {
-	ID                 *string                   `json:"ID,omitempty"`
+	ID                 *string                   `json:"id,omitempty"`
 	Meta               *Meta                     `json:"meta,omitempty"`
 	ImplicitRules      *string                   `json:"implicitRules,omitempty"`
 	Language           *string                   `json:"language,omitempty"`
@@ -30,7 +30,7 @@ type DetectedIssue struct {
 
 // Supporting evidence or manifestations that provide the basis for identifying the detected issue such as a GuidanceResponse or MeasureReport.
 type DetectedIssueEvidence struct {
-	ID                *string           `json:"ID,omitempty"`
+	ID                *string           `json:"id,omitempty"`
 	Extension         []Extension       `json:"extension,omitempty"`
 	ModifierExtension []Extension       `json:"modifierExtension,omitempty"`
 	Code              []CodeableConcept `json:"code,omitempty"`
@@ -39,7 +39,7 @@ type DetectedIssueEvidence struct {
 
 // Indicates an action that has been taken or is committed to reduce or eliminate the likelihood of the risk identified by the detected issue from manifesting.  Can also reflect an observation of known mitigating factors that may reduce/eliminate the need for any action.
 type DetectedIssueMitigation struct {
-	ID                *string         `json:"ID,omitempty"`
+	ID                *string         `json:"id,omitempty"`
 	Extension         []Extension     `json:"extension,omitempty"`
 	ModifierExtension []Extension     `json:"modifierExtension,omitempty"`
 	Action            CodeableConcept `json:"action"`
