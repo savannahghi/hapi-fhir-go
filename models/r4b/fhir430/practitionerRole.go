@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // PractitionerRole is documented here http://hl7.org/fhir/StructureDefinition/PractitionerRole
 // A specific set of Roles/Locations/specialties/services that a practitioner may perform at an organization for a period of time.
 type PractitionerRole struct {
-	ID                     *string                         `json:"ID,omitempty"`
+	ID                     *string                         `json:"id,omitempty"`
 	Meta                   *Meta                           `json:"meta,omitempty"`
 	ImplicitRules          *string                         `json:"implicitRules,omitempty"`
 	Language               *string                         `json:"language,omitempty"`
@@ -32,7 +32,7 @@ type PractitionerRole struct {
 // A collection of times the practitioner is available or performing this role at the location and/or healthcareservice.
 // More detailed availability information may be provided in associated Schedule/Slot resources.
 type PractitionerRoleAvailableTime struct {
-	ID                 *string      `json:"ID,omitempty"`
+	ID                 *string      `json:"id,omitempty"`
 	Extension          []Extension  `json:"extension,omitempty"`
 	ModifierExtension  []Extension  `json:"modifierExtension,omitempty"`
 	DaysOfWeek         []DaysOfWeek `json:"daysOfWeek,omitempty"`
@@ -43,7 +43,7 @@ type PractitionerRoleAvailableTime struct {
 
 // The practitioner is not available or performing this role during this period of time due to the provided reason.
 type PractitionerRoleNotAvailable struct {
-	ID                *string     `json:"ID,omitempty"`
+	ID                *string     `json:"id,omitempty"`
 	Extension         []Extension `json:"extension,omitempty"`
 	ModifierExtension []Extension `json:"modifierExtension,omitempty"`
 	Description       string      `json:"description"`

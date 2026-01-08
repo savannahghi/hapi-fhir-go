@@ -1,9 +1,9 @@
-
 package fhir430
+
 // MarketingStatus is documented here http://hl7.org/fhir/StructureDefinition/MarketingStatus
 // Base StructureDefinition for MarketingStatus Type: The marketing status describes the date when a medicinal product is actually put on the market or the date as of which it is no longer available.
 type MarketingStatus struct {
-	ID                *string          `json:"ID,omitempty"`
+	ID                *string          `json:"id,omitempty"`
 	Extension         []Extension      `json:"extension,omitempty"`
 	ModifierExtension []Extension      `json:"modifierExtension,omitempty"`
 	Country           CodeableConcept  `json:"country"`

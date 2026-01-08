@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // ExplanationOfBenefit is documented here http://hl7.org/fhir/StructureDefinition/ExplanationOfBenefit
 // This resource provides: the claim details; adjudication details from the processing of a Claim; and optionally account balance information, for informing the subscriber of the benefits provided.
 type ExplanationOfBenefit struct {
-	ID                    *string                                `json:"ID,omitempty"`
+	ID                    *string                                `json:"id,omitempty"`
 	Meta                  *Meta                                  `json:"meta,omitempty"`
 	ImplicitRules         *string                                `json:"implicitRules,omitempty"`
 	Language              *string                                `json:"language,omitempty"`
@@ -61,7 +61,7 @@ type ExplanationOfBenefit struct {
 // Other claims which are related to this claim such as prior submissions or claims for related services or for the same event.
 // For example,  for the original treatment and follow-up exams.
 type ExplanationOfBenefitRelated struct {
-	ID                *string          `json:"ID,omitempty"`
+	ID                *string          `json:"id,omitempty"`
 	Extension         []Extension      `json:"extension,omitempty"`
 	ModifierExtension []Extension      `json:"modifierExtension,omitempty"`
 	Claim             *Reference       `json:"claim,omitempty"`
@@ -72,7 +72,7 @@ type ExplanationOfBenefitRelated struct {
 // The party to be reimbursed for cost of the products and services according to the terms of the policy.
 // Often providers agree to receive the benefits payable to reduce the near-term costs to the patient. The insurer may decline to pay the provider and may choose to pay the subscriber instead.
 type ExplanationOfBenefitPayee struct {
-	ID                *string          `json:"ID,omitempty"`
+	ID                *string          `json:"id,omitempty"`
 	Extension         []Extension      `json:"extension,omitempty"`
 	ModifierExtension []Extension      `json:"modifierExtension,omitempty"`
 	Type              *CodeableConcept `json:"type,omitempty"`
@@ -81,7 +81,7 @@ type ExplanationOfBenefitPayee struct {
 
 // The members of the team who provided the products and services.
 type ExplanationOfBenefitCareTeam struct {
-	ID                *string          `json:"ID,omitempty"`
+	ID                *string          `json:"id,omitempty"`
 	Extension         []Extension      `json:"extension,omitempty"`
 	ModifierExtension []Extension      `json:"modifierExtension,omitempty"`
 	Sequence          int              `json:"sequence"`
@@ -94,7 +94,7 @@ type ExplanationOfBenefitCareTeam struct {
 // Additional information codes regarding exceptions, special considerations, the condition, situation, prior or concurrent issues.
 // Often there are multiple jurisdiction specific valuesets which are required.
 type ExplanationOfBenefitSupportingInfo struct {
-	ID                *string          `json:"ID,omitempty"`
+	ID                *string          `json:"id,omitempty"`
 	Extension         []Extension      `json:"extension,omitempty"`
 	ModifierExtension []Extension      `json:"modifierExtension,omitempty"`
 	Sequence          int              `json:"sequence"`
@@ -112,7 +112,7 @@ type ExplanationOfBenefitSupportingInfo struct {
 
 // Information about diagnoses relevant to the claim items.
 type ExplanationOfBenefitDiagnosis struct {
-	ID                       *string           `json:"ID,omitempty"`
+	ID                       *string           `json:"id,omitempty"`
 	Extension                []Extension       `json:"extension,omitempty"`
 	ModifierExtension        []Extension       `json:"modifierExtension,omitempty"`
 	Sequence                 int               `json:"sequence"`
@@ -125,7 +125,7 @@ type ExplanationOfBenefitDiagnosis struct {
 
 // Procedures performed on the patient relevant to the billing items with the claim.
 type ExplanationOfBenefitProcedure struct {
-	ID                       *string           `json:"ID,omitempty"`
+	ID                       *string           `json:"id,omitempty"`
 	Extension                []Extension       `json:"extension,omitempty"`
 	ModifierExtension        []Extension       `json:"modifierExtension,omitempty"`
 	Sequence                 int               `json:"sequence"`
@@ -139,7 +139,7 @@ type ExplanationOfBenefitProcedure struct {
 // Financial instruments for reimbursement for the health care products and services specified on the claim.
 // All insurance coverages for the patient which may be applicable for reimbursement, of the products and services listed in the claim, are typically provided in the claim to allow insurers to confirm the ordering of the insurance coverages relative to local 'coordination of benefit' rules. One coverage (and only one) with 'focal=true' is to be used in the adjudication of this claim. Coverages appearing before the focal Coverage in the list, and where 'Coverage.subrogation=false', should provide a reference to the ClaimResponse containing the adjudication results of the prior claim.
 type ExplanationOfBenefitInsurance struct {
-	ID                *string     `json:"ID,omitempty"`
+	ID                *string     `json:"id,omitempty"`
 	Extension         []Extension `json:"extension,omitempty"`
 	ModifierExtension []Extension `json:"modifierExtension,omitempty"`
 	Focal             bool        `json:"focal"`
@@ -149,7 +149,7 @@ type ExplanationOfBenefitInsurance struct {
 
 // Details of a accident which resulted in injuries which required the products and services listed in the claim.
 type ExplanationOfBenefitAccident struct {
-	ID                *string          `json:"ID,omitempty"`
+	ID                *string          `json:"id,omitempty"`
 	Extension         []Extension      `json:"extension,omitempty"`
 	ModifierExtension []Extension      `json:"modifierExtension,omitempty"`
 	Date              *string          `json:"date,omitempty"`
@@ -160,7 +160,7 @@ type ExplanationOfBenefitAccident struct {
 
 // A claim line. Either a simple (a product or service) or a 'group' of details which can also be a simple items or groups of sub-details.
 type ExplanationOfBenefitItem struct {
-	ID                      *string                                `json:"ID,omitempty"`
+	ID                      *string                                `json:"id,omitempty"`
 	Extension               []Extension                            `json:"extension,omitempty"`
 	ModifierExtension       []Extension                            `json:"modifierExtension,omitempty"`
 	Sequence                int                                    `json:"sequence"`
@@ -193,7 +193,7 @@ type ExplanationOfBenefitItem struct {
 
 // If this item is a group then the values here are a summary of the adjudication of the detail items. If this item is a simple product or service then this is the result of the adjudication of this item.
 type ExplanationOfBenefitItemAdjudication struct {
-	ID                *string          `json:"ID,omitempty"`
+	ID                *string          `json:"id,omitempty"`
 	Extension         []Extension      `json:"extension,omitempty"`
 	ModifierExtension []Extension      `json:"modifierExtension,omitempty"`
 	Category          CodeableConcept  `json:"category"`
@@ -204,7 +204,7 @@ type ExplanationOfBenefitItemAdjudication struct {
 
 // Second-tier of goods and services.
 type ExplanationOfBenefitItemDetail struct {
-	ID                *string                                   `json:"ID,omitempty"`
+	ID                *string                                   `json:"id,omitempty"`
 	Extension         []Extension                               `json:"extension,omitempty"`
 	ModifierExtension []Extension                               `json:"modifierExtension,omitempty"`
 	Sequence          int                                       `json:"sequence"`
@@ -225,7 +225,7 @@ type ExplanationOfBenefitItemDetail struct {
 
 // Third-tier of goods and services.
 type ExplanationOfBenefitItemDetailSubDetail struct {
-	ID                *string                                `json:"ID,omitempty"`
+	ID                *string                                `json:"id,omitempty"`
 	Extension         []Extension                            `json:"extension,omitempty"`
 	ModifierExtension []Extension                            `json:"modifierExtension,omitempty"`
 	Sequence          int                                    `json:"sequence"`
@@ -245,7 +245,7 @@ type ExplanationOfBenefitItemDetailSubDetail struct {
 
 // The first-tier service adjudications for payor added product or service lines.
 type ExplanationOfBenefitAddItem struct {
-	ID                      *string                                `json:"ID,omitempty"`
+	ID                      *string                                `json:"id,omitempty"`
 	Extension               []Extension                            `json:"extension,omitempty"`
 	ModifierExtension       []Extension                            `json:"modifierExtension,omitempty"`
 	ItemSequence            []int                                  `json:"itemSequence,omitempty"`
@@ -273,7 +273,7 @@ type ExplanationOfBenefitAddItem struct {
 
 // The second-tier service adjudications for payor added services.
 type ExplanationOfBenefitAddItemDetail struct {
-	ID                *string                                      `json:"ID,omitempty"`
+	ID                *string                                      `json:"id,omitempty"`
 	Extension         []Extension                                  `json:"extension,omitempty"`
 	ModifierExtension []Extension                                  `json:"modifierExtension,omitempty"`
 	ProductOrService  CodeableConcept                              `json:"productOrService"`
@@ -289,7 +289,7 @@ type ExplanationOfBenefitAddItemDetail struct {
 
 // The third-tier service adjudications for payor added services.
 type ExplanationOfBenefitAddItemDetailSubDetail struct {
-	ID                *string                                `json:"ID,omitempty"`
+	ID                *string                                `json:"id,omitempty"`
 	Extension         []Extension                            `json:"extension,omitempty"`
 	ModifierExtension []Extension                            `json:"modifierExtension,omitempty"`
 	ProductOrService  CodeableConcept                        `json:"productOrService"`
@@ -305,7 +305,7 @@ type ExplanationOfBenefitAddItemDetailSubDetail struct {
 // Categorized monetary totals for the adjudication.
 // Totals for amounts submitted, co-pays, benefits payable etc.
 type ExplanationOfBenefitTotal struct {
-	ID                *string         `json:"ID,omitempty"`
+	ID                *string         `json:"id,omitempty"`
 	Extension         []Extension     `json:"extension,omitempty"`
 	ModifierExtension []Extension     `json:"modifierExtension,omitempty"`
 	Category          CodeableConcept `json:"category"`
@@ -314,7 +314,7 @@ type ExplanationOfBenefitTotal struct {
 
 // Payment details for the adjudication of the claim.
 type ExplanationOfBenefitPayment struct {
-	ID                *string          `json:"ID,omitempty"`
+	ID                *string          `json:"id,omitempty"`
 	Extension         []Extension      `json:"extension,omitempty"`
 	ModifierExtension []Extension      `json:"modifierExtension,omitempty"`
 	Type              *CodeableConcept `json:"type,omitempty"`
@@ -327,7 +327,7 @@ type ExplanationOfBenefitPayment struct {
 
 // A note that describes or explains adjudication results in a human readable form.
 type ExplanationOfBenefitProcessNote struct {
-	ID                *string          `json:"ID,omitempty"`
+	ID                *string          `json:"id,omitempty"`
 	Extension         []Extension      `json:"extension,omitempty"`
 	ModifierExtension []Extension      `json:"modifierExtension,omitempty"`
 	Number            *int             `json:"number,omitempty"`
@@ -338,7 +338,7 @@ type ExplanationOfBenefitProcessNote struct {
 
 // Balance by Benefit Category.
 type ExplanationOfBenefitBenefitBalance struct {
-	ID                *string                                       `json:"ID,omitempty"`
+	ID                *string                                       `json:"id,omitempty"`
 	Extension         []Extension                                   `json:"extension,omitempty"`
 	ModifierExtension []Extension                                   `json:"modifierExtension,omitempty"`
 	Category          CodeableConcept                               `json:"category"`
@@ -353,7 +353,7 @@ type ExplanationOfBenefitBenefitBalance struct {
 
 // Benefits Used to date.
 type ExplanationOfBenefitBenefitBalanceFinancial struct {
-	ID                 *string         `json:"ID,omitempty"`
+	ID                 *string         `json:"id,omitempty"`
 	Extension          []Extension     `json:"extension,omitempty"`
 	ModifierExtension  []Extension     `json:"modifierExtension,omitempty"`
 	Type               CodeableConcept `json:"type"`

@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // Organization is documented here http://hl7.org/fhir/StructureDefinition/Organization
 // A formally or informally recognized grouping of people or organizations formed for the purpose of achieving some form of collective action.  Includes companies, institutions, corporations, departments, community groups, healthcare practice groups, payer/insurer, etc.
 type Organization struct {
-	ID                *string               `json:"ID,omitempty"`
+	ID                *string               `json:"id,omitempty"`
 	Meta              *Meta                 `json:"meta,omitempty"`
 	ImplicitRules     *string               `json:"implicitRules,omitempty"`
 	Language          *string               `json:"language,omitempty"`
@@ -28,7 +28,7 @@ type Organization struct {
 // Contact for the organization for a certain purpose.
 // Where multiple contacts for the same purpose are provided there is a standard extension that can be used to determine which one is the preferred contact to use.
 type OrganizationContact struct {
-	ID                *string          `json:"ID,omitempty"`
+	ID                *string          `json:"id,omitempty"`
 	Extension         []Extension      `json:"extension,omitempty"`
 	ModifierExtension []Extension      `json:"modifierExtension,omitempty"`
 	Purpose           *CodeableConcept `json:"purpose,omitempty"`

@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // OrganizationAffiliation is documented here http://hl7.org/fhir/StructureDefinition/OrganizationAffiliation
 // Defines an affiliation/assotiation/relationship between 2 distinct oganizations, that is not a part-of relationship/sub-division relationship.
 type OrganizationAffiliation struct {
-	ID                        *string           `json:"ID,omitempty"`
+	ID                        *string           `json:"id,omitempty"`
 	Meta                      *Meta             `json:"meta,omitempty"`
 	ImplicitRules             *string           `json:"implicitRules,omitempty"`
 	Language                  *string           `json:"language,omitempty"`

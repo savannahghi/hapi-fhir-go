@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // RiskAssessment is documented here http://hl7.org/fhir/StructureDefinition/RiskAssessment
 // An assessment of the likely outcome(s) for a patient or other subject as well as the likelihood of each outcome.
 type RiskAssessment struct {
-	ID                 *string                    `json:"ID,omitempty"`
+	ID                 *string                    `json:"id,omitempty"`
 	Meta               *Meta                      `json:"meta,omitempty"`
 	ImplicitRules      *string                    `json:"implicitRules,omitempty"`
 	Language           *string                    `json:"language,omitempty"`
@@ -36,7 +36,7 @@ type RiskAssessment struct {
 // Describes the expected outcome for the subject.
 // Multiple repetitions can be used to identify the same type of outcome in different timeframes as well as different types of outcomes.
 type RiskAssessmentPrediction struct {
-	ID                 *string          `json:"ID,omitempty"`
+	ID                 *string          `json:"id,omitempty"`
 	Extension          []Extension      `json:"extension,omitempty"`
 	ModifierExtension  []Extension      `json:"modifierExtension,omitempty"`
 	Outcome            *CodeableConcept `json:"outcome,omitempty"`

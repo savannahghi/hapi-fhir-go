@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // CommunicationRequest is documented here http://hl7.org/fhir/StructureDefinition/CommunicationRequest
 // A request to convey information; e.g. the CDS system proposes that an alert be sent to a responsible provider, the CDS system proposes that the public health agency be notified about a reportable condition.
 type CommunicationRequest struct {
-	ID                 *string                       `json:"ID,omitempty"`
+	ID                 *string                       `json:"id,omitempty"`
 	Meta               *Meta                         `json:"meta,omitempty"`
 	ImplicitRules      *string                       `json:"implicitRules,omitempty"`
 	Language           *string                       `json:"language,omitempty"`
@@ -40,7 +40,7 @@ type CommunicationRequest struct {
 
 // Text, attachment(s), or resource(s) to be communicated to the recipient.
 type CommunicationRequestPayload struct {
-	ID                *string     `json:"ID,omitempty"`
+	ID                *string     `json:"id,omitempty"`
 	Extension         []Extension `json:"extension,omitempty"`
 	ModifierExtension []Extension `json:"modifierExtension,omitempty"`
 	ContentString     string      `json:"contentString"`

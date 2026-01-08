@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // SupplyRequest is documented here http://hl7.org/fhir/StructureDefinition/SupplyRequest
 // A record of a request for a medication, substance or device used in the healthcare setting.
 type SupplyRequest struct {
-	ID                  *string                  `json:"ID,omitempty"`
+	ID                  *string                  `json:"id,omitempty"`
 	Meta                *Meta                    `json:"meta,omitempty"`
 	ImplicitRules       *string                  `json:"implicitRules,omitempty"`
 	Language            *string                  `json:"language,omitempty"`
@@ -35,7 +35,7 @@ type SupplyRequest struct {
 
 // Specific parameters for the ordered item.  For example, the size of the indicated item.
 type SupplyRequestParameter struct {
-	ID                   *string          `json:"ID,omitempty"`
+	ID                   *string          `json:"id,omitempty"`
 	Extension            []Extension      `json:"extension,omitempty"`
 	ModifierExtension    []Extension      `json:"modifierExtension,omitempty"`
 	Code                 *CodeableConcept `json:"code,omitempty"`

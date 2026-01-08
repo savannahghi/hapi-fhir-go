@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // MedicinalProductIndication is documented here http://hl7.org/fhir/StructureDefinition/MedicinalProductIndication
 // Indication for the Medicinal Product.
 type MedicinalProductIndication struct {
-	ID                      *string                                  `json:"ID,omitempty"`
+	ID                      *string                                  `json:"id,omitempty"`
 	Meta                    *Meta                                    `json:"meta,omitempty"`
 	ImplicitRules           *string                                  `json:"implicitRules,omitempty"`
 	Language                *string                                  `json:"language,omitempty"`
@@ -26,7 +26,7 @@ type MedicinalProductIndication struct {
 
 // Information about the use of the medicinal product in relation to other therapies described as part of the indication.
 type MedicinalProductIndicationOtherTherapy struct {
-	ID                        *string         `json:"ID,omitempty"`
+	ID                        *string         `json:"id,omitempty"`
 	Extension                 []Extension     `json:"extension,omitempty"`
 	ModifierExtension         []Extension     `json:"modifierExtension,omitempty"`
 	TherapyRelationshipType   CodeableConcept `json:"therapyRelationshipType"`

@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // MessageDefinition is documented here http://hl7.org/fhir/StructureDefinition/MessageDefinition
 // Defines the characteristics of a message that can be shared between systems, including the type of event that initiates the message, the content to be transmitted and what response(s), if any, are permitted.
 type MessageDefinition struct {
-	ID                *string                            `json:"ID,omitempty"`
+	ID                *string                            `json:"id,omitempty"`
 	Meta              *Meta                              `json:"meta,omitempty"`
 	ImplicitRules     *string                            `json:"implicitRules,omitempty"`
 	Language          *string                            `json:"language,omitempty"`
@@ -41,7 +41,7 @@ type MessageDefinition struct {
 
 // Identifies the resource (or resources) that are being addressed by the event.  For example, the Encounter for an admit message or two Account records for a merge.
 type MessageDefinitionFocus struct {
-	ID                *string      `json:"ID,omitempty"`
+	ID                *string      `json:"id,omitempty"`
 	Extension         []Extension  `json:"extension,omitempty"`
 	ModifierExtension []Extension  `json:"modifierExtension,omitempty"`
 	Code              ResourceType `json:"code"`
@@ -53,7 +53,7 @@ type MessageDefinitionFocus struct {
 // Indicates what types of messages may be sent as an application-level response to this message.
 // This indicates an application level response to "close" a transaction implicit in a particular request message.  To define a complete workflow scenario, look to the [[PlanDefinition]] resource which allows the definition of complex orchestrations, conditionality, etc.
 type MessageDefinitionAllowedResponse struct {
-	ID                *string     `json:"ID,omitempty"`
+	ID                *string     `json:"id,omitempty"`
 	Extension         []Extension `json:"extension,omitempty"`
 	ModifierExtension []Extension `json:"modifierExtension,omitempty"`
 	Message           string      `json:"message"`

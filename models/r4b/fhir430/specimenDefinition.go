@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // SpecimenDefinition is documented here http://hl7.org/fhir/StructureDefinition/SpecimenDefinition
 // A kind of specimen with associated set of requirements.
 type SpecimenDefinition struct {
-	ID                 *string                        `json:"ID,omitempty"`
+	ID                 *string                        `json:"id,omitempty"`
 	Meta               *Meta                          `json:"meta,omitempty"`
 	ImplicitRules      *string                        `json:"implicitRules,omitempty"`
 	Language           *string                        `json:"language,omitempty"`
@@ -23,7 +23,7 @@ type SpecimenDefinition struct {
 
 // Specimen conditioned in a container as expected by the testing laboratory.
 type SpecimenDefinitionTypeTested struct {
-	ID                 *string                                `json:"ID,omitempty"`
+	ID                 *string                                `json:"id,omitempty"`
 	Extension          []Extension                            `json:"extension,omitempty"`
 	ModifierExtension  []Extension                            `json:"modifierExtension,omitempty"`
 	IsDerived          *bool                                  `json:"isDerived,omitempty"`
@@ -38,7 +38,7 @@ type SpecimenDefinitionTypeTested struct {
 
 // The specimen's container.
 type SpecimenDefinitionTypeTestedContainer struct {
-	ID                    *string                                         `json:"ID,omitempty"`
+	ID                    *string                                         `json:"id,omitempty"`
 	Extension             []Extension                                     `json:"extension,omitempty"`
 	ModifierExtension     []Extension                                     `json:"modifierExtension,omitempty"`
 	Material              *CodeableConcept                                `json:"material,omitempty"`
@@ -54,7 +54,7 @@ type SpecimenDefinitionTypeTestedContainer struct {
 
 // Substance introduced in the kind of container to preserve, maintain or enhance the specimen. Examples: Formalin, Citrate, EDTA.
 type SpecimenDefinitionTypeTestedContainerAdditive struct {
-	ID                      *string         `json:"ID,omitempty"`
+	ID                      *string         `json:"id,omitempty"`
 	Extension               []Extension     `json:"extension,omitempty"`
 	ModifierExtension       []Extension     `json:"modifierExtension,omitempty"`
 	AdditiveCodeableConcept CodeableConcept `json:"additiveCodeableConcept"`
@@ -63,7 +63,7 @@ type SpecimenDefinitionTypeTestedContainerAdditive struct {
 
 // Set of instructions for preservation/transport of the specimen at a defined temperature interval, prior the testing process.
 type SpecimenDefinitionTypeTestedHandling struct {
-	ID                   *string          `json:"ID,omitempty"`
+	ID                   *string          `json:"id,omitempty"`
 	Extension            []Extension      `json:"extension,omitempty"`
 	ModifierExtension    []Extension      `json:"modifierExtension,omitempty"`
 	TemperatureQualifier *CodeableConcept `json:"temperatureQualifier,omitempty"`

@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // RequestGroup is documented here http://hl7.org/fhir/StructureDefinition/RequestGroup
 // A group of related requests that can be used to capture intended activities that have inter-dependencies such as "give this medication after that one".
 type RequestGroup struct {
-	ID                    *string              `json:"ID,omitempty"`
+	ID                    *string              `json:"id,omitempty"`
 	Meta                  *Meta                `json:"meta,omitempty"`
 	ImplicitRules         *string              `json:"implicitRules,omitempty"`
 	Language              *string              `json:"language,omitempty"`
@@ -35,7 +35,7 @@ type RequestGroup struct {
 
 // The actions, if any, produced by the evaluation of the artifact.
 type RequestGroupAction struct {
-	ID                  *string                           `json:"ID,omitempty"`
+	ID                  *string                           `json:"id,omitempty"`
 	Extension           []Extension                       `json:"extension,omitempty"`
 	ModifierExtension   []Extension                       `json:"modifierExtension,omitempty"`
 	Prefix              *string                           `json:"prefix,omitempty"`
@@ -67,7 +67,7 @@ type RequestGroupAction struct {
 // An expression that describes applicability criteria, or start/stop conditions for the action.
 // When multiple conditions of the same kind are present, the effects are combined using AND semantics, so the overall condition is true only if all of the conditions are true.
 type RequestGroupActionCondition struct {
-	ID                *string             `json:"ID,omitempty"`
+	ID                *string             `json:"id,omitempty"`
 	Extension         []Extension         `json:"extension,omitempty"`
 	ModifierExtension []Extension         `json:"modifierExtension,omitempty"`
 	Kind              ActionConditionKind `json:"kind"`
@@ -76,7 +76,7 @@ type RequestGroupActionCondition struct {
 
 // A relationship to another action such as "before" or "30-60 minutes after start of".
 type RequestGroupActionRelatedAction struct {
-	ID                *string                `json:"ID,omitempty"`
+	ID                *string                `json:"id,omitempty"`
 	Extension         []Extension            `json:"extension,omitempty"`
 	ModifierExtension []Extension            `json:"modifierExtension,omitempty"`
 	ActionId          string                 `json:"actionId"`

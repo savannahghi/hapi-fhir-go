@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // SubstanceReferenceInformation is documented here http://hl7.org/fhir/StructureDefinition/SubstanceReferenceInformation
 // Todo.
 type SubstanceReferenceInformation struct {
-	ID                *string                                       `json:"ID,omitempty"`
+	ID                *string                                       `json:"id,omitempty"`
 	Meta              *Meta                                         `json:"meta,omitempty"`
 	ImplicitRules     *string                                       `json:"implicitRules,omitempty"`
 	Language          *string                                       `json:"language,omitempty"`
@@ -22,7 +22,7 @@ type SubstanceReferenceInformation struct {
 
 // Todo.
 type SubstanceReferenceInformationGene struct {
-	ID                 *string          `json:"ID,omitempty"`
+	ID                 *string          `json:"id,omitempty"`
 	Extension          []Extension      `json:"extension,omitempty"`
 	ModifierExtension  []Extension      `json:"modifierExtension,omitempty"`
 	GeneSequenceOrigin *CodeableConcept `json:"geneSequenceOrigin,omitempty"`
@@ -32,7 +32,7 @@ type SubstanceReferenceInformationGene struct {
 
 // Todo.
 type SubstanceReferenceInformationGeneElement struct {
-	ID                *string          `json:"ID,omitempty"`
+	ID                *string          `json:"id,omitempty"`
 	Extension         []Extension      `json:"extension,omitempty"`
 	ModifierExtension []Extension      `json:"modifierExtension,omitempty"`
 	Type              *CodeableConcept `json:"type,omitempty"`
@@ -42,7 +42,7 @@ type SubstanceReferenceInformationGeneElement struct {
 
 // Todo.
 type SubstanceReferenceInformationClassification struct {
-	ID                *string           `json:"ID,omitempty"`
+	ID                *string           `json:"id,omitempty"`
 	Extension         []Extension       `json:"extension,omitempty"`
 	ModifierExtension []Extension       `json:"modifierExtension,omitempty"`
 	Domain            *CodeableConcept  `json:"domain,omitempty"`
@@ -53,7 +53,7 @@ type SubstanceReferenceInformationClassification struct {
 
 // Todo.
 type SubstanceReferenceInformationTarget struct {
-	ID                *string          `json:"ID,omitempty"`
+	ID                *string          `json:"id,omitempty"`
 	Extension         []Extension      `json:"extension,omitempty"`
 	ModifierExtension []Extension      `json:"modifierExtension,omitempty"`
 	Target            *Identifier      `json:"target,omitempty"`

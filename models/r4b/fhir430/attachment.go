@@ -1,9 +1,9 @@
-
 package fhir430
+
 // Attachment is documented here http://hl7.org/fhir/StructureDefinition/Attachment
 // Base StructureDefinition for Attachment Type: For referring to data content defined in other formats.
 type Attachment struct {
-	ID          *string     `json:"ID,omitempty"`
+	ID          *string     `json:"id,omitempty"`
 	Extension   []Extension `json:"extension,omitempty"`
 	ContentType *string     `json:"contentType,omitempty"`
 	Language    *string     `json:"language,omitempty"`

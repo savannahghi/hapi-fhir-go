@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // GuidanceResponse is documented here http://hl7.org/fhir/StructureDefinition/GuidanceResponse
 // A guidance response is the formal response to a guidance request, including any output parameters returned by the evaluation, as well as the description of any proposed actions to be taken.
 type GuidanceResponse struct {
-	ID                    *string                `json:"ID,omitempty"`
+	ID                    *string                `json:"id,omitempty"`
 	Meta                  *Meta                  `json:"meta,omitempty"`
 	ImplicitRules         *string                `json:"implicitRules,omitempty"`
 	Language              *string                `json:"language,omitempty"`

@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // Evidence is documented here http://hl7.org/fhir/StructureDefinition/Evidence
 // The Evidence resource describes the conditional state (population and any exposures being compared within the population) and outcome (if specified) that the knowledge (evidence, assertion, recommendation) is about.
 type Evidence struct {
-	ID                 *string           `json:"ID,omitempty"`
+	ID                 *string           `json:"id,omitempty"`
 	Meta               *Meta             `json:"meta,omitempty"`
 	ImplicitRules      *string           `json:"implicitRules,omitempty"`
 	Language           *string           `json:"language,omitempty"`

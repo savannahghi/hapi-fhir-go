@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // ImplementationGuide is documented here http://hl7.org/fhir/StructureDefinition/ImplementationGuide
 // A set of rules of how a particular interoperability or standards problem is solved - typically through the use of FHIR resources. This resource is used to gather all the parts of an implementation guide into a logical whole and to publish a computable definition of all the parts.
 type ImplementationGuide struct {
-	ID                *string                        `json:"ID,omitempty"`
+	ID                *string                        `json:"id,omitempty"`
 	Meta              *Meta                          `json:"meta,omitempty"`
 	ImplicitRules     *string                        `json:"implicitRules,omitempty"`
 	Language          *string                        `json:"language,omitempty"`
@@ -36,7 +36,7 @@ type ImplementationGuide struct {
 
 // Another implementation guide that this implementation depends on. Typically, an implementation guide uses value sets, profiles etc.defined in other implementation guides.
 type ImplementationGuideDependsOn struct {
-	ID                *string     `json:"ID,omitempty"`
+	ID                *string     `json:"id,omitempty"`
 	Extension         []Extension `json:"extension,omitempty"`
 	ModifierExtension []Extension `json:"modifierExtension,omitempty"`
 	Uri               string      `json:"uri"`
@@ -47,7 +47,7 @@ type ImplementationGuideDependsOn struct {
 // A set of profiles that all resources covered by this implementation guide must conform to.
 // See [Default Profiles](implementationguide.html#default) for a discussion of which resources are 'covered' by an implementation guide.
 type ImplementationGuideGlobal struct {
-	ID                *string      `json:"ID,omitempty"`
+	ID                *string      `json:"id,omitempty"`
 	Extension         []Extension  `json:"extension,omitempty"`
 	ModifierExtension []Extension  `json:"modifierExtension,omitempty"`
 	Type              ResourceType `json:"type"`
@@ -57,7 +57,7 @@ type ImplementationGuideGlobal struct {
 // The information needed by an IG publisher tool to publish the whole implementation guide.
 // Principally, this consists of information abuot source resource and file locations, and build parameters and templates.
 type ImplementationGuideDefinition struct {
-	ID                *string                                  `json:"ID,omitempty"`
+	ID                *string                                  `json:"id,omitempty"`
 	Extension         []Extension                              `json:"extension,omitempty"`
 	ModifierExtension []Extension                              `json:"modifierExtension,omitempty"`
 	Grouping          []ImplementationGuideDefinitionGrouping  `json:"grouping,omitempty"`
@@ -70,7 +70,7 @@ type ImplementationGuideDefinition struct {
 // A logical group of resources. Logical groups can be used when building pages.
 // Groupings are arbitrary sub-divisions of content. Typically, they are used to help build Table of Contents automatically.
 type ImplementationGuideDefinitionGrouping struct {
-	ID                *string     `json:"ID,omitempty"`
+	ID                *string     `json:"id,omitempty"`
 	Extension         []Extension `json:"extension,omitempty"`
 	ModifierExtension []Extension `json:"modifierExtension,omitempty"`
 	Name              string      `json:"name"`
@@ -79,7 +79,7 @@ type ImplementationGuideDefinitionGrouping struct {
 
 // A resource that is part of the implementation guide. Conformance resources (value set, structure definition, capability statements etc.) are obvious candidates for inclusion, but any kind of resource can be included as an example resource.
 type ImplementationGuideDefinitionResource struct {
-	ID                *string       `json:"ID,omitempty"`
+	ID                *string       `json:"id,omitempty"`
 	Extension         []Extension   `json:"extension,omitempty"`
 	ModifierExtension []Extension   `json:"modifierExtension,omitempty"`
 	Reference         Reference     `json:"reference"`
@@ -94,7 +94,7 @@ type ImplementationGuideDefinitionResource struct {
 // A page / section in the implementation guide. The root page is the implementation guide home page.
 // Pages automatically become sections if they have sub-pages. By convention, the home page is called index.html.
 type ImplementationGuideDefinitionPage struct {
-	ID                *string                             `json:"ID,omitempty"`
+	ID                *string                             `json:"id,omitempty"`
 	Extension         []Extension                         `json:"extension,omitempty"`
 	ModifierExtension []Extension                         `json:"modifierExtension,omitempty"`
 	NameUrl           string                              `json:"nameUrl"`
@@ -106,7 +106,7 @@ type ImplementationGuideDefinitionPage struct {
 
 // Defines how IG is built by tools.
 type ImplementationGuideDefinitionParameter struct {
-	ID                *string            `json:"ID,omitempty"`
+	ID                *string            `json:"id,omitempty"`
 	Extension         []Extension        `json:"extension,omitempty"`
 	ModifierExtension []Extension        `json:"modifierExtension,omitempty"`
 	Code              GuideParameterCode `json:"code"`
@@ -115,7 +115,7 @@ type ImplementationGuideDefinitionParameter struct {
 
 // A template for building resources.
 type ImplementationGuideDefinitionTemplate struct {
-	ID                *string     `json:"ID,omitempty"`
+	ID                *string     `json:"id,omitempty"`
 	Extension         []Extension `json:"extension,omitempty"`
 	ModifierExtension []Extension `json:"modifierExtension,omitempty"`
 	Code              string      `json:"code"`
@@ -125,7 +125,7 @@ type ImplementationGuideDefinitionTemplate struct {
 
 // Information about an assembled implementation guide, created by the publication tooling.
 type ImplementationGuideManifest struct {
-	ID                *string                               `json:"ID,omitempty"`
+	ID                *string                               `json:"id,omitempty"`
 	Extension         []Extension                           `json:"extension,omitempty"`
 	ModifierExtension []Extension                           `json:"modifierExtension,omitempty"`
 	Rendering         *string                               `json:"rendering,omitempty"`
@@ -137,7 +137,7 @@ type ImplementationGuideManifest struct {
 
 // A resource that is part of the implementation guide. Conformance resources (value set, structure definition, capability statements etc.) are obvious candidates for inclusion, but any kind of resource can be included as an example resource.
 type ImplementationGuideManifestResource struct {
-	ID                *string     `json:"ID,omitempty"`
+	ID                *string     `json:"id,omitempty"`
 	Extension         []Extension `json:"extension,omitempty"`
 	ModifierExtension []Extension `json:"modifierExtension,omitempty"`
 	Reference         Reference   `json:"reference"`
@@ -148,7 +148,7 @@ type ImplementationGuideManifestResource struct {
 
 // Information about a page within the IG.
 type ImplementationGuideManifestPage struct {
-	ID                *string     `json:"ID,omitempty"`
+	ID                *string     `json:"id,omitempty"`
 	Extension         []Extension `json:"extension,omitempty"`
 	ModifierExtension []Extension `json:"modifierExtension,omitempty"`
 	Name              string      `json:"name"`

@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // CompartmentDefinition is documented here http://hl7.org/fhir/StructureDefinition/CompartmentDefinition
 // A compartment definition that defines how resources are accessed on a server.
 type CompartmentDefinition struct {
-	ID                *string                         `json:"ID,omitempty"`
+	ID                *string                         `json:"id,omitempty"`
 	Meta              *Meta                           `json:"meta,omitempty"`
 	ImplicitRules     *string                         `json:"implicitRules,omitempty"`
 	Language          *string                         `json:"language,omitempty"`
@@ -31,7 +31,7 @@ type CompartmentDefinition struct {
 
 // Information about how a resource is related to the compartment.
 type CompartmentDefinitionResource struct {
-	ID                *string      `json:"ID,omitempty"`
+	ID                *string      `json:"id,omitempty"`
 	Extension         []Extension  `json:"extension,omitempty"`
 	ModifierExtension []Extension  `json:"modifierExtension,omitempty"`
 	Code              ResourceType `json:"code"`

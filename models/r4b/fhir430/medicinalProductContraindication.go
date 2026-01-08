@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // MedicinalProductContraindication is documented here http://hl7.org/fhir/StructureDefinition/MedicinalProductContraindication
 // The clinical particulars - indications, contraindications etc. of a medicinal product, including for regulatory purposes.
 type MedicinalProductContraindication struct {
-	ID                    *string                                        `json:"ID,omitempty"`
+	ID                    *string                                        `json:"id,omitempty"`
 	Meta                  *Meta                                          `json:"meta,omitempty"`
 	ImplicitRules         *string                                        `json:"implicitRules,omitempty"`
 	Language              *string                                        `json:"language,omitempty"`
@@ -24,7 +24,7 @@ type MedicinalProductContraindication struct {
 
 // Information about the use of the medicinal product in relation to other therapies described as part of the indication.
 type MedicinalProductContraindicationOtherTherapy struct {
-	ID                        *string         `json:"ID,omitempty"`
+	ID                        *string         `json:"id,omitempty"`
 	Extension                 []Extension     `json:"extension,omitempty"`
 	ModifierExtension         []Extension     `json:"modifierExtension,omitempty"`
 	TherapyRelationshipType   CodeableConcept `json:"therapyRelationshipType"`

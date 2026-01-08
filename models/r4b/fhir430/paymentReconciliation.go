@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // PaymentReconciliation is documented here http://hl7.org/fhir/StructureDefinition/PaymentReconciliation
 // This resource provides the details including amount of a payment and allocates the payment items being paid.
 type PaymentReconciliation struct {
-	ID                *string                            `json:"ID,omitempty"`
+	ID                *string                            `json:"id,omitempty"`
 	Meta              *Meta                              `json:"meta,omitempty"`
 	ImplicitRules     *string                            `json:"implicitRules,omitempty"`
 	Language          *string                            `json:"language,omitempty"`
@@ -32,7 +32,7 @@ type PaymentReconciliation struct {
 
 // Distribution of the payment amount for a previously acknowledged payable.
 type PaymentReconciliationDetail struct {
-	ID                *string         `json:"ID,omitempty"`
+	ID                *string         `json:"id,omitempty"`
 	Extension         []Extension     `json:"extension,omitempty"`
 	ModifierExtension []Extension     `json:"modifierExtension,omitempty"`
 	Identifier        *Identifier     `json:"identifier,omitempty"`
@@ -49,7 +49,7 @@ type PaymentReconciliationDetail struct {
 
 // A note that describes or explains the processing in a human readable form.
 type PaymentReconciliationProcessNote struct {
-	ID                *string     `json:"ID,omitempty"`
+	ID                *string     `json:"id,omitempty"`
 	Extension         []Extension `json:"extension,omitempty"`
 	ModifierExtension []Extension `json:"modifierExtension,omitempty"`
 	Type              *NoteType   `json:"type,omitempty"`

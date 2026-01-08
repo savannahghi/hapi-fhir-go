@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // SubstanceSpecification is documented here http://hl7.org/fhir/StructureDefinition/SubstanceSpecification
 // The detailed description of a substance, typically at a level beyond what is used for prescribing.
 type SubstanceSpecification struct {
-	ID                   *string                                                 `json:"ID,omitempty"`
+	ID                   *string                                                 `json:"id,omitempty"`
 	Meta                 *Meta                                                   `json:"meta,omitempty"`
 	ImplicitRules        *string                                                 `json:"implicitRules,omitempty"`
 	Language             *string                                                 `json:"language,omitempty"`
@@ -36,7 +36,7 @@ type SubstanceSpecification struct {
 
 // Moiety, for structural modifications.
 type SubstanceSpecificationMoiety struct {
-	ID                *string          `json:"ID,omitempty"`
+	ID                *string          `json:"id,omitempty"`
 	Extension         []Extension      `json:"extension,omitempty"`
 	ModifierExtension []Extension      `json:"modifierExtension,omitempty"`
 	Role              *CodeableConcept `json:"role,omitempty"`
@@ -51,7 +51,7 @@ type SubstanceSpecificationMoiety struct {
 
 // General specifications for this substance, including how it is related to other substances.
 type SubstanceSpecificationProperty struct {
-	ID                               *string          `json:"ID,omitempty"`
+	ID                               *string          `json:"id,omitempty"`
 	Extension                        []Extension      `json:"extension,omitempty"`
 	ModifierExtension                []Extension      `json:"modifierExtension,omitempty"`
 	Category                         *CodeableConcept `json:"category,omitempty"`
@@ -65,7 +65,7 @@ type SubstanceSpecificationProperty struct {
 
 // Structural information.
 type SubstanceSpecificationStructure struct {
-	ID                       *string                                                `json:"ID,omitempty"`
+	ID                       *string                                                `json:"id,omitempty"`
 	Extension                []Extension                                            `json:"extension,omitempty"`
 	ModifierExtension        []Extension                                            `json:"modifierExtension,omitempty"`
 	Stereochemistry          *CodeableConcept                                       `json:"stereochemistry,omitempty"`
@@ -80,7 +80,7 @@ type SubstanceSpecificationStructure struct {
 
 // Applicable for single substances that contain a radionuclide or a non-natural isotopic ratio.
 type SubstanceSpecificationStructureIsotope struct {
-	ID                *string                                                `json:"ID,omitempty"`
+	ID                *string                                                `json:"id,omitempty"`
 	Extension         []Extension                                            `json:"extension,omitempty"`
 	ModifierExtension []Extension                                            `json:"modifierExtension,omitempty"`
 	Identifier        *Identifier                                            `json:"identifier,omitempty"`
@@ -92,7 +92,7 @@ type SubstanceSpecificationStructureIsotope struct {
 
 // The molecular weight or weight range (for proteins, polymers or nucleic acids).
 type SubstanceSpecificationStructureIsotopeMolecularWeight struct {
-	ID                *string          `json:"ID,omitempty"`
+	ID                *string          `json:"id,omitempty"`
 	Extension         []Extension      `json:"extension,omitempty"`
 	ModifierExtension []Extension      `json:"modifierExtension,omitempty"`
 	Method            *CodeableConcept `json:"method,omitempty"`
@@ -102,7 +102,7 @@ type SubstanceSpecificationStructureIsotopeMolecularWeight struct {
 
 // Molecular structural representation.
 type SubstanceSpecificationStructureRepresentation struct {
-	ID                *string          `json:"ID,omitempty"`
+	ID                *string          `json:"id,omitempty"`
 	Extension         []Extension      `json:"extension,omitempty"`
 	ModifierExtension []Extension      `json:"modifierExtension,omitempty"`
 	Type              *CodeableConcept `json:"type,omitempty"`
@@ -112,7 +112,7 @@ type SubstanceSpecificationStructureRepresentation struct {
 
 // Codes associated with the substance.
 type SubstanceSpecificationCode struct {
-	ID                *string          `json:"ID,omitempty"`
+	ID                *string          `json:"id,omitempty"`
 	Extension         []Extension      `json:"extension,omitempty"`
 	ModifierExtension []Extension      `json:"modifierExtension,omitempty"`
 	Code              *CodeableConcept `json:"code,omitempty"`
@@ -124,7 +124,7 @@ type SubstanceSpecificationCode struct {
 
 // Names applicable to this substance.
 type SubstanceSpecificationName struct {
-	ID                *string                              `json:"ID,omitempty"`
+	ID                *string                              `json:"id,omitempty"`
 	Extension         []Extension                          `json:"extension,omitempty"`
 	ModifierExtension []Extension                          `json:"modifierExtension,omitempty"`
 	Name              string                               `json:"name"`
@@ -142,7 +142,7 @@ type SubstanceSpecificationName struct {
 
 // Details of the official nature of this name.
 type SubstanceSpecificationNameOfficial struct {
-	ID                *string          `json:"ID,omitempty"`
+	ID                *string          `json:"id,omitempty"`
 	Extension         []Extension      `json:"extension,omitempty"`
 	ModifierExtension []Extension      `json:"modifierExtension,omitempty"`
 	Authority         *CodeableConcept `json:"authority,omitempty"`
@@ -152,7 +152,7 @@ type SubstanceSpecificationNameOfficial struct {
 
 // A link between this substance and another, with details of the relationship.
 type SubstanceSpecificationRelationship struct {
-	ID                       *string          `json:"ID,omitempty"`
+	ID                       *string          `json:"id,omitempty"`
 	Extension                []Extension      `json:"extension,omitempty"`
 	ModifierExtension        []Extension      `json:"modifierExtension,omitempty"`
 	SubstanceReference       *Reference       `json:"substanceReference,omitempty"`

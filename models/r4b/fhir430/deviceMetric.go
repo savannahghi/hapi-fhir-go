@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // DeviceMetric is documented here http://hl7.org/fhir/StructureDefinition/DeviceMetric
 // Describes a measurement, calculation or setting capability of a medical device.
 type DeviceMetric struct {
-	ID                *string                        `json:"ID,omitempty"`
+	ID                *string                        `json:"id,omitempty"`
 	Meta              *Meta                          `json:"meta,omitempty"`
 	ImplicitRules     *string                        `json:"implicitRules,omitempty"`
 	Language          *string                        `json:"language,omitempty"`
@@ -27,7 +27,7 @@ type DeviceMetric struct {
 
 // Describes the calibrations that have been performed or that are required to be performed.
 type DeviceMetricCalibration struct {
-	ID                *string                       `json:"ID,omitempty"`
+	ID                *string                       `json:"id,omitempty"`
 	Extension         []Extension                   `json:"extension,omitempty"`
 	ModifierExtension []Extension                   `json:"modifierExtension,omitempty"`
 	Type              *DeviceMetricCalibrationType  `json:"type,omitempty"`

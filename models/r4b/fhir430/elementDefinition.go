@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // ElementDefinition is documented here http://hl7.org/fhir/StructureDefinition/ElementDefinition
 // Base StructureDefinition for ElementDefinition Type: Captures constraints on each element within the resource, profile, or extension.
 type ElementDefinition struct {
-	ID                              *string                       `json:"ID,omitempty"`
+	ID                              *string                       `json:"id,omitempty"`
 	Extension                       []Extension                   `json:"extension,omitempty"`
 	ModifierExtension               []Extension                   `json:"modifierExtension,omitempty"`
 	Path                            string                        `json:"path"`
@@ -210,7 +210,7 @@ type ElementDefinition struct {
 // Indicates that the element is sliced into a set of alternative definitions (i.e. in a structure definition, there are multiple different constraints on a single element in the base resource). Slicing can be used in any resource that has cardinality ..* on the base resource, or any resource with a choice of types. The set of slices is any elements that come after this in the element sequence that have the same path, until a shorter path occurs (the shorter path terminates the set).
 // The first element in the sequence, the one that carries the slicing, is the definition that applies to all the slices. This is based on the unconstrained element, but can apply any constraints as appropriate. This may include the common constraints on the children of the element.
 type ElementDefinitionSlicing struct {
-	ID            *string                                 `json:"ID,omitempty"`
+	ID            *string                                 `json:"id,omitempty"`
 	Extension     []Extension                             `json:"extension,omitempty"`
 	Discriminator []ElementDefinitionSlicingDiscriminator `json:"discriminator,omitempty"`
 	Description   *string                                 `json:"description,omitempty"`
@@ -221,7 +221,7 @@ type ElementDefinitionSlicing struct {
 // Designates which child elements are used to discriminate between the slices when processing an instance. If one or more discriminators are provided, the value of the child elements in the instance data SHALL completely distinguish which slice the element in the resource matches based on the allowed values for those elements in each of the slices.
 // If there is no discriminator, the content is hard to process, so this should be avoided.
 type ElementDefinitionSlicingDiscriminator struct {
-	ID        *string           `json:"ID,omitempty"`
+	ID        *string           `json:"id,omitempty"`
 	Extension []Extension       `json:"extension,omitempty"`
 	Type      DiscriminatorType `json:"type"`
 	Path      string            `json:"path"`
@@ -230,7 +230,7 @@ type ElementDefinitionSlicingDiscriminator struct {
 // Information about the base definition of the element, provided to make it unnecessary for tools to trace the deviation of the element through the derived and related profiles. When the element definition is not the original definition of an element - i.g. either in a constraint on another type, or for elements from a super type in a snap shot - then the information in provided in the element definition may be different to the base definition. On the original definition of the element, it will be same.
 // The base information does not carry any information that could not be determined from the path and related profiles, but making this determination requires both that the related profiles are available, and that the algorithm to determine them be available. For tooling simplicity, the base information must always be populated in element definitions in snap shots, even if it is the same.
 type ElementDefinitionBase struct {
-	ID        *string     `json:"ID,omitempty"`
+	ID        *string     `json:"id,omitempty"`
 	Extension []Extension `json:"extension,omitempty"`
 	Path      string      `json:"path"`
 	Min       int         `json:"min"`
@@ -240,7 +240,7 @@ type ElementDefinitionBase struct {
 // The data type or resource that the value of this element is permitted to be.
 // The Type of the element can be left blank in a differential constraint, in which case the type is inherited from the resource. Abstract types are not permitted to appear as a type when multiple types are listed.  (I.e. Abstract types cannot be part of a choice).
 type ElementDefinitionType struct {
-	ID            *string                `json:"ID,omitempty"`
+	ID            *string                `json:"id,omitempty"`
 	Extension     []Extension            `json:"extension,omitempty"`
 	Code          string                 `json:"code"`
 	Profile       []string               `json:"profile,omitempty"`
@@ -252,7 +252,7 @@ type ElementDefinitionType struct {
 // A sample value for this element demonstrating the type of information that would typically be found in the element.
 // Examples will most commonly be present for data where it's not implicitly obvious from either the data type or value set what the values might be.  (I.e. Example values for dates or quantities would generally be unnecessary.)  If the example value is fully populated, the publication tool can generate an instance automatically.
 type ElementDefinitionExample struct {
-	ID                       *string             `json:"ID,omitempty"`
+	ID                       *string             `json:"id,omitempty"`
 	Extension                []Extension         `json:"extension,omitempty"`
 	Label                    string              `json:"label"`
 	ValueBase64Binary        string              `json:"valueBase64Binary"`
@@ -310,7 +310,7 @@ type ElementDefinitionExample struct {
 // Formal constraints such as co-occurrence and other constraints that can be computationally evaluated within the context of the instance.
 // Constraints should be declared on the "context" element - the lowest element in the hierarchy that is common to all nodes referenced by the constraint.
 type ElementDefinitionConstraint struct {
-	ID           *string            `json:"ID,omitempty"`
+	ID           *string            `json:"id,omitempty"`
 	Extension    []Extension        `json:"extension,omitempty"`
 	Key          string             `json:"key"`
 	Requirements *string            `json:"requirements,omitempty"`
@@ -324,7 +324,7 @@ type ElementDefinitionConstraint struct {
 // Binds to a value set if this element is coded (code, Coding, CodeableConcept, Quantity), or the data types (string, uri).
 // For a CodeableConcept, when no codes are allowed - only text, use a binding of strength "required" with a description explaining that no coded values are allowed and what sort of information to put in the "text" element.
 type ElementDefinitionBinding struct {
-	ID          *string         `json:"ID,omitempty"`
+	ID          *string         `json:"id,omitempty"`
 	Extension   []Extension     `json:"extension,omitempty"`
 	Strength    BindingStrength `json:"strength"`
 	Description *string         `json:"description,omitempty"`
@@ -334,7 +334,7 @@ type ElementDefinitionBinding struct {
 // Identifies a concept from an external specification that roughly corresponds to this element.
 // Mappings are not necessarily specific enough for safe translation.
 type ElementDefinitionMapping struct {
-	ID        *string     `json:"ID,omitempty"`
+	ID        *string     `json:"id,omitempty"`
 	Extension []Extension `json:"extension,omitempty"`
 	Identity  string      `json:"identity"`
 	Language  *string     `json:"language,omitempty"`

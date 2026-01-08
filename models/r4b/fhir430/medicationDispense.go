@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // MedicationDispense is documented here http://hl7.org/fhir/StructureDefinition/MedicationDispense
 // Indicates that a medication product is to be or has been dispensed for a named person/patient.  This includes a description of the medication product (supply) provided and the instructions for administering the medication.  The medication dispense is the result of a pharmacy system responding to a medication order.
 type MedicationDispense struct {
-	ID                          *string                         `json:"ID,omitempty"`
+	ID                          *string                         `json:"id,omitempty"`
 	Meta                        *Meta                           `json:"meta,omitempty"`
 	ImplicitRules               *string                         `json:"implicitRules,omitempty"`
 	Language                    *string                         `json:"language,omitempty"`
@@ -43,7 +43,7 @@ type MedicationDispense struct {
 
 // Indicates who or what performed the event.
 type MedicationDispensePerformer struct {
-	ID                *string          `json:"ID,omitempty"`
+	ID                *string          `json:"id,omitempty"`
 	Extension         []Extension      `json:"extension,omitempty"`
 	ModifierExtension []Extension      `json:"modifierExtension,omitempty"`
 	Function          *CodeableConcept `json:"function,omitempty"`
@@ -52,7 +52,7 @@ type MedicationDispensePerformer struct {
 
 // Indicates whether or not substitution was made as part of the dispense.  In some cases, substitution will be expected but does not happen, in other cases substitution is not expected but does happen.  This block explains what substitution did or did not happen and why.  If nothing is specified, substitution was not done.
 type MedicationDispenseSubstitution struct {
-	ID                *string           `json:"ID,omitempty"`
+	ID                *string           `json:"id,omitempty"`
 	Extension         []Extension       `json:"extension,omitempty"`
 	ModifierExtension []Extension       `json:"modifierExtension,omitempty"`
 	WasSubstituted    bool              `json:"wasSubstituted"`

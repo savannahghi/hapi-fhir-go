@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // DocumentManifest is documented here http://hl7.org/fhir/StructureDefinition/DocumentManifest
 // A collection of documents compiled for a purpose together with metadata that applies to the collection.
 type DocumentManifest struct {
-	ID                *string                   `json:"ID,omitempty"`
+	ID                *string                   `json:"id,omitempty"`
 	Meta              *Meta                     `json:"meta,omitempty"`
 	ImplicitRules     *string                   `json:"implicitRules,omitempty"`
 	Language          *string                   `json:"language,omitempty"`
@@ -30,7 +30,7 @@ type DocumentManifest struct {
 // Related identifiers or resources associated with the DocumentManifest.
 // May be identifiers or resources that caused the DocumentManifest to be created.
 type DocumentManifestRelated struct {
-	ID                *string     `json:"ID,omitempty"`
+	ID                *string     `json:"id,omitempty"`
 	Extension         []Extension `json:"extension,omitempty"`
 	ModifierExtension []Extension `json:"modifierExtension,omitempty"`
 	Identifier        *Identifier `json:"identifier,omitempty"`

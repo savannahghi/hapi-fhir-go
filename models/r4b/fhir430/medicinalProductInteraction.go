@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // MedicinalProductInteraction is documented here http://hl7.org/fhir/StructureDefinition/MedicinalProductInteraction
 // The interactions of the medicinal product with other medicinal products, or other forms of interactions.
 type MedicinalProductInteraction struct {
-	ID                *string                                  `json:"ID,omitempty"`
+	ID                *string                                  `json:"id,omitempty"`
 	Meta              *Meta                                    `json:"meta,omitempty"`
 	ImplicitRules     *string                                  `json:"implicitRules,omitempty"`
 	Language          *string                                  `json:"language,omitempty"`
@@ -24,7 +24,7 @@ type MedicinalProductInteraction struct {
 
 // The specific medication, food or laboratory test that interacts.
 type MedicinalProductInteractionInteractant struct {
-	ID                  *string         `json:"ID,omitempty"`
+	ID                  *string         `json:"id,omitempty"`
 	Extension           []Extension     `json:"extension,omitempty"`
 	ModifierExtension   []Extension     `json:"modifierExtension,omitempty"`
 	ItemReference       Reference       `json:"itemReference"`

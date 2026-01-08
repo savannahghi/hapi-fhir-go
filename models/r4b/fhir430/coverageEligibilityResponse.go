@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // CoverageEligibilityResponse is documented here http://hl7.org/fhir/StructureDefinition/CoverageEligibilityResponse
 // This resource provides eligibility and plan details from the processing of an CoverageEligibilityRequest resource.
 type CoverageEligibilityResponse struct {
-	ID                *string                                `json:"ID,omitempty"`
+	ID                *string                                `json:"id,omitempty"`
 	Meta              *Meta                                  `json:"meta,omitempty"`
 	ImplicitRules     *string                                `json:"implicitRules,omitempty"`
 	Language          *string                                `json:"language,omitempty"`
@@ -34,7 +34,7 @@ type CoverageEligibilityResponse struct {
 // Financial instruments for reimbursement for the health care products and services.
 // All insurance coverages for the patient which may be applicable for reimbursement, of the products and services listed in the claim, are typically provided in the claim to allow insurers to confirm the ordering of the insurance coverages relative to local 'coordination of benefit' rules. One coverage (and only one) with 'focal=true' is to be used in the adjudication of this claim. Coverages appearing before the focal Coverage in the list, and where 'subrogation=false', should provide a reference to the ClaimResponse containing the adjudication results of the prior claim.
 type CoverageEligibilityResponseInsurance struct {
-	ID                *string                                    `json:"ID,omitempty"`
+	ID                *string                                    `json:"id,omitempty"`
 	Extension         []Extension                                `json:"extension,omitempty"`
 	ModifierExtension []Extension                                `json:"modifierExtension,omitempty"`
 	Coverage          Reference                                  `json:"coverage"`
@@ -45,7 +45,7 @@ type CoverageEligibilityResponseInsurance struct {
 
 // Benefits and optionally current balances, and authorization details by category or service.
 type CoverageEligibilityResponseInsuranceItem struct {
-	ID                      *string                                           `json:"ID,omitempty"`
+	ID                      *string                                           `json:"id,omitempty"`
 	Extension               []Extension                                       `json:"extension,omitempty"`
 	ModifierExtension       []Extension                                       `json:"modifierExtension,omitempty"`
 	Category                *CodeableConcept                                  `json:"category,omitempty"`
@@ -66,7 +66,7 @@ type CoverageEligibilityResponseInsuranceItem struct {
 
 // Benefits used to date.
 type CoverageEligibilityResponseInsuranceItemBenefit struct {
-	ID                 *string         `json:"ID,omitempty"`
+	ID                 *string         `json:"id,omitempty"`
 	Extension          []Extension     `json:"extension,omitempty"`
 	ModifierExtension  []Extension     `json:"modifierExtension,omitempty"`
 	Type               CodeableConcept `json:"type"`
@@ -80,7 +80,7 @@ type CoverageEligibilityResponseInsuranceItemBenefit struct {
 
 // Errors encountered during the processing of the request.
 type CoverageEligibilityResponseError struct {
-	ID                *string         `json:"ID,omitempty"`
+	ID                *string         `json:"id,omitempty"`
 	Extension         []Extension     `json:"extension,omitempty"`
 	ModifierExtension []Extension     `json:"modifierExtension,omitempty"`
 	Code              CodeableConcept `json:"code"`

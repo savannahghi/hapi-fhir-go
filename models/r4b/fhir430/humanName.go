@@ -1,9 +1,9 @@
-
 package fhir430
+
 // HumanName is documented here http://hl7.org/fhir/StructureDefinition/HumanName
 // Base StructureDefinition for HumanName Type: A human's name with the ability to identify parts and usage.
 type HumanName struct {
-	ID        *string     `json:"ID,omitempty"`
+	ID        *string     `json:"id,omitempty"`
 	Extension []Extension `json:"extension,omitempty"`
 	Use       *NameUse    `json:"use,omitempty"`
 	Text      *string     `json:"text,omitempty"`

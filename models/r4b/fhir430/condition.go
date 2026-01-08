@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // Condition is documented here http://hl7.org/fhir/StructureDefinition/Condition
 // A clinical condition, problem, diagnosis, or other event, situation, issue, or clinical concept that has risen to a level of concern.
 type Condition struct {
-	ID                 *string             `json:"ID,omitempty"`
+	ID                 *string             `json:"id,omitempty"`
 	Meta               *Meta               `json:"meta,omitempty"`
 	ImplicitRules      *string             `json:"implicitRules,omitempty"`
 	Language           *string             `json:"language,omitempty"`
@@ -42,7 +42,7 @@ type Condition struct {
 
 // Clinical stage or grade of a condition. May include formal severity assessments.
 type ConditionStage struct {
-	ID                *string          `json:"ID,omitempty"`
+	ID                *string          `json:"id,omitempty"`
 	Extension         []Extension      `json:"extension,omitempty"`
 	ModifierExtension []Extension      `json:"modifierExtension,omitempty"`
 	Summary           *CodeableConcept `json:"summary,omitempty"`
@@ -53,7 +53,7 @@ type ConditionStage struct {
 // Supporting evidence / manifestations that are the basis of the Condition's verification status, such as evidence that confirmed or refuted the condition.
 // The evidence may be a simple list of coded symptoms/manifestations, or references to observations or formal assessments, or both.
 type ConditionEvidence struct {
-	ID                *string           `json:"ID,omitempty"`
+	ID                *string           `json:"id,omitempty"`
 	Extension         []Extension       `json:"extension,omitempty"`
 	ModifierExtension []Extension       `json:"modifierExtension,omitempty"`
 	Code              []CodeableConcept `json:"code,omitempty"`

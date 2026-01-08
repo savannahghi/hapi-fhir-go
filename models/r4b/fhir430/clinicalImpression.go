@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // ClinicalImpression is documented here http://hl7.org/fhir/StructureDefinition/ClinicalImpression
 // A record of a clinical assessment performed to determine what problem(s) may affect the patient and before planning the treatments or management strategies that are best to manage a patient's condition. Assessments are often 1:1 with a clinical consultation / encounter,  but this varies greatly depending on the clinical workflow. This resource is called "ClinicalImpression" rather than "ClinicalAssessment" to avoid confusion with the recording of assessment tools such as Apgar score.
 type ClinicalImpression struct {
-	ID                       *string                           `json:"ID,omitempty"`
+	ID                       *string                           `json:"id,omitempty"`
 	Meta                     *Meta                             `json:"meta,omitempty"`
 	ImplicitRules            *string                           `json:"implicitRules,omitempty"`
 	Language                 *string                           `json:"language,omitempty"`
@@ -38,7 +38,7 @@ type ClinicalImpression struct {
 
 // One or more sets of investigations (signs, symptoms, etc.). The actual grouping of investigations varies greatly depending on the type and context of the assessment. These investigations may include data generated during the assessment process, or data previously generated and recorded that is pertinent to the outcomes.
 type ClinicalImpressionInvestigation struct {
-	ID                *string         `json:"ID,omitempty"`
+	ID                *string         `json:"id,omitempty"`
 	Extension         []Extension     `json:"extension,omitempty"`
 	ModifierExtension []Extension     `json:"modifierExtension,omitempty"`
 	Code              CodeableConcept `json:"code"`
@@ -47,7 +47,7 @@ type ClinicalImpressionInvestigation struct {
 
 // Specific findings or diagnoses that were considered likely or relevant to ongoing treatment.
 type ClinicalImpressionFinding struct {
-	ID                  *string          `json:"ID,omitempty"`
+	ID                  *string          `json:"id,omitempty"`
 	Extension           []Extension      `json:"extension,omitempty"`
 	ModifierExtension   []Extension      `json:"modifierExtension,omitempty"`
 	ItemCodeableConcept *CodeableConcept `json:"itemCodeableConcept,omitempty"`

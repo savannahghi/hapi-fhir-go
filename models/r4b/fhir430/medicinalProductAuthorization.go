@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // MedicinalProductAuthorization is documented here http://hl7.org/fhir/StructureDefinition/MedicinalProductAuthorization
 // The regulatory authorization of a medicinal product.
 type MedicinalProductAuthorization struct {
-	ID                          *string                                                    `json:"ID,omitempty"`
+	ID                          *string                                                    `json:"id,omitempty"`
 	Meta                        *Meta                                                      `json:"meta,omitempty"`
 	ImplicitRules               *string                                                    `json:"implicitRules,omitempty"`
 	Language                    *string                                                    `json:"language,omitempty"`
@@ -33,7 +33,7 @@ type MedicinalProductAuthorization struct {
 
 // Authorization in areas within a country.
 type MedicinalProductAuthorizationJurisdictionalAuthorization struct {
-	ID                  *string           `json:"ID,omitempty"`
+	ID                  *string           `json:"id,omitempty"`
 	Extension           []Extension       `json:"extension,omitempty"`
 	ModifierExtension   []Extension       `json:"modifierExtension,omitempty"`
 	Identifier          []Identifier      `json:"identifier,omitempty"`
@@ -45,7 +45,7 @@ type MedicinalProductAuthorizationJurisdictionalAuthorization struct {
 
 // The regulatory procedure for granting or amending a marketing authorization.
 type MedicinalProductAuthorizationProcedure struct {
-	ID                *string                                  `json:"ID,omitempty"`
+	ID                *string                                  `json:"id,omitempty"`
 	Extension         []Extension                              `json:"extension,omitempty"`
 	ModifierExtension []Extension                              `json:"modifierExtension,omitempty"`
 	Identifier        *Identifier                              `json:"identifier,omitempty"`

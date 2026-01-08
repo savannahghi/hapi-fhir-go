@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // Claim is documented here http://hl7.org/fhir/StructureDefinition/Claim
 // A provider issued list of professional services and products which have been provided, or are to be provided, to a patient which is sent to an insurer for reimbursement.
 type Claim struct {
-	ID                   *string                      `json:"ID,omitempty"`
+	ID                   *string                      `json:"id,omitempty"`
 	Meta                 *Meta                        `json:"meta,omitempty"`
 	ImplicitRules        *string                      `json:"implicitRules,omitempty"`
 	Language             *string                      `json:"language,omitempty"`
@@ -45,7 +45,7 @@ type Claim struct {
 // Other claims which are related to this claim such as prior submissions or claims for related services or for the same event.
 // For example,  for the original treatment and follow-up exams.
 type ClaimRelated struct {
-	ID                *string          `json:"ID,omitempty"`
+	ID                *string          `json:"id,omitempty"`
 	Extension         []Extension      `json:"extension,omitempty"`
 	ModifierExtension []Extension      `json:"modifierExtension,omitempty"`
 	Claim             *Reference       `json:"claim,omitempty"`
@@ -56,7 +56,7 @@ type ClaimRelated struct {
 // The party to be reimbursed for cost of the products and services according to the terms of the policy.
 // Often providers agree to receive the benefits payable to reduce the near-term costs to the patient. The insurer may decline to pay the provider and choose to pay the subscriber instead.
 type ClaimPayee struct {
-	ID                *string         `json:"ID,omitempty"`
+	ID                *string         `json:"id,omitempty"`
 	Extension         []Extension     `json:"extension,omitempty"`
 	ModifierExtension []Extension     `json:"modifierExtension,omitempty"`
 	Type              CodeableConcept `json:"type"`
@@ -65,7 +65,7 @@ type ClaimPayee struct {
 
 // The members of the team who provided the products and services.
 type ClaimCareTeam struct {
-	ID                *string          `json:"ID,omitempty"`
+	ID                *string          `json:"id,omitempty"`
 	Extension         []Extension      `json:"extension,omitempty"`
 	ModifierExtension []Extension      `json:"modifierExtension,omitempty"`
 	Sequence          int              `json:"sequence"`
@@ -78,7 +78,7 @@ type ClaimCareTeam struct {
 // Additional information codes regarding exceptions, special considerations, the condition, situation, prior or concurrent issues.
 // Often there are multiple jurisdiction specific valuesets which are required.
 type ClaimSupportingInfo struct {
-	ID                *string          `json:"ID,omitempty"`
+	ID                *string          `json:"id,omitempty"`
 	Extension         []Extension      `json:"extension,omitempty"`
 	ModifierExtension []Extension      `json:"modifierExtension,omitempty"`
 	Sequence          int              `json:"sequence"`
@@ -96,7 +96,7 @@ type ClaimSupportingInfo struct {
 
 // Information about diagnoses relevant to the claim items.
 type ClaimDiagnosis struct {
-	ID                       *string           `json:"ID,omitempty"`
+	ID                       *string           `json:"id,omitempty"`
 	Extension                []Extension       `json:"extension,omitempty"`
 	ModifierExtension        []Extension       `json:"modifierExtension,omitempty"`
 	Sequence                 int               `json:"sequence"`
@@ -109,7 +109,7 @@ type ClaimDiagnosis struct {
 
 // Procedures performed on the patient relevant to the billing items with the claim.
 type ClaimProcedure struct {
-	ID                       *string           `json:"ID,omitempty"`
+	ID                       *string           `json:"id,omitempty"`
 	Extension                []Extension       `json:"extension,omitempty"`
 	ModifierExtension        []Extension       `json:"modifierExtension,omitempty"`
 	Sequence                 int               `json:"sequence"`
@@ -123,7 +123,7 @@ type ClaimProcedure struct {
 // Financial instruments for reimbursement for the health care products and services specified on the claim.
 // All insurance coverages for the patient which may be applicable for reimbursement, of the products and services listed in the claim, are typically provided in the claim to allow insurers to confirm the ordering of the insurance coverages relative to local 'coordination of benefit' rules. One coverage (and only one) with 'focal=true' is to be used in the adjudication of this claim. Coverages appearing before the focal Coverage in the list, and where 'Coverage.subrogation=false', should provide a reference to the ClaimResponse containing the adjudication results of the prior claim.
 type ClaimInsurance struct {
-	ID                  *string     `json:"ID,omitempty"`
+	ID                  *string     `json:"id,omitempty"`
 	Extension           []Extension `json:"extension,omitempty"`
 	ModifierExtension   []Extension `json:"modifierExtension,omitempty"`
 	Sequence            int         `json:"sequence"`
@@ -137,7 +137,7 @@ type ClaimInsurance struct {
 
 // Details of an accident which resulted in injuries which required the products and services listed in the claim.
 type ClaimAccident struct {
-	ID                *string          `json:"ID,omitempty"`
+	ID                *string          `json:"id,omitempty"`
 	Extension         []Extension      `json:"extension,omitempty"`
 	ModifierExtension []Extension      `json:"modifierExtension,omitempty"`
 	Date              string           `json:"date"`
@@ -148,7 +148,7 @@ type ClaimAccident struct {
 
 // A claim line. Either a simple  product or service or a 'group' of details which can each be a simple items or groups of sub-details.
 type ClaimItem struct {
-	ID                      *string           `json:"ID,omitempty"`
+	ID                      *string           `json:"id,omitempty"`
 	Extension               []Extension       `json:"extension,omitempty"`
 	ModifierExtension       []Extension       `json:"modifierExtension,omitempty"`
 	Sequence                int               `json:"sequence"`
@@ -179,7 +179,7 @@ type ClaimItem struct {
 
 // A claim detail line. Either a simple (a product or service) or a 'group' of sub-details which are simple items.
 type ClaimItemDetail struct {
-	ID                *string                    `json:"ID,omitempty"`
+	ID                *string                    `json:"id,omitempty"`
 	Extension         []Extension                `json:"extension,omitempty"`
 	ModifierExtension []Extension                `json:"modifierExtension,omitempty"`
 	Sequence          int                        `json:"sequence"`
@@ -198,7 +198,7 @@ type ClaimItemDetail struct {
 
 // A claim detail line. Either a simple (a product or service) or a 'group' of sub-details which are simple items.
 type ClaimItemDetailSubDetail struct {
-	ID                *string           `json:"ID,omitempty"`
+	ID                *string           `json:"id,omitempty"`
 	Extension         []Extension       `json:"extension,omitempty"`
 	ModifierExtension []Extension       `json:"modifierExtension,omitempty"`
 	Sequence          int               `json:"sequence"`

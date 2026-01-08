@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // Invoice is documented here http://hl7.org/fhir/StructureDefinition/Invoice
 // Invoice containing collected ChargeItems from an Account with calculated individual and total price for Billing purpose.
 type Invoice struct {
-	ID                  *string                         `json:"ID,omitempty"`
+	ID                  *string                         `json:"id,omitempty"`
 	Meta                *Meta                           `json:"meta,omitempty"`
 	ImplicitRules       *string                         `json:"implicitRules,omitempty"`
 	Language            *string                         `json:"language,omitempty"`
@@ -33,7 +33,7 @@ type Invoice struct {
 
 // Indicates who or what performed or participated in the charged service.
 type InvoiceParticipant struct {
-	ID                *string          `json:"ID,omitempty"`
+	ID                *string          `json:"id,omitempty"`
 	Extension         []Extension      `json:"extension,omitempty"`
 	ModifierExtension []Extension      `json:"modifierExtension,omitempty"`
 	Role              *CodeableConcept `json:"role,omitempty"`
@@ -42,7 +42,7 @@ type InvoiceParticipant struct {
 
 // Each line item represents one charge for goods and services rendered. Details such as date, code and amount are found in the referenced ChargeItem resource.
 type InvoiceLineItem struct {
-	ID                        *string                         `json:"ID,omitempty"`
+	ID                        *string                         `json:"id,omitempty"`
 	Extension                 []Extension                     `json:"extension,omitempty"`
 	ModifierExtension         []Extension                     `json:"modifierExtension,omitempty"`
 	Sequence                  *int                            `json:"sequence,omitempty"`
@@ -53,7 +53,7 @@ type InvoiceLineItem struct {
 
 // The price for a ChargeItem may be calculated as a base price with surcharges/deductions that apply in certain conditions. A ChargeItemDefinition resource that defines the prices, factors and conditions that apply to a billing code is currently under development. The priceComponent element can be used to offer transparency to the recipient of the Invoice as to how the prices have been calculated.
 type InvoiceLineItemPriceComponent struct {
-	ID                *string                   `json:"ID,omitempty"`
+	ID                *string                   `json:"id,omitempty"`
 	Extension         []Extension               `json:"extension,omitempty"`
 	ModifierExtension []Extension               `json:"modifierExtension,omitempty"`
 	Type              InvoicePriceComponentType `json:"type"`

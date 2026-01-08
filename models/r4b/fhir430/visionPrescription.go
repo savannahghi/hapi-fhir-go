@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // VisionPrescription is documented here http://hl7.org/fhir/StructureDefinition/VisionPrescription
 // An authorization for the provision of glasses and/or contact lenses to a patient.
 type VisionPrescription struct {
-	ID                *string                               `json:"ID,omitempty"`
+	ID                *string                               `json:"id,omitempty"`
 	Meta              *Meta                                 `json:"meta,omitempty"`
 	ImplicitRules     *string                               `json:"implicitRules,omitempty"`
 	Language          *string                               `json:"language,omitempty"`
@@ -25,7 +25,7 @@ type VisionPrescription struct {
 
 // Contain the details of  the individual lens specifications and serves as the authorization for the fullfillment by certified professionals.
 type VisionPrescriptionLensSpecification struct {
-	ID                *string                                    `json:"ID,omitempty"`
+	ID                *string                                    `json:"id,omitempty"`
 	Extension         []Extension                                `json:"extension,omitempty"`
 	ModifierExtension []Extension                                `json:"modifierExtension,omitempty"`
 	Product           CodeableConcept                            `json:"product"`
@@ -46,7 +46,7 @@ type VisionPrescriptionLensSpecification struct {
 
 // Allows for adjustment on two axis.
 type VisionPrescriptionLensSpecificationPrism struct {
-	ID                *string     `json:"ID,omitempty"`
+	ID                *string     `json:"id,omitempty"`
 	Extension         []Extension `json:"extension,omitempty"`
 	ModifierExtension []Extension `json:"modifierExtension,omitempty"`
 	Amount            json.Number `json:"amount"`

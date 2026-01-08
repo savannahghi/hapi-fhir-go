@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // DiagnosticReport is documented here http://hl7.org/fhir/StructureDefinition/DiagnosticReport
 // The findings and interpretation of diagnostic  tests performed on patients, groups of patients, devices, and locations, and/or specimens derived from these. The report includes clinical context such as requesting and provider information, and some mix of atomic results, images, textual and coded interpretations, and formatted representation of diagnostic reports.
 type DiagnosticReport struct {
-	ID                 *string                 `json:"ID,omitempty"`
+	ID                 *string                 `json:"id,omitempty"`
 	Meta               *Meta                   `json:"meta,omitempty"`
 	ImplicitRules      *string                 `json:"implicitRules,omitempty"`
 	Language           *string                 `json:"language,omitempty"`
@@ -36,7 +36,7 @@ type DiagnosticReport struct {
 
 // A list of key images associated with this report. The images are generally created during the diagnostic process, and may be directly of the patient, or of treated specimens (i.e. slides of interest).
 type DiagnosticReportMedia struct {
-	ID                *string     `json:"ID,omitempty"`
+	ID                *string     `json:"id,omitempty"`
 	Extension         []Extension `json:"extension,omitempty"`
 	ModifierExtension []Extension `json:"modifierExtension,omitempty"`
 	Comment           *string     `json:"comment,omitempty"`

@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // ExampleScenario is documented here http://hl7.org/fhir/StructureDefinition/ExampleScenario
 // Example of workflow instance.
 type ExampleScenario struct {
-	ID                *string                   `json:"ID,omitempty"`
+	ID                *string                   `json:"id,omitempty"`
 	Meta              *Meta                     `json:"meta,omitempty"`
 	ImplicitRules     *string                   `json:"implicitRules,omitempty"`
 	Language          *string                   `json:"language,omitempty"`
@@ -33,7 +33,7 @@ type ExampleScenario struct {
 
 // Actor participating in the resource.
 type ExampleScenarioActor struct {
-	ID                *string                  `json:"ID,omitempty"`
+	ID                *string                  `json:"id,omitempty"`
 	Extension         []Extension              `json:"extension,omitempty"`
 	ModifierExtension []Extension              `json:"modifierExtension,omitempty"`
 	ActorId           string                   `json:"actorId"`
@@ -44,7 +44,7 @@ type ExampleScenarioActor struct {
 
 // Each resource and each version that is present in the workflow.
 type ExampleScenarioInstance struct {
-	ID                *string                                    `json:"ID,omitempty"`
+	ID                *string                                    `json:"id,omitempty"`
 	Extension         []Extension                                `json:"extension,omitempty"`
 	ModifierExtension []Extension                                `json:"modifierExtension,omitempty"`
 	ResourceId        string                                     `json:"resourceId"`
@@ -57,7 +57,7 @@ type ExampleScenarioInstance struct {
 
 // A specific version of the resource.
 type ExampleScenarioInstanceVersion struct {
-	ID                *string     `json:"ID,omitempty"`
+	ID                *string     `json:"id,omitempty"`
 	Extension         []Extension `json:"extension,omitempty"`
 	ModifierExtension []Extension `json:"modifierExtension,omitempty"`
 	VersionId         string      `json:"versionId"`
@@ -66,7 +66,7 @@ type ExampleScenarioInstanceVersion struct {
 
 // Resources contained in the instance (e.g. the observations contained in a bundle).
 type ExampleScenarioInstanceContainedInstance struct {
-	ID                *string     `json:"ID,omitempty"`
+	ID                *string     `json:"id,omitempty"`
 	Extension         []Extension `json:"extension,omitempty"`
 	ModifierExtension []Extension `json:"modifierExtension,omitempty"`
 	ResourceId        string      `json:"resourceId"`
@@ -75,7 +75,7 @@ type ExampleScenarioInstanceContainedInstance struct {
 
 // Each major process - a group of operations.
 type ExampleScenarioProcess struct {
-	ID                *string                      `json:"ID,omitempty"`
+	ID                *string                      `json:"id,omitempty"`
 	Extension         []Extension                  `json:"extension,omitempty"`
 	ModifierExtension []Extension                  `json:"modifierExtension,omitempty"`
 	Title             string                       `json:"title"`
@@ -87,7 +87,7 @@ type ExampleScenarioProcess struct {
 
 // Each step of the process.
 type ExampleScenarioProcessStep struct {
-	ID                *string                                 `json:"ID,omitempty"`
+	ID                *string                                 `json:"id,omitempty"`
 	Extension         []Extension                             `json:"extension,omitempty"`
 	ModifierExtension []Extension                             `json:"modifierExtension,omitempty"`
 	Process           []ExampleScenarioProcess                `json:"process,omitempty"`
@@ -98,7 +98,7 @@ type ExampleScenarioProcessStep struct {
 
 // Each interaction or action.
 type ExampleScenarioProcessStepOperation struct {
-	ID                *string                                   `json:"ID,omitempty"`
+	ID                *string                                   `json:"id,omitempty"`
 	Extension         []Extension                               `json:"extension,omitempty"`
 	ModifierExtension []Extension                               `json:"modifierExtension,omitempty"`
 	Number            string                                    `json:"number"`
@@ -115,7 +115,7 @@ type ExampleScenarioProcessStepOperation struct {
 
 // Indicates an alternative step that can be taken instead of the operations on the base step in exceptional/atypical circumstances.
 type ExampleScenarioProcessStepAlternative struct {
-	ID                *string                      `json:"ID,omitempty"`
+	ID                *string                      `json:"id,omitempty"`
 	Extension         []Extension                  `json:"extension,omitempty"`
 	ModifierExtension []Extension                  `json:"modifierExtension,omitempty"`
 	Title             string                       `json:"title"`

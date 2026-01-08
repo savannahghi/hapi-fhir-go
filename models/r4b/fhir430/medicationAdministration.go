@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // MedicationAdministration is documented here http://hl7.org/fhir/StructureDefinition/MedicationAdministration
 // Describes the event of a patient consuming or otherwise being administered a medication.  This may be as simple as swallowing a tablet or it may be a long running infusion.  Related resources tie this event to the authorizing prescription, and the specific encounter between patient and health care practitioner.
 type MedicationAdministration struct {
-	ID                        *string                             `json:"ID,omitempty"`
+	ID                        *string                             `json:"id,omitempty"`
 	Meta                      *Meta                               `json:"meta,omitempty"`
 	ImplicitRules             *string                             `json:"implicitRules,omitempty"`
 	Language                  *string                             `json:"language,omitempty"`
@@ -38,7 +38,7 @@ type MedicationAdministration struct {
 
 // Indicates who or what performed the medication administration and how they were involved.
 type MedicationAdministrationPerformer struct {
-	ID                *string          `json:"ID,omitempty"`
+	ID                *string          `json:"id,omitempty"`
 	Extension         []Extension      `json:"extension,omitempty"`
 	ModifierExtension []Extension      `json:"modifierExtension,omitempty"`
 	Function          *CodeableConcept `json:"function,omitempty"`
@@ -47,7 +47,7 @@ type MedicationAdministrationPerformer struct {
 
 // Describes the medication dosage information details e.g. dose, rate, site, route, etc.
 type MedicationAdministrationDosage struct {
-	ID                *string          `json:"ID,omitempty"`
+	ID                *string          `json:"id,omitempty"`
 	Extension         []Extension      `json:"extension,omitempty"`
 	ModifierExtension []Extension      `json:"modifierExtension,omitempty"`
 	Text              *string          `json:"text,omitempty"`

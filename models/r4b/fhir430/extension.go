@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // Extension is documented here http://hl7.org/fhir/StructureDefinition/Extension
 // Base StructureDefinition for Extension Type: Optional Extension Element - found in all resources.
 type Extension struct {
-	ID                       *string              `json:"ID,omitempty"`
+	ID                       *string              `json:"id,omitempty"`
 	Extension                []Extension          `json:"extension,omitempty"`
 	Url                      string               `json:"url"`
 	ValueBase64Binary        *string              `json:"valueBase64Binary,omitempty"`

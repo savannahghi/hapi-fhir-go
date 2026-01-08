@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // MedicinalProductUndesirableEffect is documented here http://hl7.org/fhir/StructureDefinition/MedicinalProductUndesirableEffect
 // Describe the undesirable effects of the medicinal product.
 type MedicinalProductUndesirableEffect struct {
-	ID                     *string           `json:"ID,omitempty"`
+	ID                     *string           `json:"id,omitempty"`
 	Meta                   *Meta             `json:"meta,omitempty"`
 	ImplicitRules          *string           `json:"implicitRules,omitempty"`
 	Language               *string           `json:"language,omitempty"`

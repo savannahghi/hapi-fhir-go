@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // Bundle is documented here http://hl7.org/fhir/StructureDefinition/Bundle
 // A container for a collection of resources.
 type Bundle struct {
-	ID            *string       `json:"ID,omitempty"`
+	ID            *string       `json:"id,omitempty"`
 	Meta          *Meta         `json:"meta,omitempty"`
 	ImplicitRules *string       `json:"implicitRules,omitempty"`
 	Language      *string       `json:"language,omitempty"`
@@ -27,7 +27,7 @@ Bundle.entry.link corresponds to links found in the HTTP header if the resource 
 This specification defines some specific uses of Bundle.link for [searching](search.html#conformance) and [paging](http.html#paging), but no specific uses for Bundle.entry.link, and no defined function in a transaction - the meaning is implementation specific.
 */
 type BundleLink struct {
-	ID                *string     `json:"ID,omitempty"`
+	ID                *string     `json:"id,omitempty"`
 	Extension         []Extension `json:"extension,omitempty"`
 	ModifierExtension []Extension `json:"modifierExtension,omitempty"`
 	Relation          string      `json:"relation"`
@@ -36,7 +36,7 @@ type BundleLink struct {
 
 // An entry in a bundle resource - will either contain a resource or information about a resource (transactions and history only).
 type BundleEntry struct {
-	ID                *string              `json:"ID,omitempty"`
+	ID                *string              `json:"id,omitempty"`
 	Extension         []Extension          `json:"extension,omitempty"`
 	ModifierExtension []Extension          `json:"modifierExtension,omitempty"`
 	Link              []BundleLink         `json:"link,omitempty"`
@@ -49,7 +49,7 @@ type BundleEntry struct {
 
 // Information about the search process that lead to the creation of this entry.
 type BundleEntrySearch struct {
-	ID                *string          `json:"ID,omitempty"`
+	ID                *string          `json:"id,omitempty"`
 	Extension         []Extension      `json:"extension,omitempty"`
 	ModifierExtension []Extension      `json:"modifierExtension,omitempty"`
 	Mode              *SearchEntryMode `json:"mode,omitempty"`
@@ -58,7 +58,7 @@ type BundleEntrySearch struct {
 
 // Additional information about how this entry should be processed as part of a transaction or batch.  For history, it shows how the entry was processed to create the version contained in the entry.
 type BundleEntryRequest struct {
-	ID                *string     `json:"ID,omitempty"`
+	ID                *string     `json:"id,omitempty"`
 	Extension         []Extension `json:"extension,omitempty"`
 	ModifierExtension []Extension `json:"modifierExtension,omitempty"`
 	Method            HTTPVerb    `json:"method"`
@@ -71,7 +71,7 @@ type BundleEntryRequest struct {
 
 // Indicates the results of processing the corresponding 'request' entry in the batch or transaction being responded to or what the results of an operation where when returning history.
 type BundleEntryResponse struct {
-	ID                *string         `json:"ID,omitempty"`
+	ID                *string         `json:"id,omitempty"`
 	Extension         []Extension     `json:"extension,omitempty"`
 	ModifierExtension []Extension     `json:"modifierExtension,omitempty"`
 	Status            string          `json:"status"`

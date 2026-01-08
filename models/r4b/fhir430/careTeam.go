@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // CareTeam is documented here http://hl7.org/fhir/StructureDefinition/CareTeam
 // The Care Team includes all the people and organizations who plan to participate in the coordination and delivery of care for a patient.
 type CareTeam struct {
-	ID                   *string               `json:"ID,omitempty"`
+	ID                   *string               `json:"id,omitempty"`
 	Meta                 *Meta                 `json:"meta,omitempty"`
 	ImplicitRules        *string               `json:"implicitRules,omitempty"`
 	Language             *string               `json:"language,omitempty"`
@@ -30,7 +30,7 @@ type CareTeam struct {
 
 // Identifies all people and organizations who are expected to be involved in the care team.
 type CareTeamParticipant struct {
-	ID                *string           `json:"ID,omitempty"`
+	ID                *string           `json:"id,omitempty"`
 	Extension         []Extension       `json:"extension,omitempty"`
 	ModifierExtension []Extension       `json:"modifierExtension,omitempty"`
 	Role              []CodeableConcept `json:"role,omitempty"`

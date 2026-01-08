@@ -5,7 +5,7 @@ import "encoding/json"
 // Account is documented here http://hl7.org/fhir/StructureDefinition/Account
 // A financial tool for tracking value accrued for a particular purpose.  In the healthcare field, used to track charges for a patient, cost centers, etc.
 type Account struct {
-	ID                *string            `json:"ID,omitempty"`
+	ID                *string            `json:"id,omitempty"`
 	Meta              *Meta              `json:"meta,omitempty"`
 	ImplicitRules     *string            `json:"implicitRules,omitempty"`
 	Language          *string            `json:"language,omitempty"`
@@ -34,7 +34,7 @@ Local or jurisdictional business rules may determine which coverage covers which
 Where the order is important, a local/jurisdictional extension may be defined to specify the order for the type of charge.
 */
 type AccountCoverage struct {
-	ID                *string     `json:"ID,omitempty"`
+	ID                *string     `json:"id,omitempty"`
 	Extension         []Extension `json:"extension,omitempty"`
 	ModifierExtension []Extension `json:"modifierExtension,omitempty"`
 	Coverage          Reference   `json:"coverage"`
@@ -43,7 +43,7 @@ type AccountCoverage struct {
 
 // The parties responsible for balancing the account if other payment options fall short.
 type AccountGuarantor struct {
-	ID                *string     `json:"ID,omitempty"`
+	ID                *string     `json:"id,omitempty"`
 	Extension         []Extension `json:"extension,omitempty"`
 	ModifierExtension []Extension `json:"modifierExtension,omitempty"`
 	Party             Reference   `json:"party"`

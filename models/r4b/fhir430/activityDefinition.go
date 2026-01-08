@@ -5,7 +5,7 @@ import "encoding/json"
 // ActivityDefinition is documented here http://hl7.org/fhir/StructureDefinition/ActivityDefinition
 // This resource allows for the definition of some activity to be performed, independent of a particular patient, practitioner, or other performance context.
 type ActivityDefinition struct {
-	ID                           *string                          `json:"ID,omitempty"`
+	ID                           *string                          `json:"id,omitempty"`
 	Meta                         *Meta                            `json:"meta,omitempty"`
 	ImplicitRules                *string                          `json:"implicitRules,omitempty"`
 	Language                     *string                          `json:"language,omitempty"`
@@ -69,7 +69,7 @@ type ActivityDefinition struct {
 
 // Indicates who should participate in performing the action described.
 type ActivityDefinitionParticipant struct {
-	ID                *string               `json:"ID,omitempty"`
+	ID                *string               `json:"id,omitempty"`
 	Extension         []Extension           `json:"extension,omitempty"`
 	ModifierExtension []Extension           `json:"modifierExtension,omitempty"`
 	Type              ActionParticipantType `json:"type"`
@@ -79,7 +79,7 @@ type ActivityDefinitionParticipant struct {
 // Dynamic values that will be evaluated to produce values for elements of the resulting resource. For example, if the dosage of a medication must be computed based on the patient's weight, a dynamic value would be used to specify an expression that calculated the weight, and the path on the request resource that would contain the result.
 // Dynamic values are applied in the order in which they are defined in the ActivityDefinition. Note that if both a transform and dynamic values are specified, the dynamic values will be applied to the result of the transform.
 type ActivityDefinitionDynamicValue struct {
-	ID                *string     `json:"ID,omitempty"`
+	ID                *string     `json:"id,omitempty"`
 	Extension         []Extension `json:"extension,omitempty"`
 	ModifierExtension []Extension `json:"modifierExtension,omitempty"`
 	Path              string      `json:"path"`

@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // Procedure is documented here http://hl7.org/fhir/StructureDefinition/Procedure
 // An action that is or was performed on or for a patient. This can be a physical intervention like an operation, or less invasive like long term services, counseling, or hypnotherapy.
 type Procedure struct {
-	ID                    *string                `json:"ID,omitempty"`
+	ID                    *string                `json:"id,omitempty"`
 	Meta                  *Meta                  `json:"meta,omitempty"`
 	ImplicitRules         *string                `json:"implicitRules,omitempty"`
 	Language              *string                `json:"language,omitempty"`
@@ -49,7 +49,7 @@ type Procedure struct {
 
 // Limited to "real" people rather than equipment.
 type ProcedurePerformer struct {
-	ID                *string          `json:"ID,omitempty"`
+	ID                *string          `json:"id,omitempty"`
 	Extension         []Extension      `json:"extension,omitempty"`
 	ModifierExtension []Extension      `json:"modifierExtension,omitempty"`
 	Function          *CodeableConcept `json:"function,omitempty"`
@@ -59,7 +59,7 @@ type ProcedurePerformer struct {
 
 // A device that is implanted, removed or otherwise manipulated (calibration, battery replacement, fitting a prosthesis, attaching a wound-vac, etc.) as a focal portion of the Procedure.
 type ProcedureFocalDevice struct {
-	ID                *string          `json:"ID,omitempty"`
+	ID                *string          `json:"id,omitempty"`
 	Extension         []Extension      `json:"extension,omitempty"`
 	ModifierExtension []Extension      `json:"modifierExtension,omitempty"`
 	Action            *CodeableConcept `json:"action,omitempty"`

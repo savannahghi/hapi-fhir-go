@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // Person is documented here http://hl7.org/fhir/StructureDefinition/Person
 // Demographics and administrative information about a person independent of a specific health-related context.
 type Person struct {
-	ID                   *string               `json:"ID,omitempty"`
+	ID                   *string               `json:"id,omitempty"`
 	Meta                 *Meta                 `json:"meta,omitempty"`
 	ImplicitRules        *string               `json:"implicitRules,omitempty"`
 	Language             *string               `json:"language,omitempty"`
@@ -27,7 +27,7 @@ type Person struct {
 
 // Link to a resource that concerns the same actual person.
 type PersonLink struct {
-	ID                *string                 `json:"ID,omitempty"`
+	ID                *string                 `json:"id,omitempty"`
 	Extension         []Extension             `json:"extension,omitempty"`
 	ModifierExtension []Extension             `json:"modifierExtension,omitempty"`
 	Target            Reference               `json:"target"`

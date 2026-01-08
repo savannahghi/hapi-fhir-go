@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // RelatedPerson is documented here http://hl7.org/fhir/StructureDefinition/RelatedPerson
 // Information about a person that is involved in the care for a patient, but who is not the target of healthcare, nor has a formal responsibility in the care process.
 type RelatedPerson struct {
-	ID                *string                      `json:"ID,omitempty"`
+	ID                *string                      `json:"id,omitempty"`
 	Meta              *Meta                        `json:"meta,omitempty"`
 	ImplicitRules     *string                      `json:"implicitRules,omitempty"`
 	Language          *string                      `json:"language,omitempty"`
@@ -30,7 +30,7 @@ type RelatedPerson struct {
 // A language which may be used to communicate with about the patient's health.
 // If no language is specified, this *implies* that the default local language is spoken.  If you need to convey proficiency for multiple modes, then you need multiple RelatedPerson.Communication associations.   If the RelatedPerson does not speak the default local language, then the Interpreter Required Standard can be used to explicitly declare that an interpreter is required.
 type RelatedPersonCommunication struct {
-	ID                *string         `json:"ID,omitempty"`
+	ID                *string         `json:"id,omitempty"`
 	Extension         []Extension     `json:"extension,omitempty"`
 	ModifierExtension []Extension     `json:"modifierExtension,omitempty"`
 	Language          CodeableConcept `json:"language"`

@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // CatalogEntry is documented here http://hl7.org/fhir/StructureDefinition/CatalogEntry
 // Catalog entries are wrappers that contextualize items included in a catalog.
 type CatalogEntry struct {
-	ID                       *string                    `json:"ID,omitempty"`
+	ID                       *string                    `json:"id,omitempty"`
 	Meta                     *Meta                      `json:"meta,omitempty"`
 	ImplicitRules            *string                    `json:"implicitRules,omitempty"`
 	Language                 *string                    `json:"language,omitempty"`
@@ -30,7 +30,7 @@ type CatalogEntry struct {
 
 // Used for example, to point to a substance, or to a device used to administer a medication.
 type CatalogEntryRelatedEntry struct {
-	ID                *string                  `json:"ID,omitempty"`
+	ID                *string                  `json:"id,omitempty"`
 	Extension         []Extension              `json:"extension,omitempty"`
 	ModifierExtension []Extension              `json:"modifierExtension,omitempty"`
 	Relationtype      CatalogEntryRelationType `json:"relationtype"`

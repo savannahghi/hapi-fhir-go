@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // RiskEvidenceSynthesis is documented here http://hl7.org/fhir/StructureDefinition/RiskEvidenceSynthesis
 // The RiskEvidenceSynthesis resource describes the likelihood of an outcome in a population plus exposure state where the risk estimate is derived from a combination of research studies.
 type RiskEvidenceSynthesis struct {
-	ID                *string                            `json:"ID,omitempty"`
+	ID                *string                            `json:"id,omitempty"`
 	Meta              *Meta                              `json:"meta,omitempty"`
 	ImplicitRules     *string                            `json:"implicitRules,omitempty"`
 	Language          *string                            `json:"language,omitempty"`
@@ -47,7 +47,7 @@ type RiskEvidenceSynthesis struct {
 
 // A description of the size of the sample involved in the synthesis.
 type RiskEvidenceSynthesisSampleSize struct {
-	ID                   *string     `json:"ID,omitempty"`
+	ID                   *string     `json:"id,omitempty"`
 	Extension            []Extension `json:"extension,omitempty"`
 	ModifierExtension    []Extension `json:"modifierExtension,omitempty"`
 	Description          *string     `json:"description,omitempty"`
@@ -57,7 +57,7 @@ type RiskEvidenceSynthesisSampleSize struct {
 
 // The estimated risk of the outcome.
 type RiskEvidenceSynthesisRiskEstimate struct {
-	ID                *string                                              `json:"ID,omitempty"`
+	ID                *string                                              `json:"id,omitempty"`
 	Extension         []Extension                                          `json:"extension,omitempty"`
 	ModifierExtension []Extension                                          `json:"modifierExtension,omitempty"`
 	Description       *string                                              `json:"description,omitempty"`
@@ -71,7 +71,7 @@ type RiskEvidenceSynthesisRiskEstimate struct {
 
 // A description of the precision of the estimate for the effect.
 type RiskEvidenceSynthesisRiskEstimatePrecisionEstimate struct {
-	ID                *string          `json:"ID,omitempty"`
+	ID                *string          `json:"id,omitempty"`
 	Extension         []Extension      `json:"extension,omitempty"`
 	ModifierExtension []Extension      `json:"modifierExtension,omitempty"`
 	Type              *CodeableConcept `json:"type,omitempty"`
@@ -82,7 +82,7 @@ type RiskEvidenceSynthesisRiskEstimatePrecisionEstimate struct {
 
 // A description of the certainty of the risk estimate.
 type RiskEvidenceSynthesisCertainty struct {
-	ID                    *string                                               `json:"ID,omitempty"`
+	ID                    *string                                               `json:"id,omitempty"`
 	Extension             []Extension                                           `json:"extension,omitempty"`
 	ModifierExtension     []Extension                                           `json:"modifierExtension,omitempty"`
 	Rating                []CodeableConcept                                     `json:"rating,omitempty"`
@@ -92,7 +92,7 @@ type RiskEvidenceSynthesisCertainty struct {
 
 // A description of a component of the overall certainty.
 type RiskEvidenceSynthesisCertaintyCertaintySubcomponent struct {
-	ID                *string           `json:"ID,omitempty"`
+	ID                *string           `json:"id,omitempty"`
 	Extension         []Extension       `json:"extension,omitempty"`
 	ModifierExtension []Extension       `json:"modifierExtension,omitempty"`
 	Type              *CodeableConcept  `json:"type,omitempty"`

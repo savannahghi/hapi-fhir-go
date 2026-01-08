@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // Schedule is documented here http://hl7.org/fhir/StructureDefinition/Schedule
 // A container for slots of time that may be available for booking appointments.
 type Schedule struct {
-	ID                *string           `json:"ID,omitempty"`
+	ID                *string           `json:"id,omitempty"`
 	Meta              *Meta             `json:"meta,omitempty"`
 	ImplicitRules     *string           `json:"implicitRules,omitempty"`
 	Language          *string           `json:"language,omitempty"`

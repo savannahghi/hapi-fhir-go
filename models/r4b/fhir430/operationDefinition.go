@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // OperationDefinition is documented here http://hl7.org/fhir/StructureDefinition/OperationDefinition
 // A formal computable definition of an operation (on the RESTful interface) or a named query (using the search interaction).
 type OperationDefinition struct {
-	ID                *string                        `json:"ID,omitempty"`
+	ID                *string                        `json:"id,omitempty"`
 	Meta              *Meta                          `json:"meta,omitempty"`
 	ImplicitRules     *string                        `json:"implicitRules,omitempty"`
 	Language          *string                        `json:"language,omitempty"`
@@ -44,7 +44,7 @@ type OperationDefinition struct {
 // The parameters for the operation/query.
 // Query Definitions only have one output parameter, named "result". This might not be described, but can be to allow a profile to be defined.
 type OperationDefinitionParameter struct {
-	ID                *string                                      `json:"ID,omitempty"`
+	ID                *string                                      `json:"id,omitempty"`
 	Extension         []Extension                                  `json:"extension,omitempty"`
 	ModifierExtension []Extension                                  `json:"modifierExtension,omitempty"`
 	Name              string                                       `json:"name"`
@@ -62,7 +62,7 @@ type OperationDefinitionParameter struct {
 
 // Binds to a value set if this parameter is coded (code, Coding, CodeableConcept).
 type OperationDefinitionParameterBinding struct {
-	ID                *string         `json:"ID,omitempty"`
+	ID                *string         `json:"id,omitempty"`
 	Extension         []Extension     `json:"extension,omitempty"`
 	ModifierExtension []Extension     `json:"modifierExtension,omitempty"`
 	Strength          BindingStrength `json:"strength"`
@@ -72,7 +72,7 @@ type OperationDefinitionParameterBinding struct {
 // Identifies other resource parameters within the operation invocation that are expected to resolve to this resource.
 // Resolution applies if the referenced parameter exists.
 type OperationDefinitionParameterReferencedFrom struct {
-	ID                *string     `json:"ID,omitempty"`
+	ID                *string     `json:"id,omitempty"`
 	Extension         []Extension `json:"extension,omitempty"`
 	ModifierExtension []Extension `json:"modifierExtension,omitempty"`
 	Source            string      `json:"source"`
@@ -82,7 +82,7 @@ type OperationDefinitionParameterReferencedFrom struct {
 // Defines an appropriate combination of parameters to use when invoking this operation, to help code generators when generating overloaded parameter sets for this operation.
 // The combinations are suggestions as to which sets of parameters to use together, but the combinations are not intended to be authoritative.
 type OperationDefinitionOverload struct {
-	ID                *string     `json:"ID,omitempty"`
+	ID                *string     `json:"id,omitempty"`
 	Extension         []Extension `json:"extension,omitempty"`
 	ModifierExtension []Extension `json:"modifierExtension,omitempty"`
 	ParameterName     []string    `json:"parameterName,omitempty"`

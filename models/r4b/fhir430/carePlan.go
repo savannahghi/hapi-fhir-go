@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // CarePlan is documented here http://hl7.org/fhir/StructureDefinition/CarePlan
 // Describes the intention of how one or more practitioners intend to deliver care for a particular patient, group or community for a period of time, possibly limited to care for a specific condition or set of conditions.
 type CarePlan struct {
-	ID                    *string            `json:"ID,omitempty"`
+	ID                    *string            `json:"id,omitempty"`
 	Meta                  *Meta              `json:"meta,omitempty"`
 	ImplicitRules         *string            `json:"implicitRules,omitempty"`
 	Language              *string            `json:"language,omitempty"`
@@ -40,7 +40,7 @@ type CarePlan struct {
 
 // Identifies a planned action to occur as part of the plan.  For example, a medication to be used, lab tests to perform, self-monitoring, education, etc.
 type CarePlanActivity struct {
-	ID                     *string                 `json:"ID,omitempty"`
+	ID                     *string                 `json:"id,omitempty"`
 	Extension              []Extension             `json:"extension,omitempty"`
 	ModifierExtension      []Extension             `json:"modifierExtension,omitempty"`
 	OutcomeCodeableConcept []CodeableConcept       `json:"outcomeCodeableConcept,omitempty"`
@@ -52,7 +52,7 @@ type CarePlanActivity struct {
 
 // A simple summary of a planned activity suitable for a general care plan system (e.g. form driven) that doesn't know about specific resources such as procedure etc.
 type CarePlanActivityDetail struct {
-	ID                     *string                `json:"ID,omitempty"`
+	ID                     *string                `json:"id,omitempty"`
 	Extension              []Extension            `json:"extension,omitempty"`
 	ModifierExtension      []Extension            `json:"modifierExtension,omitempty"`
 	Kind                   *CarePlanActivityKind  `json:"kind,omitempty"`

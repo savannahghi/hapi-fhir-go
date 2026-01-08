@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // GraphDefinition is documented here http://hl7.org/fhir/StructureDefinition/GraphDefinition
 // A formal computable definition of a graph of resources - that is, a coherent set of resources that form a graph by following references. The Graph Definition resource defines a set and makes rules about the set.
 type GraphDefinition struct {
-	ID                *string               `json:"ID,omitempty"`
+	ID                *string               `json:"id,omitempty"`
 	Meta              *Meta                 `json:"meta,omitempty"`
 	ImplicitRules     *string               `json:"implicitRules,omitempty"`
 	Language          *string               `json:"language,omitempty"`
@@ -32,7 +32,7 @@ type GraphDefinition struct {
 
 // Links this graph makes rules about.
 type GraphDefinitionLink struct {
-	ID                *string                     `json:"ID,omitempty"`
+	ID                *string                     `json:"id,omitempty"`
 	Extension         []Extension                 `json:"extension,omitempty"`
 	ModifierExtension []Extension                 `json:"modifierExtension,omitempty"`
 	Path              *string                     `json:"path,omitempty"`
@@ -45,7 +45,7 @@ type GraphDefinitionLink struct {
 
 // Potential target for the link.
 type GraphDefinitionLinkTarget struct {
-	ID                *string                                `json:"ID,omitempty"`
+	ID                *string                                `json:"id,omitempty"`
 	Extension         []Extension                            `json:"extension,omitempty"`
 	ModifierExtension []Extension                            `json:"modifierExtension,omitempty"`
 	Type              ResourceType                           `json:"type"`
@@ -57,7 +57,7 @@ type GraphDefinitionLinkTarget struct {
 
 // Compartment Consistency Rules.
 type GraphDefinitionLinkTargetCompartment struct {
-	ID                *string              `json:"ID,omitempty"`
+	ID                *string              `json:"id,omitempty"`
 	Extension         []Extension          `json:"extension,omitempty"`
 	ModifierExtension []Extension          `json:"modifierExtension,omitempty"`
 	Use               GraphCompartmentUse  `json:"use"`

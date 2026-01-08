@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // DeviceRequest is documented here http://hl7.org/fhir/StructureDefinition/DeviceRequest
 // Represents a request for a patient to employ a medical device. The device may be an implantable device, or an external assistive device, such as a walker.
 type DeviceRequest struct {
-	ID                    *string                  `json:"ID,omitempty"`
+	ID                    *string                  `json:"id,omitempty"`
 	Meta                  *Meta                    `json:"meta,omitempty"`
 	ImplicitRules         *string                  `json:"implicitRules,omitempty"`
 	Language              *string                  `json:"language,omitempty"`
@@ -44,7 +44,7 @@ type DeviceRequest struct {
 
 // Specific parameters for the ordered item.  For example, the prism value for lenses.
 type DeviceRequestParameter struct {
-	ID                   *string          `json:"ID,omitempty"`
+	ID                   *string          `json:"id,omitempty"`
 	Extension            []Extension      `json:"extension,omitempty"`
 	ModifierExtension    []Extension      `json:"modifierExtension,omitempty"`
 	Code                 *CodeableConcept `json:"code,omitempty"`

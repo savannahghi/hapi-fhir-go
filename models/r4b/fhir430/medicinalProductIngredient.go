@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // MedicinalProductIngredient is documented here http://hl7.org/fhir/StructureDefinition/MedicinalProductIngredient
 // An ingredient of a manufactured item or pharmaceutical product.
 type MedicinalProductIngredient struct {
-	ID                  *string                                        `json:"ID,omitempty"`
+	ID                  *string                                        `json:"id,omitempty"`
 	Meta                *Meta                                          `json:"meta,omitempty"`
 	ImplicitRules       *string                                        `json:"implicitRules,omitempty"`
 	Language            *string                                        `json:"language,omitempty"`
@@ -23,7 +23,7 @@ type MedicinalProductIngredient struct {
 
 // A specified substance that comprises this ingredient.
 type MedicinalProductIngredientSpecifiedSubstance struct {
-	ID                *string                                                `json:"ID,omitempty"`
+	ID                *string                                                `json:"id,omitempty"`
 	Extension         []Extension                                            `json:"extension,omitempty"`
 	ModifierExtension []Extension                                            `json:"modifierExtension,omitempty"`
 	Code              CodeableConcept                                        `json:"code"`
@@ -34,7 +34,7 @@ type MedicinalProductIngredientSpecifiedSubstance struct {
 
 // Quantity of the substance or specified substance present in the manufactured item or pharmaceutical product.
 type MedicinalProductIngredientSpecifiedSubstanceStrength struct {
-	ID                    *string                                                                 `json:"ID,omitempty"`
+	ID                    *string                                                                 `json:"id,omitempty"`
 	Extension             []Extension                                                             `json:"extension,omitempty"`
 	ModifierExtension     []Extension                                                             `json:"modifierExtension,omitempty"`
 	Presentation          Ratio                                                                   `json:"presentation"`
@@ -48,7 +48,7 @@ type MedicinalProductIngredientSpecifiedSubstanceStrength struct {
 
 // Strength expressed in terms of a reference substance.
 type MedicinalProductIngredientSpecifiedSubstanceStrengthReferenceStrength struct {
-	ID                *string           `json:"ID,omitempty"`
+	ID                *string           `json:"id,omitempty"`
 	Extension         []Extension       `json:"extension,omitempty"`
 	ModifierExtension []Extension       `json:"modifierExtension,omitempty"`
 	Substance         *CodeableConcept  `json:"substance,omitempty"`
@@ -60,7 +60,7 @@ type MedicinalProductIngredientSpecifiedSubstanceStrengthReferenceStrength struc
 
 // The ingredient substance.
 type MedicinalProductIngredientSubstance struct {
-	ID                *string                                                `json:"ID,omitempty"`
+	ID                *string                                                `json:"id,omitempty"`
 	Extension         []Extension                                            `json:"extension,omitempty"`
 	ModifierExtension []Extension                                            `json:"modifierExtension,omitempty"`
 	Code              CodeableConcept                                        `json:"code"`

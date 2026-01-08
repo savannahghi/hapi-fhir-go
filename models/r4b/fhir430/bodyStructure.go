@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // BodyStructure is documented here http://hl7.org/fhir/StructureDefinition/BodyStructure
 // Record details about an anatomical structure.  This resource may be used when a coded concept does not provide the necessary detail needed for the use case.
 type BodyStructure struct {
-	ID                *string           `json:"ID,omitempty"`
+	ID                *string           `json:"id,omitempty"`
 	Meta              *Meta             `json:"meta,omitempty"`
 	ImplicitRules     *string           `json:"implicitRules,omitempty"`
 	Language          *string           `json:"language,omitempty"`

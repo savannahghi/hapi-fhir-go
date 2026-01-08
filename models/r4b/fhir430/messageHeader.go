@@ -1,11 +1,11 @@
-
 package fhir430
 
 import "encoding/json"
+
 // MessageHeader is documented here http://hl7.org/fhir/StructureDefinition/MessageHeader
 // The header for a message exchange that is either requesting or responding to an action.  The reference(s) that are the subject of the action as well as other information related to the action are typically transmitted in a bundle in which the MessageHeader resource instance is the first resource in the bundle.
 type MessageHeader struct {
-	ID                *string                    `json:"ID,omitempty"`
+	ID                *string                    `json:"id,omitempty"`
 	Meta              *Meta                      `json:"meta,omitempty"`
 	ImplicitRules     *string                    `json:"implicitRules,omitempty"`
 	Language          *string                    `json:"language,omitempty"`
@@ -30,7 +30,7 @@ type MessageHeader struct {
 // The destination application which the message is intended for.
 // There SHOULD be at least one destination, but in some circumstances, the source system is unaware of any particular destination system.
 type MessageHeaderDestination struct {
-	ID                *string     `json:"ID,omitempty"`
+	ID                *string     `json:"id,omitempty"`
 	Extension         []Extension `json:"extension,omitempty"`
 	ModifierExtension []Extension `json:"modifierExtension,omitempty"`
 	Name              *string     `json:"name,omitempty"`
@@ -41,7 +41,7 @@ type MessageHeaderDestination struct {
 
 // The source application from which this message originated.
 type MessageHeaderSource struct {
-	ID                *string       `json:"ID,omitempty"`
+	ID                *string       `json:"id,omitempty"`
 	Extension         []Extension   `json:"extension,omitempty"`
 	ModifierExtension []Extension   `json:"modifierExtension,omitempty"`
 	Name              *string       `json:"name,omitempty"`
@@ -53,7 +53,7 @@ type MessageHeaderSource struct {
 
 // Information about the message that this message is a response to.  Only present if this message is a response.
 type MessageHeaderResponse struct {
-	ID                *string      `json:"ID,omitempty"`
+	ID                *string      `json:"id,omitempty"`
 	Extension         []Extension  `json:"extension,omitempty"`
 	ModifierExtension []Extension  `json:"modifierExtension,omitempty"`
 	Identifier        string       `json:"identifier"`
