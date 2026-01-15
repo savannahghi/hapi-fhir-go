@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.14.0](https://github.com/savannahghi/hapi-fhir-go/compare/v1.13.0...v1.14.0) (2026-01-15)
+
+
+### Features
+
+* extract all errors from fhir operation outcome ([#90](https://github.com/savannahghi/hapi-fhir-go/issues/90)) ([8aeef06](https://github.com/savannahghi/hapi-fhir-go/commit/8aeef06e9b63b794d38754a2df4c1dad8923569a))
+
+
+### Bug Fixes
+
+* all resources json `id` propery ([#88](https://github.com/savannahghi/hapi-fhir-go/issues/88)) ([54241a7](https://github.com/savannahghi/hapi-fhir-go/commit/54241a7a2ce32edefb0f481bbdd002047d597d04))
+
 ## [1.13.0](https://github.com/savannahghi/hapi-fhir-go/compare/v1.12.3...v1.13.0) (2025-12-02)
 
 
