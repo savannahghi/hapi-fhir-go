@@ -279,8 +279,11 @@ func (c *Client) makeRequest(
 	return c.readResponse(resp, path, result)
 }
 
+// isValidSeverity returns true if the severity does not indicate a failure.
+// Only "error" and "fatal" severities cause validation to fail.
+// "warning", "information", and "success" are considered non-failing.
 func isValidSeverity(severity string) bool {
-	return severity == "success" || severity == "information"
+	return severity == "success" || severity == "information" || severity == "warning"
 }
 
 /*
