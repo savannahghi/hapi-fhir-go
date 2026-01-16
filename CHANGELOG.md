@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.15.1](https://github.com/savannahghi/hapi-fhir-go/compare/v1.15.0...v1.15.1) (2026-01-16)
+
+
+### Bug Fixes
+
+* ignore warning errors when validating resources ([#92](https://github.com/savannahghi/hapi-fhir-go/issues/92)) ([64cc45c](https://github.com/savannahghi/hapi-fhir-go/commit/64cc45c5b3a42841b694d134b0a8abe9f694c9c7))
+
 ## [1.15.0](https://github.com/savannahghi/hapi-fhir-go/compare/v1.14.0...v1.15.0) (2026-01-15)
 
 
