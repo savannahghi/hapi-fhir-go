@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.15.2](https://github.com/savannahghi/hapi-fhir-go/compare/v1.15.1...v1.15.2) (2026-01-30)
+
+
+### Bug Fixes
+
+* skip validation for questionnaire and questionnaire-response ([#94](https://github.com/savannahghi/hapi-fhir-go/issues/94)) ([3db42ec](https://github.com/savannahghi/hapi-fhir-go/commit/3db42ec525e6f597cf809b726c0e6bf0a49d4eee))
+
 ## [1.15.1](https://github.com/savannahghi/hapi-fhir-go/compare/v1.15.0...v1.15.1) (2026-01-16)
 
 
