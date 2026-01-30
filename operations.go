@@ -23,15 +23,20 @@ import (
 // CreateFHIRResource creates a FHIR resource
 // POST [base]/[type].
 func (c *Client) CreateFHIRResource(ctx context.Context, resourceType string, payload map[string]interface{}, resource interface{}) error {
+	var skipValidationResources = map[string]bool{
+		"Questionnaire":         true,
+		"QuestionnaireResponse": true,
+	}
 	payload["resourceType"] = resourceType
 	payload["language"] = "en"
-
-	err := c.ValidateResource(ctx, resourceType, payload)
-	if err != nil {
-		return err
+	if !skipValidationResources[resourceType] {
+		err := c.ValidateResource(ctx, resourceType, payload)
+		if err != nil {
+			return err
+		}
 	}
 
-	err = c.makeRequest(ctx, http.MethodPost, resourceType, nil, payload, resource, false)
+	err := c.makeRequest(ctx, http.MethodPost, resourceType, nil, payload, resource, false)
 	if err != nil {
 		return err
 	}
