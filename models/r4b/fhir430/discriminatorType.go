@@ -1,0 +1,92 @@
+
+package fhir430
+
+import (
+	"encoding/json"
+	"fmt"
+	"strings"
+)
+// DiscriminatorType is documented here http://hl7.org/fhir/ValueSet/discriminator-type
+type DiscriminatorType int
+
+const (
+	DiscriminatorTypeValue DiscriminatorType = iota
+	DiscriminatorTypeExists
+	DiscriminatorTypePattern
+	DiscriminatorTypeType
+	DiscriminatorTypeProfile
+)
+
+func (code DiscriminatorType) MarshalJSON() ([]byte, error) {
+	return json.Marshal(code.Code())
+}
+func (code *DiscriminatorType) UnmarshalJSON(input []byte) error {
+	var s string
+	if err := json.Unmarshal(input, &s); err != nil {
+		return fmt.Errorf("failed to Unmarshal DiscriminatorType code `%s`", s)
+	}
+	s = strings.ToLower(s)
+	switch s {
+	case "value":
+		*code = DiscriminatorTypeValue
+	case "exists":
+		*code = DiscriminatorTypeExists
+	case "pattern":
+		*code = DiscriminatorTypePattern
+	case "type":
+		*code = DiscriminatorTypeType
+	case "profile":
+		*code = DiscriminatorTypeProfile
+	default:
+		return fmt.Errorf("unknown DiscriminatorType code `%s`", s)
+	}
+	return nil
+}
+func (code DiscriminatorType) String() string {
+	return code.Code()
+}
+func (code DiscriminatorType) Code() string {
+	switch code {
+	case DiscriminatorTypeValue:
+		return "value"
+	case DiscriminatorTypeExists:
+		return "exists"
+	case DiscriminatorTypePattern:
+		return "pattern"
+	case DiscriminatorTypeType:
+		return "type"
+	case DiscriminatorTypeProfile:
+		return "profile"
+	}
+	return "<unknown>"
+}
+func (code DiscriminatorType) Display() string {
+	switch code {
+	case DiscriminatorTypeValue:
+		return "Value"
+	case DiscriminatorTypeExists:
+		return "Exists"
+	case DiscriminatorTypePattern:
+		return "Pattern"
+	case DiscriminatorTypeType:
+		return "Type"
+	case DiscriminatorTypeProfile:
+		return "Profile"
+	}
+	return "<unknown>"
+}
+func (code DiscriminatorType) Definition() string {
+	switch code {
+	case DiscriminatorTypeValue:
+		return "The slices have different values in the nominated element."
+	case DiscriminatorTypeExists:
+		return "The slices are differentiated by the presence or absence of the nominated element."
+	case DiscriminatorTypePattern:
+		return "The slices have different values in the nominated element, as determined by testing them against the applicable ElementDefinition.pattern[x]."
+	case DiscriminatorTypeType:
+		return "The slices are differentiated by type of the nominated element."
+	case DiscriminatorTypeProfile:
+		return "The slices are differentiated by conformance of the nominated element to a specified profile. Note that if the path specifies .resolve() then the profile is the target profile on the reference. In this case, validation by the possible profiles is required to differentiate the slices."
+	}
+	return "<unknown>"
+}

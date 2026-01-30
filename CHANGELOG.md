@@ -1,5 +1,85 @@
 # Changelog
 
+## [1.15.1](https://github.com/savannahghi/hapi-fhir-go/compare/v1.15.0...v1.15.1) (2026-01-16)
+
+
+### Bug Fixes
+
+* ignore warning errors when validating resources ([#92](https://github.com/savannahghi/hapi-fhir-go/issues/92)) ([64cc45c](https://github.com/savannahghi/hapi-fhir-go/commit/64cc45c5b3a42841b694d134b0a8abe9f694c9c7))
+
+## [1.15.0](https://github.com/savannahghi/hapi-fhir-go/compare/v1.14.0...v1.15.0) (2026-01-15)
+
+
+### Features
+
+* extract all errors from fhir operation outcome ([#90](https://github.com/savannahghi/hapi-fhir-go/issues/90)) ([8aeef06](https://github.com/savannahghi/hapi-fhir-go/commit/8aeef06e9b63b794d38754a2df4c1dad8923569a))
+
+
+### Bug Fixes
+
+* all resources json `id` propery ([#88](https://github.com/savannahghi/hapi-fhir-go/issues/88)) ([54241a7](https://github.com/savannahghi/hapi-fhir-go/commit/54241a7a2ce32edefb0f481bbdd002047d597d04))
+
+## [1.14.0](https://github.com/savannahghi/hapi-fhir-go/compare/v1.13.0...v1.14.0) (2026-01-15)
+
+
+### Features
+
+* extract all errors from fhir operation outcome ([#90](https://github.com/savannahghi/hapi-fhir-go/issues/90)) ([8aeef06](https://github.com/savannahghi/hapi-fhir-go/commit/8aeef06e9b63b794d38754a2df4c1dad8923569a))
+
+
+### Bug Fixes
+
+* all resources json `id` propery ([#88](https://github.com/savannahghi/hapi-fhir-go/issues/88)) ([54241a7](https://github.com/savannahghi/hapi-fhir-go/commit/54241a7a2ce32edefb0f481bbdd002047d597d04))
+
+## [1.13.0](https://github.com/savannahghi/hapi-fhir-go/compare/v1.12.3...v1.13.0) (2025-12-02)
+
+
+### Features
+
+* add $expand operation ([#85](https://github.com/savannahghi/hapi-fhir-go/issues/85)) ([573f626](https://github.com/savannahghi/hapi-fhir-go/commit/573f62641e7fee0a38412dd40953802f0806d331))
+
+## [1.12.3](https://github.com/savannahghi/hapi-fhir-go/compare/v1.12.2...v1.12.3) (2025-11-28)
+
+
+### Bug Fixes
+
+* correct json unmarshal to use address of result ([#83](https://github.com/savannahghi/hapi-fhir-go/issues/83)) ([160ded2](https://github.com/savannahghi/hapi-fhir-go/commit/160ded27ec1706fe3f1d34c4d2c0e5459d825fa1))
+
+## [1.12.2](https://github.com/savannahghi/hapi-fhir-go/compare/v1.12.1...v1.12.2) (2025-11-27)
+
+
+### Bug Fixes
+
+* assorted create resource fix ([#81](https://github.com/savannahghi/hapi-fhir-go/issues/81)) ([53d64e9](https://github.com/savannahghi/hapi-fhir-go/commit/53d64e9b9c09297aa4f1b7e1acc0d22c52f630ab))
+
+## [1.12.1](https://github.com/savannahghi/hapi-fhir-go/compare/v1.12.0...v1.12.1) (2025-10-14)
+
+
+### Bug Fixes
+
+* assorted fix ([#76](https://github.com/savannahghi/hapi-fhir-go/issues/76)) ([3bd3f19](https://github.com/savannahghi/hapi-fhir-go/commit/3bd3f19b7a290cfea171be921c44d95340249bc2))
+
+## [1.12.0](https://github.com/savannahghi/hapi-fhir-go/compare/v1.11.0...v1.12.0) (2025-09-29)
+
+
+### Features
+
+* extract data from questionnaire response ([#72](https://github.com/savannahghi/hapi-fhir-go/issues/72)) ([f82d170](https://github.com/savannahghi/hapi-fhir-go/commit/f82d170189c83c4956aa70a59f8b5b9d998a5244))
+
+## [1.11.0](https://github.com/savannahghi/hapi-fhir-go/compare/v1.10.0...v1.11.0) (2025-09-24)
+
+
+### Features
+
+* add nsr auth option ([#70](https://github.com/savannahghi/hapi-fhir-go/issues/70)) ([80da7f7](https://github.com/savannahghi/hapi-fhir-go/commit/80da7f767d95f9c9c55e66a5345604adc6cddc57))
+
+## [1.10.0](https://github.com/savannahghi/hapi-fhir-go/compare/v1.9.0...v1.10.0) (2025-09-18)
+
+
+### Features
+
+* add FHIR R4B models ([#66](https://github.com/savannahghi/hapi-fhir-go/issues/66)) ([20d8a0a](https://github.com/savannahghi/hapi-fhir-go/commit/20d8a0a2be9fe87a233411b7b16802561de25a64))
+
 ## [1.9.0](https://github.com/savannahghi/hapi-fhir-go/compare/v1.8.0...v1.9.0) (2025-07-09)
 
 

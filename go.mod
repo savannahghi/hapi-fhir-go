@@ -1,21 +1,13 @@
 module github.com/savannahghi/hapi-fhir-go
 
-go 1.23.8
-
-toolchain go1.24.0
+go 1.25.4
 
 require (
-	github.com/brianvoe/gofakeit v3.18.0+incompatible
-	github.com/mailgun/errors v0.4.0
+	github.com/mailgun/errors v0.5.0
 	github.com/savannahghi/scalarutils v0.0.4
-	github.com/testcontainers/testcontainers-go v0.34.0
 )
 
 require (
-	dario.cat/mergo v1.0.0 // indirect
-	github.com/AdaLogics/go-fuzz-headers v0.0.0-20240806141605-e8a1dd7889d6 // indirect
-	github.com/Azure/go-ansiterm v0.0.0-20230124172434-306776ec8161 // indirect
-	github.com/Microsoft/go-winio v0.6.2 // indirect
 	github.com/asaskevich/govalidator v0.0.0-20210307081110-f21760c49a8d // indirect
 	github.com/cenkalti/backoff/v4 v4.3.0 // indirect
 	github.com/containerd/log v0.1.0 // indirect

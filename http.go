@@ -10,22 +10,127 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
-
-	"github.com/savannahghi/hapi-fhir-go/models"
 )
 
 // APIError represents a FHIR specific error with operation outcome.
 type APIError struct {
-	StatusCode       int                      `json:"statusCode,omitempty"`
-	OperationOutcome *models.OperationOutcome `json:"operationOutcome,omitempty"`
+	StatusCode       int         `json:"statusCode,omitempty"`
+	OperationOutcome interface{} `json:"operationOutcome,omitempty"`
 }
 
 func (a APIError) Error() string {
-	if a.OperationOutcome != nil && len(a.OperationOutcome.Issue) > 0 {
-		return a.OperationOutcome.ErrorLogging()
+	if a.OperationOutcome == nil {
+		return fmt.Sprintf("FHIR error (HTTP %d)", a.StatusCode)
+	}
+
+	outcomeStr := a.formatOperationOutcome()
+	if outcomeStr != "" {
+		return fmt.Sprintf("FHIR error (HTTP %d): %s", a.StatusCode, outcomeStr)
+	}
+
+	outcomeJSON, err := json.Marshal(a.OperationOutcome)
+	if err != nil {
+		return fmt.Sprintf("FHIR error (HTTP %d): unable to format OperationOutcome", a.StatusCode)
+	}
+
+	if len(outcomeJSON) > 0 {
+		return fmt.Sprintf("FHIR error (HTTP %d): %s", a.StatusCode, string(outcomeJSON))
 	}
 
 	return fmt.Sprintf("FHIR error (HTTP %d)", a.StatusCode)
+}
+
+// formatOperationOutcome formats the OperationOutcome into a human-readable string.
+func (a APIError) formatOperationOutcome() string {
+	if a.OperationOutcome == nil {
+		return ""
+	}
+
+	outcomeMap, ok := a.OperationOutcome.(map[string]interface{})
+	if !ok {
+		return ""
+	}
+
+	issuesRaw, ok := outcomeMap["issue"].([]interface{})
+	if !ok {
+		return ""
+	}
+
+	if len(issuesRaw) == 0 {
+		return ""
+	}
+
+	var issues []string
+	for _, issueRaw := range issuesRaw {
+		if issueRaw == nil {
+			continue
+		}
+
+		issue, ok := issueRaw.(map[string]interface{})
+		if !ok {
+			continue
+		}
+
+		var parts []string
+
+		severity, ok := issue["severity"].(string)
+		if ok && severity != "" {
+			parts = append(parts, fmt.Sprintf("severity: %s", severity))
+		}
+
+		code, ok := issue["code"].(string)
+		if ok && code != "" {
+			parts = append(parts, fmt.Sprintf("code: %s", code))
+		}
+
+		details, ok := issue["details"].(map[string]interface{})
+		if ok && details != nil {
+			text, ok := details["text"].(string)
+			if ok && text != "" {
+				parts = append(parts, fmt.Sprintf("details: %s", text))
+			}
+		}
+
+		diagnostics, ok := issue["diagnostics"].(string)
+		if ok && diagnostics != "" {
+			parts = append(parts, fmt.Sprintf("diagnostics: %s", diagnostics))
+		}
+
+		location, ok := issue["location"].([]interface{})
+		if ok && len(location) > 0 {
+			var locs []string
+			for _, loc := range location {
+				if loc == nil {
+					continue
+				}
+				locStr, ok := loc.(string)
+				if ok && locStr != "" {
+					locs = append(locs, locStr)
+				}
+			}
+			if len(locs) > 0 {
+				parts = append(parts, fmt.Sprintf("location: %s", strings.Join(locs, ", ")))
+			}
+		}
+
+		if len(parts) > 0 {
+			issues = append(issues, strings.Join(parts, "; "))
+		}
+	}
+
+	if len(issues) == 0 {
+		return ""
+	}
+
+	return strings.Join(issues, " | ")
+}
+
+// GetOperationOutcome returns the OperationOutcome as a map for programmatic access.
+func (a APIError) GetOperationOutcome() map[string]interface{} {
+	if outcomeMap, ok := a.OperationOutcome.(map[string]interface{}); ok {
+		return outcomeMap
+	}
+	return nil
 }
 
 func (c *Client) newRequest(
@@ -33,15 +138,21 @@ func (c *Client) newRequest(
 	method, path string,
 	params url.Values,
 	data interface{},
+	useCREnabledServer bool,
 ) (*http.Request, error) {
-	url, err := c.composeRequestURL(path, params)
+
+	reqUrl, err := c.composeRequestURL(path, params, useCREnabledServer)
 	if err != nil {
 		return nil, err
 	}
 
-	request, err := http.NewRequestWithContext(ctx, method, url, http.NoBody)
+	request, err := http.NewRequestWithContext(ctx, method, reqUrl, http.NoBody)
 	if err != nil {
 		return nil, err
+	}
+
+	if c.authCreds != nil {
+		request.SetBasicAuth(c.authCreds.username, c.authCreds.password)
 	}
 
 	switch method {
@@ -75,8 +186,14 @@ func (c *Client) setHeaders(r *http.Request) {
 	r.Header.Set("Accept", "application/fhir+json")
 }
 
-func (c *Client) composeRequestURL(path string, params url.Values) (string, error) {
-	u, err := url.Parse(c.baseURL)
+func (c *Client) composeRequestURL(path string, params url.Values, useCREnabledServer bool) (string, error) {
+	baseURL := c.baseURL
+
+	if useCREnabledServer {
+		baseURL = c.CREnabledHAPIFHIRBaseURL
+	}
+
+	u, err := url.Parse(baseURL)
 	if err != nil {
 		return "", fmt.Errorf("invalid base URL: %w", err)
 	}
@@ -114,16 +231,16 @@ func (c *Client) readResponse(response *http.Response, path string, result inter
 	}
 
 	if response.StatusCode >= 400 {
-		var outcome models.OperationOutcome
+		var outcome map[string]interface{}
 
-		err = json.Unmarshal(respBytes, &outcome)
+		err := json.Unmarshal(respBytes, &outcome)
 		if err != nil {
-			return err
+			return fmt.Errorf("failed to unmarshal OperationOutcome (HTTP %d): %w", response.StatusCode, err)
 		}
 
 		return APIError{
 			StatusCode:       response.StatusCode,
-			OperationOutcome: &outcome,
+			OperationOutcome: outcome,
 		}
 	}
 
@@ -134,7 +251,7 @@ func (c *Client) readResponse(response *http.Response, path string, result inter
 		return handleValidationResponse(respBytes, response.StatusCode)
 	}
 
-	err = json.Unmarshal(respBytes, result)
+	err = json.Unmarshal(respBytes, &result)
 	if err != nil {
 		return fmt.Errorf("failed to unmarshall body: %w", err)
 	}
@@ -147,8 +264,9 @@ func (c *Client) makeRequest(
 	method, path string,
 	params url.Values,
 	data, result interface{},
+	useCREnabledServer bool,
 ) error {
-	request, err := c.newRequest(ctx, method, path, params, data)
+	request, err := c.newRequest(ctx, method, path, params, data, useCREnabledServer)
 	if err != nil {
 		return err
 	}
@@ -161,8 +279,11 @@ func (c *Client) makeRequest(
 	return c.readResponse(resp, path, result)
 }
 
+// isValidSeverity returns true if the severity does not indicate a failure.
+// Only "error" and "fatal" severities cause validation to fail.
+// "warning", "information", and "success" are considered non-failing.
 func isValidSeverity(severity string) bool {
-	return severity == "success" || severity == "information"
+	return severity == "success" || severity == "information" || severity == "warning"
 }
 
 /*
@@ -179,27 +300,57 @@ func isValidateInPath(path string) bool {
 
 // handleValidationResponse is helper function that handles validation outcome response.
 func handleValidationResponse(resBytes []byte, statusCode int) error {
-	var results []models.OperationOutcomeIssue
+	if len(resBytes) == 0 {
+		return fmt.Errorf("empty validation response body")
+	}
 
-	var outCome models.OperationOutcome
+	var outCome map[string]interface{}
 
 	err := json.Unmarshal(resBytes, &outCome)
 	if err != nil {
-		return err
+		return fmt.Errorf("failed to unmarshal validation OperationOutcome: %w", err)
 	}
 
-	for _, item := range outCome.Issue {
-		if !isValidSeverity(string(item.Severity)) {
-			results = append(results, item)
+	if outCome == nil {
+		return nil
+	}
+
+	// Check if there are any issues with severity other than success/information
+	issues, ok := outCome["issue"].([]interface{})
+	if !ok {
+		return nil
+	}
+
+	if len(issues) == 0 {
+		return nil
+	}
+
+	var results []interface{}
+	for _, issue := range issues {
+		if issue == nil {
+			continue
+		}
+
+		issueMap, ok := issue.(map[string]interface{})
+		if !ok {
+			continue
+		}
+
+		severity, ok := issueMap["severity"].(string)
+		if !ok {
+			continue
+		}
+
+		if !isValidSeverity(severity) {
+			results = append(results, issue)
 		}
 	}
 
 	if len(results) > 0 {
-		outCome.Issue = results
-
+		outCome["issue"] = results
 		return APIError{
 			StatusCode:       statusCode,
-			OperationOutcome: &outCome,
+			OperationOutcome: outCome,
 		}
 	}
 
