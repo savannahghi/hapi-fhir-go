@@ -155,12 +155,7 @@ func (c *Client) newRequest(
 		request.SetBasicAuth(c.authCreds.username, c.authCreds.password)
 	}
 
-	switch method {
-	case http.MethodPatch:
-		request.Header.Set("Content-Type", "application/json-patch+json")
-	default:
-		c.setHeaders(request)
-	}
+	c.setHeaders(request)
 
 	switch payload := data.(type) {
 	case nil:
