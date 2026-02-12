@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.15.3](https://github.com/savannahghi/hapi-fhir-go/compare/v1.15.2...v1.15.3) (2026-02-12)
+
+
+### Bug Fixes
+
+* use application/fhir+json headers ([#96](https://github.com/savannahghi/hapi-fhir-go/issues/96)) ([791fc1a](https://github.com/savannahghi/hapi-fhir-go/commit/791fc1af815f1818b4a98d863ec5edf32f15f203))
+
 ## [1.15.2](https://github.com/savannahghi/hapi-fhir-go/compare/v1.15.1...v1.15.2) (2026-01-30)
 
 
