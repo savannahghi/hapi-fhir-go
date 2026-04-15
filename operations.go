@@ -208,9 +208,24 @@ func (c *Client) FHIRPathPatch(ctx context.Context, resourceType string, resourc
 }
 
 func (c *Client) PostFHIRBundle(ctx context.Context, payload interface{}, response interface{}) error {
-	err := c.makeRequest(ctx, http.MethodPost, "", nil, payload, &response, false)
+	request, err := c.newRequest(ctx, http.MethodPost, "", nil, payload, false)
+	if err != nil {
+		return fmt.Errorf("failed to build bundle request: %w", err)
+	}
+
+	// Prefer: return=representation tells the FHIR server to include the
+	// full updated resource in each transaction-response entry. Without
+	// it, HAPI returns only status/location/etag metadata and callers
+	// have no patched resource to read.
+	request.Header.Set("Prefer", "return=representation")
+
+	resp, err := c.HTTP.Do(request)
 	if err != nil {
 		return fmt.Errorf("failed to post bundle entry: %w", err)
+	}
+
+	if err := c.readResponse(resp, "", &response); err != nil {
+		return err
 	}
 
 	return nil
