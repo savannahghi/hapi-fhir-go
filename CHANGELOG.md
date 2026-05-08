@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.15.5](https://github.com/savannahghi/hapi-fhir-go/compare/v1.15.4...v1.15.5) (2026-05-08)
+
+
+### Bug Fixes
+
+* set Cache-Control: no-cache to avoid stale FHIR search bundles ([#99](https://github.com/savannahghi/hapi-fhir-go/issues/99)) ([b44c694](https://github.com/savannahghi/hapi-fhir-go/commit/b44c6948cda13d8ddc0139ea5d89c0f4698df9af))
+
 ## [1.15.3](https://github.com/savannahghi/hapi-fhir-go/compare/v1.15.2...v1.15.3) (2026-02-12)
 
 
