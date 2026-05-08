@@ -179,6 +179,7 @@ func (c *Client) newRequest(
 func (c *Client) setHeaders(r *http.Request) {
 	r.Header.Set("Content-Type", "application/fhir+json")
 	r.Header.Set("Accept", "application/fhir+json")
+	r.Header.Set("Cache-Control", "no-cache")
 }
 
 func (c *Client) composeRequestURL(path string, params url.Values, useCREnabledServer bool) (string, error) {
