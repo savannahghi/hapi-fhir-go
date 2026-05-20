@@ -8,6 +8,60 @@ A Go SDK for interacting with HAPI FHIR servers supporting both FHIR R4B and R5.
 - **Simple client**: One client for all FHIR versions
 - **Smaller binaries**: Import only the FHIR version you need
 - **Clean separation**: Clear distinction between FHIR versions
+- **Production-tuned HTTP transport** out of the box (HTTP/2, large idle pool, no admission cap)
+- **Pluggable retry** for idempotent operations (`WithRetry`)
+- **Customisable headers** (`WithDefaultHeaders`, `WithoutCacheControlHeader`)
+
+## Tuning for high concurrency
+
+The default transport is sized for a "medium" deployment (4-8 service pods talking to one HAPI host):
+
+| Setting | Default |
+|---|---|
+| `MaxIdleConns` | 400 |
+| `MaxIdleConnsPerHost` | 150 |
+| `MaxConnsPerHost` | 0 (unlimited) |
+| `IdleConnTimeout` | 90s |
+| `TLSHandshakeTimeout` | 5s |
+| `ForceAttemptHTTP2` | true |
+| `Client.Timeout` | 60s |
+
+If you run hotter (1000+ RPS per pod) or talk to multiple distinct hosts, inject your own transport:
+
+```go
+import "net/http"
+import "go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp"
+
+transport := &http.Transport{
+    MaxIdleConns:        800,
+    MaxIdleConnsPerHost: 300,
+    IdleConnTimeout:     120 * time.Second,
+    ForceAttemptHTTP2:   true,
+    // ... see net/http docs for the full set
+}
+
+client, _ := hapifhirgo.NewClient(
+    baseURL,
+    hapifhirgo.WithTransport(otelhttp.NewTransport(transport)),
+    hapifhirgo.WithRetry(hapifhirgo.RetryPolicy{
+        MaxAttempts:    3,
+        InitialBackoff: 100 * time.Millisecond,
+        MaxBackoff:     2 * time.Second,
+    }),
+    hapifhirgo.WithoutCacheControlHeader(),
+)
+```
+
+### POST is not retried by default
+
+FHIR `create` is not idempotent without `If-None-Exist`. The retry policy excludes POST. If you must retry POST (e.g. behind an idempotency-key gateway), add it explicitly:
+
+```go
+WithRetry(RetryPolicy{
+    MaxAttempts:      3,
+    RetryableMethods: []string{http.MethodGet, http.MethodPost, http.MethodPut, http.MethodDelete},
+})
+```
 
 ## Quick Start
 
