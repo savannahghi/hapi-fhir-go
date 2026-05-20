@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.15.6](https://github.com/savannahghi/hapi-fhir-go/compare/v1.15.5...v1.15.6) (2026-05-20)
+
+
+### Bug Fixes
+
+* connection-pool starvation, add retry & configurable headers ([#101](https://github.com/savannahghi/hapi-fhir-go/issues/101)) ([f117e7c](https://github.com/savannahghi/hapi-fhir-go/commit/f117e7c951e716442a7e42c23e2de1f048f5d8f8))
+
 ## [1.15.5](https://github.com/savannahghi/hapi-fhir-go/compare/v1.15.4...v1.15.5) (2026-05-08)
 
 
