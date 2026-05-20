@@ -161,6 +161,7 @@ func (c *Client) newRequest(
 	case nil:
 		request.Body = nil
 	case io.ReadCloser:
+		// Caller owns lifecycle; we cannot replay this on retry.
 		request.Body = payload
 	case io.Reader:
 		request.Body = io.NopCloser(payload)
@@ -171,6 +172,10 @@ func (c *Client) newRequest(
 		}
 
 		request.Body = io.NopCloser(bytes.NewReader(b))
+		request.ContentLength = int64(len(b))
+		request.GetBody = func() (io.ReadCloser, error) {
+			return io.NopCloser(bytes.NewReader(b)), nil
+		}
 	}
 
 	return request, nil
@@ -179,7 +184,13 @@ func (c *Client) newRequest(
 func (c *Client) setHeaders(r *http.Request) {
 	r.Header.Set("Content-Type", "application/fhir+json")
 	r.Header.Set("Accept", "application/fhir+json")
-	r.Header.Set("Cache-Control", "no-cache")
+	if !c.omitCacheControl {
+		r.Header.Set("Cache-Control", "no-cache")
+	}
+
+	for k, v := range c.defaultHeaders {
+		r.Header.Set(k, v)
+	}
 }
 
 func (c *Client) composeRequestURL(path string, params url.Values, useCREnabledServer bool) (string, error) {
@@ -221,15 +232,15 @@ func (c *Client) readResponse(response *http.Response, path string, result inter
 
 	defer response.Body.Close()
 
-	respBytes, err := io.ReadAll(response.Body)
-	if err != nil {
-		return err
-	}
-
 	if response.StatusCode >= 400 {
+		respBytes, err := io.ReadAll(response.Body)
+		if err != nil {
+			return err
+		}
+
 		var outcome map[string]interface{}
 
-		err := json.Unmarshal(respBytes, &outcome)
+		err = json.Unmarshal(respBytes, &outcome)
 		if err != nil {
 			return fmt.Errorf("failed to unmarshal OperationOutcome (HTTP %d): %w", response.StatusCode, err)
 		}
@@ -240,15 +251,24 @@ func (c *Client) readResponse(response *http.Response, path string, result inter
 		}
 	}
 
-	// A Specific case for validation responses.
-	// Validation of the resource is considered valid only when the severity is either "success" or "information"
-	// All validation responses, whether valid or invalid, returns a http status code of 200 https://www.hl7.org/fhir/resource-operation-validate.html
 	if isValidateInPath(path) && response.StatusCode == http.StatusOK {
+		respBytes, err := io.ReadAll(response.Body)
+		if err != nil {
+			return err
+		}
+
 		return handleValidationResponse(respBytes, response.StatusCode)
 	}
 
-	err = json.Unmarshal(respBytes, &result)
-	if err != nil {
+	// Happy path: stream-decode straight into the destination. Saves a
+	// full copy of the response body for every large Bundle/$everything.
+	if result == nil {
+		// Drain to allow conn reuse even when caller doesn't want the body.
+		_, _ = io.Copy(io.Discard, response.Body)
+		return nil
+	}
+
+	if err := json.NewDecoder(response.Body).Decode(&result); err != nil {
 		return fmt.Errorf("failed to unmarshall body: %w", err)
 	}
 
