@@ -92,6 +92,196 @@ func (c *Client) SearchFHIRResource(ctx context.Context, bundleID, resourceType 
 	return nil
 }
 
+// SearchFHIRResourceWithIncludes searches for resources of a given type and
+// pulls related resources into the same searchset Bundle using the FHIR
+// _include and _revinclude search-result parameters.
+//
+// Unlike SearchFHIRResource (which posts to [type]/_search), this performs a
+// plain GET against [base]/[type], the canonical form for include/revinclude
+// searches. Use it to fetch a resource together with everything linked to it
+// when the $everything operation is unavailable for that type — e.g.
+// EpisodeOfCare.
+//
+// Parameters:
+//   - resourceType: the type being searched, e.g. "EpisodeOfCare".
+//   - params:       ordinary search parameters selecting the matched resources,
+//     e.g. {"_id": "episode-123"} or {"status": "active"}. Values may be a
+//     string or []string (multiple values for the same key).
+//   - includes:     _include values — resources referenced BY the matches to
+//     pull in (forward references), e.g. "EpisodeOfCare:patient".
+//   - revIncludes:  _revinclude values — resources that reference the matches
+//     to pull in (reverse references), e.g. "Encounter:episode-of-care",
+//     "Observation:encounter".
+//
+// To follow references transitively, pass the :iterate modifier through params
+// directly, e.g. params["_revinclude:iterate"] = []string{"Observation:encounter"}.
+//
+// Example — fetch an EpisodeOfCare and the resources tied to it:
+//
+//	var bundle r4b.Bundle
+//	err := client.SearchFHIRResourceWithIncludes(ctx, "EpisodeOfCare",
+//	    map[string]any{"_id": episodeID},
+//	    []string{"EpisodeOfCare:patient", "EpisodeOfCare:care-manager"},
+//	    []string{"Encounter:episode-of-care", "Observation:encounter"},
+//	    &bundle,
+//	)
+func (c *Client) SearchFHIRResourceWithIncludes(
+	ctx context.Context,
+	resourceType string,
+	params map[string]any,
+	includes []string,
+	revIncludes []string,
+	bundle interface{},
+) error {
+	if resourceType == "" {
+		return errors.Errorf("resourceType cannot be empty")
+	}
+
+	urlParams := convertMapToURLValues(params)
+
+	for _, inc := range includes {
+		if inc != "" {
+			urlParams.Add("_include", inc)
+		}
+	}
+
+	for _, rev := range revIncludes {
+		if rev != "" {
+			urlParams.Add("_revinclude", rev)
+		}
+	}
+
+	if err := c.makeRequest(ctx, http.MethodGet, resourceType, urlParams, nil, bundle, false); err != nil {
+		return fmt.Errorf("unable to search %s with includes: %w", resourceType, err)
+	}
+
+	return nil
+}
+
+// SearchFHIRResourceWithIncludesAllPages behaves like
+// SearchFHIRResourceWithIncludes but follows Bundle.link[relation=next] until
+// the server stops returning a next link, merging every page's entries into a
+// single searchset Bundle that is decoded into bundle.
+//
+// HAPI caps the number of entries returned per page (and per include
+// expansion), so a single include/revinclude search rarely returns everything
+// tied to a resource in one response. Use this when you need the complete set
+// — e.g. all resources linked to an EpisodeOfCare — and are prepared to pay for
+// the extra round trips. For incremental consumption, call
+// SearchFHIRResourceWithIncludes and walk the next links yourself.
+//
+// The merged bundle preserves the first page's top-level fields (type, total,
+// etc.) but drops the paging link array, which no longer applies once pages
+// are combined.
+func (c *Client) SearchFHIRResourceWithIncludesAllPages(
+	ctx context.Context,
+	resourceType string,
+	params map[string]any,
+	includes []string,
+	revIncludes []string,
+	bundle interface{},
+) error {
+	if resourceType == "" {
+		return errors.Errorf("resourceType cannot be empty")
+	}
+
+	urlParams := convertMapToURLValues(params)
+
+	for _, inc := range includes {
+		if inc != "" {
+			urlParams.Add("_include", inc)
+		}
+	}
+
+	for _, rev := range revIncludes {
+		if rev != "" {
+			urlParams.Add("_revinclude", rev)
+		}
+	}
+
+	if err := c.searchAllPages(ctx, resourceType, urlParams, bundle); err != nil {
+		return fmt.Errorf("unable to search %s with includes across pages: %w", resourceType, err)
+	}
+
+	return nil
+}
+
+// searchAllPages performs an initial GET against path and then follows the
+// searchset Bundle's "next" link until exhausted, accumulating every page's
+// entries. The merged bundle is decoded into out.
+//
+// Visited next-page URLs are tracked to break pathological paging cycles
+// (a malformed server whose next link points back at an already-seen page)
+// rather than looping forever; a detected cycle is returned as an error so the
+// caller is never handed a silently-truncated result.
+func (c *Client) searchAllPages(ctx context.Context, path string, params url.Values, out interface{}) error {
+	var page map[string]interface{}
+	if err := c.makeRequest(ctx, http.MethodGet, path, params, nil, &page, false); err != nil {
+		return err
+	}
+
+	merged := page
+	mergedEntries, _ := merged["entry"].([]interface{})
+
+	seen := map[string]bool{}
+
+	for {
+		next := nextLink(page)
+		if next == "" {
+			break
+		}
+
+		if seen[next] {
+			return fmt.Errorf("pagination cycle detected at next link %q", next)
+		}
+		seen[next] = true
+
+		page = nil
+		if err := c.fetchURL(ctx, next, &page); err != nil {
+			return err
+		}
+
+		if entries, ok := page["entry"].([]interface{}); ok {
+			mergedEntries = append(mergedEntries, entries...)
+		}
+	}
+
+	if mergedEntries != nil {
+		merged["entry"] = mergedEntries
+	}
+	// The paging links describe the original page boundaries and are
+	// meaningless once the pages are combined.
+	delete(merged, "link")
+
+	return remarshal(merged, out)
+}
+
+// nextLink returns the URL of the bundle's "next" relation link, or "" if the
+// bundle has no next page.
+func nextLink(bundle map[string]interface{}) string {
+	links, ok := bundle["link"].([]interface{})
+	if !ok {
+		return ""
+	}
+
+	for _, l := range links {
+		link, ok := l.(map[string]interface{})
+		if !ok {
+			continue
+		}
+
+		if rel, _ := link["relation"].(string); rel != "next" {
+			continue
+		}
+
+		if u, _ := link["url"].(string); u != "" {
+			return u
+		}
+	}
+
+	return ""
+}
+
 func convertMapToURLValues(params map[string]any) url.Values {
 	urlParams := url.Values{}
 

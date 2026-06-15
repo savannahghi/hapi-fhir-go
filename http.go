@@ -295,6 +295,44 @@ func (c *Client) makeRequest(
 	return c.readResponse(resp, path, result)
 }
 
+// fetchURL issues a GET against an already-formed URL (typically a Bundle
+// "next" paging link) and decodes the response into result. Unlike newRequest,
+// it does not run the URL through composeRequestURL: paging links are returned
+// fully formed by the server. Relative links are resolved against the client's
+// base URL. Default headers and basic-auth credentials are still applied.
+func (c *Client) fetchURL(ctx context.Context, rawURL string, result interface{}) error {
+	u, err := url.Parse(rawURL)
+	if err != nil {
+		return fmt.Errorf("invalid next-page URL %q: %w", rawURL, err)
+	}
+
+	if !u.IsAbs() {
+		base, err := url.Parse(c.baseURL)
+		if err != nil {
+			return fmt.Errorf("invalid base URL: %w", err)
+		}
+		u = base.ResolveReference(u)
+	}
+
+	request, err := http.NewRequestWithContext(ctx, http.MethodGet, u.String(), http.NoBody)
+	if err != nil {
+		return err
+	}
+
+	if c.authCreds != nil {
+		request.SetBasicAuth(c.authCreds.username, c.authCreds.password)
+	}
+
+	c.setHeaders(request)
+
+	resp, err := c.HTTP.Do(request)
+	if err != nil {
+		return err
+	}
+
+	return c.readResponse(resp, "", result)
+}
+
 // isValidSeverity returns true if the severity does not indicate a failure.
 // Only "error" and "fatal" severities cause validation to fail.
 // "warning", "information", and "success" are considered non-failing.

@@ -3,9 +3,11 @@ package hapifhirgo
 import (
 	"context"
 	"errors"
+	"fmt"
 	"io"
 	"net/http"
 	"net/http/httptest"
+	"net/url"
 	"strings"
 	"sync/atomic"
 	"testing"
@@ -340,6 +342,164 @@ func TestStreamingDecode_LargeResponse(t *testing.T) {
 	}
 	if id, _ := out["id"].(string); len(id) != len(bigID) {
 		t.Errorf("id len = %d, want %d", len(id), len(bigID))
+	}
+}
+
+// TestSearchFHIRResourceWithIncludes verifies that the method issues a plain
+// GET against [base]/[type] and folds the ordinary params, _include and
+// _revinclude values into the query string.
+func TestSearchFHIRResourceWithIncludes(t *testing.T) {
+	var (
+		gotPath   string
+		gotQuery  url.Values
+		gotMethod string
+	)
+	srv := newTestServer(t, func(w http.ResponseWriter, r *http.Request) {
+		gotPath = r.URL.Path
+		gotQuery = r.URL.Query()
+		gotMethod = r.Method
+		w.Header().Set("Content-Type", "application/fhir+json")
+		_, _ = w.Write([]byte(`{"resourceType":"Bundle","type":"searchset"}`))
+	})
+
+	c, err := NewClient(srv.URL)
+	if err != nil {
+		t.Fatalf("NewClient: %v", err)
+	}
+
+	var bundle map[string]interface{}
+	err = c.SearchFHIRResourceWithIncludes(context.Background(), "EpisodeOfCare",
+		map[string]any{"_id": "episode-123"},
+		[]string{"EpisodeOfCare:patient", ""}, // empty entry must be skipped
+		[]string{"Encounter:episode-of-care", "Observation:encounter"},
+		&bundle,
+	)
+	if err != nil {
+		t.Fatalf("SearchFHIRResourceWithIncludes: %v", err)
+	}
+
+	if gotMethod != http.MethodGet {
+		t.Errorf("method = %q, want GET", gotMethod)
+	}
+	if !strings.HasSuffix(gotPath, "/EpisodeOfCare") {
+		t.Errorf("path = %q, want suffix /EpisodeOfCare", gotPath)
+	}
+	if gotQuery.Get("_id") != "episode-123" {
+		t.Errorf("_id = %q, want episode-123", gotQuery.Get("_id"))
+	}
+	if inc := gotQuery["_include"]; len(inc) != 1 || inc[0] != "EpisodeOfCare:patient" {
+		t.Errorf("_include = %v, want [EpisodeOfCare:patient] (empty entry should be skipped)", inc)
+	}
+	rev := gotQuery["_revinclude"]
+	if len(rev) != 2 {
+		t.Fatalf("_revinclude = %v, want 2 values", rev)
+	}
+	wantRev := map[string]bool{"Encounter:episode-of-care": true, "Observation:encounter": true}
+	for _, r := range rev {
+		if !wantRev[r] {
+			t.Errorf("unexpected _revinclude value %q", r)
+		}
+	}
+	if bundle["resourceType"] != "Bundle" {
+		t.Errorf("decoded wrong shape: %v", bundle["resourceType"])
+	}
+}
+
+// TestSearchFHIRResourceWithIncludesAllPages verifies that the method follows
+// Bundle.link[relation=next] across pages, accumulates every page's entries
+// into one bundle, and strips the paging links from the merged result.
+func TestSearchFHIRResourceWithIncludesAllPages(t *testing.T) {
+	var hits int32
+	srv := newTestServer(t, func(w http.ResponseWriter, r *http.Request) {
+		atomic.AddInt32(&hits, 1)
+		w.Header().Set("Content-Type", "application/fhir+json")
+
+		switch r.URL.Query().Get("page") {
+		case "": // first page (the initial search)
+			fmt.Fprintf(w, `{"resourceType":"Bundle","type":"searchset","total":3,
+				"link":[{"relation":"self","url":"http://%[1]s/EpisodeOfCare"},
+				        {"relation":"next","url":"http://%[1]s/?page=2"}],
+				"entry":[{"resource":{"resourceType":"EpisodeOfCare","id":"a"}}]}`, r.Host)
+		case "2":
+			fmt.Fprintf(w, `{"resourceType":"Bundle","type":"searchset","total":3,
+				"link":[{"relation":"next","url":"http://%[1]s/?page=3"}],
+				"entry":[{"resource":{"resourceType":"Encounter","id":"b"}}]}`, r.Host)
+		case "3": // last page: no next link
+			fmt.Fprint(w, `{"resourceType":"Bundle","type":"searchset","total":3,
+				"entry":[{"resource":{"resourceType":"Observation","id":"c"}}]}`)
+		default:
+			http.Error(w, "unexpected page", http.StatusBadRequest)
+		}
+	})
+
+	c, err := NewClient(srv.URL)
+	if err != nil {
+		t.Fatalf("NewClient: %v", err)
+	}
+
+	var bundle map[string]interface{}
+	err = c.SearchFHIRResourceWithIncludesAllPages(context.Background(), "EpisodeOfCare",
+		map[string]any{"_id": "episode-123"},
+		nil,
+		[]string{"Encounter:episode-of-care", "Observation:encounter"},
+		&bundle,
+	)
+	if err != nil {
+		t.Fatalf("SearchFHIRResourceWithIncludesAllPages: %v", err)
+	}
+
+	if got := atomic.LoadInt32(&hits); got != 3 {
+		t.Errorf("server hits = %d, want 3 (initial + 2 next links)", got)
+	}
+
+	entries, ok := bundle["entry"].([]interface{})
+	if !ok || len(entries) != 3 {
+		t.Fatalf("merged entry count = %d, want 3 (%v)", len(entries), bundle["entry"])
+	}
+
+	if _, hasLink := bundle["link"]; hasLink {
+		t.Error("merged bundle still has paging link array; want it dropped")
+	}
+}
+
+// TestSearchFHIRResourceWithIncludesAllPages_CycleDetected ensures a server
+// whose next link points back at an already-seen page yields an error rather
+// than looping forever.
+func TestSearchFHIRResourceWithIncludesAllPages_CycleDetected(t *testing.T) {
+	srv := newTestServer(t, func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/fhir+json")
+		// Every page advertises the same next link → a cycle.
+		fmt.Fprintf(w, `{"resourceType":"Bundle","type":"searchset",
+			"link":[{"relation":"next","url":"http://%s/?page=loop"}],
+			"entry":[{"resource":{"resourceType":"Observation","id":"x"}}]}`, r.Host)
+	})
+
+	c, err := NewClient(srv.URL)
+	if err != nil {
+		t.Fatalf("NewClient: %v", err)
+	}
+
+	var bundle map[string]interface{}
+	err = c.SearchFHIRResourceWithIncludesAllPages(context.Background(), "Observation",
+		nil, nil, nil, &bundle,
+	)
+	if err == nil {
+		t.Fatal("expected a pagination cycle error, got nil")
+	}
+	if !strings.Contains(err.Error(), "cycle") {
+		t.Errorf("error = %q, want it to mention a cycle", err.Error())
+	}
+}
+
+func TestSearchFHIRResourceWithIncludes_EmptyResourceType(t *testing.T) {
+	c, err := NewClient("http://example.test")
+	if err != nil {
+		t.Fatalf("NewClient: %v", err)
+	}
+	var bundle map[string]interface{}
+	err = c.SearchFHIRResourceWithIncludes(context.Background(), "", nil, nil, nil, &bundle)
+	if err == nil {
+		t.Fatal("expected error for empty resourceType")
 	}
 }
 

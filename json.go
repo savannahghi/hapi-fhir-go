@@ -24,3 +24,19 @@ func structToMap(item interface{}) (map[string]interface{}, error) {
 
 	return res, nil
 }
+
+// remarshal re-encodes src and decodes it into dst. It is used to convert a
+// generically-assembled bundle (map[string]interface{}) into the caller's
+// version-specific bundle type.
+func remarshal(src interface{}, dst interface{}) error {
+	bs, err := json.Marshal(src)
+	if err != nil {
+		return fmt.Errorf("unable to marshal merged bundle: %w", err)
+	}
+
+	if err := json.Unmarshal(bs, dst); err != nil {
+		return fmt.Errorf("unable to unmarshal merged bundle: %w", err)
+	}
+
+	return nil
+}
