@@ -151,8 +151,8 @@ func (c *Client) newRequest(
 		return nil, err
 	}
 
-	if c.authCreds != nil {
-		request.SetBasicAuth(c.authCreds.username, c.authCreds.password)
+	if err := c.applyAuth(request); err != nil {
+		return nil, err
 	}
 
 	c.setHeaders(request)
@@ -179,6 +179,28 @@ func (c *Client) newRequest(
 	}
 
 	return request, nil
+}
+
+// applyAuth sets the request's Authorization. A configured token provider takes
+// precedence over basic auth: it is called with the request context so it can
+// relay a per-request token or hand back a cached service-account one.
+func (c *Client) applyAuth(r *http.Request) error {
+	if c.tokenProvider != nil {
+		token, err := c.tokenProvider(r.Context())
+		if err != nil {
+			return fmt.Errorf("hapifhirgo: token provider failed: %w", err)
+		}
+		if token != "" {
+			r.Header.Set("Authorization", "Bearer "+token)
+		}
+		return nil
+	}
+
+	if c.authCreds != nil {
+		r.SetBasicAuth(c.authCreds.username, c.authCreds.password)
+	}
+
+	return nil
 }
 
 func (c *Client) setHeaders(r *http.Request) {

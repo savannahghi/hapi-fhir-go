@@ -161,6 +161,83 @@ func TestClientOptions(t *testing.T) {
 	}
 }
 
+func TestTokenAuth(t *testing.T) {
+	type ctxKey string
+	const tokenKey ctxKey = "tok"
+
+	tests := []struct {
+		name           string
+		opts           []ClientOption
+		ctx            context.Context
+		wantAuthHeader string
+		wantErr        bool
+	}{
+		{
+			name:           "WithBearerToken sets the Authorization header",
+			opts:           []ClientOption{WithBearerToken("static-token")},
+			wantAuthHeader: "Bearer static-token",
+		},
+		{
+			name: "WithTokenProvider relays a per-request token from context",
+			opts: []ClientOption{WithTokenProvider(func(ctx context.Context) (string, error) {
+				tok, _ := ctx.Value(tokenKey).(string)
+				return tok, nil
+			})},
+			ctx:            context.WithValue(context.Background(), tokenKey, "ctx-token"),
+			wantAuthHeader: "Bearer ctx-token",
+		},
+		{
+			name:           "token provider takes precedence over basic auth",
+			opts:           []ClientOption{WithBasicAuth("u", "p"), WithBearerToken("wins")},
+			wantAuthHeader: "Bearer wins",
+		},
+		{
+			name:    "token provider error fails the request before sending",
+			opts:    []ClientOption{WithTokenProvider(func(context.Context) (string, error) { return "", errors.New("mint failed") })},
+			wantErr: true,
+		},
+	}
+
+	for _, tc := range tests {
+		t.Run(tc.name, func(t *testing.T) {
+			var called atomic.Bool
+			srv := newTestServer(t, func(w http.ResponseWriter, r *http.Request) {
+				called.Store(true)
+				if got := r.Header.Get("Authorization"); got != tc.wantAuthHeader {
+					http.Error(w, "bad auth header: "+got, http.StatusUnauthorized)
+					return
+				}
+				writePatient(w)
+			})
+
+			c, err := NewClient(srv.URL, tc.opts...)
+			if err != nil {
+				t.Fatalf("build client: %v", err)
+			}
+
+			ctx := tc.ctx
+			if ctx == nil {
+				ctx = context.Background()
+			}
+
+			var out map[string]interface{}
+			err = c.GetFHIRResource(ctx, "Patient", "x", &out)
+
+			switch {
+			case tc.wantErr:
+				if err == nil {
+					t.Fatal("expected error, got nil")
+				}
+				if called.Load() {
+					t.Fatal("request was sent despite the token provider error")
+				}
+			case err != nil:
+				t.Fatalf("GetFHIRResource: %v", err)
+			}
+		})
+	}
+}
+
 // TestRetryRoundTripper covers the retry policy semantics via WithRetry.
 // Each row scripts a sequence of server responses and asserts the number
 // of times the server was actually called.

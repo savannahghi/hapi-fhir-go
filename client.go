@@ -1,6 +1,7 @@
 package hapifhirgo
 
 import (
+	"context"
 	"errors"
 	"net"
 	"net/http"
@@ -25,6 +26,10 @@ type Client struct {
 	HTTP *http.Client
 
 	authCreds *authCredential
+
+	// tokenProvider, when set, supplies a Bearer token per request and takes
+	// precedence over authCreds. Set via WithTokenProvider / WithBearerToken.
+	tokenProvider TokenProvider
 
 	// CREnabledHAPIFHIRBaseURL is the base url of a HAPI FHIR server with Clinical Reasoning Module enabled
 	CREnabledHAPIFHIRBaseURL string
@@ -60,6 +65,32 @@ func WithBasicAuth(username, password string) ClientOption {
 
 		c.authCreds.username = username
 		c.authCreds.password = password
+	}
+}
+
+// TokenProvider returns the Bearer token to use for a single outbound request.
+// It is called once per request with that request's context, so an
+// implementation can return a per-request token (for example, the end user's
+// token relayed from the context) or a service-account token it caches and
+// refreshes on its own. A non-nil error fails the request before it is sent; an
+// empty token sends the request with no Authorization header.
+type TokenProvider func(ctx context.Context) (string, error)
+
+// WithTokenProvider authenticates outbound requests with a Bearer token sourced
+// per request from tp. It takes precedence over WithBasicAuth. Use it to attach
+// a service-account token (cached and refreshed inside the provider) or to relay
+// the caller's own token pulled from the request context.
+func WithTokenProvider(tp TokenProvider) ClientOption {
+	return func(c *Client) {
+		c.tokenProvider = tp
+	}
+}
+
+// WithBearerToken is a convenience for a fixed Bearer token. Prefer
+// WithTokenProvider for tokens that expire or rotate.
+func WithBearerToken(token string) ClientOption {
+	return func(c *Client) {
+		c.tokenProvider = func(context.Context) (string, error) { return token, nil }
 	}
 }
 
