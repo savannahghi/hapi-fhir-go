@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.16.0](https://github.com/savannahghi/hapi-fhir-go/compare/v1.15.6...v1.16.0) (2026-06-16)
+
+
+### Features
+
+* add Bearer token auth via a per-request TokenProvider ([#104](https://github.com/savannahghi/hapi-fhir-go/issues/104)) ([39e4ef2](https://github.com/savannahghi/hapi-fhir-go/commit/39e4ef29b676708d35780358ba89d2cb5119595f))
+
 ## [1.15.6](https://github.com/savannahghi/hapi-fhir-go/compare/v1.15.5...v1.15.6) (2026-05-20)
 
 
