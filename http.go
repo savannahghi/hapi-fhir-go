@@ -12,6 +12,15 @@ import (
 	"strings"
 )
 
+const (
+	// fhirContentType is the media type for FHIR resource bodies.
+	fhirContentType = "application/fhir+json"
+
+	// jsonPatchContentType is the media type HAPI dispatches on to read a request
+	// body as a JSON Patch (RFC 6902) document rather than a FHIR resource.
+	jsonPatchContentType = "application/json-patch+json"
+)
+
 // APIError represents a FHIR specific error with operation outcome.
 type APIError struct {
 	StatusCode       int         `json:"statusCode,omitempty"`
@@ -204,8 +213,8 @@ func (c *Client) applyAuth(r *http.Request) error {
 }
 
 func (c *Client) setHeaders(r *http.Request) {
-	r.Header.Set("Content-Type", "application/fhir+json")
-	r.Header.Set("Accept", "application/fhir+json")
+	r.Header.Set("Content-Type", fhirContentType)
+	r.Header.Set("Accept", fhirContentType)
 	if !c.omitCacheControl {
 		r.Header.Set("Cache-Control", "no-cache")
 	}
