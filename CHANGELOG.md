@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.16.1](https://github.com/savannahghi/hapi-fhir-go/compare/v1.16.0...v1.16.1) (2026-07-29)
+
+
+### Bug Fixes
+
+* update Content-Type handling for JSON Patch requests and add tests ([#106](https://github.com/savannahghi/hapi-fhir-go/issues/106)) ([7a46220](https://github.com/savannahghi/hapi-fhir-go/commit/7a46220d98a95f50fd4125a186ef84f357c263be))
+
 ## [1.16.0](https://github.com/savannahghi/hapi-fhir-go/compare/v1.15.6...v1.16.0) (2026-06-16)
 
 
