@@ -185,7 +185,8 @@ func (c *Client) FHIRPathPatch(ctx context.Context, resourceType string, resourc
 	patches := []map[string]interface{}{}
 
 	for key, value := range payload {
-		if !reflect.ValueOf(value).IsZero() {
+		v := reflect.ValueOf(value)
+		if v.IsValid() && !v.IsZero() {
 			patches = append(
 				patches,
 				map[string]interface{}{
@@ -199,8 +200,23 @@ func (c *Client) FHIRPathPatch(ctx context.Context, resourceType string, resourc
 
 	fhirResource := fmt.Sprintf("%s/%s", resourceType, resourceID)
 
-	err := c.makeRequest(ctx, http.MethodPatch, fhirResource, nil, patches, resource, false)
+	request, err := c.newRequest(ctx, http.MethodPatch, fhirResource, nil, patches, false)
 	if err != nil {
+		return fmt.Errorf("unable to patch resource: %w", err)
+	}
+
+	// The body is an RFC 6902 patch document, not a FHIR resource. HAPI dispatches
+	// on Content-Type, so under the library's default application/fhir+json it tries
+	// to parse the patch array as a resource and fails with "Content does not appear
+	// to be FHIR JSON, first non-whitespace character was: '['".
+	request.Header.Set("Content-Type", jsonPatchContentType)
+
+	resp, err := c.HTTP.Do(request)
+	if err != nil {
+		return fmt.Errorf("unable to patch resource: %w", err)
+	}
+
+	if err := c.readResponse(resp, fhirResource, resource); err != nil {
 		return fmt.Errorf("unable to patch resource: %w", err)
 	}
 
