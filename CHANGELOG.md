@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.17.0](https://github.com/savannahghi/hapi-fhir-go/compare/v1.16.1...v1.17.0) (2026-08-06)
+
+
+### Features
+
+* immunization and adverse events models ([#108](https://github.com/savannahghi/hapi-fhir-go/issues/108)) ([c66d88a](https://github.com/savannahghi/hapi-fhir-go/commit/c66d88ad6c32eaaa70ff78fcaed346b078041261))
+
 ## [1.16.1](https://github.com/savannahghi/hapi-fhir-go/compare/v1.16.0...v1.16.1) (2026-07-29)
 
 
