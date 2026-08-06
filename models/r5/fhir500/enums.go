@@ -824,3 +824,85 @@ func (c ConsentDataMeaningEnum) IsValid() bool {
 func (c ConsentDataMeaningEnum) String() string {
 	return string(c)
 }
+
+// ImmunizationStatus is the status of an Immunization event, bound to
+// https://hl7.org/fhir/R5/valueset-immunization-status.html
+//
+// R5 narrowed this value set: preparation, in-progress, on-hold, stopped and
+// unknown are no longer valid for Immunization.
+type ImmunizationStatus string
+
+const (
+	ImmunizationStatusCompleted      ImmunizationStatus = "completed"
+	ImmunizationStatusEnteredInError ImmunizationStatus = "entered-in-error"
+	ImmunizationStatusNotDone        ImmunizationStatus = "not-done"
+)
+
+// IsValid reports whether the immunization status is a known code.
+func (e ImmunizationStatus) IsValid() bool {
+	switch e {
+	case ImmunizationStatusCompleted, ImmunizationStatusEnteredInError, ImmunizationStatusNotDone:
+		return true
+	}
+
+	return false
+}
+
+// String converts the immunization status to string.
+func (e ImmunizationStatus) String() string {
+	return string(e)
+}
+
+// AdverseEventStatus is the lifecycle status of an AdverseEvent, bound to
+// https://hl7.org/fhir/R5/valueset-adverse-event-status.html
+//
+// The element is new in R5; R4B AdverseEvent carried no status.
+type AdverseEventStatus string
+
+const (
+	AdverseEventStatusInProgress     AdverseEventStatus = "in-progress"
+	AdverseEventStatusCompleted      AdverseEventStatus = "completed"
+	AdverseEventStatusEnteredInError AdverseEventStatus = "entered-in-error"
+	AdverseEventStatusUnknown        AdverseEventStatus = "unknown"
+)
+
+// IsValid reports whether the adverse event status is a known code.
+func (e AdverseEventStatus) IsValid() bool {
+	switch e {
+	case AdverseEventStatusInProgress, AdverseEventStatusCompleted,
+		AdverseEventStatusEnteredInError, AdverseEventStatusUnknown:
+		return true
+	}
+
+	return false
+}
+
+// String converts the adverse event status to string.
+func (e AdverseEventStatus) String() string {
+	return string(e)
+}
+
+// AdverseEventActuality states whether the adverse event happened or was
+// avoided, bound to
+// https://hl7.org/fhir/R5/valueset-adverse-event-actuality.html
+type AdverseEventActuality string
+
+const (
+	AdverseEventActualityActual    AdverseEventActuality = "actual"
+	AdverseEventActualityPotential AdverseEventActuality = "potential"
+)
+
+// IsValid reports whether the adverse event actuality is a known code.
+func (e AdverseEventActuality) IsValid() bool {
+	switch e {
+	case AdverseEventActualityActual, AdverseEventActualityPotential:
+		return true
+	}
+
+	return false
+}
+
+// String converts the adverse event actuality to string.
+func (e AdverseEventActuality) String() string {
+	return string(e)
+}
