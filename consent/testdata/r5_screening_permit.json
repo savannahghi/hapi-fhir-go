@@ -1,0 +1,23 @@
+{
+  "resourceType": "Consent",
+  "id": "scr-1",
+  "meta": {"profile": ["https://example.test/fhir/StructureDefinition/consent"]},
+  "language": "en",
+  "identifier": [{"system": "https://example.test/consent", "value": "scr-1"}],
+  "status": "active",
+  "category": [{"coding": [{"system": "http://terminology.hl7.org/CodeSystem/consentscope", "code": "patient-privacy", "display": "Privacy Consent"}]}],
+  "subject": {"reference": "Patient/pat-1", "display": "Jane Doe"},
+  "date": "2026-09-01T10:00:00+03:00",
+  "grantor": [{"reference": "Patient/pat-1"}],
+  "grantee": [{"reference": "Organization/org-1"}],
+  "controller": [{"reference": "Organization/org-1"}],
+  "manager": [{"reference": "Organization/org-1"}],
+  "regulatoryBasis": [{"coding": [{"system": "http://terminology.hl7.org/CodeSystem/consentpolicycodes", "code": "cric"}]}],
+  "verification": [{"verified": true, "verifiedWith": {"reference": "Patient/pat-1"}, "verifiedBy": {"reference": "Organization/org-1"}, "verificationDate": ["2026-09-01T10:00:00+03:00"]}],
+  "provision": [{
+    "actor": [{"reference": {"reference": "Organization/org-1", "display": "Clinic"}}],
+    "data": [{"meaning": "related", "reference": {"reference": "Encounter/enc-1"}}]
+  }],
+  "decision": "permit",
+  "text": {"status": "generated", "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Breast Cancer Screening consent permitted.</div>"}
+}

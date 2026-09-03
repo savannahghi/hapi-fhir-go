@@ -12,12 +12,16 @@ package hapifhirgo
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"net/http"
 	"net/url"
 	"reflect"
 
 	"github.com/mailgun/errors"
+
+	"github.com/savannahghi/hapi-fhir-go/consent"
+	fhir500 "github.com/savannahghi/hapi-fhir-go/models/r5/fhir500"
 )
 
 // CreateFHIRResource creates a FHIR resource
@@ -377,4 +381,90 @@ func (c *Client) ExpandValueSet(
 	}
 
 	return nil
+}
+
+// ValidateConsent answers whether the Consent identified by req.ConsentID is
+// a valid FHIR R5 consent for the patient in req.PatientID and the requested
+// use. Rules, reason codes and the Consent authoring guide are in
+// docs/consent-validation.md.
+//
+//	GET [base]/Consent/{id}
+//
+// Both req.PatientID and req.ConsentID are required. Looking a consent up by
+// patient alone (search) is deliberately not offered yet.
+//
+// A nil error with Result.Valid == false is a decision: read Result.Reasons.
+// A non-nil error means nothing was decided (the server could not be reached
+// or answered with an error) and should be surfaced as an upstream failure,
+// not as a denial.
+func (c *Client) ValidateConsent(ctx context.Context, req consent.Request, policy consent.Policy) (consent.Result, error) {
+	if req.PatientID == "" {
+		return consent.Result{}, consent.ErrPatientIDRequired
+	}
+
+	if req.ConsentID == "" {
+		return consent.Result{}, consent.ErrConsentIDRequired
+	}
+
+	var raw json.RawMessage
+
+	err := c.GetFHIRResource(ctx, "Consent", req.ConsentID, &raw)
+	if err != nil {
+		if isConsentNotFound(err) {
+			res := consent.Evaluate(consent.Directive{ID: req.ConsentID}, req, policy)
+			res.Reasons = []consent.Reason{{
+				Code:    consent.ReasonConsentNotFound,
+				Message: fmt.Sprintf("Consent/%s does not exist", req.ConsentID),
+			}}
+
+			return res, nil
+		}
+
+		return consent.Result{}, fmt.Errorf("consent: read Consent/%s: %w", req.ConsentID, err)
+	}
+
+	return evaluateRawConsent(raw, req, policy), nil
+}
+
+// evaluateRawConsent decodes an R5 Consent and evaluates it. Decode failures
+// become a MALFORMED_CONSENT decision.
+func evaluateRawConsent(raw json.RawMessage, req consent.Request, policy consent.Policy) consent.Result {
+	var head struct {
+		ResourceType string  `json:"resourceType"`
+		ID           *string `json:"id"`
+	}
+
+	_ = json.Unmarshal(raw, &head)
+
+	id := ""
+	if head.ID != nil {
+		id = *head.ID
+	}
+
+	malformedResult := func(msg string) consent.Result {
+		res := consent.Evaluate(consent.Directive{ID: id}, req, policy)
+		res.Reasons = []consent.Reason{{Code: consent.ReasonMalformedConsent, Message: msg}}
+
+		return res
+	}
+
+	if head.ResourceType != "" && head.ResourceType != "Consent" {
+		return malformedResult(fmt.Sprintf("expected a Consent, got %s", head.ResourceType))
+	}
+
+	var fc fhir500.Consent
+	if err := json.Unmarshal(raw, &fc); err != nil {
+		return malformedResult(fmt.Sprintf("decode R5 Consent: %v", err))
+	}
+
+	return consent.EvaluateR5(fc, req, policy)
+}
+
+func isConsentNotFound(err error) bool {
+	var apiErr APIError
+	if errors.As(err, &apiErr) {
+		return apiErr.StatusCode == http.StatusNotFound || apiErr.StatusCode == http.StatusGone
+	}
+
+	return false
 }
