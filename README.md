@@ -140,3 +140,27 @@ err := client.SearchFHIRResource(ctx, "", "Patient", map[string]any{
 var patient r5.Patient
 err := client.GetFHIRResource(ctx, "Patient", "patient-id", &patient)
 ```
+
+## Consent validation
+
+`Client.ValidateConsent` answers "is this Consent a valid FHIR R5 consent for this patient, right now, for this use?". Both the patient ID and the Consent ID are required; lookup by patient alone is deliberately deferred. Rules, reason codes and the Consent authoring guide live in [docs/consent-validation.md](docs/consent-validation.md).
+
+```go
+import "github.com/savannahghi/hapi-fhir-go/consent"
+
+res, err := client.ValidateConsent(ctx, consent.Request{
+    PatientID: "123",
+    ConsentID: "abc",
+    Actor:     "Organization/7",                       // optional context
+    Purpose:   []consent.Code{{Code: "TREAT"}},
+}, consent.Policy{RequireVerification: true})
+if err != nil {
+    // FHIR server unreachable or errored: nothing was decided (map to 502)
+}
+if !res.Valid {
+    // res.Decision == "deny"; res.Reasons carries codes such as
+    // CONSENT_NOT_FOUND, STATUS_NOT_ACTIVE, EXPIRED, PROVISION_DENIES
+}
+```
+
+The `consent` package itself is pure: `consent.EvaluateR5` and `consent.Evaluate` need no client.

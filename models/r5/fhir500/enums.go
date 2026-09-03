@@ -757,14 +757,19 @@ const (
 type ConsentStatusEnum string
 
 const (
-	ConsentStatusActive   ConsentStatusEnum = "active"
-	ConsentStatusInactive ConsentStatusEnum = "inactive"
+	ConsentStatusDraft          ConsentStatusEnum = "draft"
+	ConsentStatusActive         ConsentStatusEnum = "active"
+	ConsentStatusInactive       ConsentStatusEnum = "inactive"
+	ConsentStatusNotDone        ConsentStatusEnum = "not-done"
+	ConsentStatusEnteredInError ConsentStatusEnum = "entered-in-error"
+	ConsentStatusUnknown        ConsentStatusEnum = "unknown"
 )
 
 // IsValid ...
 func (c ConsentStatusEnum) IsValid() bool {
 	switch c {
-	case ConsentStatusActive, ConsentStatusInactive:
+	case ConsentStatusDraft, ConsentStatusActive, ConsentStatusInactive,
+		ConsentStatusNotDone, ConsentStatusEnteredInError, ConsentStatusUnknown:
 		return true
 	}
 

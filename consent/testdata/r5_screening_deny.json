@@ -1,0 +1,11 @@
+{
+  "resourceType": "Consent",
+  "id": "scr-2",
+  "status": "inactive",
+  "category": [{"coding": [{"system": "http://terminology.hl7.org/CodeSystem/consentscope", "code": "patient-privacy"}]}],
+  "subject": {"reference": "Patient/pat-1"},
+  "date": "2026-09-02",
+  "verification": [{"verified": false}],
+  "provision": [{"actor": [{"reference": {"reference": "Organization/org-1"}}]}],
+  "decision": "deny"
+}
