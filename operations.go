@@ -44,6 +44,32 @@ func (c *Client) CreateFHIRResource(ctx context.Context, resourceType string, pa
 	return nil
 }
 
+// InvokeOperation invokes a FHIR operation that takes a resource in its body.
+// POST [base]/[path], where path is the operation as the server exposes it - at system
+// level ("$accept-from-exchange"), on a type ("Patient/$match"), or on an instance
+// ("Patient/123/$everything").
+//
+// The path and the payload are independent, which is what separates this from
+// CreateFHIRResource. A create can derive the body's resourceType from the path because
+// both are the same word; an operation cannot, because its path names the operation and
+// its body is whatever resource the operation is given. Nothing is written into the
+// payload here and no validation is run against it.
+//
+// Pass a json.RawMessage to send bytes verbatim. A []byte would be marshalled as a base64
+// string by encoding/json, which no operation expects.
+func (c *Client) InvokeOperation(ctx context.Context, path string, payload, result interface{}) error {
+	if path == "" {
+		return errors.Errorf("an operation path is required")
+	}
+
+	err := c.makeRequest(ctx, http.MethodPost, path, nil, payload, result, false)
+	if err != nil {
+		return fmt.Errorf("unable to invoke operation %s: %w", path, err)
+	}
+
+	return nil
+}
+
 // deleteFHIRResource performs a logical delete on a resource instance.
 func (c *Client) DeleteFHIRResource(ctx context.Context, resourceType, fhirResourceID string) error {
 	deletePath := fmt.Sprintf("%v/%v", resourceType, fhirResourceID)
