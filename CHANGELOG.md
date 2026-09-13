@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.18.0](https://github.com/savannahghi/hapi-fhir-go/compare/v1.17.0...v1.18.0) (2026-09-13)
+
+
+### Features
+
+* add InvokeOperation for operations that take a body ([#111](https://github.com/savannahghi/hapi-fhir-go/issues/111)) ([4bb1c09](https://github.com/savannahghi/hapi-fhir-go/commit/4bb1c09edab9e0bf6ed44325cd10c520cc06eab1))
+
 ## [1.17.0](https://github.com/savannahghi/hapi-fhir-go/compare/v1.16.1...v1.17.0) (2026-08-06)
 
 
