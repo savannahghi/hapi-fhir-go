@@ -12,8 +12,11 @@ import (
 type Immunization struct {
 	ID                    *string                           `json:"id,omitempty"`
 	Meta                  *Meta                             `json:"meta,omitempty"`
+	ImplicitRules         *string                           `json:"implicitRules,omitempty"`
+	Language              *string                           `json:"language,omitempty"`
 	Text                  *Narrative                        `json:"text,omitempty"`
 	Extension             []Extension                       `json:"extension,omitempty"`
+	ModifierExtension     []Extension                       `json:"modifierExtension,omitempty"`
 	Identifier            []*Identifier                     `json:"identifier,omitempty"`
 	BasedOn               []*Reference                      `json:"basedOn,omitempty"`
 	Status                *ImmunizationStatus               `json:"status,omitempty"`
@@ -47,9 +50,11 @@ type Immunization struct {
 
 // ImmunizationPerformer indicates who performed the immunization event.
 type ImmunizationPerformer struct {
-	ID       *string          `json:"id,omitempty"`
-	Function *CodeableConcept `json:"function,omitempty"`
-	Actor    *Reference       `json:"actor,omitempty"`
+	ID                *string          `json:"id,omitempty"`
+	Extension         []Extension      `json:"extension,omitempty"`
+	ModifierExtension []Extension      `json:"modifierExtension,omitempty"`
+	Function          *CodeableConcept `json:"function,omitempty"`
+	Actor             *Reference       `json:"actor,omitempty"`
 }
 
 // ImmunizationProgramEligibility describes the patient's eligibility for a
@@ -59,9 +64,11 @@ type ImmunizationPerformer struct {
 // element so the program and the patient's status within it are recorded
 // separately.
 type ImmunizationProgramEligibility struct {
-	ID            *string          `json:"id,omitempty"`
-	Program       *CodeableConcept `json:"program,omitempty"`
-	ProgramStatus *CodeableConcept `json:"programStatus,omitempty"`
+	ID                *string          `json:"id,omitempty"`
+	Extension         []Extension      `json:"extension,omitempty"`
+	ModifierExtension []Extension      `json:"modifierExtension,omitempty"`
+	Program           *CodeableConcept `json:"program,omitempty"`
+	ProgramStatus     *CodeableConcept `json:"programStatus,omitempty"`
 }
 
 // ImmunizationReaction holds categorical data indicating that an adverse event
@@ -71,21 +78,25 @@ type ImmunizationProgramEligibility struct {
 // record it as a new AllergyIntolerance instance, because most systems do not
 // query past Immunization.reaction elements.
 type ImmunizationReaction struct {
-	ID            *string            `json:"id,omitempty"`
-	Date          *scalarutils.Date  `json:"date,omitempty"`
-	Manifestation *CodeableReference `json:"manifestation,omitempty"`
-	Reported      *bool              `json:"reported,omitempty"`
+	ID                *string            `json:"id,omitempty"`
+	Extension         []Extension        `json:"extension,omitempty"`
+	ModifierExtension []Extension        `json:"modifierExtension,omitempty"`
+	Date              *scalarutils.Date  `json:"date,omitempty"`
+	Manifestation     *CodeableReference `json:"manifestation,omitempty"`
+	Reported          *bool              `json:"reported,omitempty"`
 }
 
 // ImmunizationProtocolApplied is the protocol, meaning the set of
 // recommendations, followed by the provider who administered the dose.
 type ImmunizationProtocolApplied struct {
-	ID            *string            `json:"id,omitempty"`
-	Series        *string            `json:"series,omitempty"`
-	Authority     *Reference         `json:"authority,omitempty"`
-	TargetDisease []*CodeableConcept `json:"targetDisease,omitempty"`
-	DoseNumber    *string            `json:"doseNumber,omitempty"`
-	SeriesDoses   *string            `json:"seriesDoses,omitempty"`
+	ID                *string            `json:"id,omitempty"`
+	Extension         []Extension        `json:"extension,omitempty"`
+	ModifierExtension []Extension        `json:"modifierExtension,omitempty"`
+	Series            *string            `json:"series,omitempty"`
+	Authority         *Reference         `json:"authority,omitempty"`
+	TargetDisease     []*CodeableConcept `json:"targetDisease,omitempty"`
+	DoseNumber        *string            `json:"doseNumber,omitempty"`
+	SeriesDoses       *string            `json:"seriesDoses,omitempty"`
 }
 
 // ImmunizationRelayPayload is the wrapper used when an Immunization is relayed

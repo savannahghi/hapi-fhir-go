@@ -26,6 +26,7 @@ type MedicinalProductDefinition struct {
 	SpecialMeasures                []CodeableConcept                          `json:"specialMeasures,omitempty"`
 	PediatricUseIndicator          *CodeableConcept                           `json:"pediatricUseIndicator,omitempty"`
 	Classification                 []CodeableConcept                          `json:"classification,omitempty"`
+	MarketingStatus                []MarketingStatus                          `json:"marketingStatus,omitempty"`
 	PackagedMedicinalProduct       []CodeableConcept                          `json:"packagedMedicinalProduct,omitempty"`
 	ComprisedOf                    []Reference                                `json:"comprisedOf,omitempty"`
 	Ingredient                     []CodeableConcept                          `json:"ingredient,omitempty"`

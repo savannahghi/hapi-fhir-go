@@ -14,8 +14,11 @@ import (
 type AdverseEvent struct {
 	ID                      *string                           `json:"id,omitempty"`
 	Meta                    *Meta                             `json:"meta,omitempty"`
+	ImplicitRules           *string                           `json:"implicitRules,omitempty"`
+	Language                *string                           `json:"language,omitempty"`
 	Text                    *Narrative                        `json:"text,omitempty"`
 	Extension               []Extension                       `json:"extension,omitempty"`
+	ModifierExtension       []Extension                       `json:"modifierExtension,omitempty"`
 	Identifier              []*Identifier                     `json:"identifier,omitempty"`
 	Status                  *AdverseEventStatus               `json:"status,omitempty"`
 	Actuality               *AdverseEventActuality            `json:"actuality,omitempty"`
@@ -50,15 +53,19 @@ type AdverseEvent struct {
 // R5 replaced the R4B contributor reference list with this backbone element so a
 // participant's role can be qualified by function.
 type AdverseEventParticipant struct {
-	ID       *string          `json:"id,omitempty"`
-	Function *CodeableConcept `json:"function,omitempty"`
-	Actor    *Reference       `json:"actor,omitempty"`
+	ID                *string          `json:"id,omitempty"`
+	Extension         []Extension      `json:"extension,omitempty"`
+	ModifierExtension []Extension      `json:"modifierExtension,omitempty"`
+	Function          *CodeableConcept `json:"function,omitempty"`
+	Actor             *Reference       `json:"actor,omitempty"`
 }
 
 // AdverseEventSuspectEntity describes the entity that is suspected to have
 // caused the adverse event.
 type AdverseEventSuspectEntity struct {
 	ID                      *string                             `json:"id,omitempty"`
+	Extension               []Extension                         `json:"extension,omitempty"`
+	ModifierExtension       []Extension                         `json:"modifierExtension,omitempty"`
 	InstanceCodeableConcept *CodeableConcept                    `json:"instanceCodeableConcept,omitempty"`
 	InstanceReference       *Reference                          `json:"instanceReference,omitempty"`
 	Causality               *AdverseEventSuspectEntityCausality `json:"causality,omitempty"`
@@ -71,6 +78,8 @@ type AdverseEventSuspectEntity struct {
 // assessmentMethod and entityRelatedness.
 type AdverseEventSuspectEntityCausality struct {
 	ID                *string          `json:"id,omitempty"`
+	Extension         []Extension      `json:"extension,omitempty"`
+	ModifierExtension []Extension      `json:"modifierExtension,omitempty"`
 	AssessmentMethod  *CodeableConcept `json:"assessmentMethod,omitempty"`
 	EntityRelatedness *CodeableConcept `json:"entityRelatedness,omitempty"`
 	Author            *Reference       `json:"author,omitempty"`
@@ -80,6 +89,8 @@ type AdverseEventSuspectEntityCausality struct {
 // have increased the probability or severity of the adverse event.
 type AdverseEventContributingFactor struct {
 	ID                  *string          `json:"id,omitempty"`
+	Extension           []Extension      `json:"extension,omitempty"`
+	ModifierExtension   []Extension      `json:"modifierExtension,omitempty"`
 	ItemReference       *Reference       `json:"itemReference,omitempty"`
 	ItemCodeableConcept *CodeableConcept `json:"itemCodeableConcept,omitempty"`
 }
@@ -88,6 +99,8 @@ type AdverseEventContributingFactor struct {
 // to avoiding the adverse event.
 type AdverseEventPreventiveAction struct {
 	ID                  *string          `json:"id,omitempty"`
+	Extension           []Extension      `json:"extension,omitempty"`
+	ModifierExtension   []Extension      `json:"modifierExtension,omitempty"`
 	ItemReference       *Reference       `json:"itemReference,omitempty"`
 	ItemCodeableConcept *CodeableConcept `json:"itemCodeableConcept,omitempty"`
 }
@@ -96,6 +109,8 @@ type AdverseEventPreventiveAction struct {
 // adverse event to reduce the extent of harm.
 type AdverseEventMitigatingAction struct {
 	ID                  *string          `json:"id,omitempty"`
+	Extension           []Extension      `json:"extension,omitempty"`
+	ModifierExtension   []Extension      `json:"modifierExtension,omitempty"`
 	ItemReference       *Reference       `json:"itemReference,omitempty"`
 	ItemCodeableConcept *CodeableConcept `json:"itemCodeableConcept,omitempty"`
 }
@@ -106,6 +121,8 @@ type AdverseEventMitigatingAction struct {
 // single element.
 type AdverseEventSupportingInfo struct {
 	ID                  *string          `json:"id,omitempty"`
+	Extension           []Extension      `json:"extension,omitempty"`
+	ModifierExtension   []Extension      `json:"modifierExtension,omitempty"`
 	ItemReference       *Reference       `json:"itemReference,omitempty"`
 	ItemCodeableConcept *CodeableConcept `json:"itemCodeableConcept,omitempty"`
 }

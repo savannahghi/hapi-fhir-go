@@ -24,10 +24,11 @@ type Ingredient struct {
 }
 
 type IngredientManufacturer struct {
-	ID                *string     `json:"id,omitempty"`
-	Extension         []Extension `json:"extension,omitempty"`
-	ModifierExtension []Extension `json:"modifierExtension,omitempty"`
-	Manufacturer      Reference   `json:"manufacturer"`
+	ID                *string                     `json:"id,omitempty"`
+	Extension         []Extension                 `json:"extension,omitempty"`
+	ModifierExtension []Extension                 `json:"modifierExtension,omitempty"`
+	Role              *IngredientManufacturerRole `json:"role,omitempty"`
+	Manufacturer      Reference                   `json:"manufacturer"`
 }
 
 type IngredientSubstance struct {
@@ -63,9 +64,9 @@ type IngredientSubstanceStrengthReferenceStrength struct {
 	Extension          []Extension       `json:"extension,omitempty"`
 	ModifierExtension  []Extension       `json:"modifierExtension,omitempty"`
 	Substance          CodeableReference `json:"substance"`
-	StrengthRatio      Ratio             `json:"strengthRatio"`
-	StrengthRatioRange RatioRange        `json:"strengthRatioRange"`
-	StrengthQuantity   Quantity          `json:"strengthQuantity"`
+	StrengthRatio      Ratio             `json:"strengthRatio,omitzero"`
+	StrengthRatioRange RatioRange        `json:"strengthRatioRange,omitzero"`
+	StrengthQuantity   Quantity          `json:"strengthQuantity,omitzero"`
 	MeasurementPoint   *string           `json:"measurementPoint,omitempty"`
 	Country            []CodeableConcept `json:"country,omitempty"`
 }
