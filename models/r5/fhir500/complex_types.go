@@ -15,7 +15,8 @@ import (
 type Address struct {
 	// Unique id for the element within a resource (for internal references). This
 	// may be any string value that does not contain spaces.
-	ID *string `json:"id,omitempty"`
+	ID        *string     `json:"id,omitempty"`
+	Extension []Extension `json:"extension,omitempty"`
 
 	// The purpose of this address.
 	Use *AddressUseEnum `json:"use,omitempty"`
@@ -60,7 +61,8 @@ type Address struct {
 type Age struct {
 	// Unique id for the element within a resource (for internal references). This
 	// may be any string value that does not contain spaces.
-	ID *string `json:"id,omitempty"`
+	ID        *string     `json:"id,omitempty"`
+	Extension []Extension `json:"extension,omitempty"`
 
 	// The value of the measured amount. The value includes an implicit precision
 	// in the presentation of the value.
@@ -86,7 +88,8 @@ type Age struct {
 type Annotation struct {
 	// Unique id for the element within a resource (for internal references). This
 	// may be any string value that does not contain spaces.
-	ID *string `json:"id,omitempty"`
+	ID        *string     `json:"id,omitempty"`
+	Extension []Extension `json:"extension,omitempty"`
 
 	// The individual responsible for making the annotation.
 	AuthorReference *Reference `json:"authorReference,omitempty"`
@@ -106,7 +109,8 @@ type Annotation struct {
 type Attachment struct {
 	// Unique id for the element within a resource (for internal references). This
 	// may be any string value that does not contain spaces.
-	ID *string `json:"id,omitempty"`
+	ID        *string     `json:"id,omitempty"`
+	Extension []Extension `json:"extension,omitempty"`
 
 	// Identifies the type of the data in the attachment and allows a method to be
 	// chosen to interpret or render the data. Includes mime type parameters such
@@ -135,6 +139,11 @@ type Attachment struct {
 
 	// The date that the attachment was first created.
 	Creation *scalarutils.DateTime `json:"creation,omitempty"`
+	Height   *int                  `json:"height,omitempty"`
+	Width    *int                  `json:"width,omitempty"`
+	Frames   *int                  `json:"frames,omitempty"`
+	Duration *json.Number          `json:"duration,omitempty"`
+	Pages    *int                  `json:"pages,omitempty"`
 }
 
 // FHIRCodeableConcept definition: a concept that may be defined by a formal
@@ -142,7 +151,8 @@ type Attachment struct {
 type CodeableConcept struct {
 	// Unique id for the element within a resource (for internal references). This
 	// may be any string value that does not contain spaces.
-	ID *string `json:"id,omitempty"`
+	ID        *string     `json:"id,omitempty"`
+	Extension []Extension `json:"extension,omitempty"`
 
 	// A reference to a code defined by a terminology system.
 	Coding []*Coding `json:"coding,omitempty"`
@@ -158,7 +168,8 @@ type CodeableConcept struct {
 type Coding struct {
 	// Unique id for the element within a resource (for internal references). This
 	// may be any string value that does not contain spaces.
-	ID *string `json:"id,omitempty"`
+	ID        *string     `json:"id,omitempty"`
+	Extension []Extension `json:"extension,omitempty"`
 
 	// The identification of the code system that defines the meaning of the
 	// symbol in the code.
@@ -196,7 +207,8 @@ func (c *Coding) ToString() string {
 type ContactPoint struct {
 	// Unique id for the element within a resource (for internal references). This
 	// may be any string value that does not contain spaces.
-	ID *string `json:"id,omitempty"`
+	ID        *string     `json:"id,omitempty"`
+	Extension []Extension `json:"extension,omitempty"`
 
 	// Telecommunications form for contact point - what communications system is
 	// required to make use of the contact.
@@ -223,7 +235,8 @@ type ContactPoint struct {
 type HumanName struct {
 	// Unique id for the element within a resource (for internal references). This
 	// may be any string value that does not contain spaces.
-	ID *string `json:"id,omitempty"`
+	ID        *string     `json:"id,omitempty"`
+	Extension []Extension `json:"extension,omitempty"`
 
 	// Identifies the purpose for this name.
 	Use HumanNameUseEnum `json:"use,omitempty"`
@@ -257,14 +270,15 @@ type HumanName struct {
 type Identifier struct {
 	// Unique id for the element within a resource (for internal references). This
 	// may be any string value that does not contain spaces.
-	ID *string `json:"id,omitempty"`
+	ID        *string     `json:"id,omitempty"`
+	Extension []Extension `json:"extension,omitempty"`
 
 	// The purpose of this identifier.
 	Use IdentifierUseEnum `json:"use,omitempty"`
 
 	// A coded type for the identifier that can be used to determine which
 	// identifier to use for a specific purpose.
-	Type CodeableConcept `json:"type,omitempty"`
+	Type CodeableConcept `json:"type,omitzero"`
 
 	// Establishes the namespace for the value - that is, a URL that describes a
 	// set values that are unique.
@@ -286,7 +300,8 @@ type Identifier struct {
 type Narrative struct {
 	// Unique id for the element within a resource (for internal references). This
 	// may be any string value that does not contain spaces.
-	ID *string `json:"id,omitempty"`
+	ID        *string     `json:"id,omitempty"`
+	Extension []Extension `json:"extension,omitempty"`
 
 	// The status of the narrative - whether it's entirely generated (from just
 	// the defined data or the extensions too), or whether a human authored it and
@@ -302,7 +317,8 @@ type Narrative struct {
 type Period struct {
 	// Unique id for the element within a resource (for internal references). This
 	// may be any string value that does not contain spaces.
-	ID *string `json:"id,omitempty"`
+	ID        *string     `json:"id,omitempty"`
+	Extension []Extension `json:"extension,omitempty"`
 
 	// The start of the period. The boundary is inclusive.
 	Start scalarutils.DateTime `json:"start,omitempty"`
@@ -317,7 +333,8 @@ type Period struct {
 type Reference struct {
 	// Unique id for the element within a resource (for internal references). This
 	// may be any string value that does not contain spaces.
-	ID *string `json:"id,omitempty"`
+	ID        *string     `json:"id,omitempty"`
+	Extension []Extension `json:"extension,omitempty"`
 
 	// A reference to a location at which the other resource is found. The
 	// reference may be a relative reference, in which case it is relative to the
@@ -365,12 +382,14 @@ type Expression struct {
 // FHIRMeta is a set of metadata that provides technical and workflow context
 // to a resource.
 type Meta struct {
-	VersionID   string    `json:"versionId,omitempty"`
-	LastUpdated time.Time `json:"lastUpdated,omitempty"`
-	Source      string    `json:"source,omitempty"`
-	Tag         []Coding  `json:"tag,omitempty"`
-	Profile     []string  `json:"profile,omitempty"`
-	Security    []Coding  `json:"security,omitempty"`
+	ID          *string     `json:"id,omitempty"`
+	Extension   []Extension `json:"extension,omitempty"`
+	VersionID   string      `json:"versionId,omitempty"`
+	LastUpdated time.Time   `json:"lastUpdated,omitzero"`
+	Source      string      `json:"source,omitempty"`
+	Tag         []Coding    `json:"tag,omitempty"`
+	Profile     []string    `json:"profile,omitempty"`
+	Security    []Coding    `json:"security,omitempty"`
 }
 
 // Quantity definition: a measured amount (or an amount that can
@@ -379,7 +398,8 @@ type Meta struct {
 type Quantity struct {
 	// Unique id for the element within a resource (for internal references). This
 	// may be any string value that does not contain spaces.
-	ID *string `json:"id,omitempty"`
+	ID        *string     `json:"id,omitempty"`
+	Extension []Extension `json:"extension,omitempty"`
 
 	// The value of the measured amount. The value includes an implicit precision
 	// in the presentation of the value.
@@ -391,39 +411,41 @@ type Quantity struct {
 	Comparator *QuantityComparatorEnum `json:"comparator,omitempty"`
 
 	// A human-readable form of the unit.
-	Unit string `json:"unit"`
+	Unit string `json:"unit,omitempty"`
 
 	// The identification of the system that provides the coded form of the unit.
-	System string `json:"system"`
+	System string `json:"system,omitempty"`
 
 	// A computer processable form of the unit in some unit representation system.
-	Code *string `json:"code"`
+	Code *string `json:"code,omitempty"`
 }
 
 // FHIRRange definition: a set of ordered quantities defined by a low and high limit.
 type Range struct {
 	// Unique id for the element within a resource (for internal references). This
 	// may be any string value that does not contain spaces.
-	ID *string `json:"id,omitempty"`
+	ID        *string     `json:"id,omitempty"`
+	Extension []Extension `json:"extension,omitempty"`
 
 	// The low limit. The boundary is inclusive.
-	Low Quantity `json:"low,omitempty"`
+	Low Quantity `json:"low,omitzero"`
 
 	// The high limit. The boundary is inclusive.
-	High Quantity `json:"high,omitempty"`
+	High Quantity `json:"high,omitzero"`
 }
 
 // FHIRRatio definition: a relationship of two quantity values - expressed as a numerator and a denominator.
 type Ratio struct {
 	// Unique id for the element within a resource (for internal references). This
 	// may be any string value that does not contain spaces.
-	ID *string `json:"id,omitempty"`
+	ID        *string     `json:"id,omitempty"`
+	Extension []Extension `json:"extension,omitempty"`
 
 	// The value of the numerator.
-	Numerator Quantity `json:"numerator,omitempty"`
+	Numerator Quantity `json:"numerator,omitzero"`
 
 	// The value of the denominator.
-	Denominator Quantity `json:"denominator,omitempty"`
+	Denominator Quantity `json:"denominator,omitzero"`
 }
 
 // Extension is an optional element that provides additional information not
@@ -431,36 +453,65 @@ type Ratio struct {
 // Extensions allow the definition of new data elements or the modification of
 // existing data elements in the FHIR data model.
 type Extension struct {
-	URL                  string           `json:"url,omitempty"`
-	ValueBoolean         bool             `json:"valueBoolean,omitempty"`
-	ValueInteger         *int             `json:"valueInteger,omitempty"`
-	ValueDecimal         *float64         `json:"valueDecimal,omitempty"`
-	ValueBase64Binary    string           `json:"valueBase64Binary,omitempty"`
-	ValueInstant         string           `json:"valueInstant,omitempty"`
-	ValueString          string           `json:"valueString,omitempty"`
-	ValueURI             string           `json:"valueURI,omitempty"`
-	ValueDate            string           `json:"valueDate,omitempty"`
-	ValueDateTime        string           `json:"valueDateTime,omitempty"`
-	ValueTime            string           `json:"valueTime,omitempty"`
-	ValueCode            string           `json:"valueCode,omitempty"`
-	ValueOid             string           `json:"valueOid,omitempty"`
-	ValueUUID            string           `json:"valueUUID,omitempty"`
-	ValueID              string           `json:"valueID,omitempty"`
-	ValueUnsignedInt     int              `json:"valueUnsignedInt,omitempty"`
-	ValuePositiveInt     int              `json:"valuePositiveInt,omitempty"`
-	ValueMarkdown        string           `json:"valueMarkdown,omitempty"`
-	ValueAnnotation      *Annotation      `json:"valueAnnotation,omitempty"`
-	ValueAttachment      *Attachment      `json:"valueAttachment,omitempty"`
-	ValueIdentifier      *Identifier      `json:"valueIdentifier,omitempty"`
-	ValueCodeableConcept *CodeableConcept `json:"valueCodeableConcept,omitempty"`
-	ValueCoding          *Coding          `json:"valueCoding,omitempty"`
-	ValueQuantity        *Quantity        `json:"valueQuantity,omitempty"`
-	ValueRange           *Range           `json:"valueRange,omitempty"`
-	ValuePeriod          *Period          `json:"valuePeriod,omitempty"`
-	ValueRatio           *Ratio           `json:"valueRatio,omitempty"`
-	ValueReference       *Reference       `json:"valueReference,omitempty"`
-	ValueExpression      *Expression      `json:"valueExpression,omitempty"`
-	Extension            []Extension      `json:"extension,omitempty"`
+	ID  *string `json:"id,omitempty"`
+	URL string  `json:"url,omitempty"`
+	// ValueBoolean is a pointer so that false survives a round trip; a plain
+	// bool with omitempty drops it.
+	ValueBoolean               *bool                  `json:"valueBoolean,omitempty"`
+	ValueInteger               *int                   `json:"valueInteger,omitempty"`
+	ValueInteger64             *string                `json:"valueInteger64,omitempty"`
+	ValueDecimal               *float64               `json:"valueDecimal,omitempty"`
+	ValueBase64Binary          string                 `json:"valueBase64Binary,omitempty"`
+	ValueInstant               string                 `json:"valueInstant,omitempty"`
+	ValueString                string                 `json:"valueString,omitempty"`
+	ValueURI                   string                 `json:"valueUri,omitempty"`
+	ValueURL                   string                 `json:"valueUrl,omitempty"`
+	ValueCanonical             string                 `json:"valueCanonical,omitempty"`
+	ValueDate                  string                 `json:"valueDate,omitempty"`
+	ValueDateTime              string                 `json:"valueDateTime,omitempty"`
+	ValueTime                  string                 `json:"valueTime,omitempty"`
+	ValueCode                  string                 `json:"valueCode,omitempty"`
+	ValueOid                   string                 `json:"valueOid,omitempty"`
+	ValueUUID                  string                 `json:"valueUuid,omitempty"`
+	ValueAddress               *Address               `json:"valueAddress,omitempty"`
+	ValueAge                   *Age                   `json:"valueAge,omitempty"`
+	ValueID                    string                 `json:"valueId,omitempty"`
+	ValueUnsignedInt           int                    `json:"valueUnsignedInt,omitempty"`
+	ValuePositiveInt           int                    `json:"valuePositiveInt,omitempty"`
+	ValueMarkdown              string                 `json:"valueMarkdown,omitempty"`
+	ValueAnnotation            *Annotation            `json:"valueAnnotation,omitempty"`
+	ValueAttachment            *Attachment            `json:"valueAttachment,omitempty"`
+	ValueIdentifier            *Identifier            `json:"valueIdentifier,omitempty"`
+	ValueMoney                 *Money                 `json:"valueMoney,omitempty"`
+	ValueCodeableConcept       *CodeableConcept       `json:"valueCodeableConcept,omitempty"`
+	ValueCodeableReference     *CodeableReference     `json:"valueCodeableReference,omitempty"`
+	ValueCoding                *Coding                `json:"valueCoding,omitempty"`
+	ValueContactPoint          *ContactPoint          `json:"valueContactPoint,omitempty"`
+	ValueCount                 *Count                 `json:"valueCount,omitempty"`
+	ValueDistance              *Distance              `json:"valueDistance,omitempty"`
+	ValueDuration              *Duration              `json:"valueDuration,omitempty"`
+	ValueHumanName             *HumanName             `json:"valueHumanName,omitempty"`
+	ValueQuantity              *Quantity              `json:"valueQuantity,omitempty"`
+	ValueRange                 *Range                 `json:"valueRange,omitempty"`
+	ValuePeriod                *Period                `json:"valuePeriod,omitempty"`
+	ValueRatio                 *Ratio                 `json:"valueRatio,omitempty"`
+	ValueRatioRange            *RatioRange            `json:"valueRatioRange,omitempty"`
+	ValueReference             *Reference             `json:"valueReference,omitempty"`
+	ValueSampledData           *SampledData           `json:"valueSampledData,omitempty"`
+	ValueSignature             *Signature             `json:"valueSignature,omitempty"`
+	ValueTiming                *Timing                `json:"valueTiming,omitempty"`
+	ValueContactDetail         *ContactDetail         `json:"valueContactDetail,omitempty"`
+	ValueDataRequirement       *DataRequirement       `json:"valueDataRequirement,omitempty"`
+	ValueExpression            *Expression            `json:"valueExpression,omitempty"`
+	ValueParameterDefinition   *ParameterDefinition   `json:"valueParameterDefinition,omitempty"`
+	ValueRelatedArtifact       *RelatedArtifact       `json:"valueRelatedArtifact,omitempty"`
+	ValueTriggerDefinition     *TriggerDefinition     `json:"valueTriggerDefinition,omitempty"`
+	ValueUsageContext          *UsageContext          `json:"valueUsageContext,omitempty"`
+	ValueAvailability          *Availability          `json:"valueAvailability,omitempty"`
+	ValueExtendedContactDetail *ExtendedContactDetail `json:"valueExtendedContactDetail,omitempty"`
+	ValueDosage                *Dosage                `json:"valueDosage,omitempty"`
+	ValueMeta                  *Meta                  `json:"valueMeta,omitempty"`
+	Extension                  []Extension            `json:"extension,omitempty"`
 }
 
 // FHIRCodeableReference is documented here http://hl7.org/fhir/StructureDefinition/CodeableReference
@@ -476,25 +527,26 @@ type UsageContext struct {
 	ID                   *string         `json:"id,omitempty"`
 	Extension            []Extension     `json:"extension,omitempty"`
 	Code                 Coding          `json:"code"`
-	ValueCodeableConcept CodeableConcept `json:"valueCodeableConcept"`
-	ValueQuantity        Quantity        `json:"valueQuantity"`
-	ValueRange           Range           `json:"valueRange"`
-	ValueReference       Reference       `json:"valueReference"`
+	ValueCodeableConcept CodeableConcept `json:"valueCodeableConcept,omitzero"`
+	ValueQuantity        Quantity        `json:"valueQuantity,omitzero"`
+	ValueRange           Range           `json:"valueRange,omitzero"`
+	ValueReference       Reference       `json:"valueReference,omitzero"`
 }
 
 // RelatedArtifact is documented here http://hl7.org/fhir/StructureDefinition/RelatedArtifact
 type RelatedArtifact struct {
-	ID                *string            `json:"id,omitempty"`
-	Extension         []Extension        `json:"extension,omitempty"`
-	Classifier        []CodeableConcept  `json:"classifier,omitempty"`
-	Label             *string            `json:"label,omitempty"`
-	Display           *string            `json:"display,omitempty"`
-	Citation          *string            `json:"citation,omitempty"`
-	Document          *Attachment        `json:"document,omitempty"`
-	Resource          *string            `json:"resource,omitempty"`
-	ResourceReference *Reference         `json:"resourceReference,omitempty"`
-	PublicationStatus *PublicationStatus `json:"publicationStatus,omitempty"`
-	PublicationDate   *string            `json:"publicationDate,omitempty"`
+	ID                *string             `json:"id,omitempty"`
+	Extension         []Extension         `json:"extension,omitempty"`
+	Type              RelatedArtifactType `json:"type"`
+	Classifier        []CodeableConcept   `json:"classifier,omitempty"`
+	Label             *string             `json:"label,omitempty"`
+	Display           *string             `json:"display,omitempty"`
+	Citation          *string             `json:"citation,omitempty"`
+	Document          *Attachment         `json:"document,omitempty"`
+	Resource          *string             `json:"resource,omitempty"`
+	ResourceReference *Reference          `json:"resourceReference,omitempty"`
+	PublicationStatus *PublicationStatus  `json:"publicationStatus,omitempty"`
+	PublicationDate   *string             `json:"publicationDate,omitempty"`
 }
 
 // FHIRContactDetail is documented here http://hl7.org/fhir/StructureDefinition/ContactDetail

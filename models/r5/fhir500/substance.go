@@ -28,8 +28,8 @@ type SubstanceIngredient struct {
 	Extension                []Extension     `json:"extension,omitempty"`
 	ModifierExtension        []Extension     `json:"modifierExtension,omitempty"`
 	Quantity                 *Ratio          `json:"quantity,omitempty"`
-	SubstanceCodeableConcept CodeableConcept `json:"substanceCodeableConcept"`
-	SubstanceReference       Reference       `json:"substanceReference"`
+	SubstanceCodeableConcept CodeableConcept `json:"substanceCodeableConcept,omitzero"`
+	SubstanceReference       Reference       `json:"substanceReference,omitzero"`
 }
 
 type OtherSubstance Substance

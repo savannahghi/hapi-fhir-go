@@ -49,6 +49,7 @@ type AdministrableProductDefinitionRouteOfAdministration struct {
 	MaxSingleDose             *Quantity                                                          `json:"maxSingleDose,omitempty"`
 	MaxDosePerDay             *Quantity                                                          `json:"maxDosePerDay,omitempty"`
 	MaxDosePerTreatmentPeriod *Ratio                                                             `json:"maxDosePerTreatmentPeriod,omitempty"`
+	MaxTreatmentPeriod        *Duration                                                          `json:"maxTreatmentPeriod,omitempty"`
 	TargetSpecies             []AdministrableProductDefinitionRouteOfAdministrationTargetSpecies `json:"targetSpecies,omitempty"`
 }
 

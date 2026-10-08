@@ -89,11 +89,14 @@ type Patient struct {
 	Link []*PatientLink `json:"link,omitempty"`
 
 	// Meta stores more information about the resource
-	Meta *Meta `json:"meta,omitempty"`
+	Meta          *Meta   `json:"meta,omitempty"`
+	ImplicitRules *string `json:"implicitRules,omitempty"`
+	Language      *string `json:"language,omitempty"`
 
 	// Extension is an optional element that provides additional information not
 	// captured in the basic resource definition
-	Extension []*Extension `json:"extension,omitempty"`
+	Extension         []*Extension `json:"extension,omitempty"`
+	ModifierExtension []Extension  `json:"modifierExtension,omitempty"`
 }
 
 // GetReceivingFacilityDetails is used to fetch the details of the receiving
@@ -120,7 +123,9 @@ func (p Patient) GetPatientHealthIDIdentifier() string {
 type PatientCommunication struct {
 	// Unique id for the element within a resource (for internal references). This
 	// may be any string value that does not contain spaces.
-	ID *string `json:"id,omitempty"`
+	ID                *string     `json:"id,omitempty"`
+	Extension         []Extension `json:"extension,omitempty"`
+	ModifierExtension []Extension `json:"modifierExtension,omitempty"`
 
 	// The ISO-639-1 alpha 2 code in lower case for the language, optionally
 	// followed by a hyphen and the ISO-3166-1 alpha 2 code for the region in upper case;
@@ -137,7 +142,9 @@ type PatientCommunication struct {
 type PatientContact struct {
 	// Unique id for the element within a resource (for internal references). This
 	// may be any string value that does not contain spaces.
-	ID *string `json:"id,omitempty"`
+	ID                *string     `json:"id,omitempty"`
+	Extension         []Extension `json:"extension,omitempty"`
+	ModifierExtension []Extension `json:"modifierExtension,omitempty"`
 
 	// The nature of the relationship between the patient and the contact person.
 	Relationship []*CodeableConcept `json:"relationship,omitempty"`
@@ -170,7 +177,9 @@ type PatientContact struct {
 type PatientLink struct {
 	// Unique id for the element within a resource (for internal references). This
 	// may be any string value that does not contain spaces.
-	ID *string `json:"id,omitempty"`
+	ID                *string     `json:"id,omitempty"`
+	Extension         []Extension `json:"extension,omitempty"`
+	ModifierExtension []Extension `json:"modifierExtension,omitempty"`
 
 	// The other patient resource that the link refers to.
 	Other *Reference `json:"other,omitempty"`

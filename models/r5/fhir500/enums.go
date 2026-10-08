@@ -85,38 +85,6 @@ func (e EpisodeOfCareStatus) String() string {
 	return string(e)
 }
 
-// EncounterStatus is a FHIR enum.
-type EncounterStatus string
-
-const (
-	EncounterStatusPlanned        EncounterStatus = "planned"
-	EncounterStatusArrived        EncounterStatus = "arrived"
-	EncounterStatusTriaged        EncounterStatus = "triaged"
-	EncounterStatusInProgress     EncounterStatus = "in_progress"
-	EncounterStatusOnleave        EncounterStatus = "onleave"
-	EncounterStatusFinished       EncounterStatus = "finished"
-	EncounterStatusCancelled      EncounterStatus = "cancelled"
-	EncounterStatusEnteredInError EncounterStatus = "entered_in_error"
-	EncounterStatusUnknown        EncounterStatus = "unknown"
-)
-
-// IsValid ...
-func (e EncounterStatus) IsValid() bool {
-	switch e {
-	case EncounterStatusPlanned, EncounterStatusArrived, EncounterStatusTriaged,
-		EncounterStatusInProgress, EncounterStatusOnleave, EncounterStatusFinished,
-		EncounterStatusCancelled, EncounterStatusEnteredInError, EncounterStatusUnknown:
-		return true
-	}
-
-	return false
-}
-
-// String ...
-func (e EncounterStatus) String() string {
-	return string(e)
-}
-
 // EncounterLocationStatus is a FHIR enum.
 type EncounterLocationStatus string
 
@@ -752,78 +720,6 @@ const (
 	ServiceRequestPriorityAsap    ServiceRequestPriorityEnum = "asap"
 	ServiceRequestPriorityStat    ServiceRequestPriorityEnum = "stat"
 )
-
-// ConsentStatusEnum a type enum tha represents a Consent Status field of consent resource.
-type ConsentStatusEnum string
-
-const (
-	ConsentStatusActive   ConsentStatusEnum = "active"
-	ConsentStatusInactive ConsentStatusEnum = "inactive"
-)
-
-// IsValid ...
-func (c ConsentStatusEnum) IsValid() bool {
-	switch c {
-	case ConsentStatusActive, ConsentStatusInactive:
-		return true
-	}
-
-	return false
-}
-
-// String converts status to string.
-func (c ConsentStatusEnum) String() string {
-	return string(c)
-}
-
-// ConsentProvisionTypeEnum a type enum tha represents a Consent Provision field of consent resource.
-type ConsentProvisionTypeEnum string
-
-const (
-	ConsentProvisionTypeDeny   ConsentProvisionTypeEnum = "deny"
-	ConsentProvisionTypePermit ConsentProvisionTypeEnum = "permit"
-)
-
-// IsValid ...
-func (c ConsentProvisionTypeEnum) IsValid() bool {
-	switch c {
-	case ConsentProvisionTypeDeny, ConsentProvisionTypePermit:
-		return true
-	}
-
-	return false
-}
-
-// String converts consent provision type to string.
-func (c ConsentProvisionTypeEnum) String() string {
-	return string(c)
-}
-
-// ConsentDataMeaningEnum represents the meaning of consent data.
-type ConsentDataMeaningEnum string
-
-const (
-	ConsentDataMeaningInstance   ConsentDataMeaningEnum = "instance"
-	ConsentDataMeaningRelated    ConsentDataMeaningEnum = "related"
-	ConsentDataMeaningDependents ConsentDataMeaningEnum = "dependents"
-	ConsentDataMeaningAuthoredBy ConsentDataMeaningEnum = "authoredby"
-)
-
-// IsValid checks if the consent data meaning is valid.
-func (c ConsentDataMeaningEnum) IsValid() bool {
-	switch c {
-	case ConsentDataMeaningInstance, ConsentDataMeaningRelated,
-		ConsentDataMeaningDependents, ConsentDataMeaningAuthoredBy:
-		return true
-	}
-
-	return false
-}
-
-// String converts the consent data meaning to string.
-func (c ConsentDataMeaningEnum) String() string {
-	return string(c)
-}
 
 // ImmunizationStatus is the status of an Immunization event, bound to
 // https://hl7.org/fhir/R5/valueset-immunization-status.html

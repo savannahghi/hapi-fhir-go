@@ -17,6 +17,7 @@ type Bundle struct {
 	Total         *int            `json:"total,omitempty"`
 	Link          []BundleLink    `json:"link,omitempty"`
 	Entry         []BundleEntry   `json:"entry,omitempty"`
+	Signature     *Signature      `json:"signature,omitempty"`
 	Issues        json.RawMessage `json:"issues,omitempty"`
 }
 
