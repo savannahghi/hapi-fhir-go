@@ -1,6 +1,7 @@
 package fhir500
 
 import (
+	"encoding/json"
 	"fmt"
 	"strings"
 )
@@ -169,4 +170,28 @@ func (o *OperationOutcome) ErrorLogging() string {
 	}
 
 	return output.String()
+}
+
+// OtherOperationOutcome is OperationOutcome without its MarshalJSON, so marshalling it does not recurse.
+type OtherOperationOutcome OperationOutcome
+
+// MarshalJSON marshals the given OperationOutcome as JSON into a byte slice, with its resourceType.
+func (o OperationOutcome) MarshalJSON() ([]byte, error) {
+	return json.Marshal(struct {
+		OtherOperationOutcome
+		ResourceType string `json:"resourceType"`
+	}{
+		OtherOperationOutcome:  OtherOperationOutcome(o),
+		ResourceType: "OperationOutcome",
+	})
+}
+
+// UnmarshalOperationOutcome unmarshals a OperationOutcome.
+func UnmarshalOperationOutcome(b []byte) (OperationOutcome, error) {
+	var resource OperationOutcome
+	if err := json.Unmarshal(b, &resource); err != nil {
+		return resource, err
+	}
+
+	return resource, nil
 }

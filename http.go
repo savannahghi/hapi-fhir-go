@@ -19,12 +19,58 @@ const (
 	// jsonPatchContentType is the media type HAPI dispatches on to read a request
 	// body as a JSON Patch (RFC 6902) document rather than a FHIR resource.
 	jsonPatchContentType = "application/json-patch+json"
+
+	// maxErrorBody bounds how much of an error answer is kept on the APIError.
+	maxErrorBody = 1 << 20
 )
 
-// APIError represents a FHIR specific error with operation outcome.
+// Issue is one issue of the OperationOutcome a server answers an error with.
+type Issue struct {
+	Severity    string       `json:"severity,omitempty"`
+	Code        string       `json:"code,omitempty"`
+	Diagnostics string       `json:"diagnostics,omitempty"`
+	Details     IssueDetails `json:"details,omitempty"`
+	Location    []string     `json:"location,omitempty"`
+	Expression  []string     `json:"expression,omitempty"`
+}
+
+// IssueDetails is the human-readable part of an issue's details.
+type IssueDetails struct {
+	Text string `json:"text,omitempty"`
+}
+
+// APIError is any answer of 400 or above. When the server answered an OperationOutcome, as a
+// FHIR server does, OperationOutcome holds it decoded and Issues holds its issues parsed. When
+// it answered something else, such as a gateway's HTML page, both are empty and Body holds what
+// came back, so the status is always there to act on.
 type APIError struct {
 	StatusCode       int         `json:"statusCode,omitempty"`
 	OperationOutcome interface{} `json:"operationOutcome,omitempty"`
+	Issues           []Issue     `json:"issues,omitempty"`
+	Body             []byte      `json:"-"`
+}
+
+// Diagnostics joins the text of the error and fatal issues, which is what a caller shows or
+// logs. It is empty when the server answered something other than an OperationOutcome.
+func (a APIError) Diagnostics() string {
+	var parts []string
+
+	for _, issue := range a.Issues {
+		if issue.Severity != "error" && issue.Severity != "fatal" {
+			continue
+		}
+
+		text := strings.TrimSpace(issue.Diagnostics)
+		if text == "" {
+			text = strings.TrimSpace(issue.Details.Text)
+		}
+
+		if text != "" {
+			parts = append(parts, text)
+		}
+	}
+
+	return strings.Join(parts, "; ")
 }
 
 func (a APIError) Error() string {
@@ -149,6 +195,19 @@ func (c *Client) newRequest(
 	data interface{},
 	useCREnabledServer bool,
 ) (*http.Request, error) {
+	return c.buildRequest(ctx, method, path, params, data, useCREnabledServer, true)
+}
+
+// buildRequest is newRequest with a say over credentials: the capability statement is read
+// without them, since a server publishes it to anyone.
+func (c *Client) buildRequest(
+	ctx context.Context,
+	method, path string,
+	params url.Values,
+	data interface{},
+	useCREnabledServer bool,
+	withAuth bool,
+) (*http.Request, error) {
 
 	reqUrl, err := c.composeRequestURL(path, params, useCREnabledServer)
 	if err != nil {
@@ -160,8 +219,10 @@ func (c *Client) newRequest(
 		return nil, err
 	}
 
-	if err := c.applyAuth(request); err != nil {
-		return nil, err
+	if withAuth {
+		if err := c.applyAuth(request); err != nil {
+			return nil, err
+		}
 	}
 
 	c.setHeaders(request)
@@ -264,22 +325,7 @@ func (c *Client) readResponse(response *http.Response, path string, result inter
 	defer response.Body.Close()
 
 	if response.StatusCode >= 400 {
-		respBytes, err := io.ReadAll(response.Body)
-		if err != nil {
-			return err
-		}
-
-		var outcome map[string]interface{}
-
-		err = json.Unmarshal(respBytes, &outcome)
-		if err != nil {
-			return fmt.Errorf("failed to unmarshal OperationOutcome (HTTP %d): %w", response.StatusCode, err)
-		}
-
-		return APIError{
-			StatusCode:       response.StatusCode,
-			OperationOutcome: outcome,
-		}
+		return apiError(response)
 	}
 
 	if isValidateInPath(path) && response.StatusCode == http.StatusOK {
@@ -324,6 +370,34 @@ func (c *Client) makeRequest(
 	}
 
 	return c.readResponse(resp, path, result)
+}
+
+// apiError turns an error answer into an APIError, whatever the body is.
+func apiError(response *http.Response) error {
+	body, err := io.ReadAll(io.LimitReader(response.Body, maxErrorBody))
+	if err != nil {
+		return fmt.Errorf("failed to read the error body (HTTP %d): %w", response.StatusCode, err)
+	}
+
+	apiErr := APIError{StatusCode: response.StatusCode, Body: body}
+
+	var outcome map[string]interface{}
+	if json.Unmarshal(body, &outcome) != nil || outcome == nil {
+		return apiErr
+	}
+
+	apiErr.OperationOutcome = outcome
+
+	var parsed struct {
+		Issue []Issue `json:"issue"`
+	}
+
+	// The map already decoded, so the only way this fails is an issue whose shape is not an
+	// issue's, which leaves Issues empty and OperationOutcome still there.
+	_ = json.Unmarshal(body, &parsed)
+	apiErr.Issues = parsed.Issue
+
+	return apiErr
 }
 
 // isValidSeverity returns true if the severity does not indicate a failure.

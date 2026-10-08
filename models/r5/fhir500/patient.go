@@ -1,6 +1,7 @@
 package fhir500
 
 import (
+	"encoding/json"
 	"errors"
 	"strings"
 
@@ -317,4 +318,28 @@ type PageInfo struct {
 // mutations.
 type PatientPayload struct {
 	PatientRecord *Patient `json:"patientRecord,omitempty"`
+}
+
+// OtherPatient is Patient without its MarshalJSON, so marshalling it does not recurse.
+type OtherPatient Patient
+
+// MarshalJSON marshals the given Patient as JSON into a byte slice, with its resourceType.
+func (p Patient) MarshalJSON() ([]byte, error) {
+	return json.Marshal(struct {
+		OtherPatient
+		ResourceType string `json:"resourceType"`
+	}{
+		OtherPatient:  OtherPatient(p),
+		ResourceType: "Patient",
+	})
+}
+
+// UnmarshalPatient unmarshals a Patient.
+func UnmarshalPatient(b []byte) (Patient, error) {
+	var resource Patient
+	if err := json.Unmarshal(b, &resource); err != nil {
+		return resource, err
+	}
+
+	return resource, nil
 }
