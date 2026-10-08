@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.20.0](https://github.com/savannahghi/hapi-fhir-go/compare/v1.19.0...v1.20.0) (2026-10-08)
+
+
+### Features
+
+* cached service tokens, typed errors, metadata and model writes ([#115](https://github.com/savannahghi/hapi-fhir-go/issues/115)) ([fdfbeea](https://github.com/savannahghi/hapi-fhir-go/commit/fdfbeeaa77b31a0fc914594bee7bf0567dd273d8))
+
 ## [1.19.0](https://github.com/savannahghi/hapi-fhir-go/compare/v1.18.0...v1.19.0) (2026-10-08)
 
 
