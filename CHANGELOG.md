@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.19.0](https://github.com/savannahghi/hapi-fhir-go/compare/v1.18.0...v1.19.0) (2026-10-08)
+
+
+### Features
+
+* add the full FHIR R5 model set ([#113](https://github.com/savannahghi/hapi-fhir-go/issues/113)) ([b4da09d](https://github.com/savannahghi/hapi-fhir-go/commit/b4da09d42bdf4fcee3943ce88835baa7f0b01977))
+
 ## [1.18.0](https://github.com/savannahghi/hapi-fhir-go/compare/v1.17.0...v1.18.0) (2026-09-13)
 
 
