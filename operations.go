@@ -11,7 +11,10 @@ package hapifhirgo
 //   - Batch/transaction processing
 
 import (
+	"bytes"
 	"context"
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"net/http"
 	"net/url"
@@ -19,6 +22,108 @@ import (
 
 	"github.com/mailgun/errors"
 )
+
+// ErrBadResource is what PutResource and CreateResource wrap when the resource cannot be sent
+// as asked: it is not a JSON object, or it carries a resourceType other than the path's. The
+// caller's code is wrong, not the server, and nothing has been sent.
+var ErrBadResource = stderrors.New("hapifhirgo: the resource cannot be sent as asked")
+
+// Metadata reads the server's capability statement into result.
+// GET [base]/metadata. It is sent without credentials: a server publishes its capability
+// statement to anyone, and a readiness probe that needed a token would ask the identity
+// provider on every probe.
+func (c *Client) Metadata(ctx context.Context, params map[string]any, result interface{}) error {
+	request, err := c.buildRequest(ctx, http.MethodGet, "metadata", convertMapToURLValues(params), nil, false, false)
+	if err != nil {
+		return fmt.Errorf("unable to build the metadata request: %w", err)
+	}
+
+	resp, err := c.HTTP.Do(request)
+	if err != nil {
+		return fmt.Errorf("unable to read metadata: %w", err)
+	}
+
+	return c.readResponse(resp, "metadata", result)
+}
+
+// PutResource writes a resource under an id the caller chose: created the first time it is
+// seen and replaced after, so a write that failed part way can be sent again.
+// PUT [base]/[type]/[id]. The resource is any value that marshals to the resource, a model or
+// a map; its resourceType must match the type and is stamped when absent.
+func (c *Client) PutResource(ctx context.Context, resourceType, id string, resource, result interface{}) error {
+	if resourceType == "" || id == "" {
+		return errors.Errorf("a resource type and an id are required")
+	}
+
+	payload, err := resourcePayload(resourceType, resource)
+	if err != nil {
+		return err
+	}
+
+	err = c.makeRequest(ctx, http.MethodPut, resourceType+"/"+id, nil, payload, result, false)
+	if err != nil {
+		return fmt.Errorf("unable to put %s/%s: %w", resourceType, id, err)
+	}
+
+	return nil
+}
+
+// CreateResource lets the server assign the id. POST [base]/[type]. Unlike CreateFHIRResource
+// it runs no $validate first and writes nothing into the resource beyond a missing resourceType.
+func (c *Client) CreateResource(ctx context.Context, resourceType string, resource, result interface{}) error {
+	if resourceType == "" {
+		return errors.Errorf("a resource type is required")
+	}
+
+	payload, err := resourcePayload(resourceType, resource)
+	if err != nil {
+		return err
+	}
+
+	err = c.makeRequest(ctx, http.MethodPost, resourceType, nil, payload, result, false)
+	if err != nil {
+		return fmt.Errorf("unable to create a %s: %w", resourceType, err)
+	}
+
+	return nil
+}
+
+// resourcePayload checks a resource's type against the path and returns what to send: the
+// resource's own JSON when it carries its type, or a copy with the type stamped when it does
+// not. Numbers are kept as written, so a decimal keeps its precision either way.
+func resourcePayload(resourceType string, resource interface{}) (interface{}, error) {
+	raw, err := json.Marshal(resource)
+	if err != nil {
+		return nil, fmt.Errorf("unable to encode the resource: %w", err)
+	}
+
+	var typed struct {
+		ResourceType string `json:"resourceType"`
+	}
+
+	if err := json.Unmarshal(raw, &typed); err != nil {
+		return nil, fmt.Errorf("%w: the resource is not a JSON object", ErrBadResource)
+	}
+
+	switch typed.ResourceType {
+	case resourceType:
+		return json.RawMessage(raw), nil
+	case "":
+		decoder := json.NewDecoder(bytes.NewReader(raw))
+		decoder.UseNumber()
+
+		var payload map[string]interface{}
+		if err := decoder.Decode(&payload); err != nil || payload == nil {
+			return nil, fmt.Errorf("%w: the resource is not a JSON object", ErrBadResource)
+		}
+
+		payload["resourceType"] = resourceType
+
+		return payload, nil
+	default:
+		return nil, fmt.Errorf("%w: the resource is a %s, not a %s", ErrBadResource, typed.ResourceType, resourceType)
+	}
+}
 
 // CreateFHIRResource creates a FHIR resource
 // POST [base]/[type].

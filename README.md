@@ -63,6 +63,73 @@ WithRetry(RetryPolicy{
 })
 ```
 
+## Authenticating as a service
+
+A service calls the store as itself with the client credentials grant. `ClientCredentials` mints
+tokens from any OAuth2 token endpoint (Keycloak's is `{base}/realms/{realm}/protocol/openid-connect/token`)
+and `CachedTokenProvider` keeps one token for every request until it is about to expire, with
+concurrent callers waiting on one mint. Any other minter, such as an identity SDK, fits the same
+`TokenMinter` signature.
+
+```go
+mint := hapifhirgo.ClientCredentials{
+    TokenURL:     "https://keycloak.example/realms/study/protocol/openid-connect/token",
+    ClientID:     "study-service",
+    ClientSecret: secret,
+}.Mint
+
+client, _ := hapifhirgo.NewClient(baseURL,
+    hapifhirgo.WithTokenProvider(hapifhirgo.CachedTokenProvider(mint)),
+)
+```
+
+## Errors
+
+Every answer of 400 or above comes back as an `APIError`, whatever the body is. A FHIR server's
+`OperationOutcome` is decoded into `OperationOutcome` and parsed into `Issues`; a gateway's HTML
+page leaves both empty and keeps the bytes in `Body`. `Diagnostics()` joins the text of the error
+issues, which is what to show or log.
+
+```go
+var apiErr hapifhirgo.APIError
+if errors.As(err, &apiErr) {
+    switch apiErr.StatusCode {
+    case http.StatusNotFound:
+        // not there
+    case http.StatusUnprocessableEntity:
+        log.Println(apiErr.Diagnostics())
+    }
+}
+```
+
+## Readiness
+
+`Metadata` reads the capability statement without credentials, so a readiness probe never asks
+the identity provider for a token.
+
+```go
+var capability struct {
+    FHIRVersion string `json:"fhirVersion"`
+}
+err := client.Metadata(ctx, map[string]any{"_summary": "true"}, &capability)
+```
+
+## Writing a model
+
+`PutResource` and `CreateResource` take a model or a map as it is. The resource's `resourceType`
+is checked against the type in the path and stamped when absent, and numbers are sent as written.
+`PutResource` writes under an id the caller chose, so a write that failed part way can be sent
+again without a duplicate. Neither runs `$validate` first; `CreateFHIRResource` still does. A
+resource that cannot be sent as asked, because it is not an object or carries another type, is
+refused before anything goes out with an error that wraps `ErrBadResource`.
+
+```go
+patient := r5.Patient{ID: &id, Name: []*r5.HumanName{{Family: &family}}}
+
+var stored r5.Patient
+err := client.PutResource(ctx, "Patient", id, patient, &stored)
+```
+
 ## Quick Start
 
 ### Using R4B Models
